@@ -1,7 +1,13 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ['@nuxt/content'],
+  modules: [
+    '@nuxt/content',
+    '@nuxtjs/tailwindcss',
+    '@formkit/auto-animate',
+    '@nuxtjs/fontaine',
+    'nuxt-icon'
+  ],
   content: {
     highlight: {
       theme: {
@@ -12,6 +18,7 @@ export default defineNuxtConfig({
         // Theme used if `html.sepia`
         sepia: 'monokai'
       }
-    }
+    },
+    
   }
 })
