@@ -17,4 +17,4 @@ jobs:
         target-server: 130.61.128.102
         remote-user: lexica
         private-ssh-key: ${{ secrets.SSH_KEY }}
-        destination-path: /lexica
+        destination-path: ./lexica
