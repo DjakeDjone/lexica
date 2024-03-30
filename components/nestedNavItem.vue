@@ -26,7 +26,7 @@ const getNameOfPath = (path: string) => {
     <ul class="w-full m-0">
         <li v-for="item in navigation" :key="item._path" class="w-full m-0 !bg-transparent">
             <div v-auto-animate v-if="item.children" class="flex flex-col justify-start items-start">
-                <h3 @click="item.open = !item.open" class="w-full">
+                <h3 @click="item.open = !item.open" class="w-full mt-0">
                     <span>
                         <Icon name="line-md:chevron-down" class="transition-transform duration-150" :class="item.open ? 'transform rotate-180' : ''" size="20">
                         </Icon>

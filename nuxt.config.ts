@@ -19,6 +19,14 @@ export default defineNuxtConfig({
         sepia: 'monokai'
       }
     },
-    
+    experimental: {
+      advanceQuery: true,
+      // search: {
+      //   indexed: false,
+      //   options: {
+      //     fields: ['title', 'description', 'slug', 'text'],
+      //   }
+      // }
+    },
   }
 })
