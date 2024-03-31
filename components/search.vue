@@ -45,21 +45,22 @@ const close = () => {
     <main class="w-screen h-screen flex justify-center items-center">
         <label @click="close()"
             class="drawer-overlay h-full w-full absolute top-0 left-0 bg-black/10 backdrop-blur-sm"></label>
-        <div class="z-10 bg-neutral p-2 rounded-[.625rem] w-full max-w-md">
+        <div class="z-10 p-2 rounded-[.625rem] w-full max-w-md">
             <div class=" w-full flex items-start gap-2">
                 <textarea class="textarea resize-none w-full h-8" v-model="searchVlue"
                     placeholder="Search..." @keydown.enter="search($event)"></textarea>
-                <button class="btn btn-primary" @click="search">
+                <button class="btn btn-primary" @click="search($event)">
                     <Icon name="line-md:search" size="24" />
                 </button>
             </div>
-            <div id="search-results" class="mt-2">
+            <div v-auto-animate id="search-results" class="mt-2 bg-base-100 rounded-lg">
                 <!-- {{ searchResults }} -->
-                <div v-for="result in searchResults" :key="result._path" class="searchResult rounded-xl my-2 border border-transparent p-3 hover:bg-base-100/50">
+                <div v-for="result in searchResults" :key="result._path" class="searchResult rounded-xl border border-transparent p-3 pb-0 hover:bg-base-100/50">
                     <router-link :to="result._path" @click="searchVlue = '';close()"
-                        class="m-0 hover:no-underline hover:bg-white">
+                        class="m-0 hover:no-underline">
                         <h3 class="text-lg font-bold mt-0">{{ result.title }}</h3>
                         <p class="text-sm">{{ result.description }}</p>
+                        <div class="divider m-0 mt-2"></div>
                     </router-link>
                 </div>
             </div>

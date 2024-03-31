@@ -73,11 +73,12 @@ const scrollToTop = () => {
         <button class="btn btn-primary p-2 mr-8" @click="navOpen = !navOpen">
           <Icon name="line-md:menu" size="30" />
         </button>
-        <h1 class="text-3xl font-bold max-w-[calc(100vw-2rem)] overflow-hidden whitespace-nowrap">{{ getFileName(path) }}</h1>
+        <h1 class="text-3xl font-bold max-w-[calc(100vw-2rem)] overflow-hidden whitespace-nowrap">{{ getFileName(path)
+          }}</h1>
       </nav>
       <!-- Page content here -->
       <div class="fixed top-0 left-0 ">
-        <Search v-if="searching" @update:close="searching=false" />
+        <Search v-if="searching" @update:close="searching = false" />
       </div>
       <NuxtPage />
       <div id="topScroll" class="fixed bottom-4 right-4">
@@ -90,6 +91,28 @@ const scrollToTop = () => {
     <div class="drawer-side">
       <label for="my-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
       <ul v-auto-animate class="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
+        <li class="m-0 flex flex-row items-center">
+          <div class="inline w-fit relative">
+            <h2 class="w-fit mt-0 text-2xl">
+              FRI3DL DOCS
+            </h2>
+          </div>
+        </li>
+        <li class="m-0" @click="navOpen = false; searching = !searching">
+          <button class="inline-flex justify-between items-end">
+            <div class="flex gap-1">
+              <Icon name="icon-park-twotone:search" size="25" />
+              <span class="mr-2 mt-1">Search</span>
+            </div>
+            <div class="mr-2 opacity-50 hover:opacity-100 transition-opacity">
+              <kbd class="kbd kbd-sm">ctrl</kbd>
+              +
+              <kbd class="kbd kbd-sm">k</kbd>
+            </div>
+          </button>
+        </li>
+        <div class="divider"></div>
+        <h2 class="text-lg font-bold">Navigation</h2>
         <ContentNavigation v-slot="{ navigation }">
           <nested-nav-item @update:navOpen="navOpen = false" :navigation="navigation" />
         </ContentNavigation>
