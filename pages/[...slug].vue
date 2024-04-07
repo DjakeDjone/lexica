@@ -5,8 +5,8 @@ const path = ref(useRoute().fullPath);
 </script>
 
 <template>
-    <main>
-        <input type="text" v-model="path" />
+    <main class="max-w-2xl xl:max-w-4xl mx-auto">
+        <!-- <input type="text" v-model="path" /> -->
         <ContentDoc :path="path">
             <template #not-found>
                 <!-- {{ path }} -->
