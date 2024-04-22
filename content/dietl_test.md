@@ -159,6 +159,11 @@ Alle Ziele des magischen Vierecks sind nicht gleichzeitig erreichbar u. oft vone
 
 + **Staat**: Der Staat kann die Wirtschaft beeinflussen, indem er Geld ausgibt oder Steuern senkt.
 + **Zentralbank**: Die Zentralbank kann die Wirtschaft beeinflussen, indem sie die Zinsen senkt oder erhöht.
-+ <mark>**Interessensvertreter**:</mark> Gewerkschaften können die Wirtschaft beeinflussen, indem sie für höhere Löhne kämpfen. Bsp.: AKÖ, ÖGB
++ <mark>**Interessensvertreter**:</mark> Gewerkschaften können die Wirtschaft beeinflussen, indem sie für höhere Löhne kämpfen.
+```diff
+Arbeitgeber: IV u. WKÖ
+Arbeitnehmer: BG u. AK
+```
+
 + **Unternehmen**: Unternehmen können die Wirtschaft beeinflussen, indem sie investieren oder sparen.
 + **Konsumenten**: Konsumenten können die Wirtschaft beeinflussen, indem sie mehr oder weniger konsumieren.
