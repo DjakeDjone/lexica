@@ -3,6 +3,16 @@
 ## Themen
 
 1. [ ] [Projektabgrenzung](#projektabgrenzung)
+2. [ ] [Kontextanalyse](#kontextanalyse)
+3. [ ] [Grafische Darstellung der sozialen Projektumweltbeziehungen](#grafische-darstellung-der-sozialen-projektumweltbeziehungen)
+4. [ ] [Meilensteine](#meilensteine)
+5. [ ] [Kick-off-Meeting](#kick-off-meeting)
+6. [ ] [Projekt-Start-up Workshop](#projekt-start-up-workshop)
+7. [ ] [Projektorganisationsformen](#projektorganisationsformen)
+8. [ ] [Auswahl der geeigneten Projektorganisationsform](#auswahl-der-geeigneten-projektorganisationsform)
+9. [ ] [Projektteam](#projektteam)
+10. [ ] [Aufgaben Projektleiter](#aufgaben-projektleiter)
+11. [ ] [Anforderungen Projektleiter](#anforderungen-projektleiter)
 
 
 ## Projektabgrenzung
@@ -142,4 +152,129 @@ Darstellung:
     - **Vorgangsplanung für Projektablauf- u. Terminplanung**
 
 ## Arbeitspakete u. Verantwortungsmatrix
-Thema 18, S. 13
+
+Die **Funktionenmatrix** zeigt die *Verantwortlichkeiten* der Projektmitglieder für die Arbeitspakete. 
+
+Die **Verantwortungsmatrix** ist eine **Erweiterung der Funktionenmatrix** und zeigt die *Zuständigkeiten* der Projektmitglieder für die Arbeitspakete. Buchstabenkürzel:
+- **I** = informiert
+- **M** = mitarbeit
+- **V** = verantwortlich
+
+## Zeitplanung
+
+- Meilensteine: **überprüfbare Zwischenergebnisse** [MS](#meilensteine)
+- **Terminliste**: Auflistung aller geplanten Aktivitäten eines Projekts mit Start- und Endtermin
+- **Balldiagramm**: Darstellung der zeitlichen Abfolge von Aktivitäten
+- **Netzplan**: Darstellung der logischen Abhängigkeiten von Aktivitäten
+    - **Vorteile**: 
+        - **Übersichtlichkeit**
+        - **Kritischer Pfad** erkennbar
+        - **Ressourcenplanung** möglich
+    - **Nachteile**:
+        - **Komplexität**
+        - **Änderungen** schwer möglich
+
+## Aufgaben des Projektcontrollings
+
+- **Aufgaben:**
+    - **Planungsabweichungen** erkennen
+    - **Tendenzen** erkennen u. frühzeitig gegensteuern
+
+- **Voraussetzungen**:
+    - Geeignetes **Projektreporting
+
+- **Maßnahmen**:
+    - Mobilisierung **zusätzlicher Ressourcen**
+    - Erhöhung der **Arbeitszeit**(Überstunden)
+    - Erhöhung der **Produktivität**
+    - Outsourcing/Outtasking
+
+- **Kostenkontrolle**: Sollte nicht isoliert betrachtet werden, sondern in Zusammenhang mit **Qualität** und **Zeit**
+
+- **Sachvortschrittskontrolle**: Überprüfung des Arbeitsfortschritts
+
+- **Earned-Value-Analyse**: Analysiert die im Projekt **verstrichene Zeit**, die **geleistete Arbeit** u. die **entstandenen Kosten**
+
+## Trendanalyse
+
+Ermöglicht die **Prognose** von **Projektentwicklungen**, um **frühzeitig** gegensteuern zu können.
+
+**Meilensteintrendanalyse**: Vergleich von **geplanten** und **tatsächlichen** Meilensteinen.
+
+## Projektdokumentation
+
+- **Projekthandbuch**: gegliederte Zusammenfassung der organisatorischen Regeln dür die Durchführund von Projekten
+- sollte enthalten:
+    - Projektorganisationsplan
+    beteiligte Stellen mit Aufgabenbeschreibung
+    - Projektleitung u. Berichtswesen
+    - Sitzungskonzept
+    - Funktionen- und Verantwortungsmatrix
+    
+
+Wichtige Bestandteile der Projektdokumentation sind: 
+
+● Vorstudie und deren Ergebnisse 
+
+● Zieldokument 
+
+● Projektauftrag 
+
+● Kontext- und Stakeholderanalyse 
+
+● Organisation, Rollen im Team (falls nicht im Projekthandbuch enthalten) 
+
+● Projektstrukturplan (grafisch und in Listenform) 
+
+● Beschreibung der Arbeitspakete und Zuordnung der Verantwortlichen 
+
+● Ablauf- und Terminplan 
+
+● Kosten- und Finanzierungsplan 
+
+● Risikoanalyse 
+
+● Verträge und Bestellungen 
+
+● Abnahmen 
+
+● Controlling-Information, Berichte und Protokolle 
+
+● Schriftverkehr 
+
+## Protokolle
+
+- **Besprechungsprotokoll**: Protokoll über Besprechung mit PT oder Auftraggeber:
+    - Art der Besprechung
+    - Ord, Datum u. Uhrzeit
+    - Anlass u. Liste der Tagesordnungspunkte (TOP)
+    - Teilnehmer
+    - Protokollführer
+    - ...
+
+- **Arbeitsprotokoll:** Arbeitsvortschritte u. Ergebnisse im Projekt. Basis für Abrechnung nach Leistung oder Arbeitszeit
+- **Telephonprotokoll:** Telefonate mit Auftraggeber oder PT
+
+## 24
+
+## Projektabschluss
+
+Erforderliche Aktivitäten:
+
+- <mark>Inhaltlich-fachliche Aufgaben:</mark>
+    - **Übergabe** der Projektergebnisse an Kunden
+    - **Nachkalukation** des Projektes
+    - **Evaluierung des Projektverlaufs**, der "Projektperformance"
+    
+- <mark>Organisatorische Aufgaben:</mark>
+    - Auflösung des Projektteams
+    - Aufläsen der Beziehungen zu externen Partnern
+    - **Projektabschlussbericht**
+    - Know-How Transfer
+
+- <mark>Emotional-soziale Aufgaben:</mark>
+    - Auflösen der Projektorganisation
+    - **Prämien**
+    - emotionale **Abschlussfeier**
+
+---
