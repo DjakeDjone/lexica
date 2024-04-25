@@ -13,6 +13,14 @@
 9. [ ] [Projektteam](#projektteam)
 10. [ ] [Aufgaben Projektleiter](#aufgaben-projektleiter)
 11. [ ] [Anforderungen Projektleiter](#anforderungen-projektleiter)
+12. [ ] [Phasen Teambildung - Tuckman](#phasen-teambildung---tuckman)
+13. [ ] [Teamgröße](#teamgröße)
+14. [ ] [Projektstrukturpläne](#projektstrukturpläne)
+15. [ ] [Arbeitspaktete](#arbeitspakete)
+16. [ ] [Arbeitspakete u. Verantwortungsmatrix](#arbeitspakete-u-verantwortungsmatrix)
+17. [ ] [Zeitplanung](#zeitplanung)
+18. [ ] [Aufgaben des Projektcontrollings](#aufgaben-des-projektcontrollings)
+
 
 
 ## Projektabgrenzung
@@ -194,7 +202,7 @@ Die **Verantwortungsmatrix** ist eine **Erweiterung der Funktionenmatrix** und z
 - **Sachvortschrittskontrolle**: Überprüfung des Arbeitsfortschritts
 
 - **Earned-Value-Analyse**: Analysiert die im Projekt **verstrichene Zeit**, die **geleistete Arbeit** u. die **entstandenen Kosten**
-
+<!-- 
 ## Trendanalyse
 
 Ermöglicht die **Prognose** von **Projektentwicklungen**, um **frühzeitig** gegensteuern zu können.
@@ -277,4 +285,4 @@ Erforderliche Aktivitäten:
     - **Prämien**
     - emotionale **Abschlussfeier**
 
----
+--- -->
