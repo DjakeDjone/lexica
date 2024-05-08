@@ -10,11 +10,33 @@ const value = defineModel();
 const emit = defineEmits(['update:close']);
 const searchResults = ref([] as any[]);
 
-const search = async (e: KeyboardEvent | MouseEvent) => {
+const customPages = [
+    {
+        title: 'Lohnrechner',
+        _path: '/lohnrechner',
+        description: 'Berechnen Sie Ihren Nettolohn'
+    },
+    {
+        title: 'Impressum',
+        _path: '/impressum',
+        description: 'Impressum'
+    },
+    {
+        title: 'Datenschutz',
+        _path: '/datenschutz',
+        description: 'Datenschutz'
+    }
+]
+
+const searchEvent = async (e: KeyboardEvent | MouseEvent) => {
     if (e instanceof KeyboardEvent && e.key !== 'Enter') return;
     // SHIFT + ENTER
     if (e instanceof KeyboardEvent && e.shiftKey) return;
     e.preventDefault();
+    await search(searchVlue.value);
+}
+
+const search = async (value: string) => {
     if (searchVlue.value.length > 0) {
         searchResults.value = (await queryContent().where({
             title: {
@@ -22,10 +44,24 @@ const search = async (e: KeyboardEvent | MouseEvent) => {
             }
         }).limit(7)
         .find()).result;
+        // custom pages
+        searchResults.value = searchResults.value.concat(customPages.filter(page => page.title.toLowerCase().includes(searchVlue.value.toLowerCase())));
     } else {
         searchResults.value = [];
     }
 }
+
+let searchTimeout: NodeJS.Timeout | null = null;
+
+const searchOnTypeEnd = async () => {
+    if (searchTimeout) {
+        clearTimeout(searchTimeout);
+    }
+    searchTimeout = setTimeout(async () => {
+        await search(searchVlue.value);
+    }, 500);
+}
+
 onMounted(() => {
     // focus search input
     const searchInput = document.querySelector('.textarea') as HTMLTextAreaElement;
@@ -45,11 +81,13 @@ const close = () => {
     <main class="w-screen h-screen flex justify-center items-center">
         <label @click="close()"
             class="drawer-overlay h-full w-full absolute top-0 left-0 bg-black/10 backdrop-blur-sm"></label>
-        <div class="z-10 p-2 rounded-[.625rem] w-full max-w-md">
+        <div class="z-[500] p-2 rounded-[.625rem] w-full max-w-md">
             <div class=" w-full flex items-start gap-2">
                 <textarea class="textarea resize-none w-full h-8" v-model="searchVlue"
-                    placeholder="Search..." @keydown.enter="search($event)"></textarea>
-                <button class="btn btn-primary" @click="search($event)">
+                    placeholder="Search..." @keydown.enter="searchEvent($event)"
+                    @keyup="searchOnTypeEnd()" @focus="searchOnTypeEnd()" @click="searchOnTypeEnd()"
+                    ></textarea>
+                <button class="btn btn-primary" @click="searchEvent($event)">
                     <Icon name="line-md:search" size="24" />
                 </button>
             </div>

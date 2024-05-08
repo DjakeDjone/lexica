@@ -77,7 +77,7 @@ const scrollToTop = () => {
           }}</h1>
       </nav>
       <!-- Page content here -->
-      <div class="fixed top-0 left-0 ">
+      <div class="fixed top-0 left-0 z-30">
         <Search v-if="searching" @update:close="searching = false" />
       </div>
       <NuxtPage />
@@ -114,6 +114,11 @@ const scrollToTop = () => {
         <div class="divider"></div>
         <h2 class="text-lg font-bold">Navigation</h2>
         <ContentNavigation v-slot="{ navigation }">
+          <li class="m-0">
+            <NuxtLink to="/lohnrechner">
+              Lohnrechner
+            </NuxtLink>
+          </li>
           <nested-nav-item @update:navOpen="navOpen = false" :navigation="navigation" />
         </ContentNavigation>
       </ul>
