@@ -13,9 +13,14 @@ export type NestedNavItem = NavItem & {
 
 
 const navOpen = ref(false)
-const path = useRoute().fullPath;
+const path = ref('')
 const scroller = ref(false);
 const searching = ref(false);
+
+// update path
+watchEffect(() => {
+  path.value = useRoute().path;
+});
 
 onMounted(() => {
   let currentScroll = window.scrollY;
