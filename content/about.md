@@ -1,6 +1,5 @@
 # About Page
-This is the about page.
+This is a project made to share my Markdowns in a simple way.
 
 ## More about me
-bla bla bla
-```
+Visit my homepage on [fri3dl.com](https://fri3dl.dev)
