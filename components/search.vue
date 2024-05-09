@@ -78,11 +78,11 @@ const close = () => {
 </script>
 
 <template>
-    <main class="w-screen h-screen flex justify-center items-center">
+    <main class="w-screen h-screen flex justify-center">
         <label @click="close()"
             class="drawer-overlay h-full w-full absolute top-0 left-0 bg-black/10 backdrop-blur-sm"></label>
-        <div class="z-[500] p-2 rounded-[.625rem] w-full max-w-md">
-            <div class=" w-full flex items-start gap-2">
+        <div class="z-[500] p-2 rounded-[.625rem] w-full max-w-md mt-[15vh]">
+            <div class="w-full flex items-start gap-2">
                 <textarea class="textarea resize-none w-full h-8" v-model="searchVlue"
                     placeholder="Search..." @keydown.enter="searchEvent($event)"
                     @keyup="searchOnTypeEnd()" @focus="searchOnTypeEnd()" @click="searchOnTypeEnd()"
