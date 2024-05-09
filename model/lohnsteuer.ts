@@ -26,12 +26,14 @@ export interface LstDataIn {
 
 export enum LstDataOutKeys {
   BRUTTO = "Brutto",
+  GESAMT = "Gesamtbrutto",
   SOZIALVERSICHERUNG = "Sozialversicherung",
   UE_GRUNDLOHN = "ÜG",
   UEBERSTUNDEN_ZUSCHLAG = "Überstunden Zuschlag",
   UEBERSTUNDEN_TEILER = "Überstunden Teiler",
   UEZ_FREI = "ÜZ steuerfrei",
   UEZ_PFLICHTIG = "ÜZ steuerpflichtig",
+  UEZ_MAX = "jedoch höchstens",
   FABO = "FABO",
   FABO_VOLL = "FABO Voll",
   AVABAE = "AVABAE",
@@ -76,10 +78,11 @@ export const calcLohnabrechnung = (data: LstDataIn): LstDataOut => {
   }
   const out = [] as LstDataOut;
 
-  let auszahlung = data.brutto;
+
 
   out.push({ name: LstDataOutKeys.BRUTTO, value2: data.brutto });
   let ueberstunden_steuerfrei = 0;
+  let brutto = data.brutto;
   // Überstunden
   if (
     (data.ueberstunden50 || data.ueberstunden100) &&
@@ -92,7 +95,7 @@ export const calcLohnabrechnung = (data: LstDataIn): LstDataOut => {
     const ueg = round((ue50 + ue100) * grundlohn);
     out.push({
       name: LstDataOutKeys.UE_GRUNDLOHN,
-      nameCalc: `${LstDataOutKeys.UE_GRUNDLOHN}: ${grundlohn} • ${
+      nameCalc: `${LstDataOutKeys.UE_GRUNDLOHN}: ${brutto} / ${data.ueberstundenTeiler} = ${grundlohn} • ${
         ue50 + ue100
       }`,
       value2: ueg,
@@ -109,15 +112,29 @@ export const calcLohnabrechnung = (data: LstDataIn): LstDataOut => {
         out.push({
           name: LstDataOutKeys.UEZ_FREI,
           nameCalc: `${LstDataOutKeys.UEZ_FREI}: ${halblohn} • ${ue50frei} = ${uez50frei}`,
-          value2: uez50frei,
         });
+        if (uez50frei > 200) {
+          out.push({ name: LstDataOutKeys.UEZ_MAX, value1: 200 });
+          ueberstunden_steuerfrei = 200;
+          remaining = uez50frei - 200;
+        } else {
+          ueberstunden_steuerfrei = uez50frei;
+        }
+        const ue100frei = round(grundlohn * ue100);
+        out.push({
+          name: LstDataOutKeys.UEZ_FREI,
+          nameCalc: `${grundlohn} • ${ue100}`,
+          value1: ue100frei,
+          value2: round(ue100frei + ueberstunden_steuerfrei)
+        });
+        ueberstunden_steuerfrei += ue100frei;
       } else {
-        ueberstunden_steuerfrei = round(grundlohn * ue100);
         out.push({
           name: LstDataOutKeys.UEZ_FREI,
           nameCalc: `${LstDataOutKeys.UEZ_FREI}: ${grundlohn} • ${ue100} = ${ueberstunden_steuerfrei}`,
           value2: uez50frei,
         });
+        ueberstunden_steuerfrei += round(grundlohn * ue100);
       }
     } else {
       if (uez50frei > 200) {
@@ -137,9 +154,34 @@ export const calcLohnabrechnung = (data: LstDataIn): LstDataOut => {
         ueberstunden_steuerfrei = uez50frei;
       }
     }
+
+    const pflichtig_contrib = [];
+    let uePflichtig = 0;
+    if (ue50pflichtig) {
+      uePflichtig = round(halblohn * ue50pflichtig);
+      pflichtig_contrib.push(`${halblohn} • ${ue50pflichtig} = ${uePflichtig}`);
+    }
+
+    if (remaining) {
+      pflichtig_contrib.push(remaining.toFixed(2));
+      uePflichtig += remaining;
+    }
+
+    out.push({
+      name: LstDataOutKeys.UEZ_PFLICHTIG,
+      nameCalc:
+        LstDataOutKeys.UEZ_PFLICHTIG + ": " + pflichtig_contrib.join(" + "),
+      value2: uePflichtig,
+    });
+
+    brutto += ueg + uePflichtig + ueberstunden_steuerfrei;
+
+    out.push({name: LstDataOutKeys.GESAMT, value2: brutto, lineAbove: true});
   }
+
+    let auszahlung = brutto;
   // Sozialversicherung lfd
-  const sv = svbetrag(data.brutto);
+  const sv = svbetrag(brutto);
   out.push({
     name: LstDataOutKeys.SOZIALVERSICHERUNG,
     value2: sv,
@@ -148,12 +190,12 @@ export const calcLohnabrechnung = (data: LstDataIn): LstDataOut => {
   auszahlung -= sv;
   // Lohnsteuer lfd
   out.push({ name: LstDataOutKeys.LOHNSTEUER });
-  let bemessungsgrundlage = data.brutto - sv - ueberstunden_steuerfrei;
-  out.push({ name: LstDataOutKeys.BRUTTO, value1: data.brutto });
+  let bemessungsgrundlage = brutto - sv - ueberstunden_steuerfrei;
+  out.push({ name: LstDataOutKeys.BRUTTO, value1: brutto });
   if (ueberstunden_steuerfrei) {
     out.push({
       name: LstDataOutKeys.UEZ_FREI,
-      value2: ueberstunden_steuerfrei,
+      value1: ueberstunden_steuerfrei,
       subtract: true,
     });
   }

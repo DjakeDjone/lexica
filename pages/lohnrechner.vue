@@ -148,21 +148,20 @@ const parseAi = async () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="item in result"
-                            :class="{ 'border-t-white border-t-solid border-t': item.lineAbove }">
-                            <td>{{ (item.subtract ? '- ' : '') + (item.nameCalc || item.name) }}</td>
+                        <tr v-for="item in result" :class="{'border-t border-white border-solid': item.lineAbove}">
+                            <td>{{ item.nameCalc || item.name }}</td>
                             <td class="text-right">
                                 <!-- {{ item.value1 }} -->
                                 <!-- formated as Currency -->
                                 <span v-if="item.value1 !== undefined" class="">
-                                    {{ item.value1.toLocaleString('de-DE', { style: 'currency', currency: 'EUR' }) }}
+                                    {{ (item.subtract ? '- ' : '') + item.value1.toLocaleString('de-DE', { style: 'currency', currency: 'EUR' }) }}
                                 </span>
                             </td>
                             <td class="text-right">
                                 <!-- {{ item.value2 }} -->
                                 <!-- formated as Currency -->
                                 <span v-if="item.value2 !== undefined" class="text-right">
-                                    {{ item.value2.toLocaleString('de-DE', { style: 'currency', currency: 'EUR' }) }}
+                                    {{ (item.subtract ? '- ' : '') + item.value2.toLocaleString('de-DE', { style: 'currency', currency: 'EUR' }) }}
                                 </span>
                             </td>
                         </tr>
