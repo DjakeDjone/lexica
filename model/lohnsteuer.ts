@@ -15,7 +15,7 @@ export interface LstDataIn {
 
   freibetrag?: number;
   pendlerpauschale?: number;
-  pendlerpauschaleAbzug?: number;
+  pendlerpauschaleKostenUebername?: number;
   pendlereuro_km?: number;
 
   gewerkschaftsbeitrag?: number;
@@ -174,8 +174,8 @@ export const calcLohnabrechnung = (data: LstDataIn): LstDataOut => {
 
   if (data.pendlerpauschale) {
     let pp = data.pendlerpauschale;
-    if (data.pendlerpauschaleAbzug) {
-      pp = data.pendlerpauschaleAbzug;
+    if (data.pendlerpauschaleKostenUebername) {
+      pp = data.pendlerpauschaleKostenUebername;
     }
     bemessungsgrundlage -= pp;
     out.push({

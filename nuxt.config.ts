@@ -6,7 +6,8 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@formkit/auto-animate',
     '@nuxtjs/fontaine',
-    'nuxt-icon'
+    'nuxt-icon',
+    '@vueuse/nuxt'
   ],
   content: {
     highlight: {
