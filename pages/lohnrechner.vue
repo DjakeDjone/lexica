@@ -144,6 +144,22 @@ const parseAi = async () => {
                     <input type="number" id="gewerkschaftsbeitrag" v-model="data.gewerkschaftsbeitrag"
                         class="input input-bordered input-primary" />
                 </div>
+                <div>
+                    <label for="serviceentgelt">Servide-Entgelt</label>
+                    <input type="number" id="serviceentgelt" v-model="data.serviceentgelt"
+                        class="input input-bordered input-primary" />
+                </div>
+                <div>
+                    <label for="betriebsratsumlage">Betriebsratsumlage</label>
+                    <input type="number" id="betriebsratsumlage" v-model="data.betriebsratsumlage"
+                        class="input input-bordered input-primary" />
+                </div>
+                <div>
+                    <label for="akonto">Akontozahlung</label>
+                    <input type="number" id="akonto" v-model="data.akontozahlung"
+                        class="input input-bordered input-primary" />
+                </div>
+                
 
             </form>
             <div class="w-full border">
@@ -156,7 +172,7 @@ const parseAi = async () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="item in result" :class="{'border-t border-white border-solid': item.lineAbove}">
+                        <tr v-for="item in result" class="border-b-0" :class="{'border-t border-base-content': item.lineAbove}">
                             <td>{{ item.nameCalc || item.name }}</td>
                             <td class="text-right">
                                 <!-- {{ item.value1 }} -->

@@ -19,7 +19,7 @@ export interface LstDataIn {
   pendlereuro_km?: number;
 
   gewerkschaftsbeitrag?: number;
-  betriebsratumlage?: number;
+  betriebsratsumlage?: number;
   serviceentgelt?: number;
   akontozahlung?: number;
 }
@@ -319,13 +319,13 @@ export const calcLohnabrechnung = (data: LstDataIn): LstDataOut => {
   }
 
   // Betriebsratumlage
-  if (data.betriebsratumlage) {
+  if (data.betriebsratsumlage) {
     out.push({
       name: LstDataOutKeys.BETRIEBSRATUMLAGE,
-      value2: data.betriebsratumlage,
+      value2: data.betriebsratsumlage,
       subtract: true,
     });
-    auszahlung -= data.betriebsratumlage;
+    auszahlung -= data.betriebsratsumlage;
   }
 
   // Akontozahlung
@@ -362,7 +362,7 @@ export const svbetrag = (brutto: number) => {
   } else {
     faktor = 0.1807;
   }
-  return round(brutto * faktor);
+  return round(Math.min(brutto, 6060) * faktor);
 };
 
 export const faboPlus = (
