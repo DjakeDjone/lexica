@@ -13,9 +13,11 @@ const data = ref<LstDataIn>({
 
 const result = ref<LstDataOut>([]);
 
+const ueberstunden = ref(false);
+
 const calcLohn = () => {
-    console.log('calcLohn');
     result.value = calcLohnabrechnung(data.value);
+    console.log(result.value)
 }
 
 watch(data, () => {
@@ -59,42 +61,31 @@ watch(data, () => {
                     <input type="number" id="brutto" v-model="data.brutto" class="input input-bordered input-primary" />
                 </div>
                 <div>
-                    <label for="ueberstunden">Überstunden</label>
-                    <input type="number" id="ueberstunden" v-model="data.ueberstunden" class="input input-bordered input-primary" />
+                    <label for="uest?">Überstunden?</label>
+                    <input type="checkbox" id="uest?" v-model="ueberstunden" class="checkbox checkbox-primary" />
                 </div>
-                <div>
-                    <label for="ueberstundenZuschlag">Überstunden Zuschlag</label>
-                    <input type="number" id="ueberstundenZuschlag" v-model="data.ueberstundenZuschlag" class="input input-bordered input-primary" />
-                </div>
-                <div>
-                    <label for="ueberstundenTeiler">Überstunden Teiler</label>
-                    <input type="number" id="ueberstundenTeiler" v-model="data.ueberstundenTeiler" class="input input-bordered input-primary" />
-                </div>
-                <div>
-                    <label for="freibetrag" class="text-sm">Freibetrag</label>
-                    <input type="number" id="freibetrag" v-model="data.freibetrag" class="input input-bordered input-primary" />
-                </div>
-                <div>
-                    <label for="gewerkschaftsbeitrag">Gewerkschaftsbeitrag</label>
-                    <input type="number" id="gewerkschaftsbeitrag" v-model="data.gewerkschaftsbeitrag" class="input input-bordered input-primary" />
-                </div>
-                <div>
-                    <label for="Pendlerpauschale">Pendlerpauschale</label>
-                    <input type="number" id="Pendlerpauschale" v-model="data.pendlerpauschale" class="input input-bordered input-primary" />
-                </div>
-                <div>
-                    <label for="pendlerentfernung">KM zur Arbeit</label>
-                    <input type="number" id="pendlerentfernung" v-model="data.pendlereuro_km" class="input input-bordered input-primary" />
-                </div>
+                <template v-if="ueberstunden">
+                    <div class="ml-3">
+                        <label for="ueberstunden50">Überstunden 50%</label>
+                        <input type="number" id="ueberstunden50" v-model="data.ueberstunden50" class="input input-bordered input-primary" />
+                    </div>
+                    <div class="ml-3">
+                        <label for="ueberstunden100">Überstunden 100%</label>
+                        <input type="number" id="ueberstunden100" v-model="data.ueberstunden100" class="input input-bordered input-primary" />
+                    </div>
+                    <div class="ml-3">
+                        <label for="ueberstundenTeiler">Überstundenteiler</label>
+                        <input type="number" id="ueberstundenTeiler" v-model="data.ueberstundenTeiler" class="input input-bordered input-primary" />
+                    </div>
+                </template>
                 <div>
                     <label for="fabo">Fabo Plus</label>
                     <input type="checkbox" id="fabo" v-model="data.fabo" class="checkbox checkbox-primary" />
                 </div>
-                <div v-if="data.fabo" class="ml-2">
-                    <label for="fabo_voll">Fabo 100%</label>
+                <div v-if="data.fabo" class="ml-3">
+                    <label for="fabo_voll">Voller FABO?</label>
                     <input type="checkbox" id="fabo_voll" v-model="data.fabo_voll" class="checkbox checkbox-primary" />
                 </div>
-
                 <div>
                     <label for="avabae">AVAEB</label>
                     <input type="checkbox" id="avabae" v-model="data.avabae" class="checkbox checkbox-primary" />
@@ -107,6 +98,23 @@ watch(data, () => {
                     <label for="vollj_kinder">Volljährige Kinder</label>
                     <input type="number" id="vollj_kinder" v-model="data.vollj_kinder" class="input input-bordered input-primary" />
                 </div>
+                <div>
+                    <label for="freibetrag" class="text-sm">Freibetrag</label>
+                    <input type="number" id="freibetrag" v-model="data.freibetrag" class="input input-bordered input-primary" />
+                </div>
+                <div>
+                    <label for="Pendlerpauschale">Pendlerpauschale</label>
+                    <input type="number" id="Pendlerpauschale" v-model="data.pendlerpauschale" class="input input-bordered input-primary" />
+                </div>
+                <div>
+                    <label for="pendlerentfernung">KM zur Arbeit</label>
+                    <input type="number" id="pendlerentfernung" v-model="data.pendlereuro_km" class="input input-bordered input-primary" />
+                </div>
+                <div>
+                    <label for="gewerkschaftsbeitrag">Gewerkschaftsbeitrag</label>
+                    <input type="number" id="gewerkschaftsbeitrag" v-model="data.gewerkschaftsbeitrag" class="input input-bordered input-primary" />
+                </div>
+
             </form>
             <div class="w-full border">
                 <table class="table table-zebra w-full">
@@ -118,19 +126,19 @@ watch(data, () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="item in result" :key="item.name">
-                            <td>{{ item.name }}</td>
+                        <tr v-for="item in result" :class="{'border-t-white border-t-solid border-t': item.lineAbove}">
+                            <td>{{ (item.subtract ? '- ' : '') + (item.nameCalc || item.name) }}</td>
                             <td class="text-right">
                                 <!-- {{ item.value1 }} -->
                                 <!-- formated as Currency -->
-                                <span v-if="item.value1" class="">
+                                <span v-if="item.value1 !== undefined" class="">
                                     {{ item.value1.toLocaleString('de-DE', { style: 'currency', currency: 'EUR' }) }}
                                 </span>
                             </td>
                             <td class="text-right">
                                 <!-- {{ item.value2 }} -->
                                 <!-- formated as Currency -->
-                                <span v-if="item.value2" class="text-right">
+                                <span v-if="item.value2 !== undefined" class="text-right">
                                     {{ item.value2.toLocaleString('de-DE', { style: 'currency', currency: 'EUR' }) }}
                                 </span>
                             </td>
