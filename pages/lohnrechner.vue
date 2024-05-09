@@ -50,13 +50,13 @@ const parseAi = async () => {
 </script>
 
 <template>
-    <main class="max-w-5xl mt-12">
-        <p class="mb-4">
+    <main class="max-w-full w-[30rem] mt-12 resize-x">
+        <p class="mb-4 max-w-4xl">
             Der Lohnrechner berechnet die Lohnsteuer und Sozialabgaben für ein Bruttogehalt. Die Berechnung basiert auf
             den aktuellen Steuergesetzen. Der Lohnrechner berücksichtigt auch Überstunden, FABO Plus, AVAEB, Kinderfreibeträge, Pendlerpauschale und Gewerkschaftsbeiträge. Der Lohnrechner ist ein nützliches Tool für Arbeitnehmer, um ihr Nettogehalt zu berechnen.
         </p>
         <!-- <h1 class="text-center mb-4">Lohnrechner</h1> -->
-        <div v-auto-animate class="card bg-slate-200 p-2">
+        <div v-auto-animate class="card bg-slate-200 p-2 max-w-5xl">
             <h2 @click="showAi = !showAi" class="btn btn-primary w-full mt-0">Ai parser</h2>
             <div v-if="showAi" class="mt-1">
                 <textarea v-model="text" placeholder="Enter text to parse"
