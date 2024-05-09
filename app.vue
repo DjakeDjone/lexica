@@ -59,6 +59,9 @@ const getFileName = (path: string) => {
     }
     name = name.charAt(0).toUpperCase() + name.slice(1);
   }
+  if (name.trim().length === 0) {
+    name = 'Home';
+  }
   return name;
 }
 
@@ -75,17 +78,19 @@ const scrollToTop = () => {
     <input id="my-drawer" type="checkbox" class="drawer-toggle" v-model="navOpen" />
     <div class="drawer-content">
       <nav class="flex items-end mb-4">
-        <button class="btn btn-primary p-2 mr-8" @click="navOpen = !navOpen">
+        <button class="xl:fixed top-4 left-4 btn btn-primary p-2 mr-8" @click="navOpen = !navOpen">
           <Icon name="line-md:menu" size="30" />
         </button>
-        <h1 class="text-3xl font-bold max-w-[calc(100vw-2rem)] overflow-hidden whitespace-nowrap">{{ getFileName(path)
+        <h1 class="xl:ml-16 text-3xl font-bold max-w-[calc(100vw-2rem)] overflow-hidden whitespace-nowrap">{{ getFileName(path)
           }}</h1>
       </nav>
       <!-- Page content here -->
       <div class="fixed top-0 left-0 z-30">
         <Search v-if="searching" @update:close="searching = false" />
       </div>
-      <NuxtPage />
+      <div class="xl:ml-16">
+        <NuxtPage />
+      </div>
       <div id="topScroll" class="fixed bottom-4 right-4">
         <button v-if="scroller" class="btn btn-primary rounded-full p-2 h-fit shadow-xl animate-bounce"
           @click="scrollToTop()">

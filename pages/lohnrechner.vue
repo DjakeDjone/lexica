@@ -22,6 +22,10 @@ const data = ref<LstDataIn>({
     vollj_kinder: 0
 })
 
+onMounted(() => {
+    calcLohn();
+})
+
 const result = ref<LstDataOut>([]);
 
 const ueberstunden = ref(false);
@@ -47,13 +51,17 @@ const parseAi = async () => {
 
 <template>
     <main class="max-w-5xl mt-12">
+        <p class="mb-4">
+            Der Lohnrechner berechnet die Lohnsteuer und Sozialabgaben für ein Bruttogehalt. Die Berechnung basiert auf
+            den aktuellen Steuergesetzen. Der Lohnrechner berücksichtigt auch Überstunden, FABO Plus, AVAEB, Kinderfreibeträge, Pendlerpauschale und Gewerkschaftsbeiträge. Der Lohnrechner ist ein nützliches Tool für Arbeitnehmer, um ihr Nettogehalt zu berechnen.
+        </p>
         <!-- <h1 class="text-center mb-4">Lohnrechner</h1> -->
-        <div v-auto-animate>
-            <h2 @click="showAi = !showAi" class="btn btn-primary w-full">Ai parser</h2>
-            <div v-if="showAi" class="p-2">
+        <div v-auto-animate class="card bg-slate-200 p-2">
+            <h2 @click="showAi = !showAi" class="btn btn-primary w-full mt-0">Ai parser</h2>
+            <div v-if="showAi" class="mt-1">
                 <textarea v-model="text" placeholder="Enter text to parse"
                     class="textarea textarea-bordered textarea-primary w-full"></textarea>
-                <div class="w-full flex gap-2">
+                <div class="w-full flex gap-2 mt-1">
                     <input type="text" v-model="ai.apiKey" class="input input-bordered input-primary"
                         placeholder="API KEY from groq" />
                     <div class="w-40">
