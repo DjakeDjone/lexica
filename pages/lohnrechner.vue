@@ -47,10 +47,22 @@ const parseAi = async () => {
     aiLoading.value = false;
 }
 
+const reset = () => {
+    data.value = {
+        brutto: 1000,
+        fabo: false,
+        fabo_voll: false,
+        avabae: false,
+        minderj_kinder: 0,
+        vollj_kinder: 0
+    }
+    calcLohn();
+}
+
 </script>
 
 <template>
-    <main class="max-w-full w-[30rem] mt-12 resize-x">
+    <main class="max-w-full w-[64rem] mt-12 resize-x">
         <p class="mb-4 max-w-4xl">
             Der Lohnrechner berechnet die Lohnsteuer und Sozialabgaben für ein Bruttogehalt. Die Berechnung basiert auf
             den aktuellen Steuergesetzen. Der Lohnrechner berücksichtigt auch Überstunden, FABO Plus, AVAEB, Kinderfreibeträge, Pendlerpauschale und Gewerkschaftsbeiträge. Der Lohnrechner ist ein nützliches Tool für Arbeitnehmer, um ihr Nettogehalt zu berechnen.
@@ -167,7 +179,7 @@ const parseAi = async () => {
                 
 
             </form>
-            <div class="w-full border">
+            <div class="w-full border rounded-xl">
                 <table class="table table-zebra w-full">
                     <thead>
                         <tr>
@@ -198,9 +210,16 @@ const parseAi = async () => {
                 </table>
             </div>
         </div>
-        <p>
-
-        </p>
+        <div class="flex gap-2 justify-between">
+            <!-- turn icon on btn hover -->
+            <button class="btn btn-warning mt-2 group"
+            @click="reset()">
+                <Icon name="system-uicons:reset-alt" size="18" class="motion-safe:group-hover:animate-[spin_1s_cubic-bezier(0,.72,.83,.67)_infinite]" />
+                Reset</button>
+            <button class="btn btn-primary mt-2 w-8 !h-8 p-0">
+            <Icon name="vaadin:resize-v" size="18" />
+            </button>
+        </div>
     </main>
 </template>
 
