@@ -121,7 +121,7 @@ const scrollToTop = () => {
             </div>
           </button>
         </li>
-        <div class="divider"></div>
+        <div class="divider mb-0"></div>
         <h2 class="text-lg font-bold">Navigation</h2>
         <ContentNavigation v-slot="{ navigation }">
           <li class="m-0">
