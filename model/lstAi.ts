@@ -20,25 +20,26 @@ Convert the text to JSON in the format: \`\`\`
   export interface LstDataIn {
   brutto: number;
 
-  ueberstunden50?: number;
+  ueberstunden50?: number; // wie viele Stunden wurden mit 50% Zuschlag bezahlt
   ueberstunden100?: number;
   ueberstundenTeiler?: number;
 
   fabo: boolean;
-  fabo_voll: boolean;
+  fabo_voll: boolean; // voller Bonus/halber Bonus
   avabae: boolean;
   minderj_kinder: number;
   vollj_kinder: number;
 
   freibetrag?: number;
   pendlerpauschale?: number;
-  pendlereuro_km?: number;
   pendlerpauschaleKostenUebername?: number;
+  pendlereuro_km?: number;
 
   gewerkschaftsbeitrag?: number;
-  betriebsratumlage?: number;
+  betriebsratsumlage?: number;
   serviceentgelt?: number;
   akontozahlung?: number;
+}
 }\`\`\`
 The 'ueberstundenTeiler' should be the divisor.
 `;
