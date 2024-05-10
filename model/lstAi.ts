@@ -80,3 +80,4 @@ export const genGehaltInputByAi = async (text: string, ai: Ai) => {
         throw new Error("Could not generate Gehalt Input");
     }
 };
+

@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { useStorage } from '@vueuse/core'
+import { genTextFromJSON } from '~/model/exportLst';
 import { type LstDataOut, calcLohnabrechnung, type LstDataIn } from '~/model/lohnsteuer';
 import { genGehaltInputByAi, type Ai } from '~/model/lstAi';
 
 const text = ref("");
 const showAi = ref(false);
+const showAiApiKey = ref(false);
 const ai = useStorage('ai', {
     apiKey: '',
     model: 'llama3-8b-8192',
@@ -13,7 +15,7 @@ const ai = useStorage('ai', {
 } as Ai);
 const aiLoading = ref(false);
 
-const data = ref<LstDataIn>({
+const data = useStorage<LstDataIn>('data', {
     brutto: 1000,
     fabo: false,
     fabo_voll: false,
@@ -41,10 +43,16 @@ watch(data, () => {
 
 const parseAi = async () => {
     aiLoading.value = true;
-    const json = await genGehaltInputByAi(text.value, ai.value);
-    data.value = json;
-    calcLohn();
-    aiLoading.value = false;
+    try {
+
+        const json = await genGehaltInputByAi(text.value, ai.value);
+        data.value = json;
+        calcLohn();
+        aiLoading.value = false;
+    } catch (error) {
+        console.error(error);
+        aiLoading.value = false;
+    }
 }
 
 const reset = () => {
@@ -58,6 +66,8 @@ const reset = () => {
     }
     calcLohn();
 }
+
+text.value = genTextFromJSON(data.value);
 
 </script>
 
@@ -73,9 +83,15 @@ const reset = () => {
             <div v-if="showAi" class="mt-1">
                 <textarea v-model="text" placeholder="Enter text to parse"
                     class="textarea textarea-bordered textarea-primary w-full"></textarea>
-                <div class="w-full flex gap-2 mt-1">
-                    <input type="text" v-model="ai.apiKey" class="input input-bordered input-primary"
-                        placeholder="API KEY from groq" />
+                <div class="w-full flex justify-between gap-2 mt-1">
+                    <div class="flex tooltip tooltip-primary tooltip-bottom w-full max-w-sm" data-tip="API Key from groq.com">
+                        <input :type="showAiApiKey?'text':'password'" v-model="ai.apiKey" class="input input-bordered input-primary w-full"
+                            placeholder="API KEY from groq" />
+                        <button @click="showAiApiKey = !showAiApiKey" class="w-fit -ml-7 backdrop-blur-sm h-3/4 my-auto p-1">
+                            <Icon name="heroicons-solid:eye" size="18" v-if="!showAiApiKey" />
+                            <Icon name="heroicons-solid:eye-off" size="18" v-else />
+                        </button>
+                    </div>
                     <div class="w-40">
                         <button v-if="!aiLoading" @click="parseAi()" class="btn btn-primary w-full">Parse with
                             AI</button>
@@ -84,6 +100,10 @@ const reset = () => {
                         </button>
                     </div>
                 </div>
+                <p>
+                    For a free API Key visit <a href="https://console.groq.com/keys" target="_blank" class="link">groq.com</a>, 
+                    login with Google and copy paste your API Key here.
+                </p>
             </div>
         </div>
         <div class="w-full md:flex gap-4 mt-4">
@@ -214,7 +234,7 @@ const reset = () => {
             <!-- turn icon on btn hover -->
             <button class="btn btn-warning mt-2 group"
             @click="reset()">
-                <Icon name="system-uicons:reset-alt" size="18" class="motion-safe:group-hover:animate-[spin_1s_cubic-bezier(0,.72,.83,.67)_infinite]" />
+                <Icon name="system-uicons:reset-alt" size="18" class="motion-safe:group-active:animate-[spin_1s_cubic-bezier(0,.72,.83,.67)_infinite]" />
                 Reset</button>
             <button class="btn btn-primary mt-2 w-8 !h-8 p-0">
             <Icon name="vaadin:resize-v" size="18" />
