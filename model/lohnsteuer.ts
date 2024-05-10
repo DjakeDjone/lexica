@@ -217,7 +217,7 @@ export const calcLohnabrechnung = (data: LstDataIn): LstDataOut => {
   if (data.pendlerpauschale) {
     let pp = data.pendlerpauschale;
     if (data.pendlerpauschaleKostenUebername) {
-      pp = data.pendlerpauschaleKostenUebername;
+      pp = round(pp - data.pendlerpauschaleKostenUebername / 12);
     }
     bemessungsgrundlage -= pp;
     out.push({
@@ -257,7 +257,7 @@ export const calcLohnabrechnung = (data: LstDataIn): LstDataOut => {
   let lohnsteuer = round(bemessungsgrundlage * steuersatz);
   out.push({
     name: LstDataOutKeys.LOHNSTEUER,
-    nameCalc: `• ${steuersatz * 100}%`,
+    nameCalc: `• ${(steuersatz * 100).toFixed(0)}%`,
     value1: lohnsteuer,
     lineAbove: true,
   });
@@ -290,12 +290,13 @@ export const calcLohnabrechnung = (data: LstDataIn): LstDataOut => {
     });
   }
 
-  lohnsteuer = round(lohnsteuer);
+  lohnsteuer = Math.max(round(lohnsteuer), 0);
   auszahlung -= lohnsteuer;
   out.push({
     name: LstDataOutKeys.LOHNSTEUER,
     value2: lohnsteuer,
     lineAbove: true,
+    subtract: true,
   });
 
   // Gewerkschaftsbeitrag

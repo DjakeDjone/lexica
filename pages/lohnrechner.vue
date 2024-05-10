@@ -140,6 +140,11 @@ const parseAi = async () => {
                         class="input input-bordered input-primary" />
                 </div>
                 <div>
+                    <label for="kostenuebernahme">Pendlerpauschale Kostenübernahme /Jahr</label>
+                    <input type="number" id="kostenuebernahme" v-model="data.pendlerpauschaleKostenUebername"
+                        class="input input-bordered input-primary" />
+                </div>
+                <div>
                     <label for="gewerkschaftsbeitrag">Gewerkschaftsbeitrag</label>
                     <input type="number" id="gewerkschaftsbeitrag" v-model="data.gewerkschaftsbeitrag"
                         class="input input-bordered input-primary" />
