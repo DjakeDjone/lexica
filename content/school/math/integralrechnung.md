@@ -2,7 +2,7 @@
 
 ## Grundintegrale
 
-![Grundintegrale Img](images/grundintegrale.png)
+![Grundintegrale Img](/images/grundintegrale.png)
 
 ## Partielle Integration
 
