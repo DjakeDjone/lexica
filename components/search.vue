@@ -117,8 +117,8 @@ const close = () => {
             </div>
             <div v-auto-animate id="search-results" class="mt-2 bg-base-100 rounded-lg">
                 <!-- {{ selected }} -->
-                <div v-for="result, idx in searchResults" :key="result._path" class="searchResult rounded-xl border border-transparent p-3 pb-0 hover:bg-base-100/50"
-                    :class="{ 'border-primary': idx === selected }"
+                <div v-for="result, idx in searchResults" :key="result._path" class="searchResult rounded-lg p-3 pb-0 hover:bg-base-100/50"
+                    :style="{ border: selected === idx ? '1px solid oklch(var(--p))' : '1px solid transparent'}"
                 >
                     <router-link :to="result._path" @click="searchVlue = '';close()"
                         class="m-0 hover:no-underline">
