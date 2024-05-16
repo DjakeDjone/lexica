@@ -62,18 +62,6 @@ CREATE VIEW v AS SELECT * FROM employees WHERE department_id = 10;
 + Komplexität
 + Aktualisierbarkeit
 
-### Materialisierte Views
-
-Materialisierte Views sind Ansichten, die die Ergebnisse einer Abfrage speichern, um die Leistung zu verbessern. Sie werden in der Regel verwendet, wenn die Abfrageergebnisse teuer sind oder wenn die Abfrageergebnisse häufig abgerufen werden.
-
-```sql
-CREATE MATERIALIZED VIEW mv AS SELECT * FROM t;
-```
-
-```sql
-REFRESH MATERIALIZED VIEW mv;
-```
-
 ### Einschränkungen von Views
 
 + Keine ORDER BY Klausel
@@ -87,11 +75,11 @@ REFRESH MATERIALIZED VIEW mv;
 ## Key Begriffe
 
 + **Primary Key**: Eindeutiger Schlüssel, der die Zeilen in einer Tabelle identifiziert.
++ **Composite Key**: Mehrere Spalten, die zusammen als Primärschlüssel verwendet werden. z.B. (department_id, employee_id).
++ **Natural Key**: Spalte oder eine Gruppe von Spalten, die natürliche Daten enthalten. Z.B. SSN, E-Mail.
++ **Surrogate Key**: Künstlicher Schlüssel, der keine natürlichen Daten enthält. Z.B. Autoincrement.
 + **Foreign Key**: Spalte oder eine Gruppe von Spalten in einer Tabelle, die auf den Primärschlüssel einer anderen Tabelle verweisen.
 + **Unique Key**: Spalte oder eine Gruppe von Spalten in einer Tabelle, die keine Duplikate zulässt.
-+ **Composite Key**: Mehrere Spalten, die zusammen als Primärschlüssel verwendet werden.
-+ **Natural Key**: Spalte oder eine Gruppe von Spalten, die natürliche Daten enthalten.
-+ **Surrogate Key**: Künstlicher Schlüssel, der keine natürlichen Daten enthält.
 
 ## Redundanzen
 
