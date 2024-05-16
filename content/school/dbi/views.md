@@ -64,13 +64,25 @@ CREATE VIEW v AS SELECT * FROM employees WHERE department_id = 10;
 
 ### Einschränkungen von Views
 
-+ Keine ORDER BY Klausel
-+ Keine GROUP BY Klausel
-+ Keine DISTINCT Klausel
-+ Keine Aggregatfunktionen (SUM, COUNT, AVG, MAX, MIN)
-+ Keine Subqueries
-+ Keine Joins
-+ Keine DML-Operationen (INSERT, UPDATE, DELETE)
+**Single Table Views**:
+
++ INSERT: Nur möglich, wenn die View keine Aggregatfunktionen, DISTINCT, GROUP BY, ORDER BY, Subqueries, Joins enthält.
++ UPDATE: Nur möglich, wenn die View eine einzige Basistabelle hat und die Spalten eindeutig sind.
++ DELETE: Nur möglich, wenn die View eine einzige Basistabelle hat und die Spalten eindeutig sind.
+
+**Multiple Table Views**:
+
++ INSERT: Nicht möglich.
++ UPDATE: Nicht möglich.
++ DELETE: Nicht möglich.
+
+### Optionen
+
++ **WITH CHECK OPTION**: Stellt sicher, dass die Bedingungen der View erfüllt sind.
+
++ **WITH READ ONLY**: Verhindert das Aktualisieren der View.
+
++ **WITH CASCADED CHECK OPTION**: Stellt sicher, dass die Bedingungen der View und der Basistabelle erfüllt sind.
 
 ## Key Begriffe
 
@@ -170,6 +182,14 @@ XML (Extensible Markup Language) ist eine Auszeichnungssprache, die zur Darstell
 ## XSD
 
 XSD (XML Schema Definition) ist eine Sprache zur Definition von XML-Dokumentenstrukturen. Es definiert die Elemente, Attribute und Datentypen, die in einem XML-Dokument verwendet werden können.
+
+## XSD-Elemente
+
++ **xs:schema**: Das Wurzelelement, das das XML-Schema definiert.
++ **xs:element**: Definiert ein XML-Element.
++ **xs:complexType**: Definiert den Datentyp eines Elements.
++ **xs:sequence**: Definiert die Reihenfolge der Elemente.
++ **xs:attribute**: Definiert ein Attribut.
 
 ### Beispiel
 
