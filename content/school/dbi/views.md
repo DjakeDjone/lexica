@@ -16,6 +16,10 @@
 
 Views sind virtuelle Tabellen, die aus einer oder mehreren Tabellen erstellt werden. Sie können wie Tabellen verwendet werden, aber sie enthalten keine Daten. Die Daten werden aus den zugrunde liegenden Tabellen abgerufen, wenn eine Abfrage gegen eine Ansicht ausgeführt wird.
 
+## Arten von Views
+
+**Fehlt noch🙁 -> kommt in ein paar minuten**
+
 ### Vorteile von Views
 
 + Vereinfachung von Abfragen
