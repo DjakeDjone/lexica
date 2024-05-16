@@ -18,7 +18,35 @@ Views sind virtuelle Tabellen, die aus einer oder mehreren Tabellen erstellt wer
 
 ## Arten von Views
 
-**Fehlt noch🙁 -> kommt in ein paar minuten**
++ **Aggregat-Views**: Fassen Daten zusammen, z.B. SUM, COUNT, AVG.
+
+```sql
+CREATE VIEW v AS SELECT department_id, COUNT(*) AS count FROM employees GROUP BY department_id;
+```
+
++ **Composite-Views**: Kombinieren Daten aus mehreren Tabellen.
+
+```sql
+CREATE VIEW v AS SELECT e.employee_id, e.first_name, e.last_name, d.department_name FROM employees e JOIN departments d ON e.department_id = d.department_id;
+```
+
++ **Projektions-Views**: Wählen bestimmte Spalten aus.
+
+```sql
+CREATE VIEW v AS SELECT first_name, last_name FROM employees;
+```
+
++ **Materialisierte Views**: Speichern die Ergebnisse einer Abfrage.
+
+```sql
+CREATE MATERIALIZED VIEW mv AS SELECT * FROM t;
+```
+
++ **Selection View**: Filtern Daten basierend auf einer Bedingung.
+
+```sql
+CREATE VIEW v AS SELECT * FROM employees WHERE department_id = 10;
+```
 
 ### Vorteile von Views
 
