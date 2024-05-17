@@ -4,11 +4,11 @@ BO-Teststoff für 22.5.2024: S. 196 - 249
 
 ## Themen
 
-- [ ] [196 - 204: Darstellung der Kommunikationsbeziehungen](#196---204-darstellung-der-kommunikationsbeziehungen)
-- [ ] [205 - 216: Netzpläne](#205---216-netzpläne)
-- [ ] [217 - 246: Sollkonzept:](#217---246-sollkonzept)
-    + [ ] [218: Buisness Rules](#218-buisness-rules)
-    + [ ] [224: Techniken zur Entwicklung eines Sollkonzepts](#224-techniken-zur-entwicklung-eines-sollkonzepts)
+- [x] [196 - 204: Darstellung der Kommunikationsbeziehungen](#196---204-darstellung-der-kommunikationsbeziehungen)
+- [x] [205 - 216: Netzpläne](#205---216-netzpläne)
+- [x] [217 - 246: Sollkonzept:](#217---246-sollkonzept)
+    + [x] [218: Buisness Rules](#218-buisness-rules)
+    + [x] [224: Techniken zur Entwicklung eines Sollkonzepts](#224-techniken-zur-entwicklung-eines-sollkonzepts)
     + [ ] 234: Auswahl u. Umsetzung eines Sollkonzepts
     + [ ] 240: Einführung neuer Systeme
     + [ ] 246: Kontrolle in der Organisation
