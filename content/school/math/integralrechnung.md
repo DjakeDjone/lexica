@@ -19,3 +19,9 @@
 ![alt text](/images/partielleintegration.png)
 
 ---
+
+## Beispiel
+
+![alt text](/images/partIntBsp1.png)
+
+---
