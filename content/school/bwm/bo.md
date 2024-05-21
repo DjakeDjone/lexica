@@ -125,4 +125,72 @@ Bsp.:
 
 ### Alternativenbewertung
 
+**Scoring-Methode:**
+
+- **Kriterien festlegen**
+- **Kriterien gewichten**
+- **Gewichtete Kriterien berechnen**
+- **Rangfolge**
+- **Entscheidung**
+
+### Von der Arbeitsanalyse zur Aufgabenanalyse
+
+1. **Arbeitsanalyse:** Teilaufgaben in *kleinste Arbeitselemente* zerlegen
+2. **Arbeitssynthese:** Arbeitselemente zu *Teilaufgaben* zusammenfassen
+3. **Aufgabensynthese:** Teilaufgaben zu *Aufgaben* zusammenfassen. Dadurch entsteht die **organisatorische Aufbaustruktur**.
+
+## 240: Einführung neuer Systeme
+
+### Ablauf der Einführung
+
+```text
+1. Einführungsmethode festlegen
+2. Realisierungsplanung durchführen
+3. Ressourcen bereitstellen
+4. Informationen aller unmittelbar und mittelbar betroffenen Aktionseinheiten (~ Allen Bescheit geben)
+5. Maßnahmen zur Sicherung der laufenden Aufgabenerfüllung festlegen
+6. Übernahmephase
+```
+
+### Einführungsmethoden
+
+- **Totaleinführung:**(revolutionäre Methode) Altes System wird abgeschaltet und neues System wird eingeführt.
+- **Stufenweise Einführung:**(evolutionäre Methode) Neues System wird schrittweise eingeführt.
+- **Paralleleinführung:**(evolutionäre Methode) Altes und neues System werden parallel betrieben. (geringstes Risiko)
+- **Pilotprojekt:**(evolutionäre Methode) Neues System wird in einem Teilbereich eingeführt.
+
+![Einflussfaktoren auf die Entscheidung über die Einführungsmethoden](/images/einflussfaktorenE.png)
+
+### Einflussfaktor Mensch
+
+- **Akzeptanz:** Wird das neue System akzeptiert?
+- **Motivation:** Sind die Mitarbeiter motiviert?
+- **Qualifikation:** Sind die Mitarbeiter qualifiziert?
+- **Kommunikation:** Wird ausreichend kommuniziert?
+
+## Kontrolle in der Organisation
+
+### Grundsätze der Kontrolle
+
+Die Kontrolle sollte:
+
+- **zeitgerecht**,
+- **lückenlos**,
+- **wirtschaftlich** sein.
+\
+\
+Funktionen der Kontrolle:
+
+- **Beobachtungsfunktion**
+- **Beurteilungsfunktion**
+- **Vorsorgefunktion** (Abschreckung)
+
+**Kontrollprozess:**
+
+1. Ermittlung der **Basisdaten** für den Kontrollprozess
+2. Ermittlung der **Realisierungsinformationen**
+3. Ermittlung der **Abweichungen**
+4. **Abweichungsanalyse**
+5. **Planung der **Folgeaktivitäten**
+
 *Comming soon...* 🫤
