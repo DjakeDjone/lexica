@@ -1,4 +1,0 @@
-# BO
-
-## Table of contents
-
