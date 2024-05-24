@@ -1,5 +1,12 @@
 # Garuda Linux
 
+## update system
+
+```bash
+sudo pacman -Syu ## would be by normal arch
+sudo garuda-update
+```
+
 ## install
 
 ```bash
