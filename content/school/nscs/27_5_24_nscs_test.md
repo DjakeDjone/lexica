@@ -8,7 +8,24 @@ Präsentation Anonym im Internet
 ## Table of contents
 
 - [Layer 4](#layer-4)
-
+  - [Ports](#ports)
+  - [UDP](#udp)
+  - [TCP](#tcp)
+- [Penetration Testing](#penetration-testing)
+- [Phasen eines Hacking-Angriffs](#phasen-eines-hacking-angriffs)
+- [Reconnaissance - Informationsbeschaffung](#reconnaissance---informationsbeschaffung)
+  - [Google Dorking](#google-dorking)
+  - [Shodan](#shodan)
+    - [Whois](#whois)
+    - [DNS](#dns)
+    - [Scanning](#scanning)
+- [OWASP Top 10](#owasp-top-10)
+- [Anonymität im Internet](#anonymität-im-internet)
+  - [Proxy Server](#proxy-server)
+  - [VPN](#vpn)
+    - [Proxy vs. VPN](#proxy-vs-vpn)
+  - [TOR](#tor)
+  - [Darknet](#darknet)
 
 ## Layer 4
 
@@ -62,7 +79,6 @@ Der HOST kann eine Verbindung mit dem RST Flag beenden/ablehnen.
 - Verbindung beenden (**FIN** SEQ=Y)
 
 ## Penetration Testing
-
 
 ![Penetration Testing Kriterien](/images/penetrationTesting.png)
 
@@ -143,6 +159,7 @@ Der HOST kann eine Verbindung mit dem RST Flag beenden/ablehnen.
 \
 
 dig fragt DNS-Server nach Informationen an.
+
 ```bash
 dig -t A domain.com
 ```
