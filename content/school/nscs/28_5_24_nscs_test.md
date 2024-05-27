@@ -1,6 +1,6 @@
 # NSCS Test 26. Mai 2024
 
-NSCS Test 26. Mai 2024 Weixelbaum 3. Klasse
+NSCS Test 28. Mai 2024 Weixelbaum 3. Klasse
 \
 Stoff: Skriptum v0.8 Seite 63-81
 Präsentation Anonym im Internet
@@ -242,6 +242,7 @@ Liste der 10 häufigsten Schwachstellen in Webanwendungen.
 - Verbergen der IP-Adresse
 - Anonymität
 - Zugriff auf gesperrte Seiten
+- Proxy-Chaining: Verkettung von Proxies
 
 ## VPN
 
@@ -250,6 +251,13 @@ Liste der 10 häufigsten Schwachstellen in Webanwendungen.
 - Anonymität
 - Zugriff auf gesperrte Seiten
 - Verbindung zu Firmennetzwerken
+
+### VPN Anbieter u. Anonymizer
+
+- IPSec: unkomfortabel, sicher
+- OpenVPN: sicher, Open Source
+- SSH: sicher, langsam
+- SOCKS: Proxy-Protokoll, ohne Verschlüsselung
 
 ### Proxy vs. VPN
 
@@ -269,10 +277,15 @@ Liste der 10 häufigsten Schwachstellen in Webanwendungen.
 - Onion-Adressen
 - Exit Nodes
 
+## Deep Web
+
+- Nicht indexiert (nicht googelbar)
+- Zugriff über spezielle Browser
+- TOR, I2P, Freenet
+
 ## Darknet
 
-- Verborgener Teil des Internets
-- Zugriff über spezielle Software
+- Peer-to-Peer Netzwerk
+- Teil des Deep Web
+- Zugriff über spezielle Browser(Tor)
 - Anonymität
-- Illegale Aktivitäten
-- viele Websiten von FBI um Nutzer zu fangen
