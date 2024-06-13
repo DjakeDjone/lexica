@@ -22,12 +22,18 @@ export interface LstDataIn {
   betriebsratsumlage?: number;
   serviceentgelt?: number;
   akontozahlung?: number;
+
+  // ohne S. 42: Tägliche abrechnung
+
+  // advanced: Sachbezüge
+  sachbezuege: number[];
 }
 
 export enum LstDataOutKeys {
   BRUTTO = "Brutto",
   GESAMT = "Gesamtbrutto",
   SOZIALVERSICHERUNG = "Sozialversicherung",
+  SOZIALVERSICHERUNGSACHBEZUG = "Sachbezugswert (Pkw etc)",
   UE_GRUNDLOHN = "ÜG",
   UEBERSTUNDEN_ZUSCHLAG = "Überstunden Zuschlag",
   UEBERSTUNDEN_TEILER = "Überstunden Teiler",
@@ -95,9 +101,8 @@ export const calcLohnabrechnung = (data: LstDataIn): LstDataOut => {
     const ueg = round((ue50 + ue100) * grundlohn);
     out.push({
       name: LstDataOutKeys.UE_GRUNDLOHN,
-      nameCalc: `${LstDataOutKeys.UE_GRUNDLOHN}: ${brutto} / ${data.ueberstundenTeiler} = ${grundlohn} • ${
-        ue50 + ue100
-      }`,
+      nameCalc: `${LstDataOutKeys.UE_GRUNDLOHN}: ${brutto} / ${data.ueberstundenTeiler} = ${grundlohn} • ${ue50 + ue100
+        }`,
       value2: ueg,
     });
 
@@ -176,18 +181,22 @@ export const calcLohnabrechnung = (data: LstDataIn): LstDataOut => {
 
     brutto += ueg + uePflichtig + ueberstunden_steuerfrei;
 
-    out.push({name: LstDataOutKeys.GESAMT, value2: brutto, lineAbove: true});
+    out.push({ name: LstDataOutKeys.GESAMT, value2: brutto, lineAbove: true });
   }
 
-    let auszahlung = brutto;
+  let auszahlung = brutto;
   // Sozialversicherung lfd
-  const sv = svbetrag(brutto);
+  const sv = svbetrag(brutto + (data.sachbezuege?.reduce((a, b) => a + b, 0) || 0));
+  if (data.sachbezuege) {
+    out.push({ name: LstDataOutKeys.SOZIALVERSICHERUNGSACHBEZUG, value1: data.sachbezuege?.reduce((a, b) => a + b, 0) || 0 });
+  }
   out.push({
     name: LstDataOutKeys.SOZIALVERSICHERUNG,
     value2: sv,
     subtract: true,
   });
   auszahlung -= sv;
+
   // Lohnsteuer lfd
   out.push({ name: LstDataOutKeys.LOHNSTEUER });
   let bemessungsgrundlage = brutto - sv - ueberstunden_steuerfrei;
@@ -198,6 +207,15 @@ export const calcLohnabrechnung = (data: LstDataIn): LstDataOut => {
       value1: ueberstunden_steuerfrei,
       subtract: true,
     });
+  }
+  if (data.sachbezuege) {
+    let sachbezug = data.sachbezuege.reduce((a, b) => a + b, 0);
+    out.push({
+      name: LstDataOutKeys.SOZIALVERSICHERUNGSACHBEZUG,
+      value1: sachbezug,
+      subtract: true,
+    });
+    bemessungsgrundlage += sachbezug;
   }
   out.push({
     name: LstDataOutKeys.SOZIALVERSICHERUNG,

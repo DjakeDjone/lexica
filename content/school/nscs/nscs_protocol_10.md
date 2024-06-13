@@ -158,6 +158,35 @@ find / -name passwd
 find / -name passwd > /tmp/passwd
 ```
 
+- Change Pwd
+```
+sudo passwd
+```
+
+- User hinzufügen
+```bash
+sudo useradd -m -s /bin/bash benjamin
+```
+
+- watch on suid_cound
+```bash
+watch -n 1 "ls -l /bin/su" # -n 1 -> alle 1 Sekunden
+```
+
+- test (z.B. ob File lesbar ist)
+```bash
+test -r /etc/passwd
+```
+
+- return wert von letztem Befehl
+```bash
+echo $?
+```
+- datei ausführbar machen
+```bash
+chmod +x abc.sh
+```
+
 # Verketten von Befehlen
 \
 

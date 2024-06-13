@@ -21,7 +21,8 @@ const data = useStorage<LstDataIn>('data', {
     fabo_voll: false,
     avabae: false,
     minderj_kinder: 0,
-    vollj_kinder: 0
+    vollj_kinder: 0,
+    sachbezuege: [],
 })
 
 onMounted(() => {
@@ -62,7 +63,8 @@ const reset = () => {
         fabo_voll: false,
         avabae: false,
         minderj_kinder: 0,
-        vollj_kinder: 0
+        vollj_kinder: 0,
+        sachbezuege: [],
     }
     calcLohn();
 }
@@ -75,7 +77,9 @@ text.value = genTextFromJSON(data.value);
     <main class="max-w-full w-[64rem] mt-12 resize-x">
         <p class="mb-4 max-w-4xl">
             Der Lohnrechner berechnet die Lohnsteuer und Sozialabgaben für ein Bruttogehalt. Die Berechnung basiert auf
-            den aktuellen Steuergesetzen. Der Lohnrechner berücksichtigt auch Überstunden, FABO Plus, AVAEB, Kinderfreibeträge, Pendlerpauschale und Gewerkschaftsbeiträge. Der Lohnrechner ist ein nützliches Tool für Arbeitnehmer, um ihr Nettogehalt zu berechnen.
+            den aktuellen Steuergesetzen. Der Lohnrechner berücksichtigt auch Überstunden, FABO Plus, AVAEB,
+            Kinderfreibeträge, Pendlerpauschale und Gewerkschaftsbeiträge. Der Lohnrechner ist ein nützliches Tool für
+            Arbeitnehmer, um ihr Nettogehalt zu berechnen.
         </p>
         <!-- <h1 class="text-center mb-4">Lohnrechner</h1> -->
         <div v-auto-animate class="card bg-slate-200 p-2 max-w-5xl">
@@ -84,10 +88,12 @@ text.value = genTextFromJSON(data.value);
                 <textarea v-model="text" placeholder="Enter text to parse"
                     class="textarea textarea-bordered textarea-primary w-full"></textarea>
                 <div class="w-full flex justify-between gap-2 mt-1">
-                    <div class="flex tooltip tooltip-primary tooltip-bottom w-full max-w-sm" data-tip="API Key from groq.com">
-                        <input :type="showAiApiKey?'text':'password'" v-model="ai.apiKey" class="input input-bordered input-primary w-full"
-                            placeholder="API KEY from groq" />
-                        <button @click="showAiApiKey = !showAiApiKey" class="w-fit -ml-7 backdrop-blur-sm h-3/4 my-auto p-1">
+                    <div class="flex tooltip tooltip-primary tooltip-bottom w-full max-w-sm"
+                        data-tip="API Key from groq.com">
+                        <input :type="showAiApiKey ? 'text' : 'password'" v-model="ai.apiKey"
+                            class="input input-bordered input-primary w-full" placeholder="API KEY from groq" />
+                        <button @click="showAiApiKey = !showAiApiKey"
+                            class="w-fit -ml-7 backdrop-blur-sm h-3/4 my-auto p-1">
                             <Icon name="heroicons-solid:eye" size="18" v-if="!showAiApiKey" />
                             <Icon name="heroicons-solid:eye-off" size="18" v-else />
                         </button>
@@ -101,7 +107,8 @@ text.value = genTextFromJSON(data.value);
                     </div>
                 </div>
                 <p>
-                    For a free API Key visit <a href="https://console.groq.com/keys" target="_blank" class="link">groq.com</a>, 
+                    For a free API Key visit <a href="https://console.groq.com/keys" target="_blank"
+                        class="link">groq.com</a>,
                     login with Google and copy paste your API Key here.
                 </p>
             </div>
@@ -112,6 +119,18 @@ text.value = genTextFromJSON(data.value);
                 <div>
                     <label for="brutto">Brutto</label>
                     <input type="number" id="brutto" v-model="data.brutto" class="input input-bordered input-primary" />
+                </div>
+                <div>
+                    <div class="flex gap-2">
+                        <label for="sachbezüge">Sachbezüge</label>
+                        <button @click="data.sachbezuege.push(0)" class="btn btn-primary btn-sm">+</button>
+                        <button @click="data.sachbezuege.pop()" class="btn btn-warning btn-sm">-</button>
+                    </div>
+                    <div v-for="s, i in data.sachbezuege">
+                        <label for="sachbezugswert" class="text-sm">Sachbezugswert</label>
+                        <input type="number" id="sachbezugswert" v-model="data.sachbezuege[i]"
+                            class="input input-bordered input-primary" />
+                    </div>
                 </div>
                 <div>
                     <label for="uest?">Überstunden?</label>
@@ -196,7 +215,7 @@ text.value = genTextFromJSON(data.value);
                     <input type="number" id="akonto" v-model="data.akontozahlung"
                         class="input input-bordered input-primary" />
                 </div>
-                
+
 
             </form>
             <div class="w-full border rounded-xl">
@@ -209,20 +228,27 @@ text.value = genTextFromJSON(data.value);
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="item in result" class="border-b-0" :class="{'border-t border-base-content': item.lineAbove}">
+                        <tr v-for="item in result" class="border-b-0"
+                            :class="{ 'border-t border-base-content': item.lineAbove }">
                             <td>{{ item.nameCalc || item.name }}</td>
                             <td class="text-right">
                                 <!-- {{ item.value1 }} -->
                                 <!-- formated as Currency -->
                                 <span v-if="item.value1 !== undefined" class="">
-                                    {{ (item.subtract ? '- ' : '') + item.value1.toLocaleString('de-DE', { style: 'currency', currency: 'EUR' }) }}
+                                    {{ (item.subtract ? '- ' : '') + item.value1.toLocaleString('de-DE', {
+                                    style:
+                                    'currency', currency: 'EUR'
+                                    }) }}
                                 </span>
                             </td>
                             <td class="text-right">
                                 <!-- {{ item.value2 }} -->
                                 <!-- formated as Currency -->
                                 <span v-if="item.value2 !== undefined" class="text-right">
-                                    {{ (item.subtract ? '- ' : '') + item.value2.toLocaleString('de-DE', { style: 'currency', currency: 'EUR' }) }}
+                                    {{ (item.subtract ? '- ' : '') + item.value2.toLocaleString('de-DE', {
+                                    style:
+                                    'currency', currency: 'EUR'
+                                    }) }}
                                 </span>
                             </td>
                         </tr>
@@ -232,12 +258,13 @@ text.value = genTextFromJSON(data.value);
         </div>
         <div class="flex gap-2 justify-between">
             <!-- turn icon on btn hover -->
-            <button class="btn btn-warning mt-2 group"
-            @click="reset()">
-                <Icon name="system-uicons:reset-alt" size="18" class="motion-safe:group-active:animate-[spin_1s_cubic-bezier(0,.72,.83,.67)_infinite]" />
-                Reset</button>
+            <button class="btn btn-warning mt-2 group" @click="reset()">
+                <Icon name="system-uicons:reset-alt" size="18"
+                    class="motion-safe:group-active:animate-[spin_1s_cubic-bezier(0,.72,.83,.67)_infinite]" />
+                Reset
+            </button>
             <button class="btn btn-primary mt-2 w-8 !h-8 p-0">
-            <Icon name="vaadin:resize-v" size="18" />
+                <Icon name="vaadin:resize-v" size="18" />
             </button>
         </div>
     </main>
