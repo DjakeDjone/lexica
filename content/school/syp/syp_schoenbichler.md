@@ -21,11 +21,10 @@
 17. [ ] [Zeitplanung](#zeitplanung)
 18. [ ] [Aufgaben des Projektcontrollings](#aufgaben-des-projektcontrollings)
 
-
-
 ## Projektabgrenzung
 
 **Zeitlich, sachlich, sozial:**
+
 - Projektzielen und -inhalten (sachlich)
 - Anfang- und Endereignis des Projektes (zeitlich)
 - Rollen u. Werten (sozial)
@@ -35,7 +34,8 @@
 **Ziel:** Definiert die Projektziele und -inhalte
 
 **Projektumfeld:**
-- **Leitbild**: Unternehmensstrategie, 
+
+- **Leitbild**: Unternehmensstrategie,
 - **Projektportfolio**: Abhängigkeiten zu anderen Projekten
 - **zeitliches Umfeld**: Abgrenzungen bzw. Beziehungen zu Projektvorarbeiten (Vorstudie ec) und -nacharbeiten (Folgeprojekte, Wartung)
 - **soziales Umfeld**: Rollen, Werte, Normen, Konflikte,
@@ -63,26 +63,26 @@ Ein Meilenstein ist ein **überprüfbares Zwischenergebnis**, welches inhaltlich
 
 - kann mehrere Tage dauern
 - idealerweise **extern** (zB. in Seminarhotel)
-- **Ziel:** 
-    - informeller Meinungsaustausch, 
-    - Teambildung, 
-    - Projektziele, -inhalte - abgrenzung, -organisation
-    - Projektkommunikation einrichten
-    - Rollen u. Verantwortlichkeiten klären
+- **Ziel:**
+  - informeller Meinungsaustausch,
+  - Teambildung,
+  - Projektziele, -inhalte - abgrenzung, -organisation
+  - Projektkommunikation einrichten
+  - Rollen u. Verantwortlichkeiten klären
 - **max. 15 der wichtigsten Stakeholder**
 - externe Moderation
 
 ## Projektorganisationsformen
 
-- **Reine Projektorganisation**: 
-    - **Vorteile**: klare Struktur, klare Verantwortlichkeiten
-    - **Nachteile**: hohe Kosten, ev Probleme bei der Rückkehr in die Linienorganisation
-- **Einflussorganisation**: 
-    - **Vorteile**: geringe Kosten, schnelle Umsetzung
-    - **Nachteile**: unklare Verantwortlichkeiten, langsamer Informationsfluss
+- **Reine Projektorganisation**:
+  - **Vorteile**: klare Struktur, klare Verantwortlichkeiten
+  - **Nachteile**: hohe Kosten, ev Probleme bei der Rückkehr in die Linienorganisation
+- **Einflussorganisation**:
+  - **Vorteile**: geringe Kosten, schnelle Umsetzung
+  - **Nachteile**: unklare Verantwortlichkeiten, langsamer Informationsfluss
 - **Matrixorganisation**:
-    - **Vorteile**: Kombination der beiden anderen Formen
-    - **Nachteile**: hoher Koordinationsaufwand, Konflikte
+  - **Vorteile**: Kombination der beiden anderen Formen
+  - **Nachteile**: hoher Koordinationsaufwand, Konflikte
 
 ## Auswahl der geeigneten Projektorganisationsform
 
@@ -133,37 +133,38 @@ Bruce Wayne Tuckman (1965) beschreibt die 5 hasen der Teambildung:
 
 - **OSP**: Organisationsstrukturplan, beschreibt die Projektorganisation (Wer macht was?)\
 Darstellung:
-    - Graphisch: in Bauform
-    - Tabelle
+  - Graphisch: in Bauform
+  - Tabelle
 
 - **PSP**: Projektstrukturplan, beschreibt die Projektstruktur (Was wird gemacht?)\
 Darstellung:
-    - Objektorientiert
-    - Tätigkeitsorientiert
-    - Phasenorientiert
-    - Gemischt
+  - Objektorientiert
+  - Tätigkeitsorientiert
+  - Phasenorientiert
+  - Gemischt
 
 ## Arbeitspaktete
 
 - **Arbeitspaket**: kleinste Einheit der Projektstrukturplanung
 - **Merkmale**:
-    - **klare Verantwortlichkeit**
-    - **autonome Durchführung**
-    - **Überschneidungsfreiheit mit anderen APs**
+  - **klare Verantwortlichkeit**
+  - **autonome Durchführung**
+  - **Überschneidungsfreiheit mit anderen APs**
 
 - **Richtlinien bei der bildung von APs**:
-    - **genau 1 Verantwortlicher**
-    - **klar abgegrenzt**
+  - **genau 1 Verantwortlicher**
+  - **klar abgegrenzt**
 - **Vorteile**:
-    - **Aufwandschätzung**
-    - **Fortschrittskontrolle**
-    - **Vorgangsplanung für Projektablauf- u. Terminplanung**
+  - **Aufwandschätzung**
+  - **Fortschrittskontrolle**
+  - **Vorgangsplanung für Projektablauf- u. Terminplanung**
 
 ## Arbeitspakete u. Verantwortungsmatrix
 
-Die **Funktionenmatrix** zeigt die *Verantwortlichkeiten* der Projektmitglieder für die Arbeitspakete. 
+Die **Funktionenmatrix** zeigt die *Verantwortlichkeiten* der Projektmitglieder für die Arbeitspakete.
 
 Die **Verantwortungsmatrix** ist eine **Erweiterung der Funktionenmatrix** und zeigt die *Zuständigkeiten* der Projektmitglieder für die Arbeitspakete. Buchstabenkürzel:
+
 - **I** = informiert
 - **M** = mitarbeit
 - **V** = verantwortlich
@@ -174,28 +175,28 @@ Die **Verantwortungsmatrix** ist eine **Erweiterung der Funktionenmatrix** und z
 - **Terminliste**: Auflistung aller geplanten Aktivitäten eines Projekts mit Start- und Endtermin
 - **Balldiagramm**: Darstellung der zeitlichen Abfolge von Aktivitäten
 - **Netzplan**: Darstellung der logischen Abhängigkeiten von Aktivitäten
-    - **Vorteile**: 
-        - **Übersichtlichkeit**
-        - **Kritischer Pfad** erkennbar
-        - **Ressourcenplanung** möglich
-    - **Nachteile**:
-        - **Komplexität**
-        - **Änderungen** schwer möglich
+  - **Vorteile**:
+    - **Übersichtlichkeit**
+    - **Kritischer Pfad** erkennbar
+    - **Ressourcenplanung** möglich
+  - **Nachteile**:
+    - **Komplexität**
+    - **Änderungen** schwer möglich
 
 ## Aufgaben des Projektcontrollings
 
 - **Aufgaben:**
-    - **Planungsabweichungen** erkennen
-    - **Tendenzen** erkennen u. frühzeitig gegensteuern
+  - **Planungsabweichungen** erkennen
+  - **Tendenzen** erkennen u. frühzeitig gegensteuern
 
 - **Voraussetzungen**:
-    - Geeignetes **Projektreporting
+  - Geeignetes **Projektreporting
 
 - **Maßnahmen**:
-    - Mobilisierung **zusätzlicher Ressourcen**
-    - Erhöhung der **Arbeitszeit**(Überstunden)
-    - Erhöhung der **Produktivität**
-    - Outsourcing/Outtasking
+  - Mobilisierung **zusätzlicher Ressourcen**
+  - Erhöhung der **Arbeitszeit**(Überstunden)
+  - Erhöhung der **Produktivität**
+  - Outsourcing/Outtasking
 
 - **Kostenkontrolle**: Sollte nicht isoliert betrachtet werden, sondern in Zusammenhang mit **Qualität** und **Zeit**
 
