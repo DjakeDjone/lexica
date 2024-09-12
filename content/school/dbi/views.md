@@ -120,7 +120,7 @@ Die Spalten `first_name`, `last_name`, `email`, `phone_number` sind redundant, d
 
 Referenzielle Integrität ist ein Konzept in relationalen Datenbanken, das sicherstellt, dass Beziehungen zwischen Tabellen konsistent sind. Sie wird durch Foreign Keys implementiert, die sicherstellen, dass Werte in einer Tabelle auf Werte in einer anderen Tabelle verweisen.
 
-### Beispiel
+### Beispiel Referenzielle Integrität
 
 ```sql
 CREATE TABLE employees (
@@ -138,7 +138,7 @@ In diesem Beispiel verweist die Spalte `department_id` in der Tabelle `employees
 
 Mit dem `ALTER TABLE`-Befehl können Sie bestehende Tabellen und Constraints ändern.
 
-### Beispiel
+### Beispiel ALTER TABLE
 
 ```sql
 ALTER TABLE employees
@@ -160,7 +160,7 @@ FOREIGN KEY (department_id) REFERENCES departments (department_id);
 
 XML (Extensible Markup Language) ist eine Auszeichnungssprache, die zur Darstellung von Daten in einem hierarchischen Format verwendet wird. Es besteht aus Tags, Attributen und Text.
 
-### Beispiel
+### Beispiel XML
 
 ```xml
 <bookstore>
@@ -191,7 +191,7 @@ XSD (XML Schema Definition) ist eine Sprache zur Definition von XML-Dokumentenst
 + **xs:sequence**: Definiert die Reihenfolge der Elemente.
 + **xs:attribute**: Definiert ein Attribut.
 
-### Beispiel
+### Beispiel XSD
 
 ```xml
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">

@@ -1,4 +1,0 @@
-# XML Query - Exercise
-
-## Datenmodellierung
-
