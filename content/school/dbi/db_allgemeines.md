@@ -32,7 +32,6 @@
 - **Redundanzfreiheit** (mehr Speicherplatz, Updates problematisch)
 - **Konsistenz**, **Integrität**: Daten müssen konsistent und korrekt sein (z.B. Foreign Keys: *Referenzielle Integrität*)
 - **Sicherheit**
-- **Synchronisation** (gleichzeitiger Zugriff auf Daten)
 
 ---
 
@@ -57,3 +56,21 @@ zB. `NOT NULL`, `UNIQUE`, `PRIMARY KEY`, `FOREIGN KEY`, `CHECK`, `DEFAULT`, `IDE
 - Verhindert das Löschen von Datensätzen, auf die noch verwiesen wird (Außer CASCADE)
 
 > Optimistic Locking: Datenbank prüft, ob der Datensatz seit dem letzten Lesen verändert wurde
+
+## Weitere Eigenschaften
+
+- **Synchronisation** (gleichzeitiger Zugriff auf Daten)
+- **Datenunabhängigkeit**: Datenbanken sind unabhängig von der Anwendung
+- **Datensicherheit**: (Data Security) Bsp: Transaktionen, Datensicherung, Backups
+- **Datenschutz**: (Data Privacy) Bsp: DSGVO, Kryptographie, Zugriffskontrolle
+
+## Datenbankarchitektur: 3-Schema-Architektur
+
+- **Externe Schemata**: Sicht auf die Datenbank für den Benutzer (~Views)
+- **Konzeptionelles Schema**: Struktur der Datenbank
+- **Interne Schema**: Speicherung der Daten; Physikalische Speicherung, Indexe, etc.
+
+## Datenunabhängigkeit
+
+- **Logische Datenunabhängigkeit**: Änderungen am konzeptionellen Schema haben keine Auswirkungen auf das *externe Schema*
+- **Physische Datenunabhängigkeit**: Änderungen am internen Schema haben keine Auswirkungen auf das *konzeptionelle Schema*
