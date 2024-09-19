@@ -32,3 +32,28 @@
 - **Redundanzfreiheit** (mehr Speicherplatz, Updates problematisch)
 - **Konsistenz**, **Integrität**: Daten müssen konsistent und korrekt sein (z.B. Foreign Keys: *Referenzielle Integrität*)
 - **Sicherheit**
+- **Synchronisation** (gleichzeitiger Zugriff auf Daten)
+
+---
+
+# 2. Theoriestunde
+
+## Constraints
+
+zB. `NOT NULL`, `UNIQUE`, `PRIMARY KEY`, `FOREIGN KEY`, `CHECK`, `DEFAULT`, `IDENTITY`
+
+    Validation muss immer auf der Datenbank stattfinden, da die Datenbank die einzige Quelle der Wahrheit ist. Trotzdem sollte auch auf der Applikationsebene validiert werden um die Performance zu erhöhen.
+
+## Primary Key
+
+- sollte nicht verändert werden
+- NOT NULL
+- UNIQUE
+
+## Foreign Key
+
+- Referenzielle Integrität
+- Verweis auf einen anderen Datensatz
+- Verhindert das Löschen von Datensätzen, auf die noch verwiesen wird (Außer CASCADE)
+
+> Optimistic Locking: Datenbank prüft, ob der Datensatz seit dem letzten Lesen verändert wurde

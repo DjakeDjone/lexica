@@ -2,7 +2,7 @@
 
 - BEHAUPTUNG: "Die Erde ist eine Scheibe."
 - BEGRÜNDUNG: "Weil ich das so glaube."
-- BEWEIS: "Hier ist ein Foto von der Erde."
+- BEISPIEL: "Ich habe das in einem Buch gelesen."
 
 ## Bsp. Gewalt in Medien (Fernsehen)
 
@@ -20,3 +20,55 @@
 - Gewalt stumpft ab
 - Gewalt in Medien kann zu Gewalt in der Realität führen
 - Gewalt in Medien ist fiktiv, hat keine realen Konsequenzen (meistens)
+
+---
+---
+
+## Medien
+
+### Sozialen Medien
+
+- YouTube
+- Instagram
+- TikTok
+- Facebook
+- Twitter/X
+- Snapchat
+- Reddit
+- MetaVerse
+
+### Messenger
+
+- WhatsApp
+- Telegram
+- Email Abos
+
+### Fernsehsender
+
+- ORF (ZIP)
+- ServusTV
+- ZDF
+- ARD
+- BBC
+
+### Zeitungen
+
+- Washington Post
+- Die Furche
+- Der Standard
+- Die Presse
+
+### Radiosender
+
+- Ö3
+- FM4
+
+### Physische Medien
+
+- Schule
+- Litfaßsäule
+- Plakate
+- Graffiti
+- Briefe
+
+### Werbung
