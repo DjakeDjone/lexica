@@ -6,9 +6,12 @@
 - Unfassbare Regenmengen (teilweise viermal so hoch wie im gesamten September)
 - Gesamtregion Niederösterreich zum Katastrophengebiet erklärt
 - Höchste Not bei Rettungsoperationen
-- Schäden von ca. 600 Millionen Euro
+- Geschätzte Schäden von ca. 700 Millionen Euro
 - 424 Menschen evakuiert
 - 68.000 Einsatzkräfte im Einsatz
+- 1000 Jähriges Hochwasser in Wien
+- Tausende Schwalben gestorben
+- 7 Tote in Niederösterreich
 
 ## Auswirkungen und Schäden
 
@@ -60,6 +63,7 @@
 ## Quellen
 
 - [noe.gv.at](https://www.noe.gv.at/noe/Unwetter-_Aktuelle_Lagebesprechung_in_Niederoesterreich_m.html)
+- [noe.gv.at] <https://www.noel.gv.at/noe/wasser/hochwasser_hochwasseranschlagslinien_niederoesterreich.html>
 - [orf.at](https://orf.at/stories/3369569/)
 - [stol.it](https://www.stol.it/artikel/chronik/hochwasser-ganz-niederoesterreich-zu-katastrophengebiet-erklaert)
 - [derstandard.at](https://www.derstandard.at/story/3000000236672/unwetter-hochwasser-setzte-ost246sterreich-zu-lage-in-n214-angespannt)
