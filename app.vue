@@ -31,9 +31,27 @@ onMounted(() => {
   }
 
   let currentScroll = window.scrollY;
+  const scrollActivationPoint = 200;
+  let scrollingSpeed = 0;
+
+  let lastScrollPos = 0;
+  let lastShown = 0;
+  setInterval(() => {
+    // calculate the scroll speed
+    // if lastShwon is more than 5sec ago
+    if (new Date().getTime() - lastShown > 5000) {
+      scrollingSpeed = Math.abs(window.scrollY - lastScrollPos);
+    }
+    lastScrollPos = window.scrollY;
+  }, 100);
+
   window.addEventListener('scroll', () => {
     if (window.scrollY < currentScroll) {
-      scroller.value = window.scrollY > 100;
+      // scroller.value = window.scrollY > scrollActivationPoint;
+      scroller.value = (window.scrollY > scrollActivationPoint) && scrollingSpeed > 100;
+      if (scroller.value) {
+        lastShown = new Date().getTime();
+      }
     } else {
       scroller.value = false;
     }
