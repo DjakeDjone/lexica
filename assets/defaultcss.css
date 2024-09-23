@@ -9,6 +9,16 @@ h6 {
     margin-top: .8rem;
 }
 
+p {
+    max-width: 40rem;
+}
+
+@media (min-width: 768px) {
+    p {
+        max-width: 60rem;
+    }
+}
+
 * {
     word-wrap: break-word !important;
     overflow-wrap: break-word !important;
@@ -89,6 +99,7 @@ pre {
     overflow-x: auto;
     border-radius: 5px;
     margin-bottom: 1rem;
+    width: fit-content;
 }
 
 u {

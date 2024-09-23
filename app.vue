@@ -23,6 +23,13 @@ watchEffect(() => {
 });
 
 onMounted(() => {
+
+  // check dark mode
+  if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // html.dark
+    document.documentElement.classList.add('dark');
+  }
+
   let currentScroll = window.scrollY;
   window.addEventListener('scroll', () => {
     if (window.scrollY < currentScroll) {
@@ -81,8 +88,9 @@ const scrollToTop = () => {
         <button class="xl:fixed top-4 left-4 btn btn-primary p-2 mr-8" @click="navOpen = !navOpen">
           <Icon name="line-md:menu" size="30" />
         </button>
-        <h1 class="xl:ml-16 text-3xl font-bold max-w-[calc(100vw-2rem)] overflow-hidden whitespace-nowrap">{{ getFileName(path)
-          }}</h1>
+        <h1 class="xl:ml-16 text-3xl font-bold max-w-[calc(100vw-2rem)] overflow-hidden whitespace-nowrap">{{
+          getFileName(path)
+        }}</h1>
       </nav>
       <!-- Page content here -->
       <div class="fixed top-0 left-0 z-30">
