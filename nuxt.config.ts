@@ -1,6 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
+
   modules: [
     '@nuxt/content',
     '@nuxtjs/tailwindcss',
@@ -9,6 +10,7 @@ export default defineNuxtConfig({
     'nuxt-icon',
     '@vueuse/nuxt'
   ],
+
   content: {
     highlight: {
       theme: {
@@ -28,5 +30,7 @@ export default defineNuxtConfig({
       //   }
       // }
     },
-  }
+  },
+
+  compatibilityDate: '2024-09-23'
 })

@@ -65,7 +65,7 @@ const search = async (value: string) => {
                         }
                     },
                     {
-                        content: {
+                        body: {
                             $icontains: searchVlue.value
                         }
                     }
