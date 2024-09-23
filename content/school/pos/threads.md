@@ -30,10 +30,10 @@
 
 ## Thread Safety
 
-- Immutable Objects
-- Volatile
-- Atomic Classes
-- ThreadLocal
+- Immutable Objects (keine Änderung möglich)
+- Volatile (kein Caching)
+- Atomic Classes (jede Operation ist atomar=unzerlegbar)
+- ThreadLocal (jeder Thread hat eigene Instanz)
 
 ## Example: Producer/Consumer
 
@@ -85,6 +85,26 @@ public class Consumer implements Runnable {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+}
+```
+
+## ExecutorService
+
+- wird verwendet um Threads zu verwalten
+- ThreadPool wird automatisch erstellt
+- kann Tasks ausführen
+
+```java
+public class ExecutorServiceExample {
+    public static void main(String[] args) {
+        StringBuffer sb = new StringBuffer();
+
+        try (ExecutorService executor = Executors.newFixedThreadPool(10)) {
+            IntStream.range(0, 10).forEach(i -> executor.submit(() -> sb.append((char) ('A' + i))));
+        }
+
+        System.out.println(sb);
     }
 }
 ```
