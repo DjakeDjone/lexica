@@ -38,15 +38,42 @@ const searchEvent = async (e: KeyboardEvent | MouseEvent) => {
 }
 
 const search = async (value: string) => {
+    value = value.trim().toLowerCase();
     if (searchVlue.value.length > 0) {
         searchResults.value = (await queryContent().where({
             title: {
-                $contains: searchVlue.value
+                $icontains: searchVlue.value
             }
         }).limit(7)
-        .find()).result;
+            .find()).result;
         // custom pages
         searchResults.value = searchResults.value.concat(customPages.filter(page => page.title.toLowerCase().includes(searchVlue.value.toLowerCase())));
+
+        //
+        if (searchResults.value.length < 2) {
+            // advanced search with full text search
+            searchResults.value = (await queryContent().where({
+                $or: [
+                    {
+                        title: {
+                            $icontains: searchVlue.value
+                        }
+                    },
+                    {
+                        description: {
+                            $icontains: searchVlue.value
+                        }
+                    },
+                    {
+                        content: {
+                            $icontains: searchVlue.value
+                        }
+                    }
+                ]
+            }).limit(7)
+                .find()).result;
+
+        }
     } else {
         searchResults.value = [];
     }
@@ -56,7 +83,7 @@ let searchTimeout: NodeJS.Timeout | null = null;
 
 const searchOnTypeEnd = async (event: KeyboardEvent | FocusEvent) => {
     console.log(event);
-    
+
     if (event instanceof KeyboardEvent && event.key === 'ArrowUp') {
         if (selected.value > 0) {
             selected.value--;
@@ -107,21 +134,19 @@ const close = () => {
             class="drawer-overlay h-full w-full absolute top-0 left-0 bg-black/10 backdrop-blur-sm"></label>
         <div class="z-[500] p-2 rounded-[.625rem] w-full max-w-md mt-[15vh]">
             <div class="w-full flex items-start gap-2">
-                <textarea class="textarea resize-none w-full h-8" v-model="searchVlue"
-                    placeholder="Search..." @keydown.enter="searchEvent($event)"
-                    @keyup="searchOnTypeEnd($event)" @focus="searchOnTypeEnd($event)" @click="searchOnTypeEnd($event)"
-                    ></textarea>
+                <textarea class="textarea resize-none w-full h-8" v-model="searchVlue" placeholder="Search..."
+                    @keydown.enter="searchEvent($event)" @keyup="searchOnTypeEnd($event)"
+                    @focus="searchOnTypeEnd($event)" @click="searchOnTypeEnd($event)"></textarea>
                 <button class="btn btn-primary" @click="searchEvent($event)">
                     <Icon name="line-md:search" size="24" />
                 </button>
             </div>
             <div v-auto-animate id="search-results" class="mt-2 bg-base-100 rounded-lg">
                 <!-- {{ selected }} -->
-                <div v-for="result, idx in searchResults" :key="result._path" class="searchResult rounded-lg p-3 pb-0 hover:bg-base-100/50"
-                    :style="{ border: selected === idx ? '1px solid oklch(var(--p))' : '1px solid transparent'}"
-                >
-                    <router-link :to="result._path" @click="searchVlue = '';close()"
-                        class="m-0 hover:no-underline">
+                <div v-for="result, idx in searchResults" :key="result._path"
+                    class="searchResult rounded-lg p-3 pb-0 hover:bg-base-100/50"
+                    :style="{ border: selected === idx ? '1px solid oklch(var(--p))' : '1px solid transparent' }">
+                    <router-link :to="result._path" @click="searchVlue = ''; close()" class="m-0 hover:no-underline">
                         <h3 class="text-lg font-bold mt-0">{{ result.title }}</h3>
                         <p class="text-sm">{{ result.description }}</p>
                         <div class="divider m-0 mt-2"></div>
@@ -133,9 +158,8 @@ const close = () => {
 </template>
 
 <style scoped>
-.searchResult:hover > a > h3 {
+.searchResult:hover>a>h3 {
     transition: .2s;
     text-decoration: underline;
 }
 </style>
-
