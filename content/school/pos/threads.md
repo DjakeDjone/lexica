@@ -108,3 +108,31 @@ public class ExecutorServiceExample {
     }
 }
 ```
+
+## CountdownLatch
+
+- wird verwendet um auf das Ende von Threads zu warten
+
+```java
+public class CountdownLatchExample {
+    public static void main(String[] args) throws InterruptedException {
+        CountDownLatch latch = new CountDownLatch(3);
+        ExecutorService executor = Executors.newFixedThreadPool(3);
+
+        IntStream.range(0, 3).forEach(i -> executor.submit(() -> {
+            System.out.println("Thread " + i + " started");
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println("Thread " + i + " finished");
+            latch.countDown();
+        }));
+
+        latch.await(); // wait for 3 threads to finish
+        System.out.println("All threads finished");
+        executor.shutdown();
+    }
+}
+```
