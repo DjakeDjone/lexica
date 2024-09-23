@@ -129,9 +129,9 @@ const scrollToTop = () => {
       <ul v-auto-animate class="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
         <li class="m-0 flex flex-row items-center">
           <div class="inline w-fit relative">
-            <h2 class="w-fit mt-0 text-2xl">
+            <NuxtLink class="w-fit mt-0 text-2xl" to="/">
               FRI3DL DOCS
-            </h2>
+            </NuxtLink>
           </div>
         </li>
         <li class="m-0" @click="navOpen = false; searching = !searching">
