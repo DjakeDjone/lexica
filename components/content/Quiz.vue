@@ -5,10 +5,7 @@ const carousel = ref<HTMLElement | null>(null);
 const items = ref<HTMLElement[]>([]);
 const idx = ref(0);
 
-onMounted(() => {
-    items.value = carousel.value!.children as unknown as HTMLElement[];
-    console.log(items.value);
-});
+
 
 const next = () => {
     idx.value = (idx.value + 1) % items.value.length;
@@ -27,6 +24,22 @@ const scrollToCurrentElement = () => {
         behavior: 'smooth'
     });
 }
+
+onMounted(() => {
+    items.value = carousel.value!.children as unknown as HTMLElement[];
+    console.log(items.value);
+    // support for keyboard navigation
+    // only if the carousel is in viewport
+    window.addEventListener('keydown', (e) => {
+        if (document.activeElement === document.body) {
+            if (e.key === 'ArrowRight') {
+                next();
+            } else if (e.key === 'ArrowLeft') {
+                prev();
+            }
+        }
+    });
+});
 
 
 

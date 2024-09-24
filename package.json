@@ -10,15 +10,19 @@
   "dependencies": {
     "@nuxt/content": "^2.13.2",
     "groq-sdk": "^0.3.3",
+    "rehype-mathjax": "^6.0.0",
+    "remark-math": "^6.0.0",
     "sitemap": "^7.1.2"
   },
   "devDependencies": {
     "@formkit/auto-animate": "^0.8.2",
+    "@nuxt/image": "^1.8.0",
     "@nuxtjs/fontaine": "^0.4.3",
     "@nuxtjs/tailwindcss": "^6.12.1",
     "@vueuse/nuxt": "^11.1.0",
     "daisyui": "^4.12.10",
     "nuxt": "^3.13.2",
     "nuxt-icon": "^0.6.10"
-  }
+  },
+  "packageManager": "pnpm@9.8.0+sha512.8e4c3550fb500e808dbc30bb0ce4dd1eb614e30b1c55245f211591ec2cdf9c611cabd34e1364b42f564bd54b3945ed0f49d61d1bbf2ec9bd74b866fcdc723276"
 }
