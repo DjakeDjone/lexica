@@ -32,7 +32,10 @@ const selected = ref(-1);
                 :class="showAnswer ? (correct === index ? 'text-success' : 'text-error') : ''">
                 <input type="radio" class="checkbox checkbox-primary" :name="question" :value="index" :id="'A' + index"
                     v-model="selected" :disabled="showAnswer" />
-                <label :for="'A' + index">{{ answer }}</label>
+                <!--<label :for="'A' + index">{{ answer }}</label>-->
+                <label :for="'A' + index" class="cursor-pointer">
+                    <span v-html="answer"></span>
+                </label>
             </li>
         </ul>
         <p :class="'opacity-0 ' + (showAnswer ? 'opacity-100' : '')"
