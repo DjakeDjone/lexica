@@ -27,7 +27,7 @@ harmonischer Oszillator: ein Oszillator bei dem die Bewegung durch eine Sinus(Ko
 
 ## Federpendel
 
-![Oszilation img.](images/oszilatoin.png)
+![Oszilation img.](/images/oszilatoin.png)
 
 eine Feder ist ein harmonischer Oszillator, wenn sie elastisch ist. Die **Federkonstante** gibt an, wie stark die Feder ist. <mark>Je weiter die Feder vom Gleichgewichtszustand entfernt ist, desto stärker ist die Rückstellkraft.</mark>
 
@@ -82,7 +82,10 @@ Für die Periodendauer ergibt das: $T = \frac{1}{f} = 7.5s$
 \
 \
 
+::quiz
+
 ::question
+---
 
 question: "Was ist die Formel zur Berechnung der Frequenz eines Federpendels?"
 answers: [
@@ -92,10 +95,12 @@ answers: [
   "$f = \\frac{1}{2\\pi} \\sqrt{\\frac{g}{l}}"
 ]
 correct: 0
+---
 
 ::
 
 ::question
+---
 
 question: "Was ist die Formel zur Berechnung der Frequenz eines Pendels?"
 answers: [
@@ -105,10 +110,12 @@ answers: [
   "$f = \\frac{1}{2\\pi} \\sqrt{\\frac{g}{l}}"
 ]
 correct: 3
+---
 
 ::
 
 ::question
+---
 
 question: "Was ist die Einheit der Federkonstante?"
 answers: [
@@ -118,5 +125,7 @@ answers: [
   "Hz"
 ]
 correct: 0
+---
 
+::
 ::
