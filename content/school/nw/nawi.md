@@ -129,3 +129,28 @@ correct: 0
 
 ::
 ::
+
+## Überlagerung von Schwingungen
+
+Entweder in der selben Richtung oder aufeinander senkrecht.
+
+### Begriffe
+
+- **Unabhängigkeitsprinzip:** Zwei Schwingungen, die sich in der selben Richtung bewegen, können unabhängig voneinander betrachtet werden.
+
+- **Superpositionsprinzip:** Die resultierende Schwingung ist die Summe der einzelnen Schwingungen.
+
+- **Interferenz:** Die Überlagerung von zwei Schwingungen, die sich in der selben Richtung bewegen.
+
+- **Stehende Welle:** Eine Welle, die sich nicht bewegt.
+
+- **Wellenlänge:** Die Distanz zwischen zwei Wellenbergen.
+
+- **Wellenamplitude:** Die maximale Auslenkung einer Welle.
+
+- **Wellengeschwindigkeit:** Die Geschwindigkeit, mit der sich eine Welle bewegt.
+
+### senkrechte Schwingungen
+
+Wenn zwei Schwingungen aufeinander senkrecht sind, können sie als Vektoraddition betrachtet werden. Die resultierende Schwingung ist die Summe der beiden Schwingungen. Die Amplitude der resultierenden Schwingung ist die Länge des Vektors.
+

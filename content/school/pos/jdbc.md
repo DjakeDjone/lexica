@@ -23,7 +23,7 @@ Datei in `src/main/resources/META-INF/persistence.xml` anlegen.
 
 ```
 
-### Entity Klasse 
+### Entity Klasse
 
 Die Klasse die persistiert werden soll, muss mit `@Entity` annotiert werden.
 
@@ -36,10 +36,10 @@ public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-     qColumn(name = "nick",
+     Column(name = "nick",
             nullable = false,
             length = 50, // max length, longer strings will be truncated
-            unique = true)
+            unique = true);
     private String nickname;
     private String email;
 }
@@ -90,4 +90,123 @@ Alternativ kann auch eine persistente Datenbank verwendet werden. Dazu muss die 
 <property name="hibernate.connection.url" value="jdbc:h2:~/test"/>
 ```
 
+## Relationships
 
+- OneToOne `@OneToOne`
+- OneToMany `@OneToMany`
+- ManyToOne `@ManyToOne`
+- ManyToMany `@ManyToMany`
+
+```java
+@Getter
+@Setter
+@Entity
+public class Student {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    private String name;
+    private String email;
+    @OneToOne
+    @JoinColumn(name = "address_id")
+    private Address address;
+    @OneToMany
+    private List<Course> courses;
+    @ManyToOne
+    private University university;
+    @ManyToMany
+    private List<Professor> professors;
+
+}
+```
+
+```java
+@Getter
+@Setter
+@Entity
+public class Address {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    private String street;
+    private String city;
+    private String zip;
+}
+```
+
+```java
+@Getter
+@Setter
+@Entity
+public class Address {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    private String street;
+    private String city;
+    private String zip;
+}
+```
+
+## Persistenz
+
+- `em.persist()`: Objekt in die Datenbank speichern
+- `em.find()`: Objekt aus der Datenbank laden
+- `em.merge()`: Objekt in der Datenbank aktualisieren
+- `em.remove()`: Objekt aus der Datenbank löschen
+
+```java
+
+public class StudentApp {
+    public static void main(String[] args) {
+        
+        try (EntityManagerFactory emf = Persistence.createEntityManagerFactory("live");
+                EntityManager em = emf.createEntityManager()) {
+
+            em.getTransaction().begin();
+            Student student = new Student();
+            student.setName("John Doe");
+            student.setEmail("doe.john@mail.com");
+            em.persist(student); // write to database
+            em.getTransaction().commit(); 
+        }
+    }
+}
+    
+```
+
+> ### Transient
+>
+> Ein Objekt ist transient, wenn es nicht in der Datenbank gespeichert ist.
+
+### Persistenz und Relationships
+
+```java
+
+public class StudentApp {
+    public static void main(String[] args) {
+        
+        try (EntityManagerFactory emf = Persistence.createEntityManagerFactory("live");
+                EntityManager em = emf.createEntityManager()) {
+
+            em.getTransaction().begin();
+            Student student = new Student();
+            student.setName("John Doe");
+            student.setEmail("john@doe.com");
+
+            Address address = new Address();
+            address.setStreet("Main Street");
+            address.setCity("New York");
+            address.setZip("10001");
+
+            student.setAddress(address); // relationship
+            em.persist(student); // write to database
+            em.getTransaction().commit();
+            em.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+    
+```
