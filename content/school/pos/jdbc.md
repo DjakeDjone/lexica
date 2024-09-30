@@ -36,7 +36,11 @@ public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String name;
+     qColumn(name = "nick",
+            nullable = false,
+            length = 50, // max length, longer strings will be truncated
+            unique = true)
+    private String nickname;
     private String email;
 }
 
