@@ -144,13 +144,19 @@
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
-      "obsidian-git:Open Git source control": false,
-      "smart-connections:Open: View Smart Connections": false,
-      "smart-connections:Open: Smart Chat Conversation": false
+      "obsidian-git:Open Git source control": false
     }
   },
   "active": "bf9187382f523041",
   "lastOpenFiles": [
+    "school/syp-praxis/jira-übung.md",
+    "school/syp-praxis/jira-übung_tmp.html",
+    "school/syp-praxis/image.png",
+    "school/syp-praxis/image-3.png",
+    "school/syp-praxis/image-2.png",
+    "school/syp-praxis/image-1.png",
+    "school/syp-praxis",
+    "school/syp-pra",
     "school/nw/nawi.md"
   ]
 }
