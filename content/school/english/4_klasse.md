@@ -6,7 +6,7 @@
 
 - Email/Formal letter
 - Blog post / Comment on a blog post
-- [Report](/school/english#report)
+- [Report](/school/english)
 - Article
 
 ## Blog post
