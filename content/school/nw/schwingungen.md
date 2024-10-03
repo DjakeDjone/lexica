@@ -154,3 +154,52 @@ Entweder in der selben Richtung oder aufeinander senkrecht.
 
 Wenn zwei Schwingungen aufeinander senkrecht sind, können sie als Vektoraddition betrachtet werden. Die resultierende Schwingung ist die Summe der beiden Schwingungen. Die Amplitude der resultierenden Schwingung ist die Länge des Vektors.
 
+## Gedämpfte Schwinung
+
+Durch **Luftwiderstand** oder **Reibung** wird die Schwingung allmählich schwächer. Die **Amplitude** nimmt ab und die **Frequenz** bleibt konstant.
+
+$$
+y(t) = y_0 * e^{-\gamma t} \sin(\omega _D * t)
+$$
+
+- $y(t)$: Auslenkung zur Zeit $t$
+- $y_0$: Anfangsauslenkung
+- $\gamma$: Dämpfungskonstante
+- $\omega _D$: Dämpfungsfrequenz
+- $t$: Zeit
+
+## Der Kriechfall
+
+Wenn die Dämpfung so stark ist, dass das System **nicht mehr zurückschwingt** und in den **Ruhezustand** zurückkehrt spricht man vom Kriechfall.
+
+Bei einem Auto würde das bedeuten, dass die Federung so stark gedämpft ist, dass das Auto nicht mehr auf und ab hüpft, was zu einem angenehmeren Fahrgefühl führt. Wichtig ist, dass das Auto nicht zu stark gedämpft ist, da es sonst zu einem harten Fahrgefühl führen würde (Die Dämpfung würde die Schwingungen nicht mehr abfedern ≈ keine Federung).
+
+## Erzwungene Schwingung
+
+Eine Schwingung, die durch eine **äussere Kraft** erzwungen wird. Die **Frequenz** der erzwungenen Schwingung ist die **Frequenz** der äusseren Kraft.
+
+zB. Schaukel, die durch das Schaukeln oder antauchen in Bewegung versetzt wird.
+
+## Resonanz
+
+![Resonanz img](/images/resonanz.png)
+
+Wenn die **Frequenz** der erzwungenen Schwingung gleich der **Eigenfrequenz** des Systems ist, spricht man von Resonanz. Das System beginnt zu schwingen und die Amplitude nimmt zu.
+
+*zB. Glas, das durch eine Stimmgabel zum Schwingen gebracht wird.*
+
+Wenn die Frequenz der erzwungenen Schwingung **größer** oder **kleiner** ist als die Eigenfrequenz des Systems wird die Schwingung ständig **gedämpft** und die Amplitude nimmt ab.
+
+zB. Schaukel, die durch das Schaukeln oder antauchen in Schwingung versetzt wird, dann aber durch zu früh oder zu spätes antauchen wieder zum Stillstand kommt.
+
+> Musikinstrumente sind so konstruiert, dass sie bei möglichst vielen Frequenzen schwingen. Dadurch können sie viele Töne erzeugen.
+
+---
+
+## Formel Übersicht
+
+- **Periodendauer $T$ und Frequenz $f$** $f = \frac{1}{T}$
+- **Winkelgeschwindigkeit** $\omega = 2\pi f = \frac{2\pi}{T} = \frac{\Delta \phi}{\Delta t}$
+- **Federpendel** $f = \frac{1}{2\pi} \sqrt{\frac{k}{m}}$
+- **Pendel** $f = \frac{1}{2\pi} \sqrt{\frac{g}{l}}$
+- **Gedämpfte Schwingung** $y(t) = y_0 * e^{-\gamma t} \sin(\omega _D * t)$
