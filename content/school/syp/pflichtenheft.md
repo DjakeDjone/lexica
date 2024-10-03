@@ -44,8 +44,7 @@
    4.1. [Funktionen](#41-funktionen)  
    4.2. [Oberflächen (Styleguide, Design)](#42-oberflächen-styleguide-design)  
    4.3. [Datenbedarf](#43-datenbedarf)  
-   4.4. [APIs](#44-apis)  
-   4.5. [Epics, User Stories (Anhang)](#45-epics-user-stories-anhang)  
+   4.4. [Epics, User Stories (Anhang)](#45-epics-user-stories-anhang)  
 
 5. [Anforderungen an die Systemplattform](#5-anforderungen-an-die-systemplattform)
    5.1. [Technologie Stack](#51-technologie-stack)  
@@ -58,7 +57,6 @@
 
 7. [Mengengerüste](#7-mengengerüste)
    7.1. [Anwender/Rollen](#71-anwenderrollen)  
-   7.2. [Kunden/Produkte](#72-kundenprodukte)  
 
 8. [Vorgangsweise](#8-vorgangsweise)
    8.1. [Masterplan](#81-masterplan)  
@@ -173,3 +171,69 @@ Um den Content der Website zu bearbeiten
 - Es soll eine Seite geben, auf der der Admin den Content verwalten kann.
 - Die Startseite soll mehr austauschbaren Content als die aktuelle Website haben.
 - Die Angebote, Lehrer und Instrumente sollen zusammengefasst werden und die Tarife sollen dazugegeben werden.
+
+### 4.3. Datenbedarf
+
+- **Lehrer** und ihre jeweiligen Kurse sollen angezeigt werden.
+- **Instrumente** sollen Lehrern zugeordnet werden können.
+- **Blog** mit Neuigkeiten.
+- **Kontaktformular** (E-Mail, Telefonnummer, Nachricht etc.)
+- **Admin** login Informationen
+- **Tarife** für die verschiedenen Fächer (Preis, Dauer, etc.)
+
+## Anforderungen an die Systemplattform
+
+### 5.1. Technologie Stack
+
+Keine Vorgaben
+
+### 5.2. IT-Architektur
+
+Keine Vorgaben
+
+### 5.3. Verfügbarkeit, Performance
+
+Die Website soll 24/7 verfügbar sein und schnell laden, sowie auch auf mobilen Geräten gut und flüssig funktionieren.
+
+## 6. Anforderungen Dienstleistungen
+
+### 6.1. Schulung, Handbücher
+
+- Die Administratorin soll in die Verwendung der Admin Oberfläche eingewiesen werden.
+- Die Website soll Dokumentiert werden um die zukünftige Wartung zu erleichtern.
+
+### 6.2. Support/Wartung Nachprojektphase
+
+- Für die Wartung und den Support wird keine Gewährleistung von der Schule übernommen. Support oder Wartung kann nach Projektende gegebenenfalls ausgemacht werden.
+
+## 7. Mengengerüste
+
+### 7.1. Anwender/Rollen
+
+- **Admin** (1)
+- **Lehrer** (20)
+- **Schüler** (unbegrenzt)
+- **Besucher** (unbegrenzt)
+
+## 8. Vorgangsweise
+
+### 8.1. Masterplan
+
+TODO
+
+### 8.2. Projektorganisation
+
+- **Projektleiter**: Valentin Hacker
+- **Projektteam**: Mag. Agnes Zehetner
+- **P-Mitglieder**: Tobias Eisinger, Benjamin Friedl, Baran Koyun
+
+### 8.3. Kommunikationskanäle
+
+- **MS Teams**
+- **E-Mail**
+- **Preview-Link**
+
+### 8.4. Meetings
+
+- **Sprint Review**: alle 4-6 Wochen
+- **Projekt Übergabe**: 1 mal am Ende des Projekts
