@@ -25,4 +25,3 @@
 ## Kennzahlen zu Personalbedarf
 
 ![alt text](/images/personalkennzahlen.png)
-

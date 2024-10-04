@@ -136,3 +136,30 @@ class Counter with ChangeNotifier {
   }
 }
 ```
+
+---
+---
+
+## Routing
+
+```dart
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (context) => Counter(),
+      child: MaterialApp(
+        home: MyHomePage(),
+      ),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => MyHomePage(),
+        '/second': (context) => SecondPage(),
+      },
+    );
+  }
+}
+
+```
