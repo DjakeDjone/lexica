@@ -23,7 +23,7 @@ export default defineNuxtConfig({
         // Theme used if `html.dark`
         dark: 'one-dark-pro',
       },
-      langs: ['javascript', 'typescript','dart', 'json', 'java', 'rust', 'bash', 'sql', 'python', 'markdown', 'xml', 'nginx', 'bash'],
+      langs: ['javascript', 'typescript','dart', 'json', 'java', 'rust', 'bash', 'sql', 'python', 'markdown', 'xml', 'nginx', 'bash', 'nix'],
     },
     experimental: {
       advanceQuery: true,
