@@ -45,7 +45,9 @@ const search = async (value: string) => {
                 $icontains: searchVlue.value
             }
         }).limit(7)
-            .find()).result;
+            .find());
+        console.log("R:", searchResults.value);
+
         // custom pages
         searchResults.value = searchResults.value.concat(customPages.filter(page => page.title.toLowerCase().includes(searchVlue.value.toLowerCase())));
 
@@ -71,7 +73,7 @@ const search = async (value: string) => {
                     }
                 ]
             }).limit(7)
-                .find()).result;
+                .find());
 
         }
     } else {
