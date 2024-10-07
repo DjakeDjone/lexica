@@ -203,3 +203,19 @@ zB. Schaukel, die durch das Schaukeln oder antauchen in Schwingung versetzt wird
 - **Federpendel** $f = \frac{1}{2\pi} \sqrt{\frac{k}{m}}$
 - **Pendel** $f = \frac{1}{2\pi} \sqrt{\frac{g}{l}}$
 - **Gedämpfte Schwingung** $y(t) = y_0 * e^{-\gamma t} \sin(\omega _D * t)$
+
+## Schall
+
+### Infraschall
+
+Schallwellen mit einer Frequenz unterhalb des hörbaren Bereichs (unter 20 Hz).
+
+### Ultraschall
+
+Schallwellen mit einer Frequenz oberhalb des hörbaren Bereichs (über 20 kHz).
+
+## Musik
+
+- **Tonhöhe:** Die Frequenz eines Tons bestimmt die Tonhöhe.
+- **Klang** (Timbre): Die **Obertöne** bestimmen den Klang eines Tons.
+- **Lautstärke:** Die Amplitude eines Tons bestimmt die Lautstärke.

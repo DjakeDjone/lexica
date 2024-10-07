@@ -123,3 +123,19 @@ private Collection<Actor> actors = new HashSet<>();
 @ManyToMany(fetch = FetchType.EAGER)
 private Collection<Actor> actors = new HashSet<>();
 ```
+
+### Equals and HashCode
+
+**Problem:** Primary key is not available before persisting
+
+**Solution:** Use business key
+
+```java
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+public class Actor {
+    @EqualsAndHashCode.Include
+    private String name;
+}
+```
+
+---
