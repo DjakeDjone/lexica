@@ -1,4 +1,4 @@
- ![htl-logo](htl-logo.png)
+![htl-logo](htl-logo.png)
 
 # Pflichtenheft
 
@@ -11,17 +11,13 @@
  | Abteilung | Informatik |
  | Erstellt am | 26.09.2024 |
  | Status | In Bearbeitung |
- | Aktuelle Version | 0.0 |
+ | Aktuelle Version | 0.0 | 
 
 ## Änderungsverlauf
 
  | Version | Datum | Beschreibung | Autor |
  | --- | --- | --- | --- |
  | 0.0 | 26.09.2024 | Erstellung des Dokuments | Benjamin Friedl |
-
-## Inhaltsverzeichnis
-
-## Inhaltsverzeichnis
 
 ## Inhaltsverzeichnis
 
@@ -64,25 +60,7 @@
    8.3. [Kommunikationskanäle](#83-kommunikationskanäle)  
    8.4. [Meetings (tourlich)](#84-meetings-tourlich)  
 
-9. [Sonstiges](#9-sonstiges)
-
 ---
-<!-- •    Nicht zu viele Bilder, eher kleine am Anfang
-•    Ybbsfeld karossel
-•    Eine Reihe Karten (4) - kurzer Text schöner
-•    Beschreibung, Text, Bilder verwalten -> Admin
-•    Auf Startseite mehr Content als auf aktuelle Website
-•    Angebot,Lehrer und Instrumente zusammenfassen und Tarife dazugeben
-•    Lehrer und ihre jeweiligen Kurse anzeigen
-•    Instrumente Lehrer zuteilen oder umgekehrt noch am überlegen
-•    Instrumenteninfos unnötig -> kürzere Infos – nicht zu umfangreich
-•    Allgemein Infos zu viel
-•    Konto erstellen soll ermöglicht werden -> Anmeldung Ybbsfeld (E-Mail)
-•    Telefonnummer von Schüler muss nicht sein, außer Volljährig
-•    Verrechnung per Zahlschein oder per Lastschrift -> keine Online-Zahlung
-•    Navigationsbar -> Klaviertasten abschaffen (Sound und Design)
-•    LOGOs wie z.B. Kultur NÖ und den anderen Gemeinden oben
-•    Responsive Design -->
 
 ## 1. Beschreibung Auftraggeber
 
@@ -233,7 +211,7 @@ TODO
 - **E-Mail**
 - **Preview-Link**
 
-### 8.4. Meetings
+### 8.4. Meetings Tourlich
 
 - **Sprint Review**: alle 4-6 Wochen
 - **Projekt Übergabe**: 1 mal am Ende des Projekts
