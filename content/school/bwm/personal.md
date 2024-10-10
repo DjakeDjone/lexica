@@ -1,7 +1,7 @@
 # Personal
 
 *Zusammenfassung vom Patzl (wrsl. besser als meine):*
-[Personalmanagement](/school/bwm/BO-2024-10-11.md)
+[Personalmanagement](/school/bwm/bo-2024-10-11)
 
 ## Personalmanagement
 
