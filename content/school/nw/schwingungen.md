@@ -219,3 +219,12 @@ Schallwellen mit einer Frequenz oberhalb des hörbaren Bereichs (über 20 kHz).
 - **Tonhöhe:** Die Frequenz eines Tons bestimmt die Tonhöhe.
 - **Klang** (Timbre): Die **Obertöne** bestimmen den Klang eines Tons.
 - **Lautstärke:** Die Amplitude eines Tons bestimmt die Lautstärke.
+
+## Kopplung von Pendeln
+
+Zwei Pendel sind **gekoppelt**, wenn sie durch eine Feder oder eine Schnur miteinander verbunden sind. Die **Kopplung** kann **symmetrisch** oder **asymmetrisch** sein.
+
+- **Symmetrische Kopplung:** Die Pendel schwingen in **Gegenphasen**.
+- **Asymmetrische Kopplung:** Die Pendel schwingen in **Gleichphasen**.
+
+Ist die Kopplung **asymmetrisch**, so kann es zu **Schwebungen** kommen. Das bedeut das die Pendel sich abwechselnd beschleunigen und bis zum Stillstand abbremsen.
