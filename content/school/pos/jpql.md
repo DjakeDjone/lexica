@@ -62,3 +62,15 @@ public class StudentController {
     }
 }
 ```
+
+## JPQL Synthax
+
+### Selecting objects
+
+```java
+public OptionalDouble getAvgSpeed(Runner runner,EntityManager em) {
+    var q = em.createQuery("""
+        SELECT sum(km)*60/sum(r.minutes) as min FROM Run r WHERE true""", runner)
+    ...
+}
+```
