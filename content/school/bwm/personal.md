@@ -1,5 +1,8 @@
 # Personal
 
+*Zusammenfassung vom Patzl (wrsl. besser als meine):*
+[Personalmanagement](/school/bwm/bo-2024-10-11)
+
 ## Personalmanagement
 
 ### Aufgaben des Personalmanagements
@@ -50,12 +53,11 @@
 ### Methoden der Personalbeschaffung
 
 - **Interne Personalbeschaffung**: Mitarbeiter aus dem Unternehmen
-    - **Vorteile 👍**: geringe Kosten, geringes Risiko
-    - **Nachteile 👎**: keine neuen Ideen, keine neuen Impulse
+  - **Vorteile 👍**: geringe Kosten, geringes Risiko
+  - **Nachteile 👎**: keine neuen Ideen, keine neuen Impulse
 - **Externe Personalbeschaffung**: Mitarbeiter von außerhalb
-    - **Vorteile 👍**: neue Ideen, neue Impulse
-    - **Nachteile 👎**: hohe Kosten, hohes Risiko
-
+  - **Vorteile 👍**: neue Ideen, neue Impulse
+  - **Nachteile 👎**: hohe Kosten, hohes Risiko
 
 ## Grundlagen des Arbeitsrechts
 
@@ -98,6 +100,7 @@ persönliche Arbeitspflicht
 - **Gleitzeit**: Arbeitszeit kann flexibel gestaltet werden; meistens Kernarbeitszeit; max 12h/Tag und 60h/Woche
 
 > ## Überstunden
+>
 > 50% Zuschlag, 100% Zuschlag an Sonn- und Feiertagen,
 > erste 10h steuerfrei
 
