@@ -1,18 +1,18 @@
 
 
-# **Titel: Shells**
+# **Titel: Spanning Tree**
 
-| **AufgabenNr:** | 10 |
+| **AufgabenNr:** | 01 |
 |---|:---|
-| **Klasse:** | 3BHIF |
+| **Klasse:** | 4AHIF |
 | **Name:** | Benjamin Friedl |
-| **Gruppe:** | 2 |
-| **Abgabetermin:** | 07.04.2024 |
-| **Abgabedatum:** | 08.04.2024 |
+| **Gruppe:** | 1 |
+| **Abgabetermin:** | 17.10.2024 |
+| **Abgabedatum:** | 17.10.2024 |
 
 ## **Kurzbeschreibung:**
 
-In diesem Protokoll wird auf die verschiedenen Shells und deren Funktionsweise eingegangen. Außerdem werden verschiedene Befehle und deren Verwendung erklärt. Abschließend wird auf das Tool Netcat eingegangen und dessen Verwendungsmöglichkeiten aufgezeigt.
+In diesem Protokoll wird das Spanning Tree Protocol (STP) behandelt. STP ist ein Netzwerkprotokoll, das in Switches verwendet wird, um Netzwerkschleifen zu vermeiden und die Netzwerkkonvergenz zu gewährleisten. Dieses Protokoll bestimmt
 
 ---
 \
@@ -46,14 +46,15 @@ In diesem Protokoll wird auf die verschiedenen Shells und deren Funktionsweise e
 
 # Inhaltsverzeichnis
 
-1. [Shells](#shells)
-2. [Commands](#commands)
-3. [Verketten von Befehlen](#verketten-von-befehlen)
-4. [Netcat](#netcat)
-    1. [Chat-Tool](#chat-tool)
-    2. [File-Transfer-Tool](#file-transfer-tool)
-    3. [Shellzugriff](#shellzugriff)
-    4. [Netcat unter Windows](#netcat-unter-windows)
+1. [Allgemeine Aufgaben und Funktionen des STP](#1-allgemeine-aufgaben-und-funktionen-des-stp)
+2. [Timer im Spanning Tree Protocol](#2-timer-im-spanning-tree-protocol)
+3. [Theoretische Fragen](#3-theoretische-fragen)
+4. [Praktische Übungen](#4-praktische-übungen)
+   1. [Packet Tracer](#4b-packet-tracer)
+      1. [Clients mit Switch verbinden](#clients-mit-switch-verbinden)
+      2. [Portfast aktivieren](#portfast-aktivieren)
+      3. [BPDU Guard aktivieren](#bpdu-guard-aktivieren)
+      4. [Richten Sie einen Ssh-Zugang zum Switch ein. Wählen sie dazu passende IP Adressen (Testen)](#richten-sie-einen-ssh-zugang-zum-switch-ein-wählen-sie-dazu-passende-ip-adressen-testen)
 \
 \
 \
@@ -115,9 +116,47 @@ Das **Spanning Tree Protocol** (STP) hat folgende Funktionen:
 
 ## 3. Theoretische Fragen
 
-<!-- TODO -->
+### 3.1 Welcher Switch wird die Root Bridge?
 
-## 4. Praktische Übungen
+A: Der Switch mit der niedrigsten Bridge-ID wird zur Root Bridge gewählt (MAC: 3ce5.c3a6.fa80)
+
+### 3.2 Welche Ports werden Root Ports?
+
+A: Die Ports, die den kürzesten Pfad zur Root Bridge haben, werden zu Root Ports. In diesem Fall sind dies die Ports, die direkt mit der Root Bridge verbunden sind.
+
+### 3.3 Wo ist der Non-Designated/Designated Ports? Wie kommt die Entscheidung zustande?
+
+A: Der Non-Designated Port ist der Port, der nicht zum kürzesten Pfad zur Root Bridge gehört. Der Designated Port ist der Port, der zum kürzesten Pfad zur Root Bridge gehört. Die Entscheidung wird durch die Bridge-ID und den Portkosten getroffen.
+<!-- Todo: Image -->
+
+## 4. Schleife schließen
+
+### 4.1 Schleife schließen
+
+### 4.2 Annahmen prüfen
+
+![alt text](image-9.png)
+
+
+## 5. Root Bridge ändern
+
+```bash
+Switch(config)# spanning-tree vlan 1 root primary
+```
+
+![alt text](image-10.png)
+
+## 6. Spanning Tree deaktivieren
+
+```bash
+Switch(config)# no spanning-tree vlan 1
+```
+
+Dieser Befehl deaktiviert das Spanning Tree Protocol für VLAN 1 auf dem Switch. Dadurch werden alle Ports in den Forwarding-Zustand versetzt, was zu Netzwerkschleifen führen kann. Die Ports fangen an, Daten zu senden und blinken, was zu einer Überlastung des Netzwerks führen kann. Um das zu beenden muss man die Switches neu starten.
+
+```bash
+Switch# reload
+```
 
 ## 4b. Packet tracer
 
