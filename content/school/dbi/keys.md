@@ -1,9 +1,11 @@
+# Keys & Entity-Typen
+
 ## Identifizierung von Entities
 
 - **Superschlüssel** : Eine Kombination aus Attributen die eindeutig ist
 - **Schlüssel (kandidat)** (Candidate Key): Superschlüssel
 - **Primärschlüssel:** ausgewählter Superschlüssel, darf sich nicht ändern; eindeutig; wenn möglich Zahlen;
-- **Künstlicher Schlüssel:** (Surrogatschlüssel); wird generiert 
+- **Künstlicher Schlüssel:** (Surrogatschlüssel); wird generiert
 
 > ## Einfacher vs Zusammengesetzter Schlüssel
 >

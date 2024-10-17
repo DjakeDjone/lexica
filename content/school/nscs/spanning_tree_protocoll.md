@@ -86,12 +86,6 @@ In diesem Protokoll wird das Spanning Tree Protocol (STP) behandelt. STP ist ein
 \
 \
 \
-\
-\
-\
-\
-\
-\
 
 ## 1. Allgemeine Aufgaben und Funktionen des STP
 
@@ -139,6 +133,8 @@ A: Der Non-Designated Port ist der Port, der nicht zum kürzesten Pfad zur Root 
 
 ![alt text](image-9.png)
 
+\
+\
 
 ## 5. Root Bridge ändern
 
