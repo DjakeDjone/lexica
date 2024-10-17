@@ -49,13 +49,14 @@ In diesem Protokoll wird das Spanning Tree Protocol (STP) behandelt. STP ist ein
 1. [Allgemeine Aufgaben und Funktionen des STP](#1-allgemeine-aufgaben-und-funktionen-des-stp)
 2. [Timer im Spanning Tree Protocol](#2-timer-im-spanning-tree-protocol)
 3. [Theoretische Fragen](#3-theoretische-fragen)
-4. [Praktische Übungen](#4-praktische-übungen)
-   1. [Packet Tracer](#4b-packet-tracer)
-      1. [Clients mit Switch verbinden](#clients-mit-switch-verbinden)
-      2. [Portfast aktivieren](#portfast-aktivieren)
-      3. [BPDU Guard aktivieren](#bpdu-guard-aktivieren)
-      4. [Richten Sie einen Ssh-Zugang zum Switch ein. Wählen sie dazu passende IP Adressen (Testen)](#richten-sie-einen-ssh-zugang-zum-switch-ein-wählen-sie-dazu-passende-ip-adressen-testen)
-\
+    1. [Welcher Switch wird die Root Bridge?](#31-welcher-switch-wird-die-root-bridge)
+    2. [Welche Ports werden Root Ports?](#32-welche-ports-werden-root-ports)
+    3. [Wo ist der Non-Designated/Designated Ports? Wie kommt die Entscheidung zustande?](#33-wo-ist-der-non-designateddesignated-ports-wie-kommt-die-entscheidung-zustande
+4. [Schleife schließen](#4-schleife-schließen)
+    1. [Schleife schließen](#41-schleife-schließen)
+    2. [Annahmen prüfen](#42-annahmen-prüfen)
+5. [Root Bridge ändern](#5-root-bridge-ändern)
+6. [Spanning Tree deaktivieren](#6-spanning-tree-deaktivieren)
 \
 \
 \
@@ -128,6 +129,7 @@ A: Die Ports, die den kürzesten Pfad zur Root Bridge haben, werden zu Root Port
 
 A: Der Non-Designated Port ist der Port, der nicht zum kürzesten Pfad zur Root Bridge gehört. Der Designated Port ist der Port, der zum kürzesten Pfad zur Root Bridge gehört. Die Entscheidung wird durch die Bridge-ID und den Portkosten getroffen.
 <!-- Todo: Image -->
+![alt text](20241003_112327.jpg)
 
 ## 4. Schleife schließen
 
@@ -209,9 +211,10 @@ Switch(config-if-range)# spanning-tree bpduguard enable
 
 > **Hinweis:** Die IP-Adresse muss im selben Subnetz wie der Client sein.
 
-> #### Config:
+> #### Config
+>
 > - IP Client: `10.0.0.4`
->-  Subnetz: `255.0.0.0`
+>- Subnetz: `255.0.0.0`
 
 
 ```bash
