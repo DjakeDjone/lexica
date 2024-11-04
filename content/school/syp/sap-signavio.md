@@ -36,7 +36,7 @@ Lane: Unterteilung eines Pools zB. Abteilung, Lehrer etc.
 
 Def: **Wiederholbare Abfolge** von Aktivitäten, die ein bestimmtes Ziel erreichen.
 
-### Merkmale
+### Rollen
 
 - PM: Prozess-Modellierer
 - GPV: Gesamtprozessverantwortlicher
@@ -46,6 +46,9 @@ Def: **Wiederholbare Abfolge** von Aktivitäten, die ein bestimmtes Ziel erreich
 ### Varianten
 
 - Gate (Entweder oder)
+- Parallel (Und)
+- Inklusiv (Oder)
+- Komplex (Mehrere Bedingungen)
 
 ### Leistungsindikatoren
 
