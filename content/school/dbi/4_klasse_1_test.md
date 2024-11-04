@@ -116,13 +116,13 @@ Wenn ein Attribut häufig vorkommt, kann es auch als eigene Entität dargestellt
 
 ### Rekursive Beziehung
 
-![Rekursive Beziehung img.](images/rekursion.png)
+![Rekursive Beziehung img.](/images/rekursion.png)
 
 ---
 
 ## Beziehungen zwischen mehr als zwei Entity-Typen
 
-![mehrere Entity-typen Beziehung img.](images/multiple-relations.png)
+![mehrere Entity-typen Beziehung img.](/images/multiple-relations.png)
 
 ---
 
@@ -152,6 +152,14 @@ möglichst kurz sein.
 
 - **Redundanz**: Mehrfache Speicherung von Daten
 - **Fremdschlüssel**: Verweis auf einen anderen Datensatz
+
+### Probleme mit Redundanz
+
+- **Inkonsistenz**: Daten sind nicht mehr konsistent
+- **Speicherplatz**: Mehr Speicherplatz wird benötigt
+- **Einfüge u. Löschanomalien**: Daten können nicht mehr korrekt eingefügt oder gelöscht werden
+
+
 
 ---
 
