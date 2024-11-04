@@ -159,27 +159,15 @@ möglichst kurz sein.
 - **Speicherplatz**: Mehr Speicherplatz wird benötigt
 - **Einfüge u. Löschanomalien**: Daten können nicht mehr korrekt eingefügt oder gelöscht werden
 
+### Fremdschlüssel
 
+- **Referenzielle Integrität**: Fremdschlüssel verhindert das Löschen von Datensätzen, auf die noch verwiesen wird
 
 ---
 
 ## Weiterführende ER-Modellierung
 
-- **Kardinalität**: Anzahl der Beziehungen zwischen Entitäten
-- **Partizipation**: Pflichtteilnahme an einer Beziehung
-
----
-
-## Arten von Attributen
-
-- **Einfach**: Attribut, das nicht weiter unterteilt werden kann
-- **Zusammengesetzt**: Attribut, das in mehrere Unterattribute unterteilt werden kann
-- **Abgeleitet**: Attribut, das aus anderen Attributen berechnet wird
-
-
----
----
-### Schwache Entitäten + Owner
+### Abhängige Entitäten
 
 meist 1:N (1 Owner, N Schwache Entitäten) oder 1:1
 
@@ -193,3 +181,33 @@ Eigenschaften:
 - Wird die Owner Entität gelöscht, wird auch die schwache Entität gelöscht
 - Owner Entität wird auch als **Identifizierende Entität** bezeichnet
 - Die schwache Entität hat einen **Teil des Schlüssels** der Owner Entität als **Teil des eigenen Schlüssels**
+
+### Überlagerte Entity-Typen
+
+*genauer unter siehe [Relations](relation.md)*
+
+Überlagerte Entity-Typen lassen sich mit Vererbung in Java vergleichen. Sie haben mehrere Primärschlüssel, die sich aus den Primärschlüsseln der überlagerten Entity-Typen zusammensetzen.
+
+![Disjunkt/Nicht Disjunkt Beispiel-Bild](/images/diskunkt.png)
+
+### Total, Disjunkt, Nicht Disjunkt
+
+- **Total**: Jeder Entity-Typ muss in **mindestens einer** Untergruppe vorkommen; *Doppelter Strich als Verbindungslinie*
+- **Disjunkt**: Ein Entity-Typ kann nur in **einer** (Entweder Oder) Untergruppe vorkommen: *Wird durch ein volles Dreieck dargestellt*
+- **nicht disjunkt**: Ein Entity-Typ kann in **mehreren** Untergruppen vorkommen; *Wird durch ein gefülltes Dreieck dargestellt*
+- **partiell**: Ein Entity-Typ kann in **keiner** Untergruppe vorkommen: *Einfacher Strich als Verbindungslinie*
+
+---
+
+## Arten von Attributen
+
+- **Einfach**: Attribut, das nicht weiter unterteilt werden kann
+- **Zusammengesetzt**: Attribut, das in mehrere Unterattribute unterteilt werden kann
+- **Abgeleitet**: Attribut, das aus anderen Attributen berechnet wird
+- **Mehrwertig**: Attribut, das mehrere Werte speichern kann (z.B. Telefonnummern)
+- **Basis**: Attribut kann von keinem anderen Attribut abgeleitet werden
+- **Abgeleitet**: Attribut kann von anderen Attributen abgeleitet werden. SOLLTE VERMIEDEN WERDEN (Redundanz)
+*zB. Alter, wenn Geburtsdatum bekannt ist*
+
+---
+---
