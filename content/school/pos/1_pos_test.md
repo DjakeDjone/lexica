@@ -2,17 +2,23 @@
 
 ## Themen
 
-- JDBC
-- TCP/UDP Server
+- [TCP UDP Server](#tcp-udp-server)
+  - [Klassen](#klassen)
+  - [TCP Server](#tcp-server)
+  - [Client](#client)
+  - [UDP Server](#udp-server)
+  - [UDP Client](#udp-client)
+- [JPA](#jpa)
+- [Thread Pools](#thread-pools)
 
-## TCP/UDB Server
+## TCP UDP Server
 
 ### Klassen
 
 - `ServerSocket` (TCP Server)
 - `Socket` (TCP Client)
-- `DatagramSocket` (UDP Server)b
-- `DatagramPacket` (UDP Server)
+- `DatagramSocket` (UDP Server & Client)
+- `DatagramPacket` (UDP Server & Client)
 - `InetAddress` (UDP Client)
 
 ### TCP Server
@@ -105,7 +111,7 @@ public class UdpClient {
 }
 ```
 
-## JDBC
+## JPA
 
 ### EAGER vs. LAZY
 
@@ -160,6 +166,27 @@ public class Main {
         transaction.commit();
         manager.close();
         factory.close();
+    }
+}
+```
+
+## Thread Pools
+
+- `ExecutorService` verwaltet Threads
+- `Executors` erzeugt `ExecutorService`-Instanzen
+
+### Beispiel (FixedThreadPool)
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        ExecutorService executor = Executors.newFixedThreadPool(4);
+        for (int i = 0; i < 10; i++) {
+            executor.submit(() -> {
+                System.out.println("Thread: " + Thread.currentThread().getName());
+            });
+        }
+        executor.shutdown();
     }
 }
 ```
