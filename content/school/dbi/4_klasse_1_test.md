@@ -100,33 +100,29 @@ Bsp: 1:n Ein Bezirk hat 1 bis n Niederösterreicher
 
 [Bezirk] ---(1,n)--- bewohnt von ---(1,1)--- [Niederösterreicher]
 
-### Schwache Entitäten + Owner
+### Beziehungs-Typ oder Entitätstyp?
 
-meist 1:N (1 Owner, N Schwache Entitäten) oder 1:1
+- **Beziehungs-Typ**: Verbindung zwischen zwei Entitäten
+- **Entitätstyp**: Entität/Tabelle in der Datenbank
 
-- Entitäten, die von einer anderen Entität abhängig sind
-- z.B. Adresse ist abhängig von Person
+Wie man will: Beziehungs-Typen können auch als Entitätstypen dargestellt werden. Datenbankmäßig sind sie meistens Entitätstypen.
 
-Eigenschaften:
+### Attribut oder Entity-Typ?
 
-- **Schwache Entität**: Kann nicht ohne Besitzer existieren
-- **Owner Entität**: Besitzt die schwache Entität
-- Wird die Owner Entität gelöscht, wird auch die schwache Entität gelöscht
-- Owner Entität wird auch als **Identifizierende Entität** bezeichnet
-- Die schwache Entität hat einen **Teil des Schlüssels** der Owner Entität als **Teil des eigenen Schlüssels**
+- **Attribut**: Eigenschaft einer Entität
+- **Entity-Typ**: Entität/Tabelle in der Datenbank
 
-### Aggregation
+Wenn ein Attribut häufig vorkommt, kann es auch als eigene Entität dargestellt werden um Redundanz zu vermeiden. Außerdem können so mehrere Werte gespeichert werden. (z.B. Telefonnummern)
 
-- Zusammenfassung mehrerer Entitäten zu einer neuen Entität
-- z.B. Bestellung besteht aus Kunde und Produkt
+### Rekursive Beziehung
+
+![Rekursive Beziehung img.](images/rekursion.png)
 
 ---
 
 ## Beziehungen zwischen mehr als zwei Entity-Typen
 
-- **Rekursive Beziehung**: Entität hat Beziehung zu sich selbst
-- **Generalisierung**: Zusammenfassung mehrerer Entitäten zu einer neuen Entität
-- **Spezialisierung**: Aufteilung einer Entität in mehrere Entitäten
+![mehrere Entity-typen Beziehung img.](images/multiple-relations.png)
 
 ---
 
@@ -134,6 +130,21 @@ Eigenschaften:
 
 - **Identifizierende Attribute**: Attribute, die eine Entität eindeutig identifizieren
 - **Schlüsselattribute**: Attribute, die als Schlüssel dienen
+
+### Schlüssel
+
+- **Einfacher Schlüssel**: Ein Attribut als Schlüssel
+- **Zusammengesetzter Schlüssel**: Mehrere Attribute als Schlüssel
+- **Künstlicher Schlüssel**: Automatisch generierter Schlüssel (z.B. ID)
+- **Natürlicher Schlüssel**: Ein Attribut als Schlüssel (z.B. E-Mail)
+
+Regeln für die Wahl des Primärschlüssels:
+
+- Der Primärschlüsselwert muss beim Hinzufügen eines Entities vollständig **bekannt** sein (Entity-Integrität)
+- Da der Primärschlüssel das Entity während der ganzen Lebenszeit identifiziert, darf sein Wert **nicht geändert
+werden** müssen (dadurch würde eigentlich ein neues Entity entstehen).
+- Der Primärschlüssel soll **möglichst wenige Attribute** umfassen, die Darstellung der Attributwerte soll
+möglichst kurz sein.
 
 ---
 
@@ -156,3 +167,21 @@ Eigenschaften:
 - **Einfach**: Attribut, das nicht weiter unterteilt werden kann
 - **Zusammengesetzt**: Attribut, das in mehrere Unterattribute unterteilt werden kann
 - **Abgeleitet**: Attribut, das aus anderen Attributen berechnet wird
+
+
+---
+---
+### Schwache Entitäten + Owner
+
+meist 1:N (1 Owner, N Schwache Entitäten) oder 1:1
+
+- Entitäten, die von einer anderen Entität abhängig sind
+- z.B. Adresse ist abhängig von Person
+
+Eigenschaften:
+
+- **Schwache Entität**: Kann nicht ohne Besitzer existieren
+- **Owner Entität**: Besitzt die schwache Entität
+- Wird die Owner Entität gelöscht, wird auch die schwache Entität gelöscht
+- Owner Entität wird auch als **Identifizierende Entität** bezeichnet
+- Die schwache Entität hat einen **Teil des Schlüssels** der Owner Entität als **Teil des eigenen Schlüssels**
