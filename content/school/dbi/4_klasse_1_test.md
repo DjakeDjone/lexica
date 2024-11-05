@@ -197,9 +197,9 @@ Eigenschaften:
 - **nicht disjunkt**: Ein Entity-Typ kann in **mehreren** Untergruppen vorkommen; *Wird durch ein gefülltes Dreieck dargestellt*
 - **partiell**: Ein Entity-Typ kann in **keiner** Untergruppe vorkommen: *Einfacher Strich als Verbindungslinie*
 
-![disjunkt und total erklärung](images/disjunkt.png)
+![disjunkt und total erklärung](/images/disjunkt.png)
 
-![Nicht Disjunkt Partiell ER_Diagramm](/images/nicht_disjunkt.png.png)
+![Nicht Disjunkt Partiell ER_Diagramm](/images/nicht_disjunkt.png)
 
 ---
 
