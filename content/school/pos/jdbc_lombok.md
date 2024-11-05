@@ -139,3 +139,37 @@ public class Actor {
 ```
 
 ---
+
+### Cascade/OrphanRemoval
+
+- Cascade: Propagate operations
+- OrphanRemoval: Remove orphans 
+
+*(orphans = entities without parent)*
+
+```java
+class Movie {
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    private Collection<Actor> actors = new HashSet<>();
+}
+```
+
+```java
+class Actor {
+    @ManyToMany(orphanRemoval = true) // if actor is deleted, remove from movie
+    private Collection<Movie> movies = new HashSet<>();
+}
+```
+
+### @JoinTable
+
+Customize join table
+
+The sample below creates a table `movie_actor` with columns `movie_id` and `actor_id`
+
+```java
+@JoinTable(name = "movie_actor", 
+    joinColumns = @JoinColumn(name = "movie_id"),
+    inverseJoinColumns = @JoinColumn(name = "actor_id"))
+private Collection<Actor> actors = new HashSet<>();
+```
