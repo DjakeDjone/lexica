@@ -188,7 +188,7 @@ Eigenschaften:
 
 Überlagerte Entity-Typen lassen sich mit Vererbung in Java vergleichen. Sie haben mehrere Primärschlüssel, die sich aus den Primärschlüsseln der überlagerten Entity-Typen zusammensetzen.
 
-![Disjunkt/Nicht Disjunkt Beispiel-Bild](/images/diskunkt.png)
+<!-- ![Disjunkt/Nicht Disjunkt ER-Diagramm](/images/disjunkt.png) -->
 
 ### Total, Disjunkt, Nicht Disjunkt
 
@@ -196,6 +196,10 @@ Eigenschaften:
 - **Disjunkt**: Ein Entity-Typ kann nur in **einer** (Entweder Oder) Untergruppe vorkommen: *Wird durch ein volles Dreieck dargestellt*
 - **nicht disjunkt**: Ein Entity-Typ kann in **mehreren** Untergruppen vorkommen; *Wird durch ein gefülltes Dreieck dargestellt*
 - **partiell**: Ein Entity-Typ kann in **keiner** Untergruppe vorkommen: *Einfacher Strich als Verbindungslinie*
+
+![disjunkt und total erklärung](images/disjunkt.png)
+
+![Nicht Disjunkt Partiell ER_Diagramm](/images/nicht_disjunkt.png.png)
 
 ---
 
