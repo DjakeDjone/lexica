@@ -2,6 +2,20 @@
 
 Periodischer Vorgang, der relgelmässig wiederholt wird. Kann, muss aber nicht mit Bewegung zu tun haben. (z.B. Magnetismus).
 
+## Grundwissen
+
+- **Amplitude:** Maximale Auslenkung eines Oszillators. ("Höhe" der Schwingung)
+- **Frequenz:** Anzahl der Schwingungen pro Sekunde. (Hz)
+- **Periode:** Zeit, die eine Schwingung dauert. (s)
+- **Kreisfrequenz:** Winkelgeschwindigkeit eines Oszillators. ($\omega$)
+- **Phase:** Zeitpunkt, an dem eine Schwingung beginnt. (Winkel)
+- **Schwingungsdauer:** Zeit, die eine Schwingung dauert. (s)
+- **Schwingungsfrequenz:** Anzahl der Schwingungen pro Sekunde. (Hz)
+- **Schwingungsgleichung:** Mathematische Beschreibung einer Schwingung.
+- **Schwingungszustand:** Zustand eines Oszillators zu einem bestimmten Zeitpunkt.
+- **Schwingungszustandsgleichung:** Mathematische Beschreibung eines Schwingungszustands.
+- **Winkelgeschwindigkeit:** Geschwindigkeit, mit der sich ein Oszillator dreht. ($\omega$)
+
 ## Periodendauer $T$ und Frequenz $f$
 
 Die kürzeste Zeit, zwischen zwei exakt gleichen Zuständen, wird als Periodendauer $T$ bezeichnet. Die Frequenz $f$ ist die Anzahl der Schwingungen pro Sekunde.
@@ -208,17 +222,32 @@ zB. Schaukel, die durch das Schaukeln oder antauchen in Schwingung versetzt wird
 
 ### Infraschall
 
-Schallwellen mit einer Frequenz unterhalb des hörbaren Bereichs (unter 20 Hz).
+Schallwellen mit einer Frequenz unterhalb des hörbaren Bereichs (unter **20 Hz**).
 
 ### Ultraschall
 
-Schallwellen mit einer Frequenz oberhalb des hörbaren Bereichs (über 20 kHz).
+Schallwellen mit einer Frequenz oberhalb des hörbaren Bereichs (über **20 kHz**).
 
 ## Musik
 
 - **Tonhöhe:** Die Frequenz eines Tons bestimmt die Tonhöhe.
 - **Klang** (Timbre): Die **Obertöne** bestimmen den Klang eines Tons.
 - **Lautstärke:** Die Amplitude eines Tons bestimmt die Lautstärke.
+
+### zwei phasenverschobene Töne gleicher Frequenz u. Amplitude
+
+- **Gleichphasig:** Die Töne werden lauter.
+- **Gegenphasig:** Die Töne heben sich auf.
+
+### Obertöne
+
+Die **Obertöne** bestimmen den Klang eines Tons. Sie sind ganzzahlige Vielfache der Grundfrequenz.
+
+zB. Ein Ton mit der Frequenz 100 Hz hat Obertöne bei 200 Hz, 300 Hz, 400 Hz, usw.
+
+In der Musik sind das der Grundton, die Oktave, die Quinte, die Terz, usw.
+
+Die **Obertonreihe** ist eine Reihe von Tönen, die durch die Obertöne eines Grundtons entstehen.
 
 ## Kopplung von Pendeln
 
@@ -228,3 +257,42 @@ Zwei Pendel sind **gekoppelt**, wenn sie durch eine Feder oder eine Schnur mitei
 - **Asymmetrische Kopplung:** Die Pendel schwingen in **Gleichphasen**.
 
 Ist die Kopplung **asymmetrisch**, so kann es zu **Schwebungen** kommen. Das bedeut das die Pendel sich abwechselnd beschleunigen und bis zum Stillstand abbremsen.
+
+---
+
+### Mechanische Pendel
+
+### Elongation und Amplidute
+
+**Elongation**: Auslenkung eines Pendels aus der Ruhelage.
+
+**Amplitude**: Maximale Auslenkung eines Pendels.
+
+### Harmonische Schwingung
+
+Eine Schwingung, die durch eine Sinus- oder Kosinusfunktion beschrieben werden kann.
+
+Sie ist periodisch und wiederholt sich regelmässig.
+
+Bsp.:
+$$
+y(t) = A \sin(\omega t + \phi)
+$$
+
+### Frequenz f und Kreisfrequenz $\omega$
+
+Die Frequenz $f$ gibt an, wie oft sich ein Pendel pro Sekunde bewegt.
+
+Die Kreisfrequenz $\omega$ gibt an, wie schnell sich ein Pendel um einen bestimmten Winkel dreht.
+
+$$
+f = \frac{1}{T}
+$$
+
+Die Kreisfrequenz $\omega$ ist die Strecke eines Kreises mit Radius 1, die in einer Sekunde zurückgelegt wird.
+
+$$
+\omega = 2\pi f = \frac{2\pi}{T}
+$$
+
+---

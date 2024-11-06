@@ -2,6 +2,14 @@
 
 Eine zeitliche und räumlich periodische Ausbreitung von Schwingungen.
 
+**Erklärung:** Eine Welle ist eine periodische(wiederkehrende) Bewegung, die sich in einem Medium ausbreitet. Die Ausbreitung erfolgt durch die Übertragung von Energie, nicht von Materie.
+
+## Welle vs. Schwingung
+
+Eine Schwingung ist eine periodische Bewegung, die sich nicht ausbreitet. Eine Welle ist eine periodische Bewegung, die sich ausbreitet.
+
+Bsp. Pendel (Schwingung) vs. Wasserwelle (Welle)
+
 ## Arten von Wellen
 
 ### Transversalwellen
@@ -40,3 +48,13 @@ Grund: Die Wellenberge kommen schneller aufeinander zu, wenn sich die Quelle auf
 ## Schwebung
 
 Wenn zwei Wellen mit leicht unterschiedlichen Frequenzen aufeinandertreffen, entsteht eine Schwebung. Die Amplitude der Schwebung ist die Differenz der beiden Frequenzen.
+
+## Ausbreitungsgeschwindigkeit
+
+$$
+v = \lambda \cdot f
+$$
+
+- $v$: Geschwindigkeit (m/s)
+- $\lambda$: Wellenlänge (m)
+- $f$: Frequenz (Hz)
