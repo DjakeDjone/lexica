@@ -12,7 +12,7 @@
 
 ## **Kurzbeschreibung:**
 
-
+Einführung in Etherchannel und Portsecurity. Etherchannel ist eine Technologie, die es ermöglicht, mehrere physische Verbindungen zwischen zwei Geräten zu bündeln, um die Bandbreite zu erhöhen und die Redundanz zu verbessern. Portsecurity beschränkt den Zugriff auf den Switchport, indem er die MAC-Adresse des angeschlossenen Geräts überwacht und den Zugriff auf den Port erlaubt oder verweigert.
 
 ---
 \
@@ -46,17 +46,22 @@
 
 # Inhaltsverzeichnis
 
-1. [Allgemeine Aufgaben und Funktionen des STP](#1-allgemeine-aufgaben-und-funktionen-des-stp)
-2. [Timer im Spanning Tree Protocol](#2-timer-im-spanning-tree-protocol)
-3. [Theoretische Fragen](#3-theoretische-fragen)
-    1. [Welcher Switch wird die Root Bridge?](#31-welcher-switch-wird-die-root-bridge)
-    2. [Welche Ports werden Root Ports?](#32-welche-ports-werden-root-ports)
-    3. [Wo ist der Non-Designated/Designated Ports? Wie kommt die Entscheidung zustande?](#33-wo-ist-der-non-designateddesignated-ports-wie-kommt-die-entscheidung-zustande
-4. [Schleife schließen](#4-schleife-schließen)
-    1. [Schleife schließen](#41-schleife-schließen)
-    2. [Annahmen prüfen](#42-annahmen-prüfen)
-5. [Root Bridge ändern](#5-root-bridge-ändern)
-6. [Spanning Tree deaktivieren](#6-spanning-tree-deaktivieren)
+1. [Aufbau](#1-aufbau)
+2. [Allgemeines zu Etherchannel und LACP](#allgemeines-zu-etherchannel-und-lacp)
+3. [Konfiguration von Etherchannel mit LACP](#2-konfiguration-von-etherchannel-mit-lacp)
+    1. [Physische Schnittstellen konfigurieren](#21-physische-schnittstellen-konfigurieren)
+    2. [Etherchannel-Bündel erstellen](#22-etherchannel-bündel-erstellen)
+    3. [Physische Schnittstellen zum Etherchannel-Bündel hinzufügen](#23-physische-schnittstellen-zum-etherchannel-bündel-hinzufügen)
+    4. [Konfiguration überprüfen](#24-konfiguration-überprüfen)
+4. [Portsecurity](#3-portsecurity)
+    1. [Konfiguration von Portsecurity](#31-konfiguration-von-portsecurity)
+        1. [Portsecurity aktivieren](#311-portsecurity-aktivieren)
+        2. [Portsecurity mit MAC-Adressen konfigurieren](#312-portsecurity-mit-mac-adressen-konfigurieren)
+        3. [Portsecurity-Verletzungen konfigurieren](#313-portsecurity-verletzungen-konfigurieren)
+        4. [Portsecurity-Verletzungen anzeigen](#314-portsecurity-verletzungen-anzeigen)
+    2. [Befehle zur Überprüfung des Portstatus](#befehle-zur-überprüfung-des-portstatus)
+
+---
 \
 \
 \
@@ -171,6 +176,7 @@ Konfig auf Switch 1 (Core Switch):
 ```bash
 Switch1# show etherchannel summary
 ```
+
 ![alt text](image-9.png)
 
 Der Befehl `show etherchannel summary` zeigt eine Zusammenfassung der Etherchannel-Konfiguration auf dem Switch an, einschließlich der Nummer des Etherchannel-Bündels, der Mitgliedsschnittstellen und ihres Status.
@@ -181,3 +187,109 @@ Der Befehl `show etherchannel summary` zeigt eine Zusammenfassung der Etherchann
 
 ## 3. Portsecurity
 
+Beschreibung:
+Portsecurity beschränkt den Zugriff auf den Switchport, indem er die MAC-Adresse des angeschlossenen Geräts überwacht und den Zugriff auf den Port erlaubt oder verweigert.
+
+### 3.1 Konfiguration von Portsecurity
+
+#### 3.1.1 Portsecurity aktivieren
+
+Konfig auf einem Access Switch:
+
+```bash
+Switch1(config)# interface fastethernet 0/1
+Switch1(config-if)# switchport mode access
+Switch1(config-if)# switchport port-security
+```
+
+![Portsecurity aktivieren](portsecurity.png)
+
+Der Befehl `switchport port-security` aktiviert Portsecurity auf dem Switchport.
+
+#### 3.1.2 Portsecurity mit MAC-Adressen konfigurieren
+
+Jetzt konfigurieren wir die Portsecurity, um die MAC-Adresse des angeschlossenen Geräts zu überwachen und den Zugriff auf den Port zu erlauben oder zu verweigern.
+
+Konfig auf einem Access Switch:
+
+```bash
+Switch1(config)# interface fastethernet 0/1
+Switch1(config-if)# switchport port-security mac-address sticky
+```
+
+`switchport port-security mac-address sticky` bedeutet, dass die MAC-Adresse des angeschlossenen Geräts automatisch gelernt und in die Konfiguration des Switchports eingetragen wird (sticky).
+
+![img. switchport port-security mac-address sticky](mac-sticky.png)
+
+#### 3.1.3 Portsecurity-Verletzungen konfigurieren
+
+Portsecurity kann so konfiguriert werden, dass es auf Verletzungen reagiert, z.B. wenn ein unbekanntes Gerät angeschlossen wird.
+
+Konfig auf einem Access Switch:
+
+```bash
+Switch1(config)# interface fastethernet 0/1
+Switch1(config-if)# switchport port-security violation restrict
+```
+
+`switchport port-security violation restrict` bedeutet, dass der Zugriff auf den Port verweigert wird, wenn eine unerlaubte MAC-Adresse erkannt wird. Unter `restrict` wird der Port nicht deaktiviert, sondern der Zugriff auf den Port wird verweigert.
+
+![`switchport port-security violation restrict`](port-sec-restrict.png)
+
+#### Alle Commands zusammen
+
+```bash
+Switch1(config)# interface fastethernet 0/1
+Switch1(config-if)# switchport mode access
+Switch1(config-if)# switchport port-security
+Switch1(config-if)# switchport port-security mac-address sticky
+Switch1(config-if)# switchport port-security violation restrict
+```
+
+#### 3.1.4 Portsecurity-Verletzungen anzeigen
+
+Zum Testen der Portsecurity können wir eine Verletzung erzeugen, indem wir ein unbekanntes Gerät an den Switchport anschließen.
+
+Konfig auf einem Access Switch:
+
+```bash
+Switch1# show port-security
+```
+
+![Port Security Proof table (it worked)](port-security-proof.png)
+
+
+> Statische vs. Dynamische Portsecurity
+>
+> Statische Portsecurity: Die MAC-Adresse des angeschlossenen Geräts wird manuell konfiguriert. `switchport port-security mac-address` wird verwendet, um die MAC-Adresse manuell zu konfigurieren.
+>
+> Dynamische Portsecurity: Die MAC-Adresse des angeschlossenen Geräts wird automatisch gelernt und in die Konfiguration des Switchports eingetragen. `switchport port-security mac-address sticky` wird verwendet, um die MAC-Adresse automatisch zu lernen.
+>
+
+#### MAC-Adressen manuell konfigurieren
+
+Konfig auf einem Access Switch:
+
+```bash
+Switch1(config)# interface fastethernet 0/1
+Switch1(config-if)# switchport port-security mac-address 0011.2233.4455
+```
+
+![Total secure mac-addresses on interface FastEthernet0/1 has reached maximum limit.](manual-port-sec.png)
+
+Wenn die maximale Anzahl von MAC-Adressen erreicht ist, kann man die maximale Anzahl von MAC-Adressen auf einem Port erhöhen.
+
+```bash
+Switch1(config)# interface fastethernet 0/1
+Switch1(config-if)# switchport port-security maximum 5
+```
+
+Jetzt können die MAC-Adressen manuell konfiguriert werden. (wie oben)
+
+![Manual-MAC-Adressen Port sec.](port-sec-manual.png)
+
+### Befehle zur Überprüfung des Portstatus
+
+1. `show port-security` - Zeigt den Portstatus und die konfigurierten Portsecurity-Optionen an.
+2. `show port-security address` - Zeigt die gelernten MAC-Adressen und die Anzahl der Verletzungen an.
+3. `show port-security interface fastethernet 0/1` - Zeigt die Portsecurity-Konfiguration für einen bestimmten Port an.
