@@ -74,3 +74,21 @@ public OptionalDouble getAvgSpeed(Runner runner,EntityManager em) {
     ...
 }
 ```
+
+## Pre-Remove
+
+```java
+@PreRemove
+@PreUpdate
+@PrePersist
+public void beforeAnyChange() {
+    System.out.println("Before any change");
+}
+
+@PostRemove
+@PostUpdate
+@PostPersist
+public void afterAnyChange() {
+    System.out.println("After any change");
+}
+```
