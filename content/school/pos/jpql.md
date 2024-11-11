@@ -104,3 +104,64 @@ public List<Runner> getRunners(EntityManager em) {
     ...
 }
 ```
+
+## Embeddable
+
+Embeddable classes are used to group fields together.
+
+```java
+@Embeddable
+public class Address {
+    private String street;
+    private String city;
+    private String zip;
+}
+```
+
+### @EmbeddaedId
+
+```java
+@Embeddable
+public class Address {
+    private String street;
+    private String city;
+    private String zip;
+}
+
+@Entity
+public class Person {
+    @EmbeddedId
+    private Address address;
+    private String name;
+}
+```
+
+## Inheritance
+
+There are three types of inheritance in JPA:
+
+- Single Table
+- Joined
+- Table Per Class
+
+### Single Table
+
+In single table inheritance, all the classes are stored in the same table.
+
+### Joined
+
+In joined inheritance, each class is stored in its own table.
+
+### Table Per Class
+
+In table per class inheritance, each class is stored in its own table.
+
+```java
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+public class Person {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    private String name;
+}
