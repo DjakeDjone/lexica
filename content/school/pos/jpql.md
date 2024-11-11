@@ -92,3 +92,15 @@ public void afterAnyChange() {
     System.out.println("After any change");
 }
 ```
+
+## Selects
+
+### new Objects
+
+```java
+public List<Runner> getRunners(EntityManager em) {
+    var q = em.createQuery("""
+        SELECT new Runner(r.name, sum(km)*60/sum(r.minutes)) FROM Run r WHERE true GROUP BY r.name""", Runner.class)
+    ...
+}
+```
