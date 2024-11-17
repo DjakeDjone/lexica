@@ -19,12 +19,60 @@
 | Menge von Attributen | Menge von Spalten |
 | keine Reihenfolge | Reihenfolge |
 
-### Unnormalized Form
+### Normalformen
+
+Die `Normalformen` sind Regeln, die eine Datenbank erfüllen muss, um Redundanzen zu vermeiden und die Datenbank zu normalisieren.
 
 - `Unnormalized Form` / 0. Normalform: Datenbank, die noch nicht in die 1. Normalform gebracht wurde
-- `1. Normalform`: Jedes Attribut enthält nur einen Wert
+- `1. Normalform`: Jedes Attribut enthält nur einen Wert; keine mehrwertigen Attribute
 - `2. Normalform`: Jedes Attribut ist voll funktional abhängig von dem Primärschlüssel.
 - `3. Normalform`: Jedes Attribut ist transitiv abhängig vom Primärschlüssel.
 
 transitive Abhängigkeit: `A -> B -> C`
+triviale Abhängigkeit: `A,B -> A`
 voll funktional abhängig: `A -> B` und `A -> C`
+
+**Erklärung voll funktional abhängig:**
+
+- `A` ist der Primärschlüssel
+- `B` und `C` sind Attribute
+
+Wenn man `A` kennt, kann man `B` und `C` bestimmen.
+
+**Erklärung triviale Abhängigkeit:**
+
+- `A`und `B` sind der Primärschlüssel
+- `A` ist von `A` und `B` abhängig weil es im Schlüssel enthalten ist
+
+**Erklärung transitive Abhängigkeit:**
+
+- `A` ist der Primärschlüssel
+- `B` ist von `A` abhängig
+- `C` ist von `B` abhäng
+
+Wenn man `A` kennt, kann man auf `B` schließen und damit auch auf `C`.
+
+---
+
+## Beispiel `schueler` und `note`
+
+### 0. Normalform
+
+| Schüler | Note |
+|---------|------|
+| Max     | 1,4 |
+| Lisa    | 2, 3 |
+
+### 1. Normalform
+
+| Schüler | Note |
+|---------|------|
+| Max     | 1 |
+| Max     | 4 |
+| Lisa    | 2 |
+| Lisa    | 3 |
+
+### 2. Normalform
+
+| Schüler | Note | Fach |
+|---------|------|------|
