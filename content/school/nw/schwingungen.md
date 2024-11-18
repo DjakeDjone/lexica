@@ -96,7 +96,7 @@ Für die Periodendauer ergibt das: $T = \frac{1}{f} = 7.5s$
 \
 \
 
-::quiz
+<!-- ::quiz
 
 ::question
 ---
@@ -142,7 +142,7 @@ correct: 0
 ---
 
 ::
-::
+:: -->
 
 ## Überlagerung von Schwingungen
 
