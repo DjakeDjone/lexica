@@ -1,5 +1,4 @@
 
-
 # **Titel: VLan**
 
 | **AufgabenNr:** | 03 |
@@ -7,8 +6,8 @@
 | **Klasse:** | 4AHIF |
 | **Name:** | Benjamin Friedl |
 | **Gruppe:** | 1 |
-| **Abgabetermin:** | X |
-| **Abgabedatum:** | X |
+| **Abgabetermin:** | 21.11.2024 |
+| **Abgabedatum:** | 20.11.2024 |
 
 ## **Kurzbeschreibung:**
 
@@ -46,7 +45,23 @@ In diesem Protokoll wird das Virtual Local Area Network (VLAN) behandelt. VLANs 
 
 # Inhaltsverzeichnis
 
-
+- [Angabe](#angabe)
+- [Commands](#commands)
+- [VLAN Konfiguration](#vlan-konfiguration)
+  - [Löschen Sie ggf. die bestehende Konfiguration](#löschen-sie-ggf-die-bestehende-konfiguration)
+  - [Erstellen der Trunkverbindung (letzter Port). Kontrolle mittels CDP](#erstellen-der-trunkverbindung-letzter-port-kontrolle-mittels-cdp)
+  - [Konfiguration von Switch_Etage1 als Server, Switch_Etage2 als Client](#konfiguration-von-switch_etage1-als-server-switch_etage2-als-client)
+  - [Anzeige der VTP Konfiguration](#anzeige-der-vtp-konfiguration)
+  - [Erstellen von VLAN: Verkauf und Entwicklung](#erstellen-von-vlan-verkauf-und-entwicklung)
+  - [Zuweisen der Ports 1-3 zu Verkauf; 4-6 zu Entwicklung](#zuweisen-der-ports-1-3-zu-verkauf-4-6-zu-entwicklung)
+  - [Anzeige und Analyse der VLAN Konfiguration](#anzeige-und-analyse-der-vlan-konfiguration)
+  - [Überprüfen der Verbindung (Ping)](#überprüfen-der-verbindung-ping)
+- [Inter-VLAN Routing](#inter-vlan-routing)
+  - [Aufbau](#aufbau)
+    - [Trunk-Port](#trunk-port)
+    - [Router](#router)
+    - [Standartgateway für Clients für VLAN](#standartgateway-für-clients-für-vlan)
+  - [Überprüfen der Erreichbarkeiten](#überprüfen-der-erreichbarkeiten)
 \
 \
 \
@@ -143,7 +158,6 @@ Switch_Etage1(config)# vtp version 2
 Switch_Etage1(config)# no shutdown
 ```
 
-
 **Client**: Der VTP-Client empfängt die VLAN-Informationen vom VTP-Server und speichert sie in der VLAN-Datenbank.
 
 ```bash
@@ -172,7 +186,6 @@ Switch_Etage1(config-vlan)# name Entwicklung
 ```
 
 ![alt text](image-12.png)
-
 
 ### Zuweisen der Ports 1-3 zu Verkauf; 4-6 zu Entwicklung
 
@@ -206,17 +219,93 @@ Switch_Etage1# show vlan brief // zeigt eine kompakte Übersicht der VLAN-Konfig
 
 ### Überprüfen der Verbindung (Ping)
 
-Um die Verbindung zwischen den VLANs zu überprüfen, können wir einen Ping-Befehl verwenden.
-Um Ping zu verwenden brauchen wir eine IP-Adresse. Diese können wir mit dem `ip address` Befehl konfigurieren.
+Um die Verbindung zwischen den VLANs zu überprüfen setzen wir eine VM auf, die sich in einem anderen VLAN befindet. Dafür verwenden wir Debian VMs, wie die aufgesetzt werden kann siehe vorherige Protokolle.
+
+**Kurzgefasst**:
+
+Diese VM muss man die VM über das zweite Netzwerkinterface mit dem Switch verbinden. Die VM braucht eine feste IP-Adresse. Wegen den VLANs sind jetzt schon andere Rechner nicht mehr erreichbar. Die VM muss also in das VLAN eingetragen werden.
 
 ```bash
-Switch_Etage1(config)# interface vlan 10
-Switch_Etage1(config-if)# ip address <ip_adress> <subnet_mask>
-// Beispiel: ip address 192.168.0.17 255.255.255.0
+DebianVM:~$ ping <IP-Adresse>
 ```
 
-```bash
-Switch_Etage1# ping
-```
+![alt text](image-16.png)
 
 ## Inter-VLAN Routing
+
+**Allgemein**: Inter-VLAN-Routing ist die Kommunikation zwischen VLANs. Standardmäßig können Geräte in verschiedenen VLANs nicht miteinander kommunizieren, da sie in unterschiedlichen Broadcast-Domänen sind. Inter-VLAN-Routing ermöglicht es, dass Geräte in verschiedenen VLANs miteinander kommunizieren können.
+
+### Aufbau
+
+![alt text](image-17.png)
+
+- Es gibt 4 Endgeräte, die sich in verschiedenen VLANs befinden.
+- Es sind jeweils zwei Geräte mit einem Switch verbunden.
+- Ein Switch (Etage 1) ist mit einem Router verbunden.
+- Die Switches sind über Trunk-Ports miteinander verbunden.
+- Vlan `Verkauf` bekommt id 2
+- Vlan `Entwicklung` bekommt id 3
+
+#### Trunk-Port
+
+Ein Trunk-Port ist ein Port, der Daten von mehreren VLANs übertragen kann. Trunk-Ports werden verwendet, um Daten zwischen Switches zu übertragen.
+
+![alt text](image-18.png)
+![alt text](image-19.png)
+
+Die Endgeräte brauchen alle eine IP-Adresse:
+
+![alt text](image-22.png)
+
+#### Router
+
+Jetzt müssen wir das Inter-VLAN-Routing auf dem Router aktivieren.
+
+**Wichtig**: Erst nur das Interface aktivieren, dann die IP-Adresse setzen.
+
+```bash
+Router>enable
+Router#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#int g0/0
+Router(config-if)#no shut
+
+Router(config-if)#
+%LINK-5-CHANGED: Interface GigabitEthernet0/0, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/0, changed state to up
+
+Router(config-if)#exit
+Router(config)#int g0/0.3
+Router(config-subif)#
+%LINK-5-CHANGED: Interface GigabitEthernet0/0.3, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/0.3, changed state to up
+
+Router(config-subif)#encaps dot 3
+Router(config-subif)#ip addr 192.168.10.154 255.255.255.0
+Router(config-subif)#
+```
+
+#### Standartgateway für Clients für VLAN
+
+![alt text](image-21.png)
+
+### Überprüfen der Erreichbarkeiten
+
+Die Clients in den VLANs sollten jetzt miteinander kommunizieren können.
+
+```cmd
+<!-- get ip address -->
+C:\>ping 192.168.0.3
+```
+
+![alt text](image-23.png)
+
+Und jetzt funktioniert es auch im anderen VLAN:
+
+```cmd
+C:\>ping 192.168.10.4
+```
+
+![alt text](image-24.png)
