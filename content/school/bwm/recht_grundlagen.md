@@ -163,4 +163,22 @@ z.B. Österreich digitales Ampt, Rechtsdatenbank, Wikipedia
 - Haftung des **Wohnungsinhabers**: wenn Schädiger in Wohnung wohnt
 - **Amtshaftung**: Staat haftet für Schäden die durch Beamte verursacht wurden
 
-S. 102
+#### KFZ-Halterhaftung
+
+Für Unfälle beim Betrieb von Fahrzeugen mit einer Geschwindigkeit ab 10 km/h haftet der **Fahrzeughalter**, auch wenn er nicht der Fahrer war.
+
+#### Tierhalterhaftung
+
+Wird ein **Schaden** durch ein **Tier verursacht, haftet:
+
+- die Person, die das Tier angetrieben, gereizt oder vernachlässigt hat,
+- der Tierhalter, wenn er die Beaufsichtigungspflicht verletzt hat
+
+#### Verkehrssicherungspflicht
+
+- **Rücksicht auf andere Verkehrsteilnehmer**
+- **Pflicht zur Absicherung von Gefahrenstellen**
+
+#### Zusammengefasst alle Haftungen
+
+mach ich vll noch 😐
