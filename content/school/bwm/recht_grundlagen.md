@@ -181,4 +181,27 @@ Wird ein **Schaden** durch ein **Tier verursacht, haftet:
 
 #### Zusammengefasst alle Haftungen
 
-mach ich vll noch 😐
+**Art und Umfang des Schadenersatzes**:
+
+- **Schadensminderungspflicht**
+- **Mitverschulden des Geschädigten**
+- **Haftung mehrerer Schädiger**: vorsätzlich: solidarisch; fahrlässig: anteilig
+- **Verjährung**: 3 Jahre
+
+**Haftung für fremdes Verschulden**:
+
+- **Amtshaftung**
+- **Haftung des Wohnungsinhabers**
+- **Haftung von Aufsichtspersonen**
+- **Haftung für Besorgungsgehilfen**
+- **Haftung für Erfüllungsgehilfen**
+
+**Gefährdungshaftung**:
+
+- **Verkehrssicherungspflicht**
+- **Tierhalterhaftung**
+- **Produkthaftung**
+- **Gastwirtehaftung**
+- **Wegehalterhaftung**
+- **Haftung der Wohnungs- und Gebäudeinhaber**
+- **Kfz-Haltehaftung**
