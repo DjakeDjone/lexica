@@ -134,3 +134,26 @@ blockquote p {
     margin-top: .5rem;
     margin-bottom: .5rem;
 }
+
+/* tables */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+th {
+    background-color: #f4f4f4;
+    color: #000;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
