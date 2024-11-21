@@ -24,9 +24,9 @@
 Die `Normalformen` sind Regeln, die eine Datenbank erfüllen muss, um Redundanzen zu vermeiden und die Datenbank zu normalisieren.
 
 - `Unnormalized Form` / 0. Normalform: Datenbank, die noch nicht in die 1. Normalform gebracht wurde
-- `1. Normalform`: Jedes Attribut enthält nur einen Wert; keine mehrwertigen Attribute
-- `2. Normalform`: Jedes Attribut ist voll funktional abhängig von dem Primärschlüssel.
-- `3. Normalform`: Jedes Attribut ist transitiv abhängig vom Primärschlüssel.
+- `1. Normalform`: Jedes Attribut enthält nur einen Wert; keine mehrwertigen Attribute, keine Relationen in Relationen
+- `2. Normalform`: Jedes Attribut ist voll funktional abhängig von dem **gesamten** Primärschlüssel.
+- `3. Normalform`: Jedes Attribut ist transitiv abhängig vom gesamten Primärschlüssel. Das bedeutet, dass es **keine Abhängigkeiten** zwischen den Attributen gibt.
 
 transitive Abhängigkeit: `A -> B -> C`
 triviale Abhängigkeit: `A,B -> A`
