@@ -29,6 +29,30 @@ Bei Unklarheiten einfach melden - Gutes Gelingen!
 + **Erweiterung 1973**: Großbritannien, Irland, Dänemark
 + **Süderweiterung (1981)**: Griechenland
 + **Süderweiterung (1986)**: Spanien, Portugal
-+ **Nordweiterung (1995)**: Schweden, Finnland, Österreich
++ **Nordweiterung (1995)**: Schweden, Finnland, **Österreich**
 + **1. Ost-Erweiterung (2004)**: Estland, Lettland, Litauen, Polen, Tschechien, Slowakei, Ungarn, Slowenien, Malta, Zypern
 + **2. Ost-Erweiterung (2007)**: Rumänien, Bulgarien
+
+## 3. Beitrittskandidaten der EU
+
++ **Türkei**: Gründe für: Großes Land, Wirtschaftsmacht, NATO-Mitglied, Brücke zu Asien
++ **Türkei**: Gründe gegen: Menschenrechtsverletzungen, Zypern-Konflikt, Islamische Kultur
++ **Ukraine**: Gründe für: Großes Land, Wirtschaftsmacht, Brücke zu Russland
++ **Ukraine**: Gründe gegen: Korruption, Krieg in der Ostukraine, Russland-Konflikt
+
+## 4. Struktur und Organisation der EU
+
++ **Europäischer Rat**: Staats- und Regierungschefs der EU-Länder
++ **Europäisches Parlament**: Volksvertretung der EU
++ **Europäische Kommission**: Exekutive der EU
++ **Rat der EU**: Ministerrat der EU-Länder
++ **Gerichtshof der EU**: Rechtsprechung der EU
++ **Europäische Zentralbank**: Geldpolitik der EU
+
+## 5. EU Binnenmarkt
+
++ **4 Grundfreiheiten**: Personenfreizügigkeit, Warenverkehrsfreiheit, Dienstleistungsfreiheit, Kapitalverkehrsfreiheit
++ **Ziel**: Wirtschaftliche Zusammenarbeit und Wohlstand in der EU
++ **Vorteile**: Mehr Auswahl, günstigere Preise, höhere
++ **Nachteile**: Konkurrenz, Verlust von Arbeitsplätzen
+
