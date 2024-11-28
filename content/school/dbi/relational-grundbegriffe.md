@@ -74,5 +74,4 @@ Wenn man `A` kennt, kann man auf `B` schließen und damit auch auf `C`.
 
 ### 2. Normalform
 
-| Schüler | Note | Fach |
-|---------|------|------|
+---
