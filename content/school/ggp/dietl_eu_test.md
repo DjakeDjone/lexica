@@ -17,8 +17,8 @@ Bei Unklarheiten einfach melden - Gutes Gelingen!
 ## 1. Entstehung der EU
 
 + **EGKS (1951)**: Europäische Gemeinschaft für Kohle und Stahl (6 Länder: Belgien, Niederlande, Italien, Frankreich, Deutschland, Luxemburg). Ziel: Frieden u. wirtschaftliche Zusammenarbeit
-+ **Römische Verträge (1957)**: Gründung der **EWG**: Europäische Wirtschaftsgemeinschaft) und **EURATOM** (Europäische Atomgesellschaft)
-+ **Maastricher Vertrag (1993)**: Offizielle Gründung der EU, Einführung des Binnenmarkts und Start der politischen Union
++ **Römische Verträge (1957)**: Gründung der **EWG**: Europäische Wirtschaftsgemeinschaft und **EURATOM** (Europäische Atomgesellschaft)
++ **Maastricher Vertrag (1993)**: Offizielle Gründung der EU, Einführung des Binnenmarkts und Start der politischen Union (Maastricht- weil in Maastricht unterzeichnet)
 
 ## 2. Erweiterungswellen der EU
 
@@ -29,7 +29,7 @@ Bei Unklarheiten einfach melden - Gutes Gelingen!
 + **Erweiterung 1973**: Großbritannien, Irland, Dänemark
 + **Süderweiterung (1981)**: Griechenland
 + **Süderweiterung (1986)**: Spanien, Portugal
-+ **Nordweiterung (1995)**: Schweden, Finnland, **Österreich**
++ **Nordweiterung (1995)**: Schweden, Finnland, <mark>Österreich</mark>
 + **1. Ost-Erweiterung (2004)**: Estland, Lettland, Litauen, Polen, Tschechien, Slowakei, Ungarn, Slowenien, Malta, Zypern
 + **2. Ost-Erweiterung (2007)**: Rumänien, Bulgarien
 
@@ -39,6 +39,8 @@ Bei Unklarheiten einfach melden - Gutes Gelingen!
 + **Türkei**: Gründe gegen: Menschenrechtsverletzungen, Zypern-Konflikt, Islamische Kultur
 + **Ukraine**: Gründe für: Großes Land, Wirtschaftsmacht, Brücke zu Russland
 + **Ukraine**: Gründe gegen: Korruption, Krieg in der Ostukraine, Russland-Konflikt
+
+**andere Kandidaten**: Serbien, Montenegro, Albanien, Nordmazedonien
 
 ## 4. Struktur und Organisation der EU
 
@@ -55,4 +57,3 @@ Bei Unklarheiten einfach melden - Gutes Gelingen!
 + **Ziel**: Wirtschaftliche Zusammenarbeit und Wohlstand in der EU
 + **Vorteile**: Mehr Auswahl, günstigere Preise, höhere
 + **Nachteile**: Konkurrenz, Verlust von Arbeitsplätzen
-
