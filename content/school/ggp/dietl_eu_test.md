@@ -22,6 +22,8 @@ Bei Unklarheiten einfach melden - Gutes Gelingen!
 
 ## 2. Erweiterungswellen der EU
 
+![Erweiterungswellen](/images/erweiterungen.png)
+
 ### Süderweiterung
 
 + **Erweiterung 1973**: Großbritannien, Irland, Dänemark
