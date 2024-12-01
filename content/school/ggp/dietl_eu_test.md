@@ -45,15 +45,17 @@ Bei Unklarheiten einfach melden - Gutes Gelingen!
 ## 4. Struktur und Organisation der EU
 
 + **Europäischer Rat**: Staats- und Regierungschefs der EU-Länder
-+ **Europäisches Parlament**: Volksvertretung der EU
-+ **Europäische Kommission**: Exekutive der EU
++ **Europäisches Parlament**: Volksvertretung der EU (Wahl alle 5 Jahre)
++ **Europäische Kommission**: Exekutive der EU (Regierung der EU, 27 Kommissare, 1 pro Land)
 + **Rat der EU**: Ministerrat der EU-Länder
+(Vertreter der Regierungen der EU-Länder), Gesetzgebung der EU
 + **Gerichtshof der EU**: Rechtsprechung der EU
 + **Europäische Zentralbank**: Geldpolitik der EU
++ **Europäischer Rechnungshof**: Kontrolle der EU-Finanzen
 
 ## 5. EU Binnenmarkt
 
-+ **4 Grundfreiheiten**: Personenfreizügigkeit, Warenverkehrsfreiheit, Dienstleistungsfreiheit, Kapitalverkehrsfreiheit
++ **4 Grundfreiheiten**: Personenfreizügigkeit, Warenverkehrsfreiheit,Dienstleistungsfreiheit, Kapitalverkehrsfreiheit
 + **Ziel**: Wirtschaftliche Zusammenarbeit und Wohlstand in der EU
 + **Vorteile**: Mehr Auswahl, günstigere Preise, höhere
 + **Nachteile**: Konkurrenz, Verlust von Arbeitsplätzen
