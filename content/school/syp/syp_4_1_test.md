@@ -302,19 +302,16 @@ BPMN: Business Process Model and Notation (V. 2.0)
 
 ### BPMN-Elemente
 
-- **Aktivitäten**
-- **Ereignisse**
+- **Aktivitäten**: Task, Zugeklappter Unterprozesse
+- **Ereignisse**: Start/Endereignis, Zwischenereignis
 - **Verbindende Objekte** (Sequenzfluss, Nachrichtenfluss, Assoziation)
 - **Artefakte** (Datenobjekte, Gruppen, Annotationen)
-- **Gateways** (Exklusiv, Inklusiv, Parallele, Komplex)
-- **Rollen** (Pool, Lane)
+- **Gateways** (Exklusiv (XOR), Inklusiv (OR), Parallele (AND), Komplex)
+- **Rollen** Swimmlanes (Pool, Lane)
 
-### Arten von Aktivitäten
+### Was kann bei einem Prozess simuliert werden?
 
-- **Task**: Tätigkeiten, die einzelne Aufgabenschritte darstellen
-- **Zugeklappte Unterprozesse**: Zusammenfassung von Aktivitäten
-
-*Coming soon...*
+**Durchlaufzeit**, Aufwand und Bewertung
 
 ---
 
