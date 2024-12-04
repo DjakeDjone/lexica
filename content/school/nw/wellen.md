@@ -97,3 +97,43 @@ Bsp.:
 Wenn ein Klavier die Taste `C` anschlägt, dann schwingt die Saite mit 128 Hz. Die Obertöne sind dann 256 Hz (Oktave), 384 Hz (Quinte), 512 Hz (Oktave), 640 Hz (Terz), usw.
 
 Manche Sänger können Obertöne singen, indem sie die Resonanzfrequenz ihres Mundraums so einstellen, dass die Obertöne lauter als der Grundton werden.
+
+### Schallpegel
+
+Der Schallpegel ist ein Maß für die Lautstärke eines Schalls. Er wird in Dezibel (dB) angegeben.
+
+$$
+L = 10 \cdot \log_{10} \left( \frac{I}{I_0} \right)
+$$
+
+- $L$: Schallpegel (dB)
+- $I$: Schallintensität (W/m²)
+- $I_0$: Schallempfindungsschwelle (ca. $10^{-12}$ W/m²)
+
+**Rechenbeispiel:**
+
+Ein Schall hat eine Intensität von $10^{-6}$ W/m². Wie laut ist der Schall in dB? (Hinweis: die Schallempfindungsschwelle beträgt $10^{-12}$ W/m²)
+
+$$
+L = 10 \cdot \log_{10} \left( \frac{10^{-6}}{10^{-12}} \right) = 10 \cdot \log_{10} \left( 10^6 \right) = 10 \cdot 6 = 60 \text{ dB}
+$$
+
+### Schalldruckpegel
+
+Der Schalldruckpegel ist ein Maß für die Lautstärke eines Schalls. Er wird in Dezibel (dB) angegeben. Im Gegensatz zum Schallpegel wird der Schalldruckpegel in Bezug auf den Schalldruckschwelle angegeben.
+
+$$
+L_p = 20 \cdot \log_{10} \left( \frac{p}{p_0} \right)
+$$
+
+- $L_p$: Schalldruckpegel (dB)
+- $p$: Schalldruck (Pa)
+- $p_0$: Schalldruckschwelle (ca. $2 \cdot 10^{-5}$ Pa)
+
+**Rechenbeispiel:**
+
+Ein Schall hat einen Schalldruck von $2 \cdot 10^{-3}$ Pa. Wie laut ist der Schall in dB? (Hinweis: die Schalldruckschwelle beträgt $2 \cdot 10^{-5}$ Pa)
+
+$$
+L_p = 20 \cdot \log_{10} \left( \frac{2 \cdot 10^{-3}}{2 \cdot 10^{-5}} \right) = 20 \cdot \log_{10} \left( 100 \right) = 20 \cdot 2 = 40 \text{ dB}
+$$
