@@ -46,8 +46,23 @@
 
 # Inhaltsverzeichnis
 
+1. [Aufbau](#aufbau)
+2. [IP-Adressen configurieren](#ip-adressen-configurieren)
+3. [ssh Zugang](#ssh-zugang)
+4. [SSH Zugriff](#ssh-zugriff)
+5. [Konfiguration eines Switches kopieren](#konfiguration-eines-switches-kopieren)
 
 ---
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
 \
 \
 \
@@ -134,12 +149,7 @@ Auf einem Computer kann man sich jetzt mit den Switches verbinden:
 PS C:\Users\benja> ssh -l cisco 192.168.0.201
 ```
 
-
-
-
-
-
-
+oder halt auch nicht...
 
 ## Konfiguration eines Switches kopieren
 

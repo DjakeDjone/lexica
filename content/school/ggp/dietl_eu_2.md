@@ -16,3 +16,11 @@ EU-Bürger darf in jedem EU-Land Dienstleistungen anbieten. Dabei gelten die Reg
 - **Zinsen**: Die langfristigen Zinsen dürfen nicht mehr als 2% über dem Durchschnitt der drei preisstabilsten Länder liegen.
 - **Wechselkurs**: Der Wechselkurs darf nicht mehr als 15% vom Referenzkurs abweichen.
 - **Staatsschulden**: Die Staatsschulden dürfen nicht mehr als 60% des BIP betragen.
+
+### 2008-2009
+
+- **Lehman Brothers**: US-Investmentbank geht pleite.
+- **Finanzkrise**: Bankenkrise, Banken verleihen Geld an Leute die es nicht zurückzahlen können. **Unsicherheit** an den Finanzmärkten.
+- **Kreditklemme**: Banken verleihen kein Geld mehr, Kredite werden teurer, Arbeitslosigkeit steigt.
+- **Rezession**: Wirtschaft schrumpft, Arbeitslosigkeit steigt, Steuereinnahmen sinken, Staatsschulden steigen.
+- **Staatsschuldenkrise**: Staaten garantieren für Banken, Staatsschulden steigen, Ratingagenturen bewerten Staaten schlechter, Zinsen steigen, Staaten können Schulden nicht mehr zurückzahlen. (Grichenland)
