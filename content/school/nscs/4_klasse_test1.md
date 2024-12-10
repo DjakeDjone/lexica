@@ -8,7 +8,31 @@ SRWE Module 14 Routing Concepts
 
 ## Table of Contents
 
-1. [Switching](#switching)
+- [NSCS Test 1 (4. Klasse)](#nscs-test-1-4-klasse)
+  - [Stoff](#stoff)
+  - [Table of Contents](#table-of-contents)
+  - [Switching](#switching)
+    - [Funktionsweise](#funktionsweise)
+    - [Verarbeitung von Frames](#verarbeitung-von-frames)
+    - [Switching-Methoden (4)](#switching-methoden-4)
+    - [Redundanz](#redundanz)
+    - [Spanning Tree Protocol (STP)](#spanning-tree-protocol-stp)
+    - [VLANs](#vlans)
+      - [Eigenschaften](#eigenschaften)
+      - [Trunking](#trunking)
+      - [VTP](#vtp)
+    - [Redundanz](#redundanz)
+    - [Spanning Tree Protocol (STP)](#spanning-tree-protocol-stp)
+    - [VLANs](#vlans)
+      - [Eigenschaften](#eigenschaften)
+      - [Trunking](#trunking)
+      - [VTP](#vtp)
+  - [SRWE Module 14 Routing Concepts](#srwe-module-14-routing-concepts)
+    - [Path Determination](#path-determination)
+    - [Packet Forwarding](#packet-forwarding)
+    - [Grundlegende Router Konfiguration](#grundlegende-router-konfiguration)
+    - [IP-Routing-Table](#ip-routing-table)
+    - [Static & Dynamic Routing](#static--dynamic-routing)
 
 ---
 
