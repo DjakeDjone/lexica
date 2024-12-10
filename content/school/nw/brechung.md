@@ -1,6 +1,6 @@
 # Brechung
 
-**Hinweis:** Die meisten Formeln sind nicht unbedingt 
+**Hinweis:** Die meisten Formeln sind nicht unbedingt
 
 ## Snellius'sches Brechungsgesetz
 
@@ -50,3 +50,20 @@ Ein Regenbogen entsteht durch die Brechung und Reflexion von Sonnenlicht in Rege
 
 - Lichtstrahlen kreuzen einander **ungestört.**
 - Das menschliche Auge nimmt lediglich die Reflexion der Lichtstrahlen wahr, nich die Lichtstrahlen selbst.
+
+### menschliches Auge
+
+#### Sichtbereich
+
+- Ultraviolett: $300 - 400 nm$
+- Sichtbares Licht: $400 - 800 nm$
+- Infrarot: $800 - 1000 nm$
+
+#### Adoptionsfähigkeit
+
+- **Helladaptation**: Anpassung des Auges an helle Umgebung: max 1min
+- **Dunkeladaptation**: Anpassung des Auges an dunkle Umgebung: max 30min
+
+#### Fokusieren
+
+Weil der Winkel zwischen den Augen bei verschiedenen Entfernungen verschieden sein muss
