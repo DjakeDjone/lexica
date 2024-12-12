@@ -72,6 +72,33 @@ STP verhindert Schleifen im Netzwerk, indem es redundante Verbindungen deaktivie
 
 Siehe auch [Spanning Tree Protocol (STP)](https://lexica.fri3dl.dev/school/nscs/spanning_tree_protocoll#_1-allgemeine-aufgaben-und-funktionen-des-stp).
 
+> ## BPDU Pakete
+>
+> **Bridge Protocol Data Units (BPDU)** sind Nachrichten, die von Switches ausgetauscht werden, um das Spanning Tree Protocol zu verwalten. z. B.: Root Bridge, Root Path Cost, Bridge ID, Port ID, etc.
+>
+> Enthält: Root Bridge ID, Message Age, Max Age, Root Path Cost, Sender Bridge ID, Sender Port ID, etc.
+
+#### Aufbau der Bridge ID
+
+Die Bridge ID wird benötigt, um die Root Bridge zu bestimmen. Sie besteht aus zwei Teilen:
+
+- **Priority**: 2 Bytes (0-65535)
+- **MAC-Adresse**: 6 Bytes
+
+Die Bridge ID wird wie folgt dargestellt: `Priority:MAC-Adresse`. Es macht Sinn, die Bridge ID so zu wählen, dass die MAC-Adresse der Switch-ID entspricht. Geändert sollte sie nur werden, wenn die Priorität geändert werden muss. Die Root Bridge hat die niedrigste Bridge ID.
+
+#### States des Spanning Tree Protocols
+
+- **Blocking**: Der Port leitet keine Frames weiter, empfängt aber BPDU-Nachrichten.
+- **Listening**: Der Port hört auf BPDU-Nachrichten, leitet aber keine Frames weiter.
+- **Learning**: Der Port beginnt, MAC-Adressen zu lernen, leitet aber noch keine Frames weiter.
+- **Forwarding**: Der Port leitet Daten weiter und lernt MAC-Adressen.
+- **Disabled**: Der Port ist deaktiviert
+
+> ## Problem
+>
+> Weil das Spanning Tree Protocol (STP) redundante Verbindungen deaktiviert, kann es zu Performance-Problemen kommen. Um das zu vermeiden, kann **Rapid Spanning Tree Protocol (RSTP)** verwendet werden. Außerdem ist das wechseln von Blocking auf Forwarding langsam.
+
 ### VLANs
 
 Weil der Aufbau der physischen LAN-Verkabelung nicht immer den Anforderungen entspricht, werden VLANs verwendet. VLANs ermöglichen es, mehrere logische Netzwerke auf einem physischen Switch zu betreiben.
@@ -82,10 +109,17 @@ Weil der Aufbau der physischen LAN-Verkabelung nicht immer den Anforderungen ent
 - **Kommunikation**: Geräte in unterschiedlichen VLANs können nicht miteinander kommunizieren.
 - **Sicherheit**: VLANs erhöhen die Sicherheit, da sie den Datenverkehr trennen.
 
+> Default VLAN
+>
+> Das Default VLAN ist VLAN 1. Es wird verwendet, wenn ein Port nicht explizit einem VLAN zugewiesen wurde.
+>
+
 #### Trunking
 
-Trunking ist eine Technik, um mehrere VLANs über eine Verbindung zu übertragen.
-Weil ein Frame nicht weiß, zu welchem VLAN er gehört, wird ein **Tag** hinzugefügt. Dieser enthält die VLAN-ID und wird lediglich vom Switch interpretiert. Außerhalb des Switches wird der Tag entfernt.
+Trunking ist eine Technik, um mehrere VLANs über eine Verbindung zu übertragen. Es gitb zwei Trunking-Protokolle:
+
+- **IEEE 802.1Q**: Standard-Trunking-Protokoll, fügt Tag mit VLAN-Informationen hinzu.
+- **ISL**: Cisco-Proprietäres Trunk, fügt Tag mit VLAN-Informationen hinzu.
 
 #### VTP
 
@@ -114,3 +148,7 @@ Es gibt drei VTP-Modi:
 ### Static & Dynamic Routing
 
 ---
+
+## NSCS Test Antworten
+
+###
