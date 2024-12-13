@@ -23,4 +23,18 @@ EU-Bürger darf in jedem EU-Land Dienstleistungen anbieten. Dabei gelten die Reg
 - **Finanzkrise**: Bankenkrise, Banken verleihen Geld an Leute die es nicht zurückzahlen können. **Unsicherheit** an den Finanzmärkten.
 - **Kreditklemme**: Banken verleihen kein Geld mehr, Kredite werden teurer, Arbeitslosigkeit steigt.
 - **Rezession**: Wirtschaft schrumpft, Arbeitslosigkeit steigt, Steuereinnahmen sinken, Staatsschulden steigen.
-- **Staatsschuldenkrise**: Staaten garantieren für Banken, Staatsschulden steigen, Ratingagenturen bewerten Staaten schlechter, Zinsen steigen, Staaten können Schulden nicht mehr zurückzahlen. (Grichenland)
+- **Staatsschuldenkrise**: Staaten garantieren für Banken, Staatsschulden steigen, Ratingagenturen bewerten Staaten schlechter, Zinsen steigen, Staaten können Schulden nicht mehr zurückzahlen.
+
+#### Länder, die gerettet werden mussten (Rettungsschirm)
+
+**PIIGS**:
+
+- **Portugal**: 1990-2000: viel Textilinustrie + Elektroindustrie, eingebrochen, hohe Arbeitslosigkeit,
+- **Italien**: Wechsel von Lira (stark schwankend) auf Euro (stabli), geringe Budgetdisziplin, Kriminalitätsproblem (Mafia)
+- **Irland**: starke Anlehnung an USA, Immobilienblase
+- **Griechenland**: Massiver Schuldenberg (z.B. Olympische Spiele 2004, Pensionsbetrug, Schiffahrtssektor 3% besteuert)
+- **Spanien**: Spanischer Pesu (stark schwankend), Immobilienblase (Tourismus) **->** aufgeblähter Bausektor **->** Arbeitslosigkeit
+
+Länder wie zB. Deutschland und Österreich haben Kredite an diese Länder vergeben. Dieses Geld wurde nur **verliehen** und nicht **geschenkt**.
+
+Am schnellsten hat sich **Irland** erholt, Portugal und Spanien haben sich auch gut erholt. Griechenland hat sich noch nicht erholt.
