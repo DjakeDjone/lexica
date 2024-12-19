@@ -66,4 +66,3 @@ Der **Schlieffenplan** war ein deutscher Militärplan, der vorsah, dass Deutschl
 ### Blockade und U-Boot-Krieg
 
 Bei Kriegsausbruch hatte die englische Flotte eine **Seeblockade** über die Nordsee verhängt, um das Deutsche Kaiserreich von der Versorgung abzuschneiden. Deutschland reagierte darauf mit einem **U-Boot-Krieg,** bei dem auch Schiffe aus neutralen Ländern versenkt wurden. Dies führte zu Spannungen mit den USA, die schließlich in den Krieg eintraten.
-

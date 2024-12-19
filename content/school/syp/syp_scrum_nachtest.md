@@ -18,6 +18,7 @@
 **INVEST**:
 
 + **Independent**
+
 + **Negoiable** (Verhandelbar)
 + **Valuable**
 + **Estimatable** (Schätzbar)
@@ -70,7 +71,7 @@
 + **Nach**projektkalkulation
 + TODO
 
-## Function Points (FP) u. Simple Function Points (SFP)
+## Function Points (FP)
 
 ### Function Points
 
@@ -101,3 +102,5 @@
 3. Startereignisse
 4. Informationen aus vorherigen Sprints
 5. Art der Tasks
+
+## Simple Function Points (SFP)
