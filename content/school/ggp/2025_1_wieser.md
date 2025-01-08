@@ -1,15 +1,6 @@
 # 1. Test Wieser
 
-`
-Was waren die Reformen vom ungarischen Ausgleich
-Was bedeutet Materialschlacht und nenne Beispielschlachten
-Was war der Anlass für 1. WK plus Datum und Personen
-Wie viele Abgeordneten sitzen im Nationalrat
-Fachbegriff für die Periode bis die Abgeordneten neu gewählt werden und Dauer
-Welche Häuser hat es beim Reichsrat gegeben
-Was waren die Anfangsmitglieder der Mittelmächte
-Bonus: Welche Institution ist bei der Schlacht von Solferino gegründet
-`
+Nur Fragen und Antworten, genauere Zusammenfassung unter [Erster Weltkrieg](content/school/ggp/erster-weltkrieg)
 
 ## Fragen
 
@@ -38,11 +29,11 @@ Der Anlass für den 1. Weltkrieg war die **Ermordung des österreichischen Thron
 
 ### 4. Wie viele Abgeordneten sitzen im Nationalrat
 
-**183 Abgeordnete**
+**183** Abgeordnete
 
 ### 5. Fachbegriff für die Periode bis die Abgeordneten neu gewählt werden und Dauer
 
-**Legislaturperiode** (4 Jahre)
+**Legislaturperiode** (5 Jahre)
 
 ### 6. Welche Häuser hat es beim Reichsrat gegeben
 
@@ -50,6 +41,8 @@ Beim Reichsrat gab es zwei Häuser:
 
 - **Herrenhaus**: Vertreter des Adels und der Kirche
 - **Abgeordnetenhaus**: Vertreter des Volkes
+
+*Der Reichsrat war das Parlament von Österreich-Ungarn. Er wurde 1861 gegründet und bestand bis 1918. Seine Aufgabe war es, Gesetze zu verabschieden und die Regierung zu kontrollieren. Der Reichsrat war ein wichtiger Bestandteil des Ausgleichs zwischen Österreich und Ungarn.*
 
 ### 7. Was waren die Anfangsmitglieder der Mittelmächte
 
