@@ -1,6 +1,6 @@
 # 1. Test Wieser
 
-Nur Fragen und Antworten, genauere Zusammenfassung unter [Erster Weltkrieg](content/school/ggp/erster-weltkrieg)
+Nur Fragen und Antworten, genauere Zusammenfassung unter [Erster Weltkrieg](erster-weltkrieg)
 
 ## Fragen
 
