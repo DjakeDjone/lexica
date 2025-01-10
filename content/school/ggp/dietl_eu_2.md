@@ -38,3 +38,17 @@ EU-Bürger darf in jedem EU-Land Dienstleistungen anbieten. Dabei gelten die Reg
 Länder wie zB. Deutschland und Österreich haben Kredite an diese Länder vergeben. Dieses Geld wurde nur **verliehen** und nicht **geschenkt**.
 
 Am schnellsten hat sich **Irland** erholt, Portugal und Spanien haben sich auch gut erholt. Griechenland hat sich noch nicht erholt.
+
+## EU-Budget
+
+> **Buget**: Finanzplan, Einnahmen und Ausgaben
+
+Die EU hat ca. ein Buget von 153.6 Milliarden Euro. Die EU kann sich nicht verschulden, sie darf nur soviel ausgeben wie sie einnimmt.
+
+### Einnahmequellen
+
+- **BNE-Eigenmittel**: alle EU-Länder zahlen einen Anteil ihres Bruttonationaleinkommens (BNE) an die EU. Dabei zahlen reiche Länder mehr als arme Länder.
+- **Mehrwertssteuer-Eigenmittel**: zwischen 0.15% und 0.3% der Umsatzsteuereinnahmen
+- **Traditionelle Eigenmittel**: Zölle auf Importe aus Nicht-EU-Ländern
+
+![eu buget](/images/eu_buget.png)
