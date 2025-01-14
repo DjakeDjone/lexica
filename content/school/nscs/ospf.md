@@ -45,4 +45,33 @@ Cost = 100 Mbps / Bandwidth in Mbps
 Weil OSPF die **geringste Cost** bevorzugt, bedeutet eine **höhere Bandbreite** einen **niedrigeren Cost**.
 Wenn die Bandbreite eines Links 100 Mbps beträgt, beträgt die Cost 1. Wenn die Bandbreite 10 Mbps beträgt, beträgt die Cost 10. Wenn die Cost kleiner als 1 wäre sollte der Referenzwert von 100 Mbps angepasst werden. Dieser muss auf **allen Geräten** im OSPF-Netzwerk **gleich** sein.
 
-###
+### Multiarea OSPF
+
+OSPF kann in **mehrere Areas** unterteilt werden, um die **Skalierbarkeit** zu verbessern. Ein **Area Border Router (ABR)** verbindet die Areas miteinander. Ein **Autonomous System Boundary Router (ASBR)** verbindet das OSPF-Netzwerk mit anderen Routing-Domains.
+
+Bei Multi-Area OSPF gibt es mehrere arten von LSAs (Link State Advertisements):
+
+- **Type 1**: Router LSA: Informationen über den Router
+- **Type 2**: Network LSA: Informationen über das Netzwerk
+- **Type 3**: Summary LSA: Informationen über andere Areas
+- **Type 4**: ASBR Summary LSA: Informationen über ASBRs (Autonomous System Boundary Router)
+- **Type 5**: External LSA: Informationen über externe Routen
+- **Type 7**: NSSA External LSA: Informationen über externe Routen in einer Not-So-Stubby Area
+
+> ### OSPFv3
+>
+>Im Gegensatz zu OSPFv2 verwendet OSPFv3 IPv6-Adressen. OSPFv3 verwendet **Multicast-Adressen** für die Kommunikation. OSPFv3 verwendet **Link-Local-Adressen** für die Nachbarschaftserkennung.
+
+#### Autosummary
+
+```bash
+Router(config-router)# auto-summary
+```
+
+Mit dem Befehl `auto-summary` wird die automatische Zusammenfassung von Netzwerken aktiviert. Dies bedeutet, dass OSPF die Netzwerke automatisch zusammenfasst, wenn sie in verschiedenen Areas liegen.
+Normalerweise wird die automatische Zusammenfassung **nicht** empfohlen, da sie zu **Problemen** führen kann.
+
+Probleme mit der automatischen Zusammenfassung:
+
+- **Discontiguous Networks**: OSPF kann keine disjunkten Netzwerke zusammenfassen
+- **Suboptimal Routing**: OSPF kann zu Suboptimalen Routen führen, wenn die Netzwerke zusammengefasst werden
