@@ -1,5 +1,4 @@
 
-
 # **Titel: RIP**
 
 | **AufgabenNr:** | 05 |
@@ -45,7 +44,6 @@ In diesem Protokoll wird das RIP-Protokoll behandelt. Ziel ist es, ein Netzwerk 
 \
 
 # Inhaltsverzeichnis
-
 
 \
 \
@@ -120,12 +118,11 @@ Router# wr
 
 Mit Putty auf die Router verbinden und einschalten:
 
-```bash	
+```bash
 Router> enable
 Router# conf t
 Router(config)# interface g0/1 // = interface gigabitethernet 0/1
 ```
-![alt text](image-25.png)
 
 ### Netzwerkverbindung aufzubauen
 
