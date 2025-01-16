@@ -1,4 +1,97 @@
-# OSPF
+
+# **Titel: RIP**
+
+| **AufgabenNr:** | 05 |
+|---|:---|
+| **Klasse:** | 4AHIF |
+| **Name:** | Benjamin Friedl |
+| **Gruppe:** | 1 |
+| **Abgabetermin:** | 13.2.2025 |
+| **Abgabedatum:** | 16.01.2025 |
+
+## **Kurzbeschreibung:**
+
+In diesem Protokoll wird das OSPF-Protokoll behandelt. Ziel ist es, ein Netzwerk nach Angabe des Lehrers aufzubauen und das Open Shortest Path First (OSPF) zu konfigurieren.
+
+---
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+
+# Inhaltsverzeichnis
+
+- [Theorie](#theroie)
+- [Übung](#topologie)
+  - [Address Ranges](#address-ranges)
+- [OSPF Setup](#ospf-setup)
+    - [Basic Interface Configuration](#basic-interface-configuration)
+    - [OSPF Configuration](#ospf-configuration)
+    - [Anzeige und Analyse der Tabellen (Nachbar, Topologie, Routing)](#anzeige-und-analyse-der-tabellen-nachbar-topologie-routing)
+    - [Welcher Netzwerktyp ist eingestellt?](#welcher-netzwerktyp-ist-eingestellt)
+    - [Welche Timer verwendet OSPF und welche Werte sind konfiguriert?](#welche-timer-verwendet-ospf-und-welche-werte-sind-konfiguriert)
+    - [Ändern Sie die Prioritäten derart das Wien DR und Wellington BDR wird.](#ändern-sie-die-prioritäten-derart-das-wien-dr-und-wellington-bdr-wird)
+    - [Schalten sie den DR ab und zeichnen sie den Wahlvorgang auf](#schalten-sie-den-dr-ab-und-zeichnen-sie-den-wahlvorgang-auf)
+    - [Router wieder einschalten](#router-wieder-einschalten)
+    - [Konfigurieren Sie MD5 Authentication zwischen den Router](#konfigurieren-sie-md5-authentication-zwischen-den-router)
+
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+
+## Theroie
+
+OSPF (Open Shortest Path First) ist ein Link-State-Routing-Protokoll, das den Dijkstra-Algorithmus verwendet, um den besten Pfad zu einem Ziel zu finden. OSPF ist ein **Interior Gateway Protocol (IGP)**, das in einem **Autonomous System (AS)** verwendet wird. OSPF verwendet **Hello-Pakete**, um Nachbarn zu entdecken und **Link State Advertisements (LSAs)**, um die Topologie des Netzwerks zu verbreiten.
 
 ## Topologie
 
@@ -137,9 +230,23 @@ Router(config-if)# no shutdown
 ```
 
 Der jetzt hinzugeschaltene Router wird zu `DROTHER` weil er sich neu hinzugeschaltet hat und die *Neuwahl* nicht automatisch durchgeführt wird.
-<!-- todo: erklärung -->
 
 ![DROTHER after reset](image-43.png)
+
+Manueller Neustart des OSPF-Prozesses:
+
+```bash
+Router# clear ip ospf process
+```
+
+> ## Loopback-Interfaces
+> 
+> Weil sich noch niemand mit dem Netzwerk verbunden hat können wir Loopback-Interfaces erstellen um die Funktionalität zu testen.
+> ```bash
+> Router(config)# interface loopback 0
+> Router(config-if)# ip address 10.20.5.254 255.255.255.0
+> ```
+
 
 ### Konfigurieren Sie MD5 Authentication zwischen den Router
 
@@ -158,5 +265,8 @@ Router(config-keychain-key)# key-string password
 ```bash
 Router(config)# interface g0/0
 Router(config-if)# ip ospf message-digest-key 1 md5 password
+```
 
 > Der Schlüssel muss auf allen Geräten im OSPF-Netzwerk konfiguriert werden.
+
+Testen: Wenn man versucht, sich mit einem Router zu verbinden, der nicht den gleichen Schlüssel hat, wird die Verbindung fehlschlagen.
