@@ -52,3 +52,44 @@ Die EU hat ca. ein Buget von 153.6 Milliarden Euro. Die EU kann sich nicht versc
 - **Traditionelle Eigenmittel**: Zölle auf Importe aus Nicht-EU-Ländern
 
 ![eu buget](/images/eu_buget.png)
+
+### Landwirtschaft
+
+Die EU gibt ca. 57 Mrd. Euro für die Landwirtschaft aus. Die Landwirtschaft ist ein wichtiger Wirtschaftszweig in der EU.
+
+- Andere Sektoren profitieren auch von der Landwirtschaft weil die Landwirtschaft stark industrialisiert ist.
+- Grundbedürfnis sollte aus Sicherheitsgründen nicht vom Ausland abhängig sein
+- Landschaftspflege
+- Qualitätssicherung
+
+> ## Verwaltungsmythe
+>
+> Die EU gibt ca. 10 Mrd. Euro für Verwaltung aus. Das sind ca. 6% des EU-Budgets. Das ist weniger als die Verwaltungskosten der meisten EU-Länder.
+
+### Nettozahler <-> Nettoempfänger
+
+**Nettozahler:** Deutschland, Österreich, Niederlande, Schweden, Dänemark, Finnland
+
+**Nettoempfänger:** Polen, Griechenland, Ungarn, Portugal, Kroatien,
+
+### Beitritt Türkei
+
+### Arbeitsaufträge
+
+*Laizismus ist die strikte Trennung von Staat und Religion.*
+
+#### Pro
+
+*Die Stärkung/Beibehaltung der wirtschaftlichen Zusammenarbeit mit der Türkei liegt im Interesse der EU.*
+
+Begründung: Türkei ist die Brücke zu Asien und ein großer Konsument für europäische Güter.
+
+*Ein Beitritt der Türkei wäre insgesamt ein geostrategischer und sicherheitspolitischer Gewinn. Die Türkei soll damit auch in der NATO gehalten werden.*
+
+Begründung: Türkei ist Militärisch mächtig, nicht zu letzt wegen ihrer Drohnen und Laser.
+
+*Die Opposition und die demokratischen Kräfte im Land, die ihre Hoffnung in eine EU-Mitgliedschaft setzen sollen weiterhin unterstützt werden.*
+
+Begründung: Demokratische Türkei wäre vorteilhaft.
+
+#### Kontra
