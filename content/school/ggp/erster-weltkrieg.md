@@ -70,3 +70,43 @@ Bei Kriegsausbruch hatte die englische Flotte eine **Seeblockade** über die Nor
 ### Der Zusammenbruch der Mittelmächte
 
 Die Mittelmächte (Deutschland, Österreich-Ungarn, Osmanisches Reich) waren am Ende des Krieges erschöpft und desorganisiert. Die Bevölkerung hungerte, die Wirtschaft lag am Boden, und die politische Situation war instabil. Der Zusammenbruch der Mittelmächte führte zu Revolutionen und dem Zerfall der alten Ordnung.
+
+## Russland
+
+Der schwierige Kriegsverlauf und die schlechte Versorgungslage führten zu Revolutionen in Russland. Die Februarrevolution von 1917 führte zum Sturz des Zaren und zur Errichtung einer provisorischen Regierung. Im Oktober 1917 übernahmen die Bolschewiki unter Führung von Lenin die Macht und setzten den Frieden von Brest-Litowsk durch, der den Krieg zwischen Russland und den Mittelmächten beendete. Russland schied aus dem Krieg aus und konzentrierte sich auf den Bürgerkrieg zwischen den Roten und den Weißen. (Rote Armee: Bolschewiki, Weiße Armee: Monarchisten, Sozialisten, Demokraten)
+
+> **Lenin:**
+>
+> Lenin wurde in die Schweiz verbannt. Weil Deutschland Russland schwächen wollte, wurde Lenin mit einem Zug durch Deutschland nach Russland gebracht. Er rief die Oktoberrevolution aus und setzte den Frieden von Brest-Litowsk durch.
+
+### Russische Geschichte - Überblick
+
+- Zarenreich
+- **1917:** Februarrevolution, Oktoberrevolution
+- **1918–1921:** Russischer Bürgerkrieg
+- **1922:** Gründung der Sowjetunion
+- **1924:** Tod Lenins, Beginn der Stalin-Ära
+- **1939–1945:** Zweiter Weltkrieg
+- **1945:** Ende des Zweiten Weltkriegs, Beginn des Kalten Krieges
+- **1991:** Auflösung der Sowjetunion
+- **1999:** Putin wird Präsident
+
+## Friedensverhandlungen
+
+Nach dem Krieg zerfiel Österreich-Ungarn in verschiedene Nationalstaaten, das Osmanische Reich wurde aufgeteilt, und Deutschland musste hohe Reparationen zahlen. Die Siegermächte trafen sich zu Friedensverhandlungen, um die Bedingungen des Friedensvertrags festzulegen.
+
+### Tschechien
+
+Tschechien wurde ein unabhängiger Staat und schloss sich mit der Slowakei zu der Tschechoslowakei zusammen.
+
+### Polen
+
+Polen wurde wieder unabhängig und erhielt Gebiete, die zuvor zu Deutschland, Österreich-Ungarn und Russland gehört hatten.
+
+### Ungarn
+
+Ungarn verlor große Teile seines Territoriums und wurde zu einem kleinen Binnenstaat.
+
+### Jugoslawien
+
+Jugoslawien wurde aus den südslawischen Staaten (Serbien, Kroatien, Slowenien, Bosnien, Montenegro, Mazedonien) gebildet.
