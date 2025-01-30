@@ -1,13 +1,13 @@
 
-# **Titel: RIP**
+# **Titel: OSPF**
 
-| **AufgabenNr:** | 05 |
+| **AufgabenNr:** | 09 |
 |---|:---|
 | **Klasse:** | 4AHIF |
 | **Name:** | Benjamin Friedl |
 | **Gruppe:** | 1 |
-| **Abgabetermin:** | 13.2.2025 |
-| **Abgabedatum:** | 16.01.2025 |
+| **Abgabetermin:** | 30.1.2025 |
+| **Abgabedatum:** | 29.01.2025 |
 
 ## **Kurzbeschreibung:**
 
@@ -49,15 +49,15 @@ In diesem Protokoll wird das OSPF-Protokoll behandelt. Ziel ist es, ein Netzwerk
 - [Übung](#topologie)
   - [Address Ranges](#address-ranges)
 - [OSPF Setup](#ospf-setup)
-    - [Basic Interface Configuration](#basic-interface-configuration)
-    - [OSPF Configuration](#ospf-configuration)
-    - [Anzeige und Analyse der Tabellen (Nachbar, Topologie, Routing)](#anzeige-und-analyse-der-tabellen-nachbar-topologie-routing)
-    - [Welcher Netzwerktyp ist eingestellt?](#welcher-netzwerktyp-ist-eingestellt)
-    - [Welche Timer verwendet OSPF und welche Werte sind konfiguriert?](#welche-timer-verwendet-ospf-und-welche-werte-sind-konfiguriert)
-    - [Ändern Sie die Prioritäten derart das Wien DR und Wellington BDR wird.](#ändern-sie-die-prioritäten-derart-das-wien-dr-und-wellington-bdr-wird)
-    - [Schalten sie den DR ab und zeichnen sie den Wahlvorgang auf](#schalten-sie-den-dr-ab-und-zeichnen-sie-den-wahlvorgang-auf)
-    - [Router wieder einschalten](#router-wieder-einschalten)
-    - [Konfigurieren Sie MD5 Authentication zwischen den Router](#konfigurieren-sie-md5-authentication-zwischen-den-router)
+  - [Basic Interface Configuration](#basic-interface-configuration)
+  - [OSPF Configuration](#ospf-configuration)
+  - [Anzeige und Analyse der Tabellen (Nachbar, Topologie, Routing)](#anzeige-und-analyse-der-tabellen-nachbar-topologie-routing)
+  - [Welcher Netzwerktyp ist eingestellt?](#welcher-netzwerktyp-ist-eingestellt)
+  - [Welche Timer verwendet OSPF und welche Werte sind konfiguriert?](#welche-timer-verwendet-ospf-und-welche-werte-sind-konfiguriert)
+  - [Ändern Sie die Prioritäten derart das Wien DR und Wellington BDR wird.](#ändern-sie-die-prioritäten-derart-das-wien-dr-und-wellington-bdr-wird)
+  - [Schalten sie den DR ab und zeichnen sie den Wahlvorgang auf](#schalten-sie-den-dr-ab-und-zeichnen-sie-den-wahlvorgang-auf)
+  - [Router wieder einschalten](#router-wieder-einschalten)
+  - [Konfigurieren Sie MD5 Authentication zwischen den Router](#konfigurieren-sie-md5-authentication-zwischen-den-router)
 
 \
 \
@@ -92,6 +92,12 @@ In diesem Protokoll wird das OSPF-Protokoll behandelt. Ziel ist es, ein Netzwerk
 ## Theroie
 
 OSPF (Open Shortest Path First) ist ein Link-State-Routing-Protokoll, das den Dijkstra-Algorithmus verwendet, um den besten Pfad zu einem Ziel zu finden. OSPF ist ein **Interior Gateway Protocol (IGP)**, das in einem **Autonomous System (AS)** verwendet wird. OSPF verwendet **Hello-Pakete**, um Nachbarn zu entdecken und **Link State Advertisements (LSAs)**, um die Topologie des Netzwerks zu verbreiten.
+
+OSPF hat 3 Tabellen:
+
+- **Neighbor Table**: Liste der Nachbarn: wird durch *Hello-Pakete* aufgebaut (alle 30s)
+- **Link State DB**: Liste aller Router und Links: wird durch *Link State Advertisements* aufgebaut
+- **Routing Table**: Beste Pfade zu allen Zielen: wird durch den *Dijkstra-Algorithmus* berechnet
 
 ## Topologie
 
@@ -179,13 +185,12 @@ Router(config-router)#
 
 Wenn die Werte geändert werden, müssen sie auf allen Geräten im OSPF-Netzwerk gleich sein. Sind sie nicht gleich, kann es zu Problemen kommen (z.B. Routing-Schleifen) weil die Router nicht mehr synchron sind.
 
-![ping valid](image-40.png) 
+![ping valid](image-40.png)
 **Wichtig**: Man muss 20 Sekunden warten, bis die Änderungen wirksam werden.
-
 
 <!-- TODO: change router timers img -->
 
-### Ändern Sie die Prioritäten derart das Wien DR und Wellington BDR wird.
+### Ändern Sie die Prioritäten derart das Wien DR und Wellington BDR wird
 
 Bei uns war das Default, zu lernzwecken haben wir es genau umgekehrt gemacht.
 
@@ -196,6 +201,7 @@ Router# show ip ospf interface g0/0
 ```
 
 Current values:
+
 - **State**: `BDR`
 - **Priority**: `1`
 
@@ -240,13 +246,13 @@ Router# clear ip ospf process
 ```
 
 > ## Loopback-Interfaces
-> 
+>
 > Weil sich noch niemand mit dem Netzwerk verbunden hat können wir Loopback-Interfaces erstellen um die Funktionalität zu testen.
+>
 > ```bash
 > Router(config)# interface loopback 0
 > Router(config-if)# ip address 10.20.5.254 255.255.255.0
 > ```
-
 
 ### Konfigurieren Sie MD5 Authentication zwischen den Router
 
