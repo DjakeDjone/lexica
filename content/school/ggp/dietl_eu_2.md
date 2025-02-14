@@ -1,4 +1,4 @@
-# EU
+# EU 2
 
 ## 4 Grundfreiheiten der EU
 
@@ -93,3 +93,44 @@ Begründung: Türkei ist Militärisch mächtig, nicht zu letzt wegen ihrer Drohn
 Begründung: Demokratische Türkei wäre vorteilhaft.
 
 #### Kontra
+
+*Die Türkei hat sich in den letzten Jahren immer weiter von den EU-Standards entfernt.*
+
+Begründung: z.B. Pressefreiheit, Menschenrechte
+
+*Die Türkei hat in den letzten Jahren immer wieder Menschenrechtsverletzungen begangen.*
+
+Begründung: z.B. Kurdenkonflikt
+
+*Die Türkei ist ein Nettoempfänger und würde das EU-Budget belasten.*
+
+Begründung: X
+
+### Tigerstaaten
+
+Ein **Tigerstaat** ist ein Schwellenland, das in kurzer Zeit einen wirtschaftlichen Aufschwung erlebt. Die Tigerstaaten sind:
+
+- **Südkorea**
+- **Taiwan**
+- **Türkei**
+- **Singapur**
+...
+
+### Türkei-Zweiteilung
+
+- **Westen**: modern, säkular, **wirtschaftlich stark**
+- **Osten**: konservativ, religiös, **wirtschaftlich schwach**
+
+## Brexit
+
+### Beitritt zur EU
+
+**1973**: Großbritannien tritt der EU bei
+
+Gründe:
+
+- **Wirtschaft**: Großbritannien war wirtschaftlich schwach, die EU war wirtschaftlich stark.
+- **Sicherheit**: NATO war schwach, EU war stark.
+- **Frieden**: Nach dem 2. Weltkrieg war die EU ein Friedensprojekt.
+
+Großbritannien
