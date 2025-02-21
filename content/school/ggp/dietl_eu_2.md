@@ -121,6 +121,9 @@ Ein **Tigerstaat** ist ein Schwellenland, das in kurzer Zeit einen wirtschaftlic
 - **Westen**: modern, säkular, **wirtschaftlich stark**
 - **Osten**: konservativ, religiös, **wirtschaftlich schwach**
 
+---
+---
+
 ## Brexit
 
 ### Beitritt zur EU
@@ -133,4 +136,57 @@ Gründe:
 - **Sicherheit**: NATO war schwach, EU war stark.
 - **Frieden**: Nach dem 2. Weltkrieg war die EU ein Friedensprojekt.
 
-Großbritannien
+## Aufgaben Brexit
+
+### Sonderstellungen Großbritanniens in der EU
+
+- **Beziehungen zu USA**: z.B. Geheimdienst, Militär, z.B. Falkoinseln
+- **Britenrabatt**: Großbritannien zahlt weniger in den EU-Haushalt ein als andere Länder.
+- **Schengen**: Großbritannien hat den Schengen-Raum nicht eingeführt.
+- **Euro**: Großbritannien hat den Euro nicht eingeführt.
+
+> ## Schengen-Raum
+>
+> Gemeinsamer Raum ohne Grenzkontrollen und einer gemeinsamen Asylpolitik.
+
+### Hintergründe Brexit
+
+- **Wirtschaftlich überlegen**: Großbritannien ist ein Nettozahler.
+- **Souveränität**: Großbritannien will seine Souveränität zurück.
+- **Einwanderung**: Großbritannien will die Einwanderung reduzieren.
+- **Propaganda**: Brexit wurde von der britischen Regierung propagiert.
+- **Manipulation**: Mittels Social Media wurde die Bevölkerung manipuliert indem Werbung geziehlt auf bestimmte Zielgruppen ausgerichtet wurde.
+
+### Auswirkungen Brexit - Handel
+
+- **Zölle**: Zölle auf Waren die von Großbritannien in die EU importiert werden.
+- **Grenzkontrollen**: Grenzkontrollen an der Grenze zwischen Großbritannien und der EU.
+- **Bürokratie**: Mehr Bürokratie für Unternehmen die Waren von Großbritannien in die EU importieren.
+- **Wettbewerbsnachteile**: Unternehmen die Waren von Großbritannien in die EU importieren haben Wettbewerbsnachteile gegenüber Unternehmen die Waren innerhalb der EU importieren.
+
+### Britische Automobilindustrie
+
+- Ab 2027 müssen 65% der Teile eines Autos aus Großbritannien/EU kommen damit es zollfrei importiert werden kann.
+
+### Just-in-time Prinzip
+
+- **Just-in-time**: Teile werden erst dann geliefert wenn sie gebraucht werden.
+- **Just-in-case**: Teile werden auf Lager gelegt.
+- **Just-in-case** ist teurer als **Just-in-time**.
+- **Just-in-case** ist aber sicherer als **Just-in-time**.
+- **Just-in-case** ist aber auch langsamer als **Just-in-time**.
+
+### Verlierer des Brexits
+
+#### Verlierer seitens Großbritannien
+
+- **Studenten**: Erasmus-Programm wurde abgeschafft. Der Schüleraustausch ist um 75%, der Studentenaustausch um 60% zurückgegangen.
+- **Fachkräfte**: Fachkräfte fehlen in Großbritannien.
+
+> #### Migration
+>
+> Vor dem Brexit lag die Netto-Immigration bei rund 250.000 Menschen pro Jahr, rechnen Experten vom Think Tank "UK in a changing Europe" vor. Fünf Jahre nach dem Brexit sind es rund dreimal so viel. Es kommen weniger Arbeitskräfte aus der EU, mehr aus aller Welt.
+
+### Quellen
+
+- [ZDF](https://www.zdf.de/nachrichten/politik/ausland/brexit-grossbritannien-fuenf-jahre-100.html)

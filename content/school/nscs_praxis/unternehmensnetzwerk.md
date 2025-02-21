@@ -75,3 +75,23 @@ Router(config-subif)# exit
 | FTP-Server | 36.7.12.131 |
 
 Auf den Servern müssen wir die IP-Adressen manuell konfigurieren und das Gateway auf 36.7.12.129 setzen.
+
+### 4. NAT
+
+```bash
+IntGw(config)# access-list 1 permit 192.168.5.0 0.0.0.255
+IntGw(config)# ip nat inside source list 1 interface f0/1 overload
+IntGw(config)# interface f0/1
+IntGw(config-if)# ip nat outside
+IntGw(config-if)# exit
+IntGw(config-if)# interface f0/0
+IntGw(config-if)# ip nat inside
+```
+
+#### 4.1 NAT Testen
+
+zum NAT testen können wir von einem Client (PC) den Externen Router anpingen:
+
+```bash
+
+```
