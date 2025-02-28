@@ -141,9 +141,9 @@ Gründe:
 ### Sonderstellungen Großbritanniens in der EU
 
 - **Beziehungen zu USA**: z.B. Geheimdienst, Militär, z.B. Falkoinseln
-- **Britenrabatt**: Großbritannien zahlt weniger in den EU-Haushalt ein als andere Länder.
+- **Britenrabatt**: Großbritannien zahlt weniger in den EU-Haushalt ein als andere Länder. (Argumentiert mit Nettozahler u. Landwirtschaft)
 - **Schengen**: Großbritannien hat den Schengen-Raum nicht eingeführt.
-- **Euro**: Großbritannien hat den Euro nicht eingeführt.
+- **Opt in Recht**: Großbritannien hat das Recht auf Ausnahmen bei EU-Rechtsvorschriften.
 
 > ## Schengen-Raum
 >
@@ -178,10 +178,10 @@ Gründe:
 
 ### Verlierer des Brexits
 
-#### Verlierer seitens Großbritannien
-
 - **Studenten**: Erasmus-Programm wurde abgeschafft. Der Schüleraustausch ist um 75%, der Studentenaustausch um 60% zurückgegangen.
 - **Fachkräfte**: Fachkräfte fehlen in Großbritannien.
+- **EU**: Nettozahler fehlen in der EU.
+- **Exportwirtschaft**: Exportwirtschaft leidet unter dem Brexit.
 
 > #### Migration
 >
@@ -190,3 +190,26 @@ Gründe:
 ### Quellen
 
 - [ZDF](https://www.zdf.de/nachrichten/politik/ausland/brexit-grossbritannien-fuenf-jahre-100.html)
+
+---
+
+## Länder in Europa außerhalb der EU
+
+Länder können auch außerhalb der EU sein, und trotzdem mit der EU zusammenarbeiten.
+
+- **Schweiz**: EFTA, Schengen, Europarat
+- **Norwegen**: EFTA, Schengen, Europarat
+- **Island**: EFTA, Schengen, Europarat
+
+### Norwegen
+
+5,5 Millionen Einwohner (+0,6%/a)
+
+- Kind/Frau ca. 1.8
+- BIP/Kopf 70.825 USD (3. Platz weltweit -ca. doppelt von Österreich)
+- HDI 0,961 (4. Platz weltweit)
+- Gini Koeffizient 0,258 (Ö = 0,26)
+- Gründungsmittglied der NATO
+- EU Abstimmung 1972 u. 1994 abgelehnt
+- Wirtschaftskraft NOR = 163, EU = 100
+- **Außenhandel 80%** mit EU
