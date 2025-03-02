@@ -90,8 +90,14 @@ IntGw(config-if)# ip nat inside
 
 #### 4.1 NAT Testen
 
-zum NAT testen können wir von einem Client (PC) den Externen Router anpingen:
+zum NAT testen können wir von einem Client (PC) den Externen Router anpingen.
+
+Ip-Adresse des externen Routers:
 
 ```bash
+ExternGw# show ip interface brief
+```
 
+```bash
+C:\> ping 36.7.12.129
 ```
