@@ -57,3 +57,55 @@ Um NAT zu testen können wir von einem Client den externen Router anpingen:
 ![alt text](image-15.png)
 
 ## 5. DNS
+
+![alt text](image-16.png)
+
+DNS Server mit DNS-Records konfigurieren (im Internet):
+
+![alt text](image-17.png)
+
+![alt text](image-18.png)
+
+## ACL's
+
+### Erreichen des FTP Servers
+
+`no ip access-list extended MyACL` - ACL löschen
+`ip access-list extended MyACL` - ACL erstellen
+`remark Internal FTP` - Kommentar
+
+ACLs zum besseren Bearbeiten in einer Datei speichern:
+
+> Die internen Clients sollen auf interne und externe Webserver (Port 80 und 443) zugreifen können.  Weiters sollen sie Zugriff auf den Firmen FTP-Server haben. Andere Ports sind zu sperren.
+
+```acl
+no ip access-list extended allow_intern
+ip access-list extended allow_intern
+remark DNS
+permit udp any any eq 53
+permit tcp any any eq 53
+remark Web
+permit tcp any any eq 80
+permit tcp any any eq 443
+remark local ftp
+permit tcp any host 36.7.12.131 eq 21
+permit tcp any host 36.7.12.131 eq 20
+permit tcp any host 36.7.12.131 gt 1023
+remark alles andere blocken
+deny ip any any
+
+interface f0/0
+ip access-group allow_intern out
+ip access-group allow_intern in
+interface f0/1
+ip access-group allow_intern out
+ip access-group allow_intern in
+```
+
+![alt text](image-19.png)
+
+## Troubleshooting/Debugging
+
+- Zwei DHCP Pools
+- Statische IP Adressen bei den Servern
+- ACLs, plötzlich hat wurde alles geblockt
