@@ -213,3 +213,45 @@ Länder können auch außerhalb der EU sein, und trotzdem mit der EU zusammenarb
 - EU Abstimmung 1972 u. 1994 abgelehnt
 - Wirtschaftskraft NOR = 163, EU = 100
 - **Außenhandel 80%** mit EU
+- Höchstes Kindergeld weltweit
+
+#### Wirtschaftlich
+
+- Erdöl
+- Tourismus
+- Fischerei
+- Energiewirtschaft
+
+### Schweiz
+
+- Föderale Republik nach Kantonen
+- Staatsoberhaupt ist Bundesrat
+- 8.8 Millionen Einwohner, 214 EW/km²
+- HDI 0.96
+- Neutraler Staat (Selbstverteidigung)
+- Kaufkraft 183, Stabile Währung
+- Staatsverschuldung 27.1% Tendenz sinkend
+- Arbeitslosenrate sehr niedrig
+- Bankensektor sehr groß - 11%
+- Kein Weltkrieg
+
+## Industrie in Europa
+
+| Region  | Transport | Arbeitskräfte | Betriebsstruktur | Branchen |
+| ------- |----------|----------------|------------------|--------- |
+| Alte IR | Kohle, Stahl | viele Arbeiter | viele kleine Betriebe | Kohle, Stahl, Textil |
+| Neue IR | Maschinenbau, Chemie, Elektro | wenige Arbeiter | wenige große Betriebe | Maschinenbau, Chemie, Elektro, Pharma |
+|         |          |                |                  |         |
+
+### Wichtigste Unterschiede (Alte IR - Neue IR)
+
+- **Alte IR**: viele Arbeiter, viele kleine Betriebe, Kohle, Stahl, Textil
+- **Neue IR**: wenige Arbeiter, wenige große Betriebe, Maschinenbau, Chemie, Elektro, Pharma
+
+### Beurteilen Sie, wie diese Regionstypen auf den Prozess der Globalisierung reagieren
+
+Generell nimmt mit der Globalisierung die Bedeutung der Industrien ab, weil die Produktion in Billiglohnländer verlagert wird, wo die Löhne geringer
+und die Bedingungen weniger strikt sind (Umweltschutz etc.).
+
+- **Alte IR**: Alte Industrien sind nicht mehr wettbewerbsfähig, viele Arbeitsplätze gehen verloren, viele Betriebe schließen
+- **Neue IR**: Neue Industrien sind wettbewerbsfähig, viele Arbeitsplätze bleiben erhalten, viele Betriebe bleiben bestehen

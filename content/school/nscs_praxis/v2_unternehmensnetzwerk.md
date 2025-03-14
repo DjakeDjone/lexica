@@ -1,6 +1,99 @@
-# Unternehmensnetzwerk
+# **Titel: Unternehmensnetzwerke**
 
-Anforderungen:
+| **AufgabenNr:** | 11 |
+|---|:---|
+| **Klasse:** | 4AHIF |
+| **Name:** | Benjamin Friedl |
+| **Gruppe:** | 1 |
+| **Abgabetermin:** | 6.3.2025 |
+| **Abgabedatum:** | 6.3.2025 |
+
+## **Kurzbeschreibung:**
+
+Aufgabe zur Konfiguration eines Unternehmensnetzwerkes mit DMZ und NAT.
+
+---
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+
+## Inhaltsverzeichnis
+
+1. [Anforderungen](#anforderungen)
+2. [Init](#init)
+3. [DMZ-Adresse](#3-dmz-adresse)
+4. [Interne Router per NAT nach außen](#4-Interne-Router-per-NAT-nach-außen)
+5. [DNS](#5-dns)
+6. [ACL's](#acls)
+7. [Troubleshooting/Debugging](#troubleshootingdebugging)
+
+---
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+
+## Anforderungen
 
 - Der interne Router soll für die internen Client's als DHCP Server fungieren (192.168.KNR.0/24)
 - Die  DMZ soll die Adressen aus dem Netz 36.7.12.128/28 bekommen.
@@ -90,19 +183,16 @@ permit tcp any any eq 443
 remark local ftp
 permit tcp any host 36.7.12.131 eq 21
 permit tcp any host 36.7.12.131 eq 20
-permit tcp any host 36.7.12.131 gt 1023
-remark alles andere blocken
-deny ip any any
+remark dhcp
+permit udp host 0.0.0.0 any eq 67
 
 interface f0/0
-ip access-group allow_intern out
-ip access-group allow_intern in
-interface f0/1
-ip access-group allow_intern out
 ip access-group allow_intern in
 ```
 
 ![alt text](image-19.png)
+
+![alt text](image-20.png)
 
 ## Troubleshooting/Debugging
 
