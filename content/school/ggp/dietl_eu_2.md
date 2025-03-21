@@ -237,11 +237,11 @@ Länder können auch außerhalb der EU sein, und trotzdem mit der EU zusammenarb
 
 ## Industrie in Europa
 
-| Region  | Transport | Arbeitskräfte | Betriebsstruktur | Branchen |
-| ------- |----------|----------------|------------------|--------- |
-| Alte IR | Kohle, Stahl | viele Arbeiter | viele kleine Betriebe | Kohle, Stahl, Textil |
-| Neue IR | Maschinenbau, Chemie, Elektro | wenige Arbeiter | wenige große Betriebe | Maschinenbau, Chemie, Elektro, Pharma |
-|         |          |                |                  |         |
+| IR  | Region | Transport | Arbeitskräfte | Betriebsstruktur | Branchen |
+| ------- | --- | ----------|----------------|------------------|--------- |
+| Alte IR | Näche zu Städten | Eisenbahn | Quantität | viele kleine Betriebe | Kohle, Stahl, Textil |
+| Neue IR |  | Autobahn, Flughafen, Hafen | Qualität | wenige große Betriebe | Maschinenbau, Chemie, Elektro, Pharma |
+| | | | | | |
 
 ### Wichtigste Unterschiede (Alte IR - Neue IR)
 
@@ -255,3 +255,13 @@ und die Bedingungen weniger strikt sind (Umweltschutz etc.).
 
 - **Alte IR**: Alte Industrien sind nicht mehr wettbewerbsfähig, viele Arbeitsplätze gehen verloren, viele Betriebe schließen
 - **Neue IR**: Neue Industrien sind wettbewerbsfähig, viele Arbeitsplätze bleiben erhalten, viele Betriebe bleiben bestehen
+
+---
+
+1. Europäische Rostgürtel (s58-62)
+2. Finanzzentren Eurpoas (S. 66-68)
+3. Die Jungen industrieregionen (S. 69-47) z.B. Neues Italien
+4. volkswirtschaftlichen Zusammenhänge zw. Österreich und der EU
+
+**2**
+Powerpoint ca. 5-10min
