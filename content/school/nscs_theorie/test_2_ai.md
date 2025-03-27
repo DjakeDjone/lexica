@@ -1,7 +1,5 @@
 # OSPF, ACLs und Troubleshooting (+Gemini)
 
-Sicher, hier sind einige wichtige Punkte aus den Dokumenten, die Ihnen beim Lernen für Ihren Test über OSPF, ACLs und Troubleshooting helfen können:
-
 ## OSPF (Open Shortest Path First)
 
 * **Grundlagen:**
@@ -53,5 +51,3 @@ Sicher, hier sind einige wichtige Punkte aus den Dokumenten, die Ihnen beim Lern
   * Häufige Symptome und Ursachen von Problemen variieren je nach Schicht.
 * **IP-Konnektivität:**
   * Die Fehlerbehebung bei End-to-End-Konnektivitätsproblemen umfasst die Überprüfung der physischen Schicht, die Überprüfung auf Duplex-Fehlpaarungen, die Überprüfung der Adressierung, die Überprüfung des Standardgateways, die Überprüfung des korrekten Pfads, die Überprüfung der Transportschicht, die Überprüfung von ACLs und die Überprüfung von DNS.
-
-Ich hoffe, diese Zusammenfassung hilft Ihnen bei Ihrem Test! Lassen Sie mich wissen, wenn Sie weitere Fragen haben.
