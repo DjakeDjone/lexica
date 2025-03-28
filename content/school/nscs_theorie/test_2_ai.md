@@ -1,5 +1,7 @@
 # OSPF, ACLs und Troubleshooting (+Gemini)
 
+**Link State Protokolle:** Der Router kennt das gesamte Netzwerk/Netzwerkaufbau.
+
 ## OSPF (Open Shortest Path First)
 
 * **Grundlagen:**
@@ -14,11 +16,16 @@
 * **Metrik:**
   * OSPF verwendet Kosten als Metrik, die auf der Bandbreite einer Schnittstelle basiert.
   * Die Kosten werden mit der Formel 10^8 / Bandbreite berechnet.
+  > Problem bei der Berechnung: Alles über 100 Mbps wird als 1 betrachtet. Lösung: höhere Referenzbandbreite verwenden. (statt 10^8, z.B. 10^9)
+
+  * Designated Router (DR) und Backup Designated Router (BDR):
+     Der **erste Router**, oder der mit der höchsten **Priority** wird DR, der **zweite Router** BDR.
 * **Multi-Area OSPF:**
-  * Multi-Area OSPF wird in größeren Netzwerken verwendet, um Probleme wie große Routing-Tabellen, große LSDBs und häufige SPF-Algorithmusberechnungen zu lösen.
-  * Das Hauptgebiet wird als Backbone-Area oder Area 0 bezeichnet, und alle anderen Gebiete müssen sich mit dem Backbone-Area verbinden.
-  * Es gibt verschiedene Arten von OSPF-Routern in Multi-Area-OSPF, darunter Internal Router, Backbone Router, ABR (Area Border Router) und ASBR (Autonomous System Boundary Router).
-  * Verschiedene LSA-Typen werden in Multi-Area-OSPF verwendet, um Routing-Informationen auszutauschen.
+
+> Linkstate Advertisment:
+>
+> LSA ist eine Nachricht die Informationen über Netzwerkstruktur enthält.
+>
 
 ## **ACLs (Access Control Lists)**
 
@@ -36,6 +43,10 @@
 * **Fehlerbehebung:**
   * Häufige ACL-Fehler sind das Eingeben von ACEs in der falschen Reihenfolge oder das Nichtanwenden angemessener Kriterien auf die ACL-Regeln.
   * Die Befehle `show access-lists`, `show ip interface` und `show ipv6 access-list` können verwendet werden, um ACLs zu überprüfen.
+
+> IPV6
+>
+> Am Ende jeder IPv6 ACLS steht, dass Neighbor Discovery Protocol (NDP) und ICMPv6 aktiviert sind.
 
 ## **Troubleshooting**
 
