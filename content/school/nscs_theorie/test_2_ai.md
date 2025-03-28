@@ -9,6 +9,10 @@
   * Es verwendet Kosten als Metrik zur Bestimmung des besten Pfads.
   * OSPF verwendet fünf verschiedene Pakettypen: Hello, Database Description (DBD), Link-State Request (LSR), Link-State Update (LSU) und Link-State Acknowledgement (LSAck).
   * OSPF verwendet Designated Router (DR) und Backup Designated Router (BDR) in Multiaccess-Netzwerken, um die Anzahl der Adjazenzen und die LSA-Überflutung zu reduzieren.
+* Ablauf:
+  * OSPF-Router senden regelmäßig Hello-Pakete um Nachbarn zu erkennen.
+  * Nachbarn tauschen ihre Link-State-Datenbanken aus, um den Netzwerkstatus zu synchronisieren. (DBD-Pakete)
+  *
 * **Konfiguration:**
   * OSPF wird auf einem Router mit dem Befehl `router ospf process-id` aktiviert.
   * Das `network` Kommando wird verwendet, um Schnittstellen zu definieren, die an einem bestimmten OSPF-Prozess teilnehmen.
