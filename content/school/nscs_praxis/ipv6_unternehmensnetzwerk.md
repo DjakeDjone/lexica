@@ -213,91 +213,93 @@ nslookup web.nscs.lan
 
 > ACL's sind unter IPv6 nocheinmal wichtigere als unter IPv4, da ohne ACL's sämtliche Geräte im DMZ im Internet erreichbar sind.
 
-#### OUTSIDE_IN
+#### IntGw
 
-```acls
-ipv6 access-list OUTSIDE_IN
- remark *** Erlaube eingehenden Traffic nur auf definierten Server-Ports in der DMZ ***
-
- ! Beispiel: Webserver (80, 443) in der DMZ hat IP 2001:db8:5:2::10
- permit tcp any host 2001:db8:5:2::10 eq 80
- permit tcp any host 2001:db8:5:2::10 eq 443
-
- ! Beispiel: DNS-Server (Port 53 TCP/UDP) in der DMZ hat IP 2001:db8:5:2::20
- permit udp any host 2001:db8:5:2::20 eq 53
- permit tcp any host 2001:db8:5:2::20 eq 53
-
- ! Beispiel: FTP-Server (Port 21) in der DMZ hat IP 2001:db8:5:2::30
- permit tcp any host 2001:db8:5:2::30 eq 21
- ! Falls Sie passives FTP (Ports > 1023) benötigen, müsste man das ggf. genauer erlauben.
-
- remark *** Blockiere jeglichen direkten Zugriff auf das interne LAN ***
- deny ipv6 any 2001:db8:1::/64
- deny ipv6 any 2001:db8:2::/64
- ! ... ggf. weitere interne Subnetze
-
- remark *** Erlaube ICMPv6 Typen wie Neighbor Discovery oder Ping, falls gewünscht ***
- ! (Optional, je nachdem, was Sie benötigen)
- permit icmp any any nd-na
- permit icmp any any nd-ns
- permit icmp any any echo-reply
- permit icmp any any echo-request
-
- remark *** Alles andere ablehnen ***
- deny ipv6 any any
-
-```
-
-WICHTIG: Die ACL's müssen dann einem Interface zugewiesen werden:
+**Remove all ACL's**:
 
 ```bash
-ExtGw(config)# interface s0/0/0
-ExtGw(config-if)# ipv6 traffic-filter OUTSIDE_IN in
+no ipv6 access-list internal_in
+no ipv6 access-list internal_out
+no ipv6 access-list dmz_in
+no ipv6 access-list dmz_out
+int f0/0
+no ipv6 traffic-filter internal_in in
+no ipv6 traffic-filter internal_out out
+int f0/1
+no ipv6 traffic-filter dmz_in in
+no ipv6 traffic-filter dmz_out out
 ```
+
+**InternalIn**:
+
+permit:
+
+- ping (icmpv6)
+- dns
+- tcp/udp (http/ftp)
 
 ```bash
-ExtGw(config)# int s0/0
-ExtGw(config-if)# ipv6 traffic-filter OUTSIDE_IN in
+no ipv6 access-list internal_in
+ipv6 access-list internal_in
+remark allow icmpv6
+permit icmp any any
+remark allow dns
+permit udp any any eq 53
+permit tcp any any eq 53
+remark allow http/ftp
+permit tcp any any eq 80
+permit tcp any any eq 443
+int f0/0
+ipv6 traffic-filter internal_in in
 ```
 
-#### INSIDE_OUT
+**InternalOut**:
 
-```acls
-ipv6 access-list INSIDE_OUT
- remark *** Erlaube DNS-Abfragen (Port 53 TCP/UDP) an den DMZ-DNS oder externe DNS ***
- permit udp 2001:db8:1::/64 any eq 53
- permit tcp 2001:db8:1::/64 any eq 53
- ! Oder allgemeiner: permit udp any any eq 53, etc.
- ! Je nachdem, ob interne Clients auch andere DNS im Internet befragen sollen.
+```bash
+no ipv6 access-list internal_out
+ipv6 access-list internal_out
+remark allow icmpv6
+permit icmp any any
+remark allow dns
+permit udp any any eq 53
+permit tcp any any eq 53
+remark allow http/ftp
+permit tcp any any eq 80
+permit tcp any any eq 443
+int f0/0
+ipv6 traffic-filter internal_out out
+```
 
- remark *** Erlaube Websurfen (HTTP/HTTPS) aus dem internen LAN ins Internet ***
- permit tcp 2001:db8:1::/64 any eq 80
- permit tcp 2001:db8:1::/64 any eq 443
+#### Auf ExGW
 
- remark *** Erlaube SSH-Zugriff vom internen LAN auf die Router (Port 22) ***
- ! Hier ist wichtig, dass Sie die Zieladresse des Routers kennen.
- ! Angenommen, der Router hat die IP 2001:db8:5:2::1 (DMZ-Router) 
- ! und 2001:db8:X:Y::1 (LAN-Router), je nachdem:
- permit tcp 2001:db8:1::/64 host 2001:db8:5:2::1 eq 22
- permit tcp 2001:db8:1::/64 host 2001:db8:X:Y::1 eq 22
+**Remove all ACL's**:
 
- remark *** Optional: Erlaube Antwort-Traffic, falls "established" nicht automatisch erkannt wird ***
- ! In IPv6 kann man das mit "permit tcp any any established" NICHT mehr wie bei IPv4 machen.
- ! Man müsste Return Traffic in der OUTSIDE_IN-ACL explizit zulassen oder Stateful-Firewall-Funktion nutzen.
-
- remark *** Alles andere ablehnen ***
- deny ipv6 any any
+```bash
+no ipv6 access-list external_out
+no ipv6 access-list external_out
+no ipv6 access-list to_internal_deny
+no ipv6 access-list external_in
+no ipv6 access-list external_out
+no ipv6 access-list to_internal_deny
 ```
 
 ```bash
+no ipv6 access-list external_out
+ipv6 access-list external_in
+permit tcp any host 2001:DB8:5:2::5 eq 80
+permit tcp any host 2001:DB8:5:2::5 eq 443
+permit tcp any host 2001:DB8:5:2::6 eq 21
+permit tcp any host 2001:DB8:5:2::6 eq 20
+```
 
-\
-\
-\
+**Out:**
 
----
----
+```bash
+ipv6 access-list external_out
+permit tcp any any established
+ipv6 access-list to_internal_deny
+deny ipv6 any 2001:db8:5:1::/64
+remark bind to interface
+```
 
-## Problems
-
-- Viele Problemen waren die schlechte Dokumentation und das mehrmalige ausführen von Commands
+###
