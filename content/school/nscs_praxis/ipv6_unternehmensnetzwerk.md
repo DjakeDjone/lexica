@@ -219,15 +219,6 @@ nslookup web.nscs.lan
 
 ```bash
 no ipv6 access-list internal_in
-no ipv6 access-list internal_out
-no ipv6 access-list dmz_in
-no ipv6 access-list dmz_out
-int f0/0
-no ipv6 traffic-filter internal_in in
-no ipv6 traffic-filter internal_out out
-int f0/1
-no ipv6 traffic-filter dmz_in in
-no ipv6 traffic-filter dmz_out out
 ```
 
 **InternalIn**:
@@ -241,7 +232,7 @@ permit:
 ```bash
 no ipv6 access-list internal_in
 ipv6 access-list internal_in
-remark allow icmpv6
+remark allow icmpv6 (eig nicht nötig)
 permit icmp any any
 remark allow dns
 permit udp any any eq 53
@@ -266,40 +257,73 @@ permit tcp any any eq 53
 remark allow http/ftp
 permit tcp any any eq 80
 permit tcp any any eq 443
-int f0/0
+int f0/1
 ipv6 traffic-filter internal_out out
 ```
+
+// TODO: ssh für **einen** Client erlauben
 
 #### Auf ExGW
 
 **Remove all ACL's**:
 
 ```bash
-no ipv6 access-list external_out
-no ipv6 access-list external_out
-no ipv6 access-list to_internal_deny
-no ipv6 access-list external_in
-no ipv6 access-list external_out
-no ipv6 access-list to_internal_deny
+
 ```
+
+**Out** (von DMZ nach außen):
 
 ```bash
-no ipv6 access-list external_out
-ipv6 access-list external_in
-permit tcp any host 2001:DB8:5:2::5 eq 80
-permit tcp any host 2001:DB8:5:2::5 eq 443
-permit tcp any host 2001:DB8:5:2::6 eq 21
-permit tcp any host 2001:DB8:5:2::6 eq 20
+no ipv6 access-list dmz_out
+ipv6 access-list dmz_out
+remark dns
+permit tcp 2001:db8:5:2::/64 any eq 53
+permit udp 2001:db8:5:2::/64 any eq 53
+remark web
+permit tcp 2001:db8:5:2::/64 any eq 80
+permit tcp 2001:db8:5:2::/64 any eq 443
+remark TODO: SSH
+remark Web/FTP Server (intern)
+permit tcp host 2001:DB8:5:2::5 eq 80 any established
+permit tcp host 2001:DB8:5:2::5 eq 443 any established
+permit tcp host 2001:DB8:5:2::6 eq ftp any established
+exit
+
+no ipv6 access-list dmz_in
+ipv6 access-list dmz_in
+remark DNS
+permit tcp any eq 53 2001:db8:5:2::/64 established
+permit udp any eq 53 2001:db8:5:2::/64
+remark Externe Ressourcen (Web)
+permit tcp any eq 80 2001:db8:5:2::/64 established
+permit tcp any eq 443 2001:db8:5:2::/64 established
+remark Web/FTP Server (intern)
+permit tcp any host 2001:db8:5:1::3 eq 80
+permit tcp any host 2001:db8:5:1::3 eq 443
+permit tcp any host 2001:db8:5:1::4 eq ftp
 ```
 
-**Out:**
+**Bind to interfaces**:
 
 ```bash
-ipv6 access-list external_out
-permit tcp any any established
-ipv6 access-list to_internal_deny
-deny ipv6 any 2001:db8:5:1::/64
-remark bind to interface
+int s0/0/0
+ipv6 traffic-filter dmz_out out
+int f0/0
+ipv6 traffic-filter dmz_in in
 ```
 
-###
+**Delete all ACL's**:
+
+```bash
+int s0/0/0
+no ipv6 traffic-filter dmz_out out
+int f0/0
+no ipv6 traffic-filter dmz_in in
+no ipv6 access-list dmz_out
+no ipv6 access-list dmz_in
+```
+
+## Troubleshooting/Debugging
+
+- `no ipv6...`: CASE Sensitive 🤮
+- plötzlich funktioniert nichts
