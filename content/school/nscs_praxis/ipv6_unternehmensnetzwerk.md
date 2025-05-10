@@ -5,8 +5,8 @@
 | **Klasse:** | 4AHIF |
 | **Name:** | Benjamin Friedl |
 | **Gruppe:** | 1 |
-| **Abgabetermin:** | X.3.2025 |
-| **Abgabedatum:** | X.3.2025 |
+| **Abgabetermin:** | 22.4.2025 |
+| **Abgabedatum:** | 22.4.2025 |
 
 ## **Kurzbeschreibung:**
 
