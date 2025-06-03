@@ -1,5 +1,11 @@
-
 .prose a {
         overflow-wrap: break-word;
 }
 
+
+.prose img {
+        max-width: 40rem;
+        height: auto;
+        border-radius: 0.5rem;
+        display: inline;
+}

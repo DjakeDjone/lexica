@@ -41,12 +41,14 @@ const { data: page, error, status } = await useAsyncData(route.path, () => {
             <h1 v-if="page && page.title" class="font-bold">
                 {{ page?.title }}
             </h1>
-            <TableOfContents :page="page" v-if="page?.generateTableOfContents"/>
-            <ContentRenderer v-if="page" :value="page">
-            </ContentRenderer>
-            <div v-else>
-                <p>Loading...</p>
-            </div>
+            <TableOfContents :page="page" v-if="page?.generateTableOfContents" />
+            <ImagePopupContainer>
+                <ContentRenderer v-if="page" :value="page">
+                </ContentRenderer>
+                <div v-else>
+                    <p>Loading...</p>
+                </div>
+            </ImagePopupContainer>
         </div>
         <div v-else-if="error?.statusCode === 404" class="text-center">
             <h1 class="text-2xl font-bold">Page not found</h1>
