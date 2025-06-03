@@ -11,8 +11,23 @@ const extractPath = (path: string) => {
 
 const route = useRoute()
 const { data: page, error, status } = await useAsyncData(route.path, () => {
-    return queryCollection('docs').path(route.path).first()
+    return queryCollection('docs').path(route.path).first().then((page) => {
+        if (!page) {
+            throw createError({
+                statusCode: 404,
+                statusMessage: 'Page not found',
+            });
+        }
+        // replace first heading if same as title
+        if (page.body.value.length > 0 && page.body.value[0][0] === 'h1' && page.body.value[0][2] === page.title) {
+            const body = JSON.parse(JSON.stringify(page.body.value))
+            body[0][2] = '';
+            page.body.value = body;
+        }
+        return page;
+    });
 })
+
 
 </script>
 
@@ -22,7 +37,11 @@ const { data: page, error, status } = await useAsyncData(route.path, () => {
             <button @click="mode = 'text'" v-if="mode != 'text'">Text</button>
             <button @click="mode = 'cards'" v-if="mode != 'cards'">Cards</button>
         </div>
-        <div v-if="mode == 'text'" class="prose dark:prose-invert">
+        <div v-if="mode == 'text'" class="prose dark:prose-invert max-w-screen">
+            <h1 v-if="page && page.title" class="font-bold">
+                {{ page?.title }}
+            </h1>
+            <TableOfContents :page="page" v-if="page?.generateTableOfContents"/>
             <ContentRenderer v-if="page" :value="page">
             </ContentRenderer>
             <div v-else>

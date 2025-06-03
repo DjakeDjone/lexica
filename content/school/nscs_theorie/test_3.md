@@ -1,4 +1,8 @@
-# 3. NSCS Test
+---
+title: NSCS Test 3
+description: "Theorie für den NSCS Test 3"
+generateTableOfContents: true
+---
 
 ## Stoff
 
@@ -91,7 +95,7 @@ Die verschiedenen LSA-Typen werden verwendet, um unterschiedliche Informationen 
 Der Unterschid zwischen Hochfrequenz- und Niedrigfrequenzkabeln:
 
 - **Hochfrequenzkabeln**: Übertragen Signale mit hohen Frequenzen (über 1 MHz)
-  - Beispiele: Koaxialkabel, Twisted-Pair-Kabel (z.B. Ethernet-Kabel)
+  - Beispiele: Koaxialkabel (z.B. Ethernet-Kabel)
   - Verwendung: Datenübertragung in Netzwerken, Fernsehsignale, Internetverbindungen
 - **Niedrigfrequenzkabeln**: Übertragen Signale mit niedrigen Frequenzen (unter 1 MHz)
   - Beispiele: Telefonkabel, Stromkabel
