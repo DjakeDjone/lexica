@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue';
-import Fuse from 'fuse.js';
+import Fuse, { type FuseResult } from 'fuse.js';
 
 const searchVlue = ref('');
 
@@ -19,19 +19,19 @@ const { data: searchSections } = await useAsyncData('search-sections', () =>
 const customPages = [
     {
         title: 'Lohnrechner',
-        _path: '/lohnrechner',
+        path: '/lohnrechner',
         description: 'Berechnen Sie Ihren Nettolohn',
         content: 'Berechnen Sie Ihren Nettolohn mit unserem Lohnrechner'
     },
     {
         title: 'Impressum',
-        _path: '/impressum',
+        path: '/impressum',
         description: 'Impressum',
         content: 'Impressum und rechtliche Informationen'
     },
     {
         title: 'Datenschutz',
-        _path: '/datenschutz',
+        path: '/datenschutz',
         description: 'Datenschutz',
         content: 'Datenschutzerklärung und Informationen zum Datenschutz'
     }
@@ -55,6 +55,17 @@ const searchEvent = async (e: KeyboardEvent | MouseEvent) => {
     // SHIFT + ENTER
     if (e instanceof KeyboardEvent && e.shiftKey) return;
     e.preventDefault();
+    if (selected.value > 0 && e instanceof KeyboardEvent && e.key === 'Enter') {
+        console.log("Selected result:", selected.value, searchResults.value[selected.value]);
+        
+        const result = searchResults.value[selected.value];
+        if (result) {
+            useRouter().push(result.id);
+            searchVlue.value = '';
+            close();
+        }
+        return;
+    }
     await search(searchVlue.value);
 }
 
@@ -72,7 +83,7 @@ const search = async (value: string) => {
     } else {
         searchResults.value = [];
     }
-    selected.value = 0; // Reset selection
+    selected.value = 0;
 }
 
 let searchTimeout: NodeJS.Timeout | null = null;
@@ -141,7 +152,8 @@ const close = () => {
             <div v-auto-animate id="search-results" class="mt-2 bg-base-100 rounded-lg">
                 <div v-for="result, idx in searchResults" :key="result.id"
                     class="searchResult rounded-lg p-3 pb-0 hover:bg-base-100/50"
-                    :style="{ border: selected === idx ? '1px solid oklch(var(--p))' : '1px solid transparent' }">
+                    :style="{ border: selected === idx ? '1px solid var(--color-primary)' : '1px solid transparent' }">
+
                     <NuxtLink :to="result.id" @click="searchVlue = ''; close()" class="m-0 hover:no-underline">
                         <h3 class="text-lg font-bold mt-0">{{ result.title }}</h3>
                         {{ result.content?.slice(0, 100) + '...' }}
