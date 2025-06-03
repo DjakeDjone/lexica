@@ -1,33 +1,54 @@
 <script setup lang="ts">
-import type { NavItem } from '~/app.vue';
-
+import { ref, computed, onMounted } from 'vue';
+import Fuse from 'fuse.js';
 
 const searchVlue = ref('');
 
 const value = defineModel();
 const selected = ref(0);
 
-
 const emit = defineEmits(['update:close']);
 const searchResults = ref([] as any[]);
+
+
+// Initialize search data
+const { data: searchSections } = await useAsyncData('search-sections', () =>
+    queryCollectionSearchSections('docs')
+);
 
 const customPages = [
     {
         title: 'Lohnrechner',
         _path: '/lohnrechner',
-        description: 'Berechnen Sie Ihren Nettolohn'
+        description: 'Berechnen Sie Ihren Nettolohn',
+        content: 'Berechnen Sie Ihren Nettolohn mit unserem Lohnrechner'
     },
     {
         title: 'Impressum',
         _path: '/impressum',
-        description: 'Impressum'
+        description: 'Impressum',
+        content: 'Impressum und rechtliche Informationen'
     },
     {
         title: 'Datenschutz',
         _path: '/datenschutz',
-        description: 'Datenschutz'
+        description: 'Datenschutz',
+        content: 'Datenschutzerklärung und Informationen zum Datenschutz'
     }
-]
+];
+
+// Initialize Fuse.js with search sections and custom pages
+const allSearchData = computed(() => [
+    ...(searchSections.value || []),
+    ...customPages
+]);
+
+const fuse = computed(() => new Fuse(allSearchData.value, {
+    keys: ['title', 'description', 'content'],
+    threshold: 0.3,
+    includeScore: true,
+    minMatchCharLength: 2
+}));
 
 const searchEvent = async (e: KeyboardEvent | MouseEvent) => {
     if (e instanceof KeyboardEvent && e.key !== 'Enter') return;
@@ -38,47 +59,20 @@ const searchEvent = async (e: KeyboardEvent | MouseEvent) => {
 }
 
 const search = async (value: string) => {
-    value = value.trim().toLowerCase();
-    if (searchVlue.value.length > 0) {
-        searchResults.value = (await queryContent().where({
-            title: {
-                $icontains: searchVlue.value
-            }
-        }).limit(7)
-            .find());
-        console.log("R:", searchResults.value);
+    value = value.trim();
+    if (value.length > 1) {
+        // Use Fuse.js for fuzzy search
+        const results = fuse.value.search(value).slice(0, 7);
+        searchResults.value = results.map(result => ({
+            ...result.item,
+            score: result.score
+        }));
 
-        // custom pages
-        searchResults.value = searchResults.value.concat(customPages.filter(page => page.title.toLowerCase().includes(searchVlue.value.toLowerCase())));
-
-        //
-        if (searchResults.value.length < 2) {
-            // advanced search with full text search
-            searchResults.value = (await queryContent().where({
-                $or: [
-                    {
-                        title: {
-                            $icontains: searchVlue.value
-                        }
-                    },
-                    {
-                        description: {
-                            $icontains: searchVlue.value
-                        }
-                    },
-                    {
-                        body: {
-                            $icontains: searchVlue.value
-                        }
-                    }
-                ]
-            }).limit(7)
-                .find());
-
-        }
+        console.log("Search results:", searchResults.value);
     } else {
         searchResults.value = [];
     }
+    selected.value = 0; // Reset selection
 }
 
 let searchTimeout: NodeJS.Timeout | null = null;
@@ -112,14 +106,14 @@ const searchOnTypeEnd = async (event: KeyboardEvent | FocusEvent) => {
     }
     searchTimeout = setTimeout(async () => {
         await search(searchVlue.value);
-    }, 500);
+    }, 300); // Reduced timeout for better UX
 }
+
+const searchInputRef = ref<HTMLInputElement | null>(null);
 
 onMounted(() => {
     // focus search input
-    const searchInput = document.querySelector('.textarea') as HTMLTextAreaElement;
-    searchInput.focus();
-    searchInput.select();
+    searchInputRef.value?.focus();
 });
 
 
@@ -136,23 +130,27 @@ const close = () => {
             class="drawer-overlay h-full w-full absolute top-0 left-0 bg-black/10 backdrop-blur-sm"></label>
         <div class="z-[500] p-2 rounded-[.625rem] w-full max-w-md mt-[15vh]">
             <div class="w-full flex items-start gap-2">
-                <textarea class="textarea resize-none w-full h-8" v-model="searchVlue" placeholder="Search..."
+                <input type="text" class="input w-full" v-model="searchVlue" placeholder="Search..."
                     @keydown.enter="searchEvent($event)" @keyup="searchOnTypeEnd($event)"
-                    @focus="searchOnTypeEnd($event)" @click="searchOnTypeEnd($event)"></textarea>
+                    @focus="searchOnTypeEnd($event)" @click="searchOnTypeEnd($event)" ref="searchInputRef" />
+
                 <button class="btn btn-primary" @click="searchEvent($event)">
                     <Icon name="line-md:search" size="24" />
                 </button>
             </div>
             <div v-auto-animate id="search-results" class="mt-2 bg-base-100 rounded-lg">
-                <!-- {{ selected }} -->
-                <div v-for="result, idx in searchResults" :key="result._path"
+                <div v-for="result, idx in searchResults" :key="result.id"
                     class="searchResult rounded-lg p-3 pb-0 hover:bg-base-100/50"
                     :style="{ border: selected === idx ? '1px solid oklch(var(--p))' : '1px solid transparent' }">
-                    <router-link :to="result._path" @click="searchVlue = ''; close()" class="m-0 hover:no-underline">
+                    <NuxtLink :to="result.id" @click="searchVlue = ''; close()" class="m-0 hover:no-underline">
                         <h3 class="text-lg font-bold mt-0">{{ result.title }}</h3>
-                        <p class="text-sm">{{ result.description }}</p>
+                        {{ result.content?.slice(0, 100) + '...' }}
                         <div class="divider m-0 mt-2"></div>
-                    </router-link>
+                    </NuxtLink>
+                </div>
+                <div v-if="searchVlue.length > 1 && searchResults.length === 0"
+                    class="p-3 text-center text-base-content/60">
+                    No results found for "{{ searchVlue }}"
                 </div>
             </div>
         </div>

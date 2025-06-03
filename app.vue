@@ -1,16 +1,6 @@
 <script setup lang="ts">
 import './assets/defaultcss.css';
 
-export type NavItem = {
-  title: string
-  _path: string
-}
-
-export type NestedNavItem = NavItem & {
-  children?: NestedNavItem[],
-  open?: boolean
-}
-
 
 const navOpen = ref(false)
 const path = ref('')
@@ -108,7 +98,7 @@ const scrollToTop = () => {
         </button>
         <h1 class="xl:ml-16 text-3xl font-bold max-w-[calc(100vw-2rem)] overflow-hidden whitespace-nowrap">{{
           getFileName(path)
-        }}</h1>
+          }}</h1>
       </nav>
       <!-- Page content here -->
       <div class="fixed top-0 left-0 z-30">
@@ -149,14 +139,22 @@ const scrollToTop = () => {
         </li>
         <div class="divider mb-0"></div>
         <h2 class="text-lg font-bold">Navigation</h2>
-        <ContentNavigation v-slot="{ navigation }">
+        <!-- <ContentNavigation v-slot="{ navigation }">
           <li class="m-0">
             <NuxtLink to="/lohnrechner">
               Lohnrechner
             </NuxtLink>
           </li>
           <nested-nav-item @update:navOpen="navOpen = false" :navigation="navigation" />
-        </ContentNavigation>
+        </ContentNavigation> -->
+        <Navigation v-slot="{ navItems: navigation }">
+          <li class="m-0">
+            <NuxtLink to="/lohnrechner">
+              Lohnrechner
+            </NuxtLink>
+          </li>
+          <nested-nav-item @update:navOpen="navOpen = false" :navigation="navigation" />
+        </Navigation>
       </ul>
     </div>
   </div>

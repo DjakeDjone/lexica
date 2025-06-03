@@ -4,5 +4,10 @@
     },
     "markdown.editor.filePaste.enabled": "always",
     "markdown.editor.drop.enabled": "always",
-    "markdown.editor.filePaste.copyIntoWorkspace": "mediaFiles"
+    "markdown.editor.filePaste.copyIntoWorkspace": "mediaFiles",
+    "github.copilot.chat.codeGeneration.instructions": [
+        {
+            "file": "./.vscode/daisyui.md"
+        }
+    ]
 }
