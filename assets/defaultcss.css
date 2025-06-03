@@ -4,7 +4,8 @@
 
 
 .prose img {
-        max-width: 40rem;
+        /* max-width: 100%; and 80vw */
+        max-width: min(100%, 50rem);
         height: auto;
         border-radius: 0.5rem;
         display: inline;

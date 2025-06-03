@@ -35,7 +35,6 @@ onMounted(() => {
 
 <template>
     <div>
-        <button class="btn btn-primary" @click="open = true">Open Modal</button>
         <dialog id="my_modal_1" class="modal" ref="modalRef" @click.self="open = false" @keydown.esc="open = false">
             <button class="btn btn-sm btn-circle absolute right-2 top-2" @click="open = false">✕</button>
             <div class="modal-box !w-[calc(100%-2rem)] h-[calc(100%-2rem)] max-w-5xl">
