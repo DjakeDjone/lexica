@@ -47,7 +47,7 @@ const getMargin = (tag: string) => {
         </slot>
         <ul>
             <li v-for="(heading, index) in headings" :key="index">
-                <NuxtLink :to="getLink(heading[1] as any)" class="text-sm text-gray-700 dark:text-gray-300 hover:underline scroll-smooth"
+                <NuxtLink :to="getLink(heading[1] as any)" class="text-sm no-underline hover:underline scroll-smooth"
                 :style="{ marginLeft: getMargin(heading[0]) }">
                     <span>
                         {{ heading.length > 3 ? heading[3] : heading[2] }}
