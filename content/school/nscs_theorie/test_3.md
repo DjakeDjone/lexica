@@ -232,4 +232,13 @@ Hier ist jetzt auch **FULL-Duplex** möglich!
 
 ### Physische Addressen (MAC)
 
-TODO
+#### Aufbau
+
+- 1 Bit Unicast/Multicast
+- 1 Bit Global/Local
+- nächste **22**: Hersteller ID (OUI)
+- letzte **24**: Geräte ID (NIC)
+
+![Aufbau Macaddresse](/images/macAufbau.png)
+
+![Ethernet Frame](/images/ethernet-frame.png)
