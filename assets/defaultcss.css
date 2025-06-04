@@ -14,3 +14,35 @@
 * {
         scroll-behavior: smooth !important;
 }
+
+.prose code::before {
+        content: "";
+        margin-bottom: calc(0.25rem * 4);
+        display: block;
+        height: calc(0.25rem * 3);
+        width: calc(0.25rem * 3);
+        border-radius: calc(infinity * 1px);
+        opacity: 30%;
+        box-shadow: 1.4em 0, 2.8em 0, 4.2em 0;
+        margin-left: -1.5rem;
+}
+
+/* line numbers */
+/* <span class="line" line="1"></span> */
+
+.prose code span.line::before {
+        content: attr(line);
+        display: inline-block;
+        width: 2.5rem;
+        text-align: right;
+        color: var(--text-secondary);
+        opacity: 0.5;
+        margin-right: 1rem;
+        margin-left: -4.5rem;
+}
+
+.prose code span.line {
+        padding-left: 2.5rem;
+}
+
+/* .prose code span.line */
