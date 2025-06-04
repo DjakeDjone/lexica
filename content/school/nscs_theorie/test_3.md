@@ -174,7 +174,6 @@ Die Kabelart sowie die Maximallänge eines Kabels sind in den Ethernet-Standards
 
 ### Übertragung mittels Licht
 
-TODO: ab folie 6
 <https://moodle.htlstp.ac.at/pluginfile.php/45975/mod_resource/content/0/NSCS_Ethernet_01.pdf>
 
 Das Signal wird aufbearbeitet und mittels LEDs oder Laser übertragen. Ein Lichtwellenleiter (z.B. Glasfaser) überträgt dieses Signal.
@@ -208,3 +207,29 @@ Ethernet wurde in den 80ern von Xerox (Drucker) erfunden und später von DIX (Di
 
 ### Zugriffsverfahren
 
+#### CMA/CD (Carrier Sense Multiple Access with Collision Detection)
+
+CSMA/CD ist ein Zugriffsverfahren, das in Ethernet-Netzwerken verwendet wird, um Kollisionen zu erkennen und zu vermeiden. Es funktioniert wie folgt:
+
+1. **Carrier Sense**: Jedes Gerät hört den Kanal ab, um festzustellen, ob er frei ist.
+2. **Multiple Access**: Mehrere Geräte können gleichzeitig auf den Kanal zugreifen.
+3. **Collision Detection**: Wenn zwei Geräte gleichzeitig senden, kommt es zu einer Kollision. Die Geräte erkennen dies und stoppen die Übertragung.
+4. **Backoff**: Nach einer Kollision warten die Geräte eine zufällige Zeit, bevor sie erneut versuchen zu senden.
+CSMA/CD ist in modernen Ethernet-Netzwerken nicht mehr notwendig, da Switches Kollisionen vermeiden, indem sie Frames nur an den Port weiterleiten, an dem das Zielgerät angeschlossen ist.
+
+### Koallisionsdomänen
+
+Eine **Kollisionsdomäne** ist ein Bereich, in dem mehrere Geräte gleichzeitig senden können und sich dadurch Daten überlagern können.
+
+Der erste Ethernet Standard schrieb eine max. Ausdehnung von **2500m** vor. Dazu musste die minimale Framelänge **64 Byte** betragen, damit eine Kollision erkannt werden konnte, bevor das Frame vollständig gesendet wurde.
+
+Bei 100MBit wurde die max. Ausdehnung auf 250m reduziert.
+
+Die Kollisionsdomäne wird durch **Switches** und **Hubs** gebildet. Ein Switch leitet Frames nur an den Port weiter, an dem das Zielgerät angeschlossen ist, während ein Hub Frames an alle Ports weiterleitet. [CMA/CD](#cmacd-carrier-sense-multiple-access-with-collision-detection)
+ist hier nicht mehr notwendig, da Switches Kollisionen vermeiden.
+
+Hier ist jetzt auch **FULL-Duplex** möglich!
+
+### Physische Addressen (MAC)
+
+TODO
