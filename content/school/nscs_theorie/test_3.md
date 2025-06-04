@@ -176,3 +176,35 @@ Die Kabelart sowie die Maximallänge eines Kabels sind in den Ethernet-Standards
 
 TODO: ab folie 6
 <https://moodle.htlstp.ac.at/pluginfile.php/45975/mod_resource/content/0/NSCS_Ethernet_01.pdf>
+
+Das Signal wird aufbearbeitet und mittels LEDs oder Laser übertragen. Ein Lichtwellenleiter (z.B. Glasfaser) überträgt dieses Signal.
+Eine Fotodiode empfängt das Signal und wandelt es zurück in elektrische Signale.
+
+![Glasfaser Arten](/images/glasfaserTypes.png)
+
+- **Stufenindex**: Licht wird von der Faserwand reflektiert und in der Faser gehalten
+- **Gradientenindex**: Licht wird durch eine Änderung des Brechungsindex in der Faser gehalten ("quasi sinusförmige Reflexion")
+- Einmodenfaser: nur eine Modus (Lichtwelle) kann sich in der Faser ausbreiten
+- **NZDS-Faser:** "Non-Zero Dispersion-Shifted Fiber", eine Einmodenfaser mit geringer Dispersion (Verzerrung) für hohe Übertragungsraten
+- **PM-Faser**
+
+#### Verbindungsarten
+
+- **Steckverbindung**: große Dämpfung (NT)
+- **mechanische Spleiße**: Fasern werdenn durch Hülse verbunden, geringere Dämpfung (VT), aber aufwändig
+- **thermische Spleiße**: Enden mit Hitze verbunden, sehr geringe Dämpfung (VT), aber sehr aufwändig u. **teuer**
+
+### Vor- und Nachteile
+
+| Medium          | Vorteile                                           | Nachteile                                         |
+|------------------|----------------------------------------------------|---------------------------------------------------|
+| Strom            | Einfach, kostengünstig, weit verbreitet           | Störungen, begrenzte Bandbreite, elektromagnetische Interferenz |
+| Licht            | Hohe Bandbreite, geringe Dämpfung, keine Störungen | Teuer, aufwändig in der Installation, empfindlich gegenüber physischen Einflüssen |
+| Luft             | Keine Verkabelung erforderlich, flexibel          | Begrenzte Reichweite, anfällig für Störungen, Wetterabhängigkeit |
+
+## Layer 2 (Data Link Layer)
+
+Ethernet wurde in den 80ern von Xerox (Drucker) erfunden und später von DIX (Digital, Intel, Xerox) standardisiert. Es ist ein Protokoll für die Datenübertragung in lokalen Netzwerken (LANs).
+
+### Zugriffsverfahren
+

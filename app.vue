@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import './assets/defaultcss.css';
+import ThemeController from './components/ThemeController.vue';
 
 
 const navOpen = ref(false)
@@ -122,6 +123,7 @@ const scrollToTop = () => {
             <NuxtLink class="w-fit mt-0 text-2xl" to="/">
               FRI3DL DOCS
             </NuxtLink>
+            <ThemeController></ThemeController>
           </div>
         </li>
         <li class="m-0" @click="navOpen = false; searching = !searching">
