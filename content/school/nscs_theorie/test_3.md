@@ -181,9 +181,9 @@ Eine Fotodiode empfängt das Signal und wandelt es zurück in elektrische Signal
 
 ![Glasfaser Arten](/images/glasfaserTypes.png)
 
-- **Stufenindex**: Licht wird von der Faserwand reflektiert und in der Faser gehalten
-- **Gradientenindex**: Licht wird durch eine Änderung des Brechungsindex in der Faser gehalten ("quasi sinusförmige Reflexion")
-- Einmodenfaser: nur eine Modus (Lichtwelle) kann sich in der Faser ausbreiten
+- **Stufenindex**: Licht wird von der Faserwand reflektiert und in der Faser gehalten; Anwendung: Kurze Strecken (<300km), nicht mehr sehr verbreitet
+- **Gradientenindex**: Licht wird durch eine Änderung des Brechungsindex in der Faser gehalten ("quasi sinusförmige Reflexion"); Anwendung: locale Netzwerke, <500m
+- **Einmodenfaser/Singlemodefaser**: nur eine Modus (Lichtwelle) kann sich in der Faser ausbreiten; Anwendung: lange Strecken (>500m), hohe Bandbreite, geringe Dämpfung
 - **NZDS-Faser:** "Non-Zero Dispersion-Shifted Fiber", eine Einmodenfaser mit geringer Dispersion (Verzerrung) für hohe Übertragungsraten
 - **PM-Faser**
 
