@@ -207,7 +207,7 @@ Ethernet wurde in den 80ern von Xerox (Drucker) erfunden und später von DIX (Di
 
 ### Zugriffsverfahren
 
-#### CMA/CD (Carrier Sense Multiple Access with Collision Detection)
+#### CSMA/CD (Carrier Sense Multiple Access with Collision Detection)
 
 CSMA/CD ist ein Zugriffsverfahren, das in Ethernet-Netzwerken verwendet wird, um Kollisionen zu erkennen und zu vermeiden. Es funktioniert wie folgt:
 
