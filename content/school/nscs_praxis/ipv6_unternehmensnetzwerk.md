@@ -152,16 +152,16 @@ Zweck von `ipv6 unicast-routing`:
 >
 #### Interner Router
 
-![alt text](image-21.png)
-![alt text](image-22.png)
+![alt text](/images/school_nscs_praxis_image-21.png)
+![alt text](/images/school_nscs_praxis_image-22.png)
 
 DNS Server konfigurieren:
 
-![alt text](image-23.png)
+![alt text](/images/school_nscs_praxis_image-23.png)
 
 DNS Feld auf automatisch bei allen Clients:
 
-![alt text](image-24.png)
+![alt text](/images/school_nscs_praxis_image-24.png)
 
 Addresse zuweisen:
 
@@ -182,8 +182,8 @@ ExtGW(config)#ipv6 unicast-routing
 
 ##### Webserver
 
-![alt text](image-25.png)
-![alt text](image-26.png)
+![alt text](/images/school_nscs_praxis_image-25.png)
+![alt text](/images/school_nscs_praxis_image-26.png)
 
 Das gleiche für den FTP-Server.
 
@@ -191,14 +191,14 @@ Das gleiche für den FTP-Server.
 
 Ext zum internen Router:
 
-![alt text](image-27.png)
+![alt text](/images/school_nscs_praxis_image-27.png)
 
 Default Route vom Int zum externen Gw:
-![alt text](image-28.png)
+![alt text](/images/school_nscs_praxis_image-28.png)
 
 Außerdem müssen alle Interfaces hochgefahren und die DNS Server konfiguriert werden. (siehe [unternehmensnetzwerke ipv4](https://lexica.fri3dl.dev/school/nscs_praxis/v2_unternehmensnetzwerk))
 
-![alt text](image-29.png)
+![alt text](/images/school_nscs_praxis_image-29.png)
 
 - Webserver: `2001:db8:5:2::5`
 - FTP-Server: `2001:db8:5:2::6`

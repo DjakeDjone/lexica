@@ -69,4 +69,4 @@
 
 ## Zuordnung BFP zu PM
 
-![alt text](image-4.png)
+![alt text](/images/school_syp-praxis_image-4.png)

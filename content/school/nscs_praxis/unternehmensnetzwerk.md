@@ -40,7 +40,7 @@ InternGw(dhcp-config)# dns-server 192.168.5.1
 InternGw(dhcp-config)# exit
 ```
 
-![DHCP auf client](image-5.png)
+![DHCP auf client](/images/school_nscs_praxis_image-5.png)
 
 ## DMZ
 

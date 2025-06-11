@@ -249,7 +249,7 @@ cat < abc.txt > def.txt
 nc 10.140.6.1 3333 < "Hallo"
 ```
 
-![alt text](image.png)
+![alt text](/images/school_nscs_image.png)
 
 - Server schickt Nachricht an Client
 
@@ -266,7 +266,7 @@ echo "Hello" > hello.txt
 ```
 
 - Client schickt File "abc.txt" an Server und bricht den Befehl manuell ab
-![alt text](image-1.png)
+![alt text](/images/school_nscs_image-1.png)
 
 ```bash
 nc 10.140.0.12 3333 < hello.txt

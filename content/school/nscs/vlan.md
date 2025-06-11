@@ -131,7 +131,7 @@ Switch# delete flash:vlan.dat
 Switch# reload
 ```
 
-![VLAN Delete config](vlan-delete-config.png)
+![VLAN Delete config](/images/school_nscs_vlan-delete-config.png)
 
 ### Erstellen der Trunkverbindung (letzter Port). Kontrolle mittels CDP
 
@@ -142,7 +142,7 @@ Switch(config-if-range)# switchport trunk allowed vlan all // erlaubt alle VLANs
 Switch(config-if-range)# no shutdown
 ```
 
-![alt text](image-10.png)
+![alt text](/images/school_nscs_image-10.png)
 
 ### Konfiguration von Switch_Etage1 als Server, Switch_Etage2 als Client
 
@@ -168,7 +168,7 @@ Switch_Etage2(config)# vtp version 2
 Switch_Etage2(config)# no shutdown
 ```
 
-![alt text](image-11.png)
+![alt text](/images/school_nscs_image-11.png)
 
 ### Anzeige der VTP Konfiguration
 
@@ -185,7 +185,7 @@ Switch_Etage1(config)# vlan 20
 Switch_Etage1(config-vlan)# name Entwicklung
 ```
 
-![alt text](image-12.png)
+![alt text](/images/school_nscs_image-12.png)
 
 ### Zuweisen der Ports 1-3 zu Verkauf; 4-6 zu Entwicklung
 
@@ -203,7 +203,7 @@ Switch_Etage1(config-if-range)# switchport access vlan 20
 Switch_Etage1(config-if-range)# no shutdown
 ```
 
-![alt text](image-13.png)
+![alt text](/images/school_nscs_image-13.png)
 
 ### Anzeige und Analyse der VLAN Konfiguration
 
@@ -215,7 +215,7 @@ Switch_Etage1# show vlan
 Switch_Etage1# show vlan brief // zeigt eine kompakte Übersicht der VLAN-Konfiguration
 ```
 
-![show vlan brief](image-14.png)
+![show vlan brief](/images/school_nscs_image-14.png)
 
 ### Überprüfen der Verbindung (Ping)
 
@@ -229,7 +229,7 @@ Diese VM muss man die VM über das zweite Netzwerkinterface mit dem Switch verbi
 DebianVM:~$ ping <IP-Adresse>
 ```
 
-![alt text](image-16.png)
+![alt text](/images/school_nscs_image-16.png)
 
 ## Inter-VLAN Routing
 
@@ -237,7 +237,7 @@ DebianVM:~$ ping <IP-Adresse>
 
 ### Aufbau
 
-![alt text](image-17.png)
+![alt text](/images/school_nscs_image-17.png)
 
 - Es gibt 4 Endgeräte, die sich in verschiedenen VLANs befinden.
 - Es sind jeweils zwei Geräte mit einem Switch verbunden.
@@ -250,12 +250,12 @@ DebianVM:~$ ping <IP-Adresse>
 
 Ein Trunk-Port ist ein Port, der Daten von mehreren VLANs übertragen kann. Trunk-Ports werden verwendet, um Daten zwischen Switches zu übertragen.
 
-![alt text](image-18.png)
-![alt text](image-19.png)
+![alt text](/images/school_nscs_image-18.png)
+![alt text](/images/school_nscs_image-19.png)
 
 Die Endgeräte brauchen alle eine IP-Adresse:
 
-![alt text](image-22.png)
+![alt text](/images/school_nscs_image-22.png)
 
 #### Router
 
@@ -289,7 +289,7 @@ Router(config-subif)#
 
 #### Standartgateway für Clients für VLAN
 
-![alt text](image-21.png)
+![alt text](/images/school_nscs_image-21.png)
 
 ### Überprüfen der Erreichbarkeiten
 
@@ -300,7 +300,7 @@ Die Clients in den VLANs sollten jetzt miteinander kommunizieren können.
 C:\>ping 192.168.0.3
 ```
 
-![alt text](image-23.png)
+![alt text](/images/school_nscs_image-23.png)
 
 Und jetzt funktioniert es auch im anderen VLAN:
 
@@ -308,4 +308,4 @@ Und jetzt funktioniert es auch im anderen VLAN:
 C:\>ping 192.168.10.4
 ```
 
-![alt text](image-24.png)
+![alt text](/images/school_nscs_image-24.png)

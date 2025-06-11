@@ -101,7 +101,7 @@
 
 **Computer:**
 
-![alt text](image.png)
+![alt text](/images/school_nscs_praxis_image.png)
 
 **Switches:**
 
@@ -116,7 +116,7 @@ Switch(config-if)#ip address 192.168.0.201 255.255.255.0
 Switch(config-if)#no shutdown
 ```
 
-![alt text](image-1.png)
+![alt text](/images/school_nscs_praxis_image-1.png)
 
 Das wird für alle Switches durchgeführt.
 
@@ -138,8 +138,8 @@ Switch(config)#hostname switch1
 Switch1(config)#crypto key generate rsa general-keys modulus 2048
 ```
 
-![alt text](image-2.png)
-![alt text](image-4.png)
+![alt text](/images/school_nscs_praxis_image-2.png)
+![alt text](/images/school_nscs_praxis_image-4.png)
 
 ### SSH Zugriff
 

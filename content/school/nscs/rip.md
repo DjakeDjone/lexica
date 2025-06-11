@@ -102,13 +102,13 @@ Es wirt mit Codes gearbeitet, die die Art der Route beschreiben. Beispielsweise 
 
 ### Aufbau des Netzwerkes
 
-![alt text](image-28.png)
+![alt text](/images/school_nscs_image-28.png)
 
 - Router 1 (120Pcs): 192.168.0.0/25 -> Subnetzmaske: 255.255.
 - Router 2 (60Pcs): 192.168.0.128/26 -> Subnetzmaske: 255.255.255.192
 - Router 3 (30Pcs): 192.168.0.192/27
 
-![alt text](image-30.png)
+![alt text](/images/school_nscs_image-30.png)
 
 PtP1: 2 Bits Hostanteil, 192.168.4.224/30, Netzmaske .252, Adressen .224-.227
 PtP2: 2 Bits Hostanteil, 192.168.4.228/30, Netzmaske .252, Adressen .228-.231
@@ -131,7 +131,7 @@ Router(config-if)# ip address 192.168.4.190 255.255.255.192
 Router(config-if)# no shutdown
 ```
 
-![alt text](image-31.png)
+![alt text](/images/school_nscs_image-31.png)
 
 Das muss für alle Router gemacht werden.
 
@@ -143,7 +143,7 @@ Router(config-if)# ip address 192.168.4.190 255.255.255.252 // 252:
 Router(config-if)# no shutdown
 ```
 
-![alt text](image-32.png)
+![alt text](/images/school_nscs_image-32.png)
 
 **IP Adressen:**
 
@@ -164,7 +164,7 @@ Router(config-router)# show ip protocols
 
 Der letzte Befehl zeigt die IP-Protokolle an. Zu sehen ist, dass RIP aktiviert ist.
 
-![ip protokolle](image-33.png)
+![ip protokolle](/images/school_nscs_image-33.png)
 
 ### 3 Welchen Timer verwendet RIP
 
@@ -179,7 +179,7 @@ Der letzte Befehl zeigt die IP-Protokolle an. Zu sehen ist, dass RIP aktiviert i
 Router# show ip route
 ```
 
-![show ip route result](image-34.png)
+![show ip route result](/images/school_nscs_image-34.png)
 
 Die Routing-Tabelle zeigt die Routen an, die der Router kennt. Der Screenshot is vom Standort Amstetten. Man sieht die Routen zu den Standorten Tulln (Serial 0/1/0) und den 60 PCs (GigaBitEthernet 0/0) die über RIP konfiguriert wurden.
 
@@ -206,7 +206,7 @@ Router(config)# router rip
 Router(config-router)# ?
 ```
 
-![befehle router-konfigmode (?)](image-35.png)
+![befehle router-konfigmode (?)](/images/school_nscs_image-35.png)
 
 ### 7 Default Gateway
 

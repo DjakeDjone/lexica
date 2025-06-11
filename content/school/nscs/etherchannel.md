@@ -96,7 +96,7 @@ Einführung in Etherchannel und Portsecurity. Etherchannel ist eine Technologie,
 
 Ein Router verbunden mit einem Core Switch, der wiederum mit zwei weiteren Switches über 2 Ports verbunden ist. Die Switches haben wieder jeweils zwei Access Switches angeschlossen. Die Access Switches sind mit jeweils einem Client verbunden.
 
-![base aufbau](image.png)
+![base aufbau](/images/school_nscs_image.png)
 
 ## Allgemeines zu Etherchannel und LACP
 
@@ -122,7 +122,7 @@ The Access Switch are connected on Ports 2 and 3.
 Switch1(config)# interface range fastethernet 0/2-3
 Switch1(config-if-range)# no shutdown
 ```
-![alt text](image-4.png)
+![alt text](/images/school_nscs_image-4.png)
 
 Der Befehl `range` wählt gleichzeitig mehrere Schnittstellen (in diesem Fall GigabitEthernet 0/2 und 0/3) aus, und der Befehl `no shutdown` aktiviert die Schnittstellen.
 
@@ -133,7 +133,7 @@ Switch2(config)# interface range fastethernet 0/1-3
 Switch2(config-if-range)# no shutdown
 ```
 
-![alt text](image-5.png)
+![alt text](/images/school_nscs_image-5.png)
 
 ### 2.2 Etherchannel-Bündel erstellen
 
@@ -144,7 +144,7 @@ Switch1(config)# interface port-channel 1
 Switch1(config-if)# switchport mode trunk
 Switch1(config-if)# no shutdown
 ```
-![alt text](image-6.png)
+![alt text](/images/school_nscs_image-6.png)
 
 Der Befehl `interface port-channel 1` erstellt ein Etherchannel-Bündel mit der Nummer 1. Der Befehl `switchport mode trunk` konfiguriert das Etherchannel-Bündel als Trunk-Port, und der Befehl `no shutdown` aktiviert das Etherchannel-Bündel.
 
@@ -156,7 +156,7 @@ Konfig auf Switch 1 (Core Switch):
 Switch1(config)# interface range fastethernet 0/2-3
 Switch1(config-if-range)# channel-group 1 mode active
 ```
-![alt text](image-7.png)
+![alt text](/images/school_nscs_image-7.png)
 
 Der erste Befehl wählt die Schnittstellen aus, die zum Etherchannel-Bündel hinzugefügt werden sollen, und der zweite Befehl fügt die Schnittstellen zum Etherchannel-Bündel hinzu und konfiguriert sie im aktiven Modus.
 
@@ -167,7 +167,7 @@ Switch1(config)# interface range fastethernet 0/1-3
 Switch1(config-if-range)# channel-group 1 mode active
 ```
 
-![alt text](image-8.png)
+![alt text](/images/school_nscs_image-8.png)
 
 ### 2.4 Konfiguration überprüfen
 
@@ -177,7 +177,7 @@ Konfig auf Switch 1 (Core Switch):
 Switch1# show etherchannel summary
 ```
 
-![alt text](image-9.png)
+![alt text](/images/school_nscs_image-9.png)
 
 Der Befehl `show etherchannel summary` zeigt eine Zusammenfassung der Etherchannel-Konfiguration auf dem Switch an, einschließlich der Nummer des Etherchannel-Bündels, der Mitgliedsschnittstellen und ihres Status.
 
@@ -202,7 +202,7 @@ Switch1(config-if)# switchport mode access
 Switch1(config-if)# switchport port-security
 ```
 
-![Portsecurity aktivieren](portsecurity.png)
+![Portsecurity aktivieren](/images/school_nscs_portsecurity.png)
 
 Der Befehl `switchport port-security` aktiviert Portsecurity auf dem Switchport.
 
@@ -219,7 +219,7 @@ Switch1(config-if)# switchport port-security mac-address sticky
 
 `switchport port-security mac-address sticky` bedeutet, dass die MAC-Adresse des angeschlossenen Geräts automatisch gelernt und in die Konfiguration des Switchports eingetragen wird (sticky).
 
-![img. switchport port-security mac-address sticky](mac-sticky.png)
+![img. switchport port-security mac-address sticky](/images/school_nscs_mac-sticky.png)
 
 #### 3.1.3 Portsecurity-Verletzungen konfigurieren
 
@@ -234,7 +234,7 @@ Switch1(config-if)# switchport port-security violation restrict
 
 `switchport port-security violation restrict` bedeutet, dass der Zugriff auf den Port verweigert wird, wenn eine unerlaubte MAC-Adresse erkannt wird. Unter `restrict` wird der Port nicht deaktiviert, sondern der Zugriff auf den Port wird verweigert.
 
-![`switchport port-security violation restrict`](port-sec-restrict.png)
+![`switchport port-security violation restrict`](/images/school_nscs_port-sec-restrict.png)
 
 #### Alle Commands zusammen
 
@@ -256,7 +256,7 @@ Konfig auf einem Access Switch:
 Switch1# show port-security
 ```
 
-![Port Security Proof table (it worked)](port-security-proof.png)
+![Port Security Proof table (it worked)](/images/school_nscs_port-security-proof.png)
 
 
 > Statische vs. Dynamische Portsecurity
@@ -275,7 +275,7 @@ Switch1(config)# interface fastethernet 0/1
 Switch1(config-if)# switchport port-security mac-address 0011.2233.4455
 ```
 
-![Total secure mac-addresses on interface FastEthernet0/1 has reached maximum limit.](manual-port-sec.png)
+![Total secure mac-addresses on interface FastEthernet0/1 has reached maximum limit.](/images/school_nscs_manual-port-sec.png)
 
 Wenn die maximale Anzahl von MAC-Adressen erreicht ist, kann man die maximale Anzahl von MAC-Adressen auf einem Port erhöhen.
 
@@ -286,7 +286,7 @@ Switch1(config-if)# switchport port-security maximum 5
 
 Jetzt können die MAC-Adressen manuell konfiguriert werden. (wie oben)
 
-![Manual-MAC-Adressen Port sec.](port-sec-manual.png)
+![Manual-MAC-Adressen Port sec.](/images/school_nscs_port-sec-manual.png)
 
 ### Befehle zur Überprüfung des Portstatus
 

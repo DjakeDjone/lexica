@@ -13,7 +13,7 @@ PUBLIC_IMAGES_DIR = os.path.join(WORKSPACE_ROOT, "public", "images")
 # Add other directories containing Markdown files if necessary
 MARKDOWN_DIRS = [
     os.path.join(WORKSPACE_ROOT, "content"),
-    WORKSPACE_ROOT # To scan markdown files in the root, like README.md
+    # WORKSPACE_ROOT # To scan markdown files in the root, like README.md
 ]
 IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".gif", ".svg", ".webp", ".bmp", ".tiff"}
 # --- End Configuration ---
@@ -102,49 +102,48 @@ def update_markdown_files():
                     print(f"Processing {md_file_path}...")
                     try:
                         with open(md_file_path, 'r', encoding='utf-8') as f:
-                            content = f.read()
+                            file_content_initial = f.read()
                         
-                        original_content = content
+                        current_processing_content = file_content_initial
                         
-                        for old_workspace_ref, new_web_path in moved_images_map.items():
-                            # old_workspace_ref is like "pages/subdir/image.png"
+                        for old_workspace_path_from_root, new_web_path in moved_images_map.items():
+                            old_absolute_path = os.path.join(WORKSPACE_ROOT, old_workspace_path_from_root)
+                            md_file_directory = os.path.dirname(md_file_path)
                             
-                            # Escape for use in regex
-                            escaped_old_ref = re.escape(old_workspace_ref)
-                            
-                            # Pattern for Markdown: ![alt](path) or ![alt](path "title")
-                            # Handles paths like `(pages/...)` or `(/pages/...)`
-                            # The new_web_path already includes a leading slash.
-                            
-                            # Regex for ![...](pages/path/to/image.png)
-                            # Ensures we don't match if it's already a /images/ path
-                            content = re.sub(
-                                r'(!\[[^\]]*\]\()((?!/images/)' + escaped_old_ref + r')(\s*(?:\".*?\"|\'.*?\')?\s*)(\))',
-                                rf'\1{new_web_path}\3\4', content, flags=re.IGNORECASE
-                            )
-                            # Regex for ![...](/pages/path/to/image.png)
-                            content = re.sub(
-                                r'(!\[[^\]]*\]\()((?!/images/)/' + escaped_old_ref + r')(\s*(?:\".*?\"|\'.*?\')?\s*)(\))',
-                                rf'\1{new_web_path}\3\4', content, flags=re.IGNORECASE 
-                            )
-                            
-                            # Pattern for HTML: <img src="path">
-                            # Handles paths like `src="pages/..."` or `src="/pages/..."`
-                            
-                            # Regex for <img ... src="pages/path/to/image.png" ...>
-                            content = re.sub(
-                                r'(<img\s+[^>]*?src=")((?!/images/)' + escaped_old_ref + r')(")',
-                                rf'\1{new_web_path}\3', content, flags=re.IGNORECASE
-                            )
-                            # Regex for <img ... src="/pages/path/to/image.png" ...>
-                            content = re.sub(
-                                r'(<img\s+[^>]*?src=")((?!/images/)/' + escaped_old_ref + r')(")',
-                                rf'\1{new_web_path}\3', content, flags=re.IGNORECASE
-                            )
+                            # Normalize paths to use forward slashes for matching in Markdown/HTML
+                            path_relative_to_md = os.path.normpath(os.path.relpath(old_absolute_path, md_file_directory)).replace(os.sep, '/')
+                            normalized_old_workspace_path = old_workspace_path_from_root.replace(os.sep, '/')
 
-                        if content != original_content:
+                            possible_current_paths_to_find = set()
+                            if path_relative_to_md != ".": # Avoid using "." as a path
+                                possible_current_paths_to_find.add(path_relative_to_md)
+                            possible_current_paths_to_find.add(normalized_old_workspace_path)
+                            possible_current_paths_to_find.add("/" + normalized_old_workspace_path)
+                            
+                            # Remove the target path itself if it accidentally got generated
+                            if new_web_path in possible_current_paths_to_find:
+                                possible_current_paths_to_find.remove(new_web_path)
+
+                            for path_variant_in_md in possible_current_paths_to_find:
+                                if not path_variant_in_md: # Skip empty strings
+                                    continue
+
+                                escaped_path_variant = re.escape(path_variant_in_md)
+                                
+                                # Markdown: ![alt](path) or ![alt](path "title")
+                                # Negative lookahead to ensure the path is not already the new_web_path
+                                # and does not already start with /images/ (our target structure)
+                                markdown_pattern = rf'(!\[[^\]]*\]\()((?!{re.escape(new_web_path)}|/images/){escaped_path_variant})(\s*(?:\".*?\"|\'.*?\')?\s*)(\))'
+                                current_processing_content = re.sub(markdown_pattern, rf'\1{new_web_path}\3\4', current_processing_content, flags=re.IGNORECASE)
+
+                                # HTML: <img src="path">
+                                # Negative lookahead for src attribute
+                                html_pattern = rf'(<img\s+[^>]*?src=")((?!{re.escape(new_web_path)}|/images/){escaped_path_variant})(")'
+                                current_processing_content = re.sub(html_pattern, rf'\1{new_web_path}\3', current_processing_content, flags=re.IGNORECASE)
+
+                        if current_processing_content != file_content_initial:
                             with open(md_file_path, 'w', encoding='utf-8') as f:
-                                f.write(content)
+                                f.write(current_processing_content)
                             print(f"  Updated {md_file_path}")
                         else:
                             print(f"  No changes needed for {md_file_path}")

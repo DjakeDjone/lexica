@@ -133,7 +133,7 @@ Router# show ip ospf database
 Router# show ip route
 ```
 
-![show ip ospf neighbor](image-36.png)
+![show ip ospf neighbor](/images/school_nscs_image-36.png)
 
 The OSPF neighbor table contains the following information:
 
@@ -141,12 +141,12 @@ The OSPF neighbor table contains the following information:
 - **.2**: `FULL/BDR` // me
 - **.3**: `FULL/DR`
 
-![show ip ospf database](image-37.png)
+![show ip ospf database](/images/school_nscs_image-37.png)
 
 <!-- todo -->
 ---
 
-![show ip route](image-38.png)
+![show ip route](/images/school_nscs_image-38.png)
 
 The routing table shows the following routes:
 
@@ -159,7 +159,7 @@ The routing table shows the following routes:
 Router# show ip ospf interface g0/0
 ```
 
-![show ip ospf interface g0/0](image-39.png)
+![show ip ospf interface g0/0](/images/school_nscs_image-39.png)
 
 Netzwerktyp: **BROADCAST**
 
@@ -185,7 +185,7 @@ Router(config-router)#
 
 Wenn die Werte geändert werden, müssen sie auf allen Geräten im OSPF-Netzwerk gleich sein. Sind sie nicht gleich, kann es zu Problemen kommen (z.B. Routing-Schleifen) weil die Router nicht mehr synchron sind.
 
-![ping valid](image-40.png)
+![ping valid](/images/school_nscs_image-40.png)
 **Wichtig**: Man muss 20 Sekunden warten, bis die Änderungen wirksam werden.
 
 <!-- TODO: change router timers img -->
@@ -220,11 +220,11 @@ Zuerst wird mit `debug ip ospf adj` das Debugging aktiviert.
 
 Der Router mit DR wird mit `shutdown` abgeschaltet.
 
-![debug ip ospf result](image-41.png)
+![debug ip ospf result](/images/school_nscs_image-41.png)
 
 Der Router mit der höchsten Priorität wird zum DR und der Router mit der zweithöchsten Priorität wird zum BDR.
 
-![show ip ospf neightbor](image-42.png)
+![show ip ospf neightbor](/images/school_nscs_image-42.png)
 
 ### Router wieder einschalten
 
@@ -237,7 +237,7 @@ Router(config-if)# no shutdown
 
 Der jetzt hinzugeschaltene Router wird zu `DROTHER` weil er sich neu hinzugeschaltet hat und die *Neuwahl* nicht automatisch durchgeführt wird.
 
-![DROTHER after reset](image-43.png)
+![DROTHER after reset](/images/school_nscs_image-43.png)
 
 Manueller Neustart des OSPF-Prozesses:
 

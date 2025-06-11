@@ -131,7 +131,7 @@ A: Der Non-Designated Port ist der Port, der nicht zum kürzesten Pfad zur Root 
 
 ### 4.2 Annahmen prüfen
 
-![alt text](image-9.png)
+![alt text](/images/school_nscs_image-9.png)
 
 \
 \
@@ -142,7 +142,7 @@ A: Der Non-Designated Port ist der Port, der nicht zum kürzesten Pfad zur Root 
 Switch(config)# spanning-tree vlan 1 root primary
 ```
 
-![alt text](image-10.png)
+![alt text](/images/school_nscs_image-10.png)
 
 ## 6. Spanning Tree deaktivieren
 
@@ -160,11 +160,11 @@ Switch# reload
 
 ### Clients mit Switch verbinden
 
-![Aufbau mit Clients](image-3.png)
+![Aufbau mit Clients](/images/school_nscs_image-3.png)
 
 **Mac adressen der Clients:**
 
-![alt text](image-1.png)
+![alt text](/images/school_nscs_image-1.png)
 
 ### Portfast aktivieren
 
@@ -178,7 +178,7 @@ Switch(config-if-range)# spanning-tree portfast
 
 Der erste Befehl wählt die Schnittstellen aus, die konfiguriert werden sollen, und der zweite Befehl aktiviert Portfast auf diesen Schnittstellen.
 
-![screenshot Portfast](image.png)
+![screenshot Portfast](/images/school_nscs_image.png)
 
 ### BPDU Guard aktivieren
 
@@ -191,7 +191,7 @@ Switch(config)# interface range fa0/1-2
 Switch(config-if-range)# spanning-tree bpduguard enable
 ```
 
-![bpduguard enable](image-2.png)
+![bpduguard enable](/images/school_nscs_image-2.png)
 
 ### Richten Sie einen Ssh-Zugang zum Switch ein. Wählen sie dazu passende IP Adressen (Testen)
 
@@ -219,7 +219,7 @@ Switch(config-if)# ip address // set the ip address
 Switch(config-if)# no shutdown // activate the interface
 ```
 
-![setup ip adress](image-4.png)
+![setup ip adress](/images/school_nscs_image-4.png)
 
 - SSH-Zugriff aktivieren:
 
@@ -231,14 +231,14 @@ Switch(config)# ip ssh version 2
 Switch(config)# line vty 0 15
 Switch(config-line)# transport input ssh
 ```
-![ssh access](image-5.png)
+![ssh access](/images/school_nscs_image-5.png)
 
 - Passwort konfigurieren:
 
 ```bash
 Switch(config)# username admin password admin
 ```
-![set password](image-6.png)
+![set password](/images/school_nscs_image-6.png)
 
 - Testen:
 
@@ -246,6 +246,6 @@ Switch(config)# username admin password admin
 ssh admin 
 ```
 
-![alt text](image-7.png)
+![alt text](/images/school_nscs_image-7.png)
 
 Jetzt können Sie sich mit dem Switch über SSH verbinden, was die Sicherheit erhöht, da der SSH-Zugriff verschlüsselt ist.
