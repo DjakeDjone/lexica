@@ -46,3 +46,15 @@
 }
 
 /* .prose code span.line */
+
+math {
+        width: fit-content;
+        margin-bottom: 1rem;
+        margin-top: 1rem;
+
+}
+
+.katex-html {
+        font-size: .8rem;
+        opacity: .8;
+}

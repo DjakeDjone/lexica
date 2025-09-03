@@ -8,21 +8,26 @@
     "preview": "nuxt preview"
   },
   "dependencies": {
-    "@nuxt/content": "^3.5.1",
+    "@nuxt/content": "^3.6.3",
     "@tailwindcss/typography": "^0.5.16",
-    "@tailwindcss/vite": "^4.1.8",
-    "focus-trap": "^7",
+    "@tailwindcss/vite": "^4.1.12",
+    "better-sqlite3": "^12.2.0",
+    "focus-trap": "^7.6.5",
     "fuse.js": "^7.1.0",
     "groq-sdk": "^0.23.0",
+    "mermaid": "^11.10.1",
     "sitemap": "^8.0.0",
-    "tailwindcss": "^4.1.8"
+    "tailwindcss": "^4.1.12"
   },
   "devDependencies": {
-    "@formkit/auto-animate": "^0.8.2",
-    "@vueuse/nuxt": "^13.3.0",
-    "daisyui": "^5.0.43",
-    "nuxt": "^3.17.4",
-    "nuxt-icon": "1.0.0-beta.7"
+    "@formkit/auto-animate": "^0.8.4",
+    "@vueuse/nuxt": "^13.9.0",
+    "daisyui": "^5.1.6",
+    "katex": "^0.16.22",
+    "nuxt": "^3.19.0",
+    "nuxt-icon": "1.0.0-beta.7",
+    "rehype-katex": "^7.0.1",
+    "remark-math": "^6.0.0"
   },
   "packageManager": "pnpm@9.8.0+sha512.8e4c3550fb500e808dbc30bb0ce4dd1eb614e30b1c55245f211591ec2cdf9c611cabd34e1364b42f564bd54b3945ed0f49d61d1bbf2ec9bd74b866fcdc723276"
 }

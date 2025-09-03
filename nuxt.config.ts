@@ -30,6 +30,12 @@ export default defineNuxtConfig({
     build: {
 
       markdown: {
+        remarkPlugins: {
+          'remark-math': require('remark-math')
+        },
+        rehypePlugins: {
+          'rehype-katex': require('rehype-katex')
+        },
 
         highlight: {
           theme: {
