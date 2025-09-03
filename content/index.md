@@ -16,3 +16,10 @@ View my markdowns and use my calculators!
 $$
 \int_{a}^{b} f(x) \, dx = \lim_{n \to \infty} \sum_{i=1}^{n} f(x_i^*) \Delta x
 $$
+
+::mermaid
+    graph LR
+    A --- B
+    B-->C[fa:fa-ban forbidden]
+    B-->D(fa:fa-spinner);
+::
