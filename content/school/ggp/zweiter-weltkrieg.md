@@ -10,3 +10,7 @@
 - 1938: Einmarsch der Deutschen Truppen in Österreich.
 - 1938: Anschluss Österreichs an das Deutsche Reich.
 - 1938: Volksabstimmung in Österreich, 99% stimmen für den Anschluss (Propaganda, Drohungen).
+
+## Referate
+
+- Bonnhöfer: aus religiösen Gründen gegen den Krieg, wurde 1945 hingerichtet.

@@ -52,3 +52,4 @@ Außerdem prüft der Data Layer die Integrität der Frames und behebt Fehler.
 Übertragung von Bits über ein physikalisches Medium
 
 **Protokolle:** USB, RS-232, DSL..
+
