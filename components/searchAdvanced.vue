@@ -14,7 +14,7 @@ const searchInputRef = ref<HTMLInputElement | null>(null);
 
 
 // Initialize search data
-const { data: results } = await useFetch('/api/search', {
+const { data: results, status } = await useFetch('/api/search', {
     method: 'GET',
     query: { q: searchVlue }
 });
@@ -89,6 +89,9 @@ onUnmounted(() => {
                         </p>
                         <div class="divider m-0 mt-2"></div>
                     </NuxtLink>
+                </div>
+                <div v-if="status === 'pending'" class="p-3 text-center text-base-content/60">
+                    Loading...
                 </div>
                 <div v-if="searchVlue.length > 1 && results?.total === 0" class="p-3 text-center text-base-content/60">
                     No results found for "{{ searchVlue }}"
