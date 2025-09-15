@@ -103,7 +103,7 @@ const scrollToTop = () => {
       </nav>
       <!-- Page content here -->
       <div class="fixed top-0 left-0 z-30">
-        <Search v-if="searching" @update:close="searching = false" />
+        <SearchAdvanced v-if="searching" @update:close="searching = false" />
       </div>
       <div class="xl:ml-16">
         <NuxtPage />
