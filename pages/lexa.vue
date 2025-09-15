@@ -1,0 +1,3 @@
+<template>
+    <Lexa />
+</template>

@@ -15,12 +15,14 @@
     "focus-trap": "^7.6.5",
     "fuse.js": "^7.1.0",
     "groq-sdk": "^0.23.0",
+    "markdown-it": "^14.1.0",
     "mermaid": "^11.10.1",
     "sitemap": "^8.0.0",
     "tailwindcss": "^4.1.12"
   },
   "devDependencies": {
     "@formkit/auto-animate": "^0.8.4",
+    "@types/markdown-it": "^14.1.2",
     "@vueuse/nuxt": "^13.9.0",
     "daisyui": "^5.1.6",
     "katex": "^0.16.22",
