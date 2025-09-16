@@ -10,6 +10,7 @@ export default defineEventHandler(async (event) => {
     const body = await readBody(event);
     const question = body.question as string;
     const history = body.history as { role: 'user' | 'system' | 'assistant'; content: string }[] || [];
+    const context = body.context as string[] | undefined;
     if (!question) {
         throw createError({ statusCode: 400, statusMessage: 'Question is required' });
     }

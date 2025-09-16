@@ -9,9 +9,11 @@ const error = ref('');
 const md = new MarkdownIt();
 const { history, askAi } = useAiHandler();
 
+const selectedContext = defineModel<SearchResult[]>("context");
+
 
 const askAI = async () => {
-    askAi(prompt.value);
+    askAi(prompt.value, selectedContext.value || []);
     prompt.value = '';
 };
 
@@ -37,7 +39,7 @@ const askAI = async () => {
             </div> -->
         </div>
         <div class="fixed bottom-0 left-0 right-0 flex justify-center">
-            <LexaPrompt v-model="prompt" :loading="loading" @ask="askAI" />
+            <LexaPrompt v-model:context="selectedContext" v-model="prompt" :loading="loading" @ask="askAI" />
         </div>
     </div>
 </template>

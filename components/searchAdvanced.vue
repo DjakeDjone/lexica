@@ -2,6 +2,8 @@
 import { ref, computed, onMounted } from 'vue';
 import Fuse, { type FuseResult } from 'fuse.js';
 
+
+
 const searchVlue = ref('');
 
 const value = defineModel();
@@ -23,6 +25,12 @@ const { data: results, status } = await useFetch('/api/search', {
 const close = () => {
     emit('update:close', false);
 }
+
+// const aiHandler = useAiHandler();
+
+// const addToContext = (context: string) => {
+//     aiHandler.addContext(context);
+// }
 
 const handleKeyDown = (e: KeyboardEvent) => {
     if (!results?.value?.results?.length) return;
@@ -65,7 +73,8 @@ onUnmounted(() => {
             <div class="w-full flex items-start gap-2">
                 <input type="text" class="input w-full" v-model="searchVlue" placeholder="Type to search..."
                     ref="searchInputRef" />
-                <button class="btn btn-square" @click="resultExpaned = !resultExpaned" :title="resultExpaned ? 'Collapse descriptions' : 'Expand descriptions'">
+                <button class="btn btn-square" @click="resultExpaned = !resultExpaned"
+                    :title="resultExpaned ? 'Collapse descriptions' : 'Expand descriptions'">
                     <Icon v-if="resultExpaned" name="line-md:menu-fold-left" size="24" />
                     <Icon v-else name="line-md:menu-unfold-left" size="24" />
                 </button>
@@ -77,16 +86,25 @@ onUnmounted(() => {
                     :style="{ border: selected === idx ? '1px solid var(--color-primary)' : '1px solid transparent', background: selected === idx ? 'var(--color-base-200)' : '' }">
 
                     <NuxtLink v-auto-animate :to="result.id" @click="searchVlue = ''; close()" class="m-0 no-underline">
-                        <div class="flex items-center justify-between">
-                            <h3 class="text-lg font-bold mt-0">{{ result.title }}</h3>
-                            <span v-if="result.score !== undefined" class="badge badge-info badge-sm ml-2">
-                                {{ result.score.toFixed(2) }}
-                            </span>
+                        <div class="flex w-full">
+                            <div class="w-full">
+                                <h3 class="text-lg font-bold mt-0">{{ result.title }}</h3>
+                                {{ result.titles }} {{ result.tag ? ' - ' + result.tag : '' }}
+                                <p v-if="resultExpaned" class="mt-1 text-base-content/80">
+                                    {{ result.description }}
+                                </p>
+                            </div>
+                            <div class="flex flex-col gap-1">
+                                <span v-if="result.score !== undefined" class="badge badge-info badge-sm ml-2">
+                                    {{ result.score.toFixed(2) }}
+                                </span>
+
+                                <!-- <button @click.prevent="addToContext(result.id)"
+                                    class="btn btn-sm !h-6 btn-outline btn-primary ml-2">
+                                    <Icon name="mdi:plus" />
+                                </button> -->
+                            </div>
                         </div>
-                        {{ result.titles }} {{ result.tag ? ' - ' + result.tag : '' }}
-                        <p v-if="resultExpaned" class="mt-1 text-base-content/80">
-                            {{ result.description }}
-                        </p>
                         <div class="divider m-0 mt-2"></div>
                     </NuxtLink>
                 </div>

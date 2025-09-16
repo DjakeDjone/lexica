@@ -11,6 +11,7 @@ export const useAiHandler = () => {
     });
     const history = ref<ChatMessage[]>([]);
 
+
     const llmHistory = (h: ChatMessage[]) => {
         return h.map(msg => ({
             role: msg.role,
@@ -18,7 +19,7 @@ export const useAiHandler = () => {
         }));
     }
 
-    const askAi = async (question: string) => {
+    const askAi = async (question: string, selectedContext: SearchResult[]) => {
         status.value.error = null;
         status.value.loading = true;
 
@@ -34,6 +35,7 @@ export const useAiHandler = () => {
                 body: JSON.stringify({
                     question,
                     history: llmHistory(history.value),
+                    context: selectedContext.length > 0 ? selectedContext.map(c => c.id) : undefined
                 })
             });
             if (!response.ok || !response.body) {
