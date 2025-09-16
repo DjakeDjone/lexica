@@ -11,7 +11,7 @@ const { history, askAi } = useAiHandler();
 
 
 const askAI = async () => {
-   await askAi(prompt.value);
+    await askAi(prompt.value);
 };
 
 
@@ -25,8 +25,10 @@ const askAI = async () => {
                 {{ error }}
             </div>
             <div id="history" class="mb-4 flex flex-col gap-4">
-                <div v-for="(msg, index) in history" :key="index" :class="msg.role === 'user' ? 'self-end bg-blue-100 text-blue-900' : 'self-start bg-gray-100 text-gray-900'" class="p-4 rounded max-w-[80%]">
-                    <LexaMsg :message="md.render(msg.content || '', { html: true })" />
+                <div v-for="(msg, index) in history" :key="index">
+                    <LexaMsg
+                        :message="msg.role == 'user' ? msg.content : md.render(msg.content || '', { html: true })"
+                        :role="msg.role" />
                 </div>
             </div>
             <!-- <div v-if="responseRaw" class="ai-response p-4 rounded mb-4">

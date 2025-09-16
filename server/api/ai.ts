@@ -1,8 +1,9 @@
+import { ChatCompletionChunk } from "groq-sdk/resources/chat.mjs";
 import { askLLM } from "../utils/llm";
+import { Stream } from "groq-sdk/lib/streaming.mjs";
 
 export default defineEventHandler(async (event) => {
     console.log("Received request at /api/ai");
-    const eventStream = createEventStream(event);
 
     // no body in sse, so we get it from query
     // const question = getQuery(event).question as string;
@@ -16,40 +17,33 @@ export default defineEventHandler(async (event) => {
     }
 
     const aiResponse = await askLLM(question, history, event);
+    const readable = await createAiStream(aiResponse);
 
-    // Forward the stream to the client
-    event.node.res.on('close', () => {
-        console.log("Connection closed by client.");
-        // Here you could add logic to clean up resources if the LLM call is still in progress.
-        // For many stream-based APIs, this might involve aborting a request.
+    return sendStream(event, readable);
+
+});
+
+const createAiStream = async (groqStream: Stream<ChatCompletionChunk>) => {
+    const { Readable } = await import('stream');
+
+    const readable = new Readable({
+        read() { }
     });
 
     (async () => {
         try {
-            for await (const chunk of aiResponse) {
-                if (event.node.res.writableEnded) {
-                    console.log("Stream is not writable, stopping.");
-                    break;
-                }
-                const content = chunk.choices[0].delta?.content || '';
+            for await (const chunk of groqStream) {
+                const content = chunk.choices[0]?.delta?.content || "";
                 if (content) {
-                    await eventStream.push(content);
+                    readable.push(content);
                 }
             }
+            readable.push(null); // End of stream
         } catch (error) {
-            console.error("Error during stream processing:", error);
-        } finally {
-            if (!event.node.res.writableEnded) {
-                await eventStream.close();
-            }
-            console.log("Finished processing request at /api/ai");
+            console.error('Error in AI stream processing:', error);
+            readable.emit('error', error);
         }
-    })().catch((error) => {
-        console.error("Error in stream processing task:", error);
-        if (!event.node.res.writableEnded) {
-            eventStream.close().catch(console.error);
-        }
-    });
+    })();
 
-    return eventStream.send();
-});
+    return readable;
+}

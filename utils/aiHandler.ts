@@ -8,7 +8,6 @@ export const useAiHandler = () => {
     const askAi = async (question: string) => {
         status.value.error = null;
         status.value.loading = true;
-        history.value.push({ role: 'user', content: question });
 
         try {
             // streaming response from /api/ai
@@ -16,6 +15,7 @@ export const useAiHandler = () => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    
                 },
                 body: JSON.stringify({
                     question,
@@ -28,6 +28,9 @@ export const useAiHandler = () => {
             const reader = response.body.getReader();
             const decoder = new TextDecoder();
             let done = false;
+            
+            history.value.push({ role: 'user', content: question });
+            
             let aiResponse = '';
             history.value.push({ role: 'assistant', content: aiResponse });
 
@@ -41,6 +44,7 @@ export const useAiHandler = () => {
                 aiResponse += chunkValue;
                 history.value[history.value.length - 1].content = aiResponse;
             }
+
 
         } catch (error: any) {
             console.error("Error in askAi:", error);
