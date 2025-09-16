@@ -141,14 +141,6 @@ const scrollToTop = () => {
         </li>
         <div class="divider mb-0"></div>
         <h2 class="text-lg font-bold">Navigation</h2>
-        <!-- <ContentNavigation v-slot="{ navigation }">
-          <li class="m-0">
-            <NuxtLink to="/lohnrechner">
-              Lohnrechner
-            </NuxtLink>
-          </li>
-          <nested-nav-item @update:navOpen="navOpen = false" :navigation="navigation" />
-        </ContentNavigation> -->
         <Navigation v-slot="{ navItems: navigation }">
           <li class="m-0">
             <NuxtLink to="/lohnrechner">
@@ -160,7 +152,7 @@ const scrollToTop = () => {
               Lexa <Icon name="hugeicons:ai-search-02" />
             </NuxtLink>
           </li>
-          <nested-nav-item @update:navOpen="navOpen = false" :navigation="navigation" />
+          <NestedNavItem @update:navOpen="navOpen = false" :navigation="navigation" />
         </Navigation>
       </ul>
     </div>

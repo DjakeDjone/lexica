@@ -2,6 +2,13 @@
 
 const { data } = await useAsyncData('navigation', () => {
     return queryCollectionNavigation('docs');
+}, {
+    transform: (data) => {
+        data.forEach(item => {
+            item.open = false;
+        });
+        return data;
+    }
 });
 
 </script>
@@ -9,7 +16,6 @@ const { data } = await useAsyncData('navigation', () => {
 
 <template>
     <div>
-        <!-- {{ data }} -->
         <slot :navItems="data" />
     </div>
 </template>
