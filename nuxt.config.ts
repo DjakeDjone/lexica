@@ -5,12 +5,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   // ssr: false,
 
-  modules: [
-    '@nuxt/content',
-    '@formkit/auto-animate',
-    'nuxt-icon',
-    '@vueuse/nuxt'
-  ],
+  modules: ['@nuxt/content', '@formkit/auto-animate', '@vueuse/nuxt', '@nuxt/icon'],
 
   vite: {
     plugins: [tailwindcss()],

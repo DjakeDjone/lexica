@@ -2,7 +2,7 @@ import Groq from "groq-sdk";
 
 const groqApiKey = useRuntimeConfig().groqApiKey;
 
-export const getRelevantSections = async (query: string, event: any) => {
+export const getRelevantSections = async (query: string, event: any): Promise<SearchResult[]> => {
       const sections = await queryCollectionSearchSections(event, 'docs');
 
       const groq = new Groq({

@@ -65,13 +65,13 @@ onMounted(() => {
 const getFileName = (path: string) => {
   const parts = path.split('/');
   let name = parts[parts.length - 1];
-  if (name === '') {
-    name = parts[parts.length - 2];
+  if (!name || name === '') {
+    name = parts[parts.length - 2]!;
   }
   if (name.length > 0) {
     // return the # and everything after it
     if (name.includes('#')) {
-      name = name.split('#')[1];
+      name = name.split('#')[1]!;
     }
     name = name.charAt(0).toUpperCase() + name.slice(1);
   }

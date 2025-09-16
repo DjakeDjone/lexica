@@ -8,25 +8,26 @@
     "preview": "nuxt preview"
   },
   "dependencies": {
-    "@nuxt/content": "^3.6.3",
+    "@nuxt/content": "^3.7.0",
     "@tailwindcss/typography": "^0.5.16",
-    "@tailwindcss/vite": "^4.1.12",
+    "@tailwindcss/vite": "^4.1.13",
     "better-sqlite3": "^12.2.0",
     "focus-trap": "^7.6.5",
     "fuse.js": "^7.1.0",
-    "groq-sdk": "^0.23.0",
+    "groq-sdk": "^0.32.0",
     "markdown-it": "^14.1.0",
-    "mermaid": "^11.10.1",
+    "mermaid": "^11.11.0",
     "sitemap": "^8.0.0",
-    "tailwindcss": "^4.1.12"
+    "tailwindcss": "^4.1.13"
   },
   "devDependencies": {
-    "@formkit/auto-animate": "^0.8.4",
+    "@formkit/auto-animate": "^0.9.0",
+    "@nuxt/icon": "^2.0.0",
     "@types/markdown-it": "^14.1.2",
     "@vueuse/nuxt": "^13.9.0",
-    "daisyui": "^5.1.6",
+    "daisyui": "^5.1.12",
     "katex": "^0.16.22",
-    "nuxt": "^3.19.0",
+    "nuxt": "^4.1.2",
     "nuxt-icon": "1.0.0-beta.7",
     "rehype-katex": "^7.0.1",
     "remark-math": "^6.0.0"

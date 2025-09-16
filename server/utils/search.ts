@@ -7,6 +7,7 @@ export type SearchResult = {
     titles: string[];
     level: number;
     description: string;
+    content?: string;
     score: number;
     url: string;
 };
@@ -68,6 +69,7 @@ export const processSearchResults = (sections: any[], query: string): SearchResu
             title: section.titles[section.titles.length - 1],
             tag: section.titles.length > 1 ? section.titles[section.titles.length - 2] : undefined,
             description,
+            content: section.content,
             titles: section.titles,
             level: section.level,
             url: `/docs/${section.id}`,

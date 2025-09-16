@@ -12,7 +12,11 @@ export default defineEventHandler(async (event): Promise<SearchResultsResponse> 
   const filteredResults = processSearchResults(sections, query);
 
   // paginate
-  const paginatedResults = filteredResults.slice((page - 1) * pageSize, page * pageSize);
+  const paginatedResults = filteredResults.slice((page - 1) * pageSize, page * pageSize).map(result => {
+    // remove content from result for search results
+    const { content, ...rest } = result;
+    return rest;
+  });
 
   // folders
   const folders = buildFolders(filteredResults);

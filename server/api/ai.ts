@@ -1,6 +1,4 @@
-import { ChatCompletionChunk } from "groq-sdk/resources/chat.mjs";
 import { askLLM } from "../utils/llm";
-import { Stream } from "groq-sdk/lib/streaming.mjs";
 
 export default defineEventHandler(async (event) => {
     console.log("Received request at /api/ai");
@@ -16,19 +14,22 @@ export default defineEventHandler(async (event) => {
         throw createError({ statusCode: 400, statusMessage: 'Question is required' });
     }
 
-    const aiResponse = await askLLM(question, history, event);
-    const readable = await createAiStream(aiResponse);
+    const {response: aiResponse, relevantSections } = await askLLM(question, history, event);
+    const readable = await createAiStream(aiResponse, relevantSections);
 
     return sendStream(event, readable);
 
 });
 
-const createAiStream = async (groqStream: Stream<ChatCompletionChunk>) => {
+const createAiStream = async (groqStream: any, relevantSections: SearchResult[]) => {
     const { Readable } = await import('stream');
 
     const readable = new Readable({
         read() { }
     });
+
+    // Send relevantSections as the first chunk (JSON stringified, prefixed for client parsing)
+    readable.push(`$SOURCES$${JSON.stringify(relevantSections.map(section => ({ title: section.title, url: section.url })))}\n$SOURCES$\n`);
 
     (async () => {
         try {
