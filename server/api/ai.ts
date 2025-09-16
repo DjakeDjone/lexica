@@ -18,5 +18,9 @@ export default defineEventHandler(async (event) => {
         eventStream.push(`${chunk.choices[0].delta?.content || ''}`);
     }
 
+    // Send 'done' after the response
+    eventStream.push('done');
+    console.log("Finished processing request at /api/ai");
+
     return eventStream.send();
 });

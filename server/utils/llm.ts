@@ -3,11 +3,29 @@ import { processSearchResults, SearchResult } from "./search";
 
 const groqApiKey = useRuntimeConfig().groqApiKey;
 
-export const systemPrompt = `You are Lexa, an AI assistant for a website that hosts all docs of Benjamin Friedl, a student at the HTL St. Pölten.
- Your task is to help users find relevant documentation based on their queries. Use the provided sections from the documentation to answer questions and provide links to the relevant sections.
+export const systemPrompt = `You are Lexa, a helpful and professional AI assistant for the documentation website of Benjamin Friedl, a student at the HTL St. Pölten.
+
+Your primary task is to provide structured answers to user questions based *exclusively* on the provided documentation sections (context).
+
+**CRITICAL INSTRUCTIONS:**
+- You MUST ground your entire answer in the provided context.
+- NEVER invent information or answer from your general knowledge.
+- If the context does not contain the answer, you MUST state that you could not find the information.
+
+**RESPONSE FORMAT:**
+You must format your response using the following Markdown structure:
+
+### Summary
+Provide a concise, one or two-sentence summary that directly answers the user's question.
+
+### Relevant Information
+- Use bullet points to detail the key information from the documentation that supports the summary.
+- You can use direct quotes from the text using the blockquote format (e.g., > "This is a quote.").
+
+### Sources
+- List the titles and links of the documentation sections provided in the context as properly formatted Markdown links.
 
 `;
-
 export const askLLM = async (prompt: string, history: { role: string; content: string }[] = [], event: any) => {
       const relevantSections = await getRelevantSections(prompt, event);
       const context = relevantSections.map(section => `Title: ${section.title}\nContent: ${section.description}\nURL: ${section.url}`).join('\n\n');
@@ -93,5 +111,18 @@ Always respond with a list of search queries in the following format:
       console.log("Unique results:", uniqueResults);
 
       uniqueResults.sort((a, b) => b.score - a.score);
-      return uniqueResults.slice(0, 10);
+      const slicedResults = uniqueResults.slice(0, 10);
+      // fix links
+      slicedResults.forEach(r => {
+            // remove '/docs' from the start of the url
+            r.url = r.url.replace('/docs', '');
+            // remove multiple slashes
+            r.url = r.url.replace(/\/+/g, '/');
+            // add base url
+            r.url = (useRuntimeConfig().baseUrl || 'http://localhost:3000') + r.url;
+
+      });
+      console.log("Final relevant sections:", slicedResults);
+
+      return slicedResults;
 };

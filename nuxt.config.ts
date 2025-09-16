@@ -55,6 +55,7 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     groqApiKey: process.env.GROQ_API_KEY,
+    baseUrl: process.env.BASE_URL || 'http://localhost:3000',
   },
 
   compatibilityDate: '2024-09-23'
