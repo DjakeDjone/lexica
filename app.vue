@@ -109,9 +109,9 @@ const scrollToTop = () => {
         <NuxtPage />
       </div>
       <div id="topScroll" class="fixed bottom-4 right-4">
-        <button v-if="scroller" class="btn btn-primary rounded-full p-2 h-fit shadow-xl animate-bounce"
+        <button v-if="scroller" class="btn btn-primary rounded-full p-1 h-fit shadow-xl"
           @click="scrollToTop()">
-          <Icon name="line-md:arrow-up-circle" size="45" />
+          <Icon name="line-md:arrow-up-circle" size="35" />
         </button>
       </div>
     </div>

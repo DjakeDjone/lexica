@@ -45,7 +45,7 @@ const handleKeyDown = (e: KeyboardEvent) => {
         if (result) {
             searchVlue.value = '';
             close();
-            window.location.href = result.id;
+            useRouter().push(result.id);
         }
     }
 };
