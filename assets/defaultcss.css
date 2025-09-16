@@ -15,7 +15,7 @@
         scroll-behavior: smooth !important;
 }
 
-.prose code::before {
+.prose pre code::before {
         content: "";
         margin-bottom: calc(0.25rem * 4);
         display: block;
