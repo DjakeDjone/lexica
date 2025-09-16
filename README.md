@@ -1,42 +1,53 @@
-# Content v2 Minimal Starter
+# Lexica
 
-Look at the [Content documentation](https://content.nuxt.com/) to learn more.
+My own lexicon where I push most of my notes from school and all other markdown files I write.
+
+## Features
+
+- Search through all notes (fuzzy search)
+- AI assistant (Lexa) that can answer questions based on the notes
+- Markdown support with syntax highlighting
+
+## Tech Stack
+
+- [Nuxt 3](https://nuxt.com/)
+- [Vue 3](https://vuejs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [DaisyUI](https://daisyui.com/)
+- [Groq API](https://groq.com)
 
 ## Setup
 
-Make sure to install the dependencies:
+1. Clone the repository
 
 ```bash
-# yarn
-yarn install
-
-# npm
-npm install
-
-# pnpm
-pnpm install
+git clone git@github.com:DjakeDjone/lexica.git
 ```
 
-## Development Server
-
-Start the development server on http://localhost:3000
+2. install dependencies
 
 ```bash
-npm run dev
+cd lexica
+pnpm i
 ```
 
-## Production
+3. Create a `.env` file in the root directory and add your groq key
 
-Build the application for production:
+```
+GROQ_API_KEY=your_groq_api_key
+```
+
+4. Run the development server
 
 ```bash
-npm run build
+pnpm dev -o
 ```
 
-Locally preview production build:
+Your ready to write some notes! 📝⭐️
 
-```bash
-npm run preview
-```
+## Usage
 
-Checkout the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+- Add your markdown files to the `content` directory
+- Use the search bar to find notes
+- Use the Lexa AI assistant to ask questions based on your notes
