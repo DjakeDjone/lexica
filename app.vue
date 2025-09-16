@@ -155,6 +155,11 @@ const scrollToTop = () => {
               Lohnrechner
             </NuxtLink>
           </li>
+          <li class="m-0">
+            <NuxtLink to="/lexa" class="inline-flex items-center">
+              Lexa <Icon name="hugeicons:ai-search-02" />
+            </NuxtLink>
+          </li>
           <nested-nav-item @update:navOpen="navOpen = false" :navigation="navigation" />
         </Navigation>
       </ul>

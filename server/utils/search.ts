@@ -27,6 +27,35 @@ export type SearchResultsResponse = {
     pageSize: number;
 };
 
+export const extraPages = [
+    {
+        id: 'lexa',
+        titles: ['Lexa'],
+        title: 'Lexa',
+        description: 'Chat with Lexa, your AI assistant for all things Lexica.',
+        content: '',
+        level: 1,
+        url: '/lexa',
+    }
+];
+
+
+export const extendSearchResults = (results: SearchResult[]): SearchResult[] => {
+    const extendedResults = [...results];
+    
+    // add extra pages if they are not already in results
+    extraPages.forEach(page => {
+        if (!extendedResults.find(r => r.id === page.id)) {
+            extendedResults.push({
+                ...page,
+                score: 1, // low score to not interfere with real results
+            });
+        }
+    });
+
+    return extendedResults;
+}
+
 export const scoreSection = (section: any, query: string): number => {
     const words = query.split(/\s+/).filter(w => w.length > 0);
     const wordScores = words.map(word => {
@@ -60,6 +89,7 @@ export const scoreSection = (section: any, query: string): number => {
 };
 
 export const processSearchResults = (sections: any[], query: string): SearchResult[] => {
+    sections = extendSearchResults(sections);
     const results: SearchResult[] = sections.map((section) => {
         const score = scoreSection(section, query);
         const description = section.content.length > 200 ? section.content.substring(0, 197) + '...' : section.content;
