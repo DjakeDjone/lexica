@@ -7,6 +7,7 @@ My own lexicon where I push most of my notes from school and all other markdown 
 - Search through all notes (fuzzy search)
 - AI assistant (Lexa) that can answer questions based on the notes
 - Markdown support with syntax highlighting
+- **Mermaid support** 🧜‍♀️
 
 ## Tech Stack
 
