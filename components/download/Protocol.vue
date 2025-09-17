@@ -11,21 +11,60 @@ const props = defineProps<{
 
 const pdf = ref<HTMLElement | null>(null);
 
-const downloadPdf = () => {
-    if (!pdf.value) return;
-    const element = pdf.value;
-    
-    import('html2pdf.js').then((html2pdf) => {
-        const opt = {
-            margin:       0.5,
-            filename:     (props.page?.title ?? 'document') + '.pdf',
-            image:        { type: 'jpeg', quality: 0.98 },
-            html2canvas:  { scale: 2 },
-            jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
-        };
-        html2pdf.default().set(opt).from(element).save();
-    });
+function printElement(element: HTMLElement) {
+    const iframe = document.createElement('iframe');
+    iframe.style.display = 'none';
+    document.body.appendChild(iframe);
+
+    const iframeDoc = iframe.contentWindow?.document;
+    if (iframeDoc) {
+        iframeDoc.open();
+        // Copy styles from the main document to the iframe
+        Array.from(document.styleSheets).forEach(styleSheet => {
+            try {
+                const rules = styleSheet.cssRules;
+                const style = document.createElement('style');
+                style.appendChild(document.createTextNode(Array.from(rules).map(rule => rule.cssText).join('\n')));
+                iframeDoc.head.appendChild(style);
+            } catch (e) {
+                console.error('Could not read stylesheet for printing:', e);
+            }
+        });
+
+        // Add print-specific styles
+        const printStyle = document.createElement('style');
+        printStyle.textContent = `
+            @media print {
+                body {
+                    -webkit-print-color-adjust: exact;
+                }
+                h1, h2 {
+                    page-break-before: always;
+                    break-before: page;
+                    margin-top: 2rem;
+                }
+            }
+        `;
+        iframeDoc.head.appendChild(printStyle);
+
+        iframeDoc.body.innerHTML = element.innerHTML;
+
+        setTimeout(() => {
+            iframe.contentWindow?.focus();
+            iframe.contentWindow?.print();
+            document.body.removeChild(iframe);
+        }, 500); // A short delay to ensure content and styles are loaded
+    } else {
+        document.body.removeChild(iframe);
+    }
 }
+
+const downloadPdf = () => {
+    if (pdf.value) {
+        printElement(pdf.value);
+    }
+}
+
 </script>
 
 
@@ -33,7 +72,7 @@ const downloadPdf = () => {
     <div class="mb-4">
         <button class="btn btn-sm" @click="downloadPdf">Download PDF</button>
     </div>
-    <div ref="pdf" class="max-w-2xl">
+    <div ref="pdf" class="max-w-2xl printable">
         <div id="protocol-header" class="flex justify-between items-center mb-8 border-b">
             <div class="text-lg">
                 Abteilung für INFORMATIK
@@ -53,3 +92,37 @@ const downloadPdf = () => {
         </ImagePopupContainer>
     </div>
 </template>
+
+<style>
+@media print {
+
+    body * {
+        visibility: hidden;
+    }
+
+    .printable,
+    .printable * {
+        visibility: visible !important;
+    }
+
+    .printable {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+    }
+
+    code {
+        color: black !important;
+        background: gray !important;
+    }
+
+    /* extra page for every h2 */
+    .printable h1,
+    .printable h2 {
+        page-break-before: always;
+        break-before: page;
+        margin-top: 2rem;
+    }
+}
+</style>
