@@ -11,11 +11,13 @@ export default defineEventHandler(async (event) => {
     const question = body.question as string;
     const history = body.history as { role: 'user' | 'system' | 'assistant'; content: string }[] || [];
     const context = body.context as string[] | undefined;
+    const withoutContext = body.withoutContext as boolean | undefined;
+
     if (!question) {
         throw createError({ statusCode: 400, statusMessage: 'Question is required' });
     }
 
-    const {response: aiResponse, relevantSections } = await askLLM(question, history, event);
+    const { response: aiResponse, relevantSections } = await askLLM(question, history, event, context, withoutContext);
     const readable = await createAiStream(aiResponse, relevantSections);
 
     return sendStream(event, readable);
@@ -30,7 +32,10 @@ const createAiStream = async (groqStream: any, relevantSections: SearchResult[])
     });
 
     // Send relevantSections as the first chunk (JSON stringified, prefixed for client parsing)
-    readable.push(`$SOURCES$${JSON.stringify(relevantSections.map(section => ({ title: section.title, url: section.url })))}\n$SOURCES$\n`);
+    readable.push(`$SOURCES$${JSON.stringify(relevantSections.map(section => ({
+        title: section.title, url: section.url
+            ?? section.id.replace('docs', '').replace('.md', '')
+    })))}\n$SOURCES$\n`);
 
     (async () => {
         try {

@@ -30,7 +30,7 @@ const selectedContext = defineModel<SearchResult[]>("context");
 
 <template>
     <div @keydown.ctrl.enter="ask()" class="w-full max-w-3xl mx-auto rounded-t-2xl backdrop-blur-md flex flex-col gap-2 bg-accent/10 p-4">
-        <textarea ref="textarea" v-model="prompt" placeholder="Enter your question here..."
+        <textarea autofocus ref="textarea" v-model="prompt" placeholder="Enter your question here..."
             class="border-none outline-none resize-none w-full p-2 border rounded max-h-48"></textarea>
 
         <div id="actions" class="flex justify-end gap-2">

@@ -1,5 +1,5 @@
 import Groq from "groq-sdk";
-import { processSearchResults, SearchResult } from "./search";
+import { openLink, processSearchResults, SearchResult } from "./search";
 import { getRelevantSections } from "./llm-search";
 
 const groqApiKey = useRuntimeConfig().groqApiKey;
@@ -29,11 +29,37 @@ Provide a concise, one or two-sentence summary that directly answers the user's 
 
 `;
 
+export const sectionsToContext = (sections: SearchResult[]): string => {
+      return sections.map(section => `Title: ${section.title}\nContent: ${section.content}\nURL: ${section.url}`).join('\n\n');
+}
 
+export const askLLM = async (prompt: string, history: { role: string; content: string }[] = [], event: any,
+      contextLinks?: string[]
+      , withoutContext?: boolean
+      , aiSettings: { model?: string } = {},
 
-export const askLLM = async (prompt: string, history: { role: string; content: string }[] = [], event: any, aiSettings: { model?: string } = {}) => {
-      const relevantSections = await getRelevantSections(prompt, event);
-      const context = relevantSections.map(section => `Title: ${section.title}\nContent: ${section.content}\nURL: ${section.url}`).join('\n\n');
+) => {
+      let context = ""
+      let relevantSections: SearchResult[] = [];
+      if (!contextLinks) {
+            relevantSections = await getRelevantSections(prompt, event);
+            context = sectionsToContext(relevantSections);
+      } else {
+            relevantSections = [];
+            for (const link of contextLinks) {
+                  const section = await openLink(link, event);
+                  if (section) {
+                        relevantSections.push(section);
+                  } else {
+                        console.warn(`Could not fetch section for link: ${link}, ${section}`);
+                  }
+            }
+            console.log("Fetched sections for provided links:", relevantSections);
+            console.log("withoutContext:", contextLinks);
+            context = sectionsToContext(relevantSections);
+      }
+
+      console.log("Using context:", context);
 
       const groq = new Groq({
             apiKey: groqApiKey,

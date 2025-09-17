@@ -33,7 +33,7 @@ export const extraPages = [
         titles: ['Lexa'],
         title: 'Lexa',
         description: 'Chat with Lexa, your AI assistant for all things Lexica.',
-        content: '',
+        content: 'Chat with Lexa, your AI assistant for all things Lexica.',
         level: 1,
         url: '/lexa',
     }
@@ -81,6 +81,10 @@ export const scoreSection = (section: any, query: string): number => {
     if (titleMatch) {
         score += 5;
     }
+    const MIN_SCORE = 5;
+    if (score < MIN_SCORE) {
+        return 0;
+    }
 
     // Boost score for matches in higher-level sections
     score += Math.max(0, 10 - section.level * 3); // Higher level (lower number) gets more points
@@ -93,7 +97,10 @@ export const processSearchResults = (sections: any[], query: string): SearchResu
     const results: SearchResult[] = sections.map((section) => {
         const score = scoreSection(section, query);
         const description = section.content.length > 200 ? section.content.substring(0, 197) + '...' : section.content;
-
+        // remove the '/' from the id if it exists
+        if (section.id.startsWith('/')) {
+            section.id = section.id.substring(1);
+        }
         return {
             id: section.id,
             title: section.titles[section.titles.length - 1],
@@ -105,7 +112,7 @@ export const processSearchResults = (sections: any[], query: string): SearchResu
             url: `/docs/${section.id}`,
             score
         };
-    });
+    }).filter(result => result.score > 0 && result.id && result.title);
 
     // filter out results with score 0
     const filteredResults = results.filter(result => result.score > 0);
@@ -160,4 +167,23 @@ export const buildFolders = (results: SearchResult[]): SearchResultFolder[] => {
     sortFolders(folders);
 
     return folders;
+};
+
+export const openLink = async (link: string, event: any): Promise<SearchResult | null> => {
+    // remove '/docs/' from the link if it exists
+    if (link.startsWith('/docs/')) {
+        link = link.substring(6);
+    } else if (link.startsWith('docs/')) {
+        link = link.substring(5);
+    }
+    // add '/' to the start of the link if it doesn't exist
+    if (!link.startsWith('/')) {
+        link = '/' + link;
+    }
+    // remove '#' and anything after it
+    if (link.includes('#')) {
+        link = link.split('#')[0];
+    }
+    console.log("Opening link:", link);
+    return await queryCollection(event, 'docs').path(link).first();
 };

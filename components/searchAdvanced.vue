@@ -45,7 +45,7 @@ const handleKeyDown = (e: KeyboardEvent) => {
         if (result) {
             searchVlue.value = '';
             close();
-            useRouter().push(result.id);
+            useRouter().replace(`/${result.id}`);
         }
     }
 };
@@ -85,11 +85,12 @@ onUnmounted(() => {
                     class="searchResult rounded-lg p-3 pb-0 hover:bg-base-100/50"
                     :style="{ border: selected === idx ? '1px solid var(--color-primary)' : '1px solid transparent', background: selected === idx ? 'var(--color-base-200)' : '' }">
 
-                    <NuxtLink v-auto-animate :to="result.id" @click="searchVlue = ''; close()" class="m-0 no-underline">
+                    <NuxtLink v-auto-animate :to="`/${result.id}`" @click="searchVlue = ''; close()"
+                        class="m-0 no-underline">
                         <div class="flex w-full">
                             <div class="w-full">
                                 <h3 class="text-lg font-bold mt-0">{{ result.title }}</h3>
-                                {{ result.titles }} {{ result.tag ? ' - ' + result.tag : '' }}
+                                <!-- {{ result.titles }} {{ result.tag ? ' - ' + result.tag : '' }} -->
                                 <p v-if="resultExpaned" class="mt-1 text-base-content/80">
                                     {{ result.description }}
                                 </p>
