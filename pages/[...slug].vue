@@ -1,13 +1,7 @@
 <script setup lang="ts">
 
 const path = ref(useRoute().fullPath);
-const mode = ref<'text' | 'cards'>('text');
-
-const extractPath = (path: string) => {
-    // remove # and everything after
-    return path.split('#')[0];
-}
-
+const mode = ref<'text' | 'protocol'>('text');
 
 const route = useRoute()
 const { data: page, error, status } = await useAsyncData(route.path, () => {
@@ -19,7 +13,7 @@ const { data: page, error, status } = await useAsyncData(route.path, () => {
             });
         }
         // replace first heading if same as title
-        if (page.body.value.length > 0 && page.body.value[0][0] === 'h1' && page.body.value[0][2] === page.title) {
+        if (page.body.value.length > 0 && page.body.value[0]![0] === 'h1' && page.body.value[0]![2] === page.title) {
             const body = JSON.parse(JSON.stringify(page.body.value))
             body[0][2] = '';
             page.body.value = body;
@@ -35,7 +29,7 @@ const { data: page, error, status } = await useAsyncData(route.path, () => {
     <main class="mt-8">
         <div class="*:btn *:btn-sm">
             <button @click="mode = 'text'" v-if="mode != 'text'">Text</button>
-            <button @click="mode = 'cards'" v-if="mode != 'cards'">Cards</button>
+            <button @click="mode = 'protocol'" v-if="mode != 'protocol'">HTL Protokoll</button>
         </div>
         <div v-if="mode == 'text'" class="prose dark:prose-invert max-w-screen">
             <h1 v-if="page && page.title" class="font-bold">
@@ -57,8 +51,14 @@ const { data: page, error, status } = await useAsyncData(route.path, () => {
         <div v-else-if="status === 'pending'" class="text-center">
             <p>Loading...</p>
         </div>
-        <div v-else>
+        <div v-else-if="error" class="text-center">
             Unknown error
+        </div>
+        <div v-else-if="mode == 'protocol'" class="prose dark:prose-invert max-w-screen">
+            <DownloadProtocol :page="page" v-if="page" />
+            <div v-else>
+                <p>Loading...</p>
+            </div>
         </div>
     </main>
 </template>
