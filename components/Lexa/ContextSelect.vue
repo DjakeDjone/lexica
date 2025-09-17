@@ -3,6 +3,7 @@
 const selectedContext = defineModel<SearchResult[]>();
 const showSelect = ref(false);
 const showHoveredContext = ref(false);
+const searchInput = ref<HTMLInputElement | null>(null);
 
 const searchWord = ref('');
 const { data: searchResults } = useFetch('/api/search', {
@@ -18,30 +19,31 @@ const { data: searchResults } = useFetch('/api/search', {
     }
 });
 
-const addToContext = (context: SearchResult) => {
-    if (!selectedContext.value) {
-        selectedContext.value = [];
-    }
-    if (!selectedContext.value.includes(context)) {
-        selectedContext.value.push(context);
-    }
-};
-
 const removeFromContext = (context: SearchResult) => {
     if (!selectedContext.value) return;
     selectedContext.value = selectedContext.value.filter(c => c !== context);
 };
 
+watch(showSelect, (newVal) => {
+    if (newVal) {
+        nextTick(() => {
+            searchInput.value?.focus();
+        });
+    }
+});
+
 </script>
 
 <template>
-    <div v-if="showSelect" class="absolute bottom-16 bg-base-100 p-4 rounded shadow-lg flex flex-col gap-2">
+    <div @keydown.enter="showSelect = false" v-if="showSelect"
+        class="absolute bottom-16 bg-base-100 p-4 rounded shadow-lg flex flex-col gap-2">
         <h3 class="font-semibold">Select Context
             <button class="btn btn-xs btn-ghost float-right" @click="showSelect = false">
                 <Icon name="mdi:close" class="inline-block" />
             </button>
         </h3>
-        <input type="text" v-model="searchWord" placeholder="Search context..." class="input w-full mb-2" />
+        <input ref="searchInput" type="text" v-model="searchWord" placeholder="Search context..."
+            class="input w-full mb-2" />
         <div class="max-h-60 flex gap-2">
             <div v-if="searchResults && searchResults.results.length" class="max-h-60 w-52 overflow-y-auto">
                 <div v-for="(result, index) in searchResults.results" :key="index"

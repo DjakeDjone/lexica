@@ -3,10 +3,6 @@ import { askLLM } from "../utils/llm";
 export default defineEventHandler(async (event) => {
     console.log("Received request at /api/ai");
 
-    // no body in sse, so we get it from query
-    // const question = getQuery(event).question as string;
-    // const history = JSON.parse((getQuery(event).history as string) || '[]') as { role: 'user' | 'system' | 'assistant'; content: string }[];
-    // get from body
     const body = await readBody(event);
     const question = body.question as string;
     const history = body.history as { role: 'user' | 'system' | 'assistant'; content: string }[] || [];

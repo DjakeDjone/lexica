@@ -19,6 +19,10 @@ export const useAiHandler = () => {
         }));
     }
 
+    const clearHistory = () => {
+        history.value = [];
+    }
+
     const askAi = async (question: string, selectedContext: SearchResult[]) => {
         status.value.error = null;
         status.value.loading = true;
@@ -112,5 +116,6 @@ export const useAiHandler = () => {
         status,
         history,
         askAi,
+        clearHistory,
     };
 }

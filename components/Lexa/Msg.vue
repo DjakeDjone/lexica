@@ -2,11 +2,13 @@
 
 const props = defineProps<{
     message: string;
+    thinking?: string;
     role: 'user' | 'system' | 'assistant';
     sources: { title: string; url: string }[] | undefined;
 }>();
 
 const openedSources = ref(false);
+const expandedThinking = ref(false);
 
 </script>
 
@@ -16,10 +18,24 @@ const openedSources = ref(false);
             {{ message }}
         </p>
         <div v-else class="prose !first:pt-0">
-            <span v-html="message"></span>
+            <div>
+                <div @click="expandedThinking = !expandedThinking">
+                    <strong class="opacity-70">
+                        <Icon name="emojione-monotone:thinking-face" /> Thinking
+                    </strong>
+                    <button v-if="thinking" class="cursor-pointer">
+                        <Icon name="line-md:arrow-down" size="15" class="inline-block ml-2 transition-transform"
+                            :class="{ 'rotate-180': expandedThinking }" />
+                    </button>
+                </div>
+                <p v-if="thinking && expandedThinking" class="italic text-gray-500 mb-2">{{ thinking }}</p>
+            </div>
+            <div class="ai-message">
+                <div v-html="message"></div>
+            </div>
         </div>
 
-        <div v-if="sources && sources.length" class="mt-4">
+        <div v-if="sources && sources.length">
             <div class="flex items-center mb-2 gap-4">
                 <h3 class="font-semibold mb-2">Sources:</h3>
                 <button class="cursor-pointer" @click="openedSources = !openedSources">
@@ -38,3 +54,10 @@ const openedSources = ref(false);
         </div>
     </div>
 </template>
+
+<style>
+.ai-message div:first-child {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+}
+</style>
