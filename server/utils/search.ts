@@ -82,6 +82,7 @@ export const scoreSection = (section: any, query: string): number => {
         score += 5;
     }
     const MIN_SCORE = 5;
+    console.log(`Section: ${section.title}, Score: ${score}`);
     if (score < MIN_SCORE) {
         return 0;
     }

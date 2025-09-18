@@ -17,17 +17,19 @@ export const getRelevantSections = async (query: string, event: any): Promise<Se
                   {
                         role: "system",
                         content: `You are an AI assistant that helps to create search queries for a document search engine.
- Your task is to generate a list of search queries based on the user's question. The search queries should be relevant to the user's question and should help to find the most relevant documents.
- 
- Here are some examples:
- User question: "What is the capital of France?"
- Answer: ["capital of France", "France capital", "French capital city"]
- 
- User question: "How to bake a cake?"
- Search queries: ["bake a cake", "cake recipe", "how to make a cake"]
+ Your task is to generate a list of search queries based on the user's question. The search queries are executed in a fuzzy search engine, so they can be short and concise.
+The search queries should be in english and german.
+      The search queries should be relevant to the user's question and should help to find the most relevant documents.
+      Provide the search queries in a list format, enclosed in square brackets and double quotes, separated by commas.
+      The search queries should be short, ideally 2-5 words long.
+      Sort them by relevance, with the most relevant ones first.
 
-Always respond with a list of search queries in the following format:
-      [ "search query 1", "search query 2", "search query 3"]
+      Example:
+      User question: "Was ist tcp?"
+      Search queries: ["tcp", "tcp protocol", "tcp/ip", "transmission control protocol"]
+      
+      User question: "How to center a div in css?"
+      Search queries: ["center div css", "css center div", "css center element", "css center block element"]
  `,
                   },
                   {
@@ -49,8 +51,9 @@ Always respond with a list of search queries in the following format:
 
       // find relevant sections based on search queries
       const results: SearchResult[] = [];
-      for (const searchQuery of searchQueryList) {
+      for (const [i, searchQuery] of searchQueryList.entries()) {
             const filteredResults = processSearchResults(sections, searchQuery);
+            filteredResults.forEach(r => r.score += (3 - i));
             results.push(...filteredResults);
       }
 
@@ -73,6 +76,7 @@ Always respond with a list of search queries in the following format:
 
       });
       console.log("Final relevant sections:", slicedResults);
+      // remove results with 
 
       return slicedResults;
 };
