@@ -8,6 +8,11 @@ const prompt = defineModel({
     type: String,
     required: true
 });
+const autoContext = defineModel<boolean>("autoContext", {
+    type: Boolean,
+    required: true,
+    default: true
+});
 
 const props = defineProps<{
     loading: boolean;
@@ -34,8 +39,8 @@ const selectedContext = defineModel<SearchResult[]>("context");
             class="border-none outline-none resize-none w-full p-2 border rounded max-h-48"></textarea>
 
         <div id="actions" class="flex justify-end gap-2">
-            <LexaContextSelect v-model="selectedContext" />
-            <button class="btn btn-sm btn-primary" :disabled="loading" @click="ask()">
+            <LexaContextSelect v-model="selectedContext" v-model:autoContext="autoContext" />
+            <button class="btn btn-sm btn-primary" :disabled="loading || prompt.trim() === ''" @click="ask()">
                 <Icon name="mdi:send" v-if="!loading" class="-rotate-90" />
                 <Icon name="mdi:loading" v-else class="animate-spin" />
             </button>

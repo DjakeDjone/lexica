@@ -23,7 +23,7 @@ export const useAiHandler = () => {
         history.value = [];
     }
 
-    const askAi = async (question: string, selectedContext: SearchResult[]) => {
+    const askAi = async (question: string, selectedContext: SearchResult[], autoContext: boolean) => {
         status.value.error = null;
         status.value.loading = true;
 
@@ -39,7 +39,8 @@ export const useAiHandler = () => {
                 body: JSON.stringify({
                     question,
                     history: llmHistory(history.value),
-                    context: selectedContext.length > 0 ? selectedContext.map(c => c.id) : undefined
+                    context: selectedContext.length > 0 ? selectedContext.map(c => c.id) : undefined,
+                    withoutContext: !autoContext,
                 })
             });
             if (!response.ok || !response.body) {

@@ -4,7 +4,7 @@ import { getRelevantSections } from "./llm-search";
 
 const groqApiKey = useRuntimeConfig().groqApiKey;
 
-export const systemPrompt = `You are Lexa, a helpful and professional AI assistant for the documentation website of Benjamin Friedl, a student at the HTL St. Pölten.
+export const systemPromptWithContext = `You are Lexa, a helpful and professional AI assistant for the documentation website of Benjamin Friedl, a student at the HTL St. Pölten.
 
 Your primary task is to provide structured answers to user questions based *exclusively* on the provided documentation sections (context).
 
@@ -26,7 +26,19 @@ Provide a concise, one or two-sentence summary that directly answers the user's 
 
 ### Sources
 - List the titles and links of the documentation sections provided in the context as properly formatted Markdown links.
+`;
 
+const systemPromptWithoutContext = `
+You are Zenia, a helpful and professional AI assistant for the documentation website of Benjamin Friedl, a student at the HTL St. Pölten.
+
+**CRITICAL INSTRUCTIONS:**
+- You MUST NOT answer questions that cannot be answered with your general knowledge.
+- If you do not know the answer, you MUST state that you do not know.
+- NEVER invent information or make up answers.
+
+**LANGUAGE:** Always respond in the same language as the user's question.
+
+answer short and concisely.
 `;
 
 export const sectionsToContext = (sections: SearchResult[]): string => {
@@ -41,22 +53,24 @@ export const askLLM = async (prompt: string, history: { role: string; content: s
 ) => {
       let context = ""
       let relevantSections: SearchResult[] = [];
-      if (!contextLinks) {
-            relevantSections = await getRelevantSections(prompt, event);
-            context = sectionsToContext(relevantSections);
-      } else {
-            relevantSections = [];
-            for (const link of contextLinks) {
-                  const section = await openLink(link, event);
-                  if (section) {
-                        relevantSections.push(section);
-                  } else {
-                        console.warn(`Could not fetch section for link: ${link}, ${section}`);
+      if (!withoutContext) {
+            if (!contextLinks) {
+                  relevantSections = await getRelevantSections(prompt, event);
+                  context = sectionsToContext(relevantSections);
+            } else {
+                  relevantSections = [];
+                  for (const link of contextLinks) {
+                        const section = await openLink(link, event);
+                        if (section) {
+                              relevantSections.push(section);
+                        } else {
+                              console.warn(`Could not fetch section for link: ${link}, ${section}`);
+                        }
                   }
+                  console.log("Fetched sections for provided links:", relevantSections);
+                  console.log("withoutContext:", contextLinks);
+                  context = sectionsToContext(relevantSections);
             }
-            console.log("Fetched sections for provided links:", relevantSections);
-            console.log("withoutContext:", contextLinks);
-            context = sectionsToContext(relevantSections);
       }
 
       console.log("Using context:", context);
@@ -74,9 +88,9 @@ export const askLLM = async (prompt: string, history: { role: string; content: s
       `;
 
       const messages = [
-            { role: "system", content: systemPrompt },
+            { role: "system", content: withoutContext ? systemPromptWithoutContext : systemPromptWithContext },
             ...history,
-            { role: "user", content: prompt }
+            { role: "user", content: withoutContext ? prompt : promptWithContext },
       ] as { role: 'user' | 'system' | 'assistant'; content: string }[];
       console.log("Messages sent to LLM:", messages);
 

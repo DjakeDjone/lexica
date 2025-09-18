@@ -27,7 +27,7 @@ const suggestions = {
 
 type SuggestionCategory = keyof typeof suggestions;
 
-const selectedCategory = ref<SuggestionCategory | null>(null);
+const selectedCategory = ref<SuggestionCategory | null>('technical');
 
 const selectSuggestion = (suggestion: string) => {
     emit('update:select', suggestion);

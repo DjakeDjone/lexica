@@ -7,11 +7,11 @@ const md = new MarkdownIt();
 const { history, status, askAi, clearHistory } = useAiHandler();
 
 const selectedContext = defineModel<SearchResult[]>("context");
-
+const autoContext = ref(true);
 
 const askAI = async () => {
     if (!prompt.value.trim()) return;
-    await askAi(prompt.value, selectedContext.value || []);
+    await askAi(prompt.value, selectedContext.value || [], autoContext.value);
     prompt.value = '';
 };
 
@@ -22,9 +22,9 @@ const askAI = async () => {
     <div class="max-w-3xl mx-auto p-4">
         <div class="flex justify-between items-center mb-4">
             <h1 class="text-2xl font-bold mb-4">Ask Lexica AI</h1>
-            <button class="btn" @click="clearHistory()">
+            <button v-if="history.length" class="btn" @click="clearHistory()">
                 <!-- Clear Chat -->
-                <Icon name="mdi:trash-can-outline" />
+                <Icon name="mdi:plus" />
             </button>
         </div>
         <LexaSuggestions v-if="!history.length"
@@ -41,7 +41,7 @@ const askAI = async () => {
             </div>
         </div>
         <div class="fixed bottom-0 left-0 right-0 flex flex-col justify-center">
-            <LexaPrompt v-model:context="selectedContext" v-model="prompt" :loading="status.loading" @ask="askAI" />
+            <LexaPrompt v-model:context="selectedContext" v-model:autoContext="autoContext" v-model="prompt" :loading="status.loading" @ask="askAI" />
         </div>
     </div>
 </template>
