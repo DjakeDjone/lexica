@@ -1,5 +1,18 @@
 ---
 title: NSCS Test 3
+klasse: "4AHIF"
+jahrgang: 2024
+fach: "NSCS"
+thema: "Multiarea OSPF, Ethernet v0.1"
+lehrer: "Martin Weixelbaum"
+datum: ""
+protocolDescription: ""
+protocolAufgabenNr: 0
+protocolKlasse: ""
+protocolName: ""
+protocolGruppe: ""
+protocolAbgabedatum: ""
+protocolAbgabetermin: ""
 description: "Theorie für den NSCS Test 3"
 generateTableOfContents: true
 ---

@@ -28,22 +28,19 @@ const downloadPdf = () => {
         <button class="btn btn-sm" @click="downloadPdf">Download PDF</button>
     </div>
     <div ref="pdf" class="max-w-2xl printable">
-        <!-- <div id="protocol-header" class="flex justify-between items-center mb-8">
+        <div id="protocol-header" class="flex justify-between items-center mb-8 border-b">
             <div class="text-lg font-semibold">
                 Abteilung für INFORMATIK
             </div>
             <img src="/assets/images/htl-logo.png" alt="HTL Logo" class="h-16">
-        </div> -->
-        <div class="header flex justify-between items-center mb-8">
+        </div>
+        <!-- <div class="header flex justify-between items-center mb-8">
             <span>
                 Abteilung für INFORMATIK
             </span>
-        </div>
+        </div> -->
         <div id="printable-content">
-            <div class="title-page">
-                <h1 class="text-4xl font-bold">{{ page?.title }}</h1>
-                <p class="text-lg mt-4">{{ page?.description }}</p>
-            </div>
+            <TitlePage :page="page" />
             <TableOfContents :page="page" v-if="page?.generateTableOfContents" />
             <ImagePopupContainer>
                 <ContentRenderer v-if="page" :value="page">
@@ -67,28 +64,30 @@ const downloadPdf = () => {
         padding: 0;
     }
 
-    .header {
-        position: fixed;
-        top: 0rem;
-        left: 0;
-        right: 0;
-        width: 100%;
-        background: white;
-        padding: 10px 0;
-        border-bottom: 1px solid #ccc;
-    }
-
     @page {
-        margin: 0;
+        padding: 20mm;
         size: A4;
     }
 
     body {
         margin: 0;
-        padding: 20mm;
+        /* place for the header */
+        /* padding: 20mm 15mm 15mm 15mm; */
         box-sizing: border-box;
         font-family: Arial, sans-serif;
+        color: #000 !important;
     }
+
+    /* for every h2 a new page (except for '.no-page-break') */
+    /* h2:not(.no-page-break) {
+        page-break-before: always;
+    } */
+     /* table of contents and h2 after table of contents */
+     .table-of-contents,
+        .table-of-contents + * {
+        page-break-before: always;
+    }
+
 
     .modal {
         display: none;

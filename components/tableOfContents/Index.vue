@@ -41,7 +41,7 @@ const getMargin = (tag: string) => {
 </script>
 
 <template>
-    <nav>
+    <nav class="table-of-contents">
         <slot name="title">
             <h2 class="text-lg font-semibold mb-2">Table of Contents</h2>
         </slot>

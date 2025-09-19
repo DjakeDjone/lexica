@@ -1,3 +1,7 @@
+---
+title: Unternehmensnetzwerke IPv6
+---
+
 # **Titel: Unternehmensnetzwerke IPv6**
 
 | **AufgabenNr:** | 12 |
@@ -13,34 +17,6 @@
 Aufgabe zur Konfiguration eines Unternehmensnetzwerkes mit DMZ und NAT mit IPv6.
 
 ---
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
 
 ## Inhaltsverzeichnis
 
@@ -53,45 +29,6 @@ Aufgabe zur Konfiguration eines Unternehmensnetzwerkes mit DMZ und NAT mit IPv6.
 7. [Troubleshooting/Debugging](#troubleshootingdebugging)
 
 ---
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
 
 ## Anforderungen
 

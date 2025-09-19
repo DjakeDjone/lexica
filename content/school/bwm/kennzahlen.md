@@ -70,3 +70,19 @@ $$
 ---
 
 ## Umschlagskennzahlen
+
+### Lagerumschlagshäufigkeit
+
+Gibt an, wie oft das Lager im Jahr umgeschlagen wird.
+
+$$
+\text{Lagerumschlagshäufigkeit} = \frac{\text{Wareneinsatz}}{\text{Durchschnittslager}}
+$$
+
+### Lagerumschlagsdauer
+
+Gibt an, wie viele Tage die Ware im Durchschnitt im Lager liegt.
+
+$$
+\text{Lagerumschlagsdauer} = \frac{365}{\text{Lagerumschlagshäufigkeit}}
+$$
