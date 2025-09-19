@@ -8,6 +8,10 @@ const props = defineProps<{
     }
 }>();
 
+const settings = ref({
+    genTableOfContents: props.page?.generateTableOfContents ?? true,
+    // other settings can be added here
+});
 
 const pdf = ref<HTMLElement | null>(null);
 
@@ -24,8 +28,14 @@ const downloadPdf = () => {
 
 
 <template>
-    <div class="mb-4">
+    <div class="mt-2 flex gap-2">
         <button class="btn btn-sm" @click="downloadPdf">Download PDF</button>
+        <!-- switch -->
+        <div>
+            <button class="btn btn-sm" @click="settings.genTableOfContents = !settings.genTableOfContents">
+                {{ settings?.genTableOfContents ? 'Hide' : 'Show' }} Table of Contents
+            </button>
+        </div>
     </div>
     <div ref="pdf" class="max-w-2xl printable">
         <div id="protocol-header" class="flex justify-between items-center mb-8 border-b">
@@ -41,7 +51,7 @@ const downloadPdf = () => {
         </div> -->
         <div id="printable-content">
             <TitlePage :page="page" />
-            <TableOfContents :page="page" v-if="page?.generateTableOfContents" />
+            <TableOfContents v-if="settings.genTableOfContents" :page="page" />
             <ImagePopupContainer>
                 <ContentRenderer v-if="page" :value="page">
                 </ContentRenderer>
