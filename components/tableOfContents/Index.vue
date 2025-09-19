@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import type { DocsCollectionItem, MinimalNode } from '@nuxt/content';
+import type { DocsCollectionItem } from '@nuxt/content';
 
 
 const props = defineProps<{
@@ -9,17 +9,36 @@ const props = defineProps<{
     exclude?: string[],
 }>();
 
+const buildTree = (headings: any[]) => {
+    const tree: any[] = [];
+    const stack: any[] = [];
+    for (const tag of headings) {
+        const level = parseInt(tag[0].substring(1));
+        const node = { tag, children: [] };
+        while (stack.length && parseInt(stack[stack.length - 1].tag[0].substring(1)) >= level) {
+            stack.pop();
+        }
+        if (stack.length) {
+            stack[stack.length - 1].children.push(node);
+        } else {
+            tree.push(node);
+        }
+        stack.push(node);
+    }
+    return tree;
+};
+
 const headings = computed(() => {
-    let headings = [];
+    const flat: any[] = [];
     for (const tag of props.page.body.value) {
         if (tag[0].startsWith('h')) {
             const level = parseInt(tag[0].substring(1));
             if (level <= (props.maxDepth || 6)) {
-                headings.push(tag);
+                flat.push(tag);
             }
         }
     }
-    return headings;
+    return buildTree(flat);
 });
 
 const getLink = (text: {
@@ -28,16 +47,6 @@ const getLink = (text: {
     return `#${text.id}`;
 }
 
-const getMargin = (tag: string) => {
-    if (!tag.startsWith('h')) return '0';
-    let level = parseInt(tag.substring(1));
-    if (isNaN(level) || level < 1 || level > 6) return '0';
-    level = Math.min(level-2, 6);
-    if (level < 0) level = 0;
-    return `${(level) * 1.5}rem`;
-}
-
-
 </script>
 
 <template>
@@ -45,15 +54,10 @@ const getMargin = (tag: string) => {
         <slot name="title">
             <h2 class="text-lg font-semibold mb-2">Table of Contents</h2>
         </slot>
-        <ul>
-            <li v-for="(heading, index) in headings" :key="index">
-                <NuxtLink :to="getLink(heading[1] as any)" class="text-sm no-underline hover:underline scroll-smooth"
-                :style="{ marginLeft: getMargin(heading[0]) }">
-                    <span>
-                        {{ heading.length > 3 ? heading[3] : heading[2] }}
-                    </span>
-                </NuxtLink>
-            </li>
-        </ul>
+        <ol>
+            <TableOfContentsItem v-for="(item, index) in headings" :key="index"
+                :heading="item.tag.length > 3 ? item.tag[3] : item.tag[2]" :link="getLink(item.tag as any)"
+                :children="item.children" />
+        </ol>
     </nav>
 </template>
