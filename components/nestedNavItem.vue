@@ -21,7 +21,6 @@ const getNameOfPath = (path: string) => {
 }
 
 const toggleOpen = (item: ContentNavigationItem) => {
-    console.log('toggling', item);
     item.open = !item.open;
 }
 

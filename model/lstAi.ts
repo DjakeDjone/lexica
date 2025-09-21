@@ -72,9 +72,8 @@ export const genGehaltInputByAi = async (text: string, ai: Ai) => {
         },
         stop: null,
         });
-        const response = answer.choices[0].message.content;
-        console.log(response);
-        return JSON.parse(response) as LstDataIn;
+        const response = answer.choices[0]!.message.content;
+        return JSON.parse(response!) as LstDataIn;
     } catch (error) {
         console.error(error);
         throw new Error("Could not generate Gehalt Input");

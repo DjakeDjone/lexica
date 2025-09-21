@@ -82,7 +82,6 @@ export const scoreSection = (section: any, query: string): number => {
         score += 5;
     }
     const MIN_SCORE = 5;
-    console.log(`Section: ${section.title}, Score: ${score}`);
     if (score < MIN_SCORE) {
         return 0;
     }
@@ -185,6 +184,5 @@ export const openLink = async (link: string, event: any): Promise<SearchResult |
     if (link.includes('#')) {
         link = link.split('#')[0];
     }
-    console.log("Opening link:", link);
     return await queryCollection(event, 'docs').path(link).first();
 };

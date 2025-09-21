@@ -56,7 +56,6 @@ const searchEvent = async (e: KeyboardEvent | MouseEvent) => {
     if (e instanceof KeyboardEvent && e.shiftKey) return;
     e.preventDefault();
     if (selected.value > 0 && e instanceof KeyboardEvent && e.key === 'Enter') {
-        console.log("Selected result:", selected.value, searchResults.value[selected.value]);
         
         const result = searchResults.value[selected.value];
         if (result) {
