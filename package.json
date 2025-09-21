@@ -8,8 +8,8 @@
     "preview": "nuxt preview"
   },
   "dependencies": {
-    "@nuxt/content": "^3.7.0",
-    "@tailwindcss/typography": "^0.5.16",
+    "@nuxt/content": "^3.7.1",
+    "@tailwindcss/typography": "^0.5.18",
     "@tailwindcss/vite": "^4.1.13",
     "better-sqlite3": "^12.2.0",
     "focus-trap": "^7.6.5",
@@ -18,7 +18,7 @@
     "html2canvas-pro": "^1.5.11",
     "html2pdf.js": "^0.12.1",
     "markdown-it": "^14.1.0",
-    "mermaid": "^11.11.0",
+    "mermaid": "^11.12.0",
     "sitemap": "^8.0.0",
     "tailwindcss": "^4.1.13"
   },
@@ -27,7 +27,7 @@
     "@nuxt/icon": "^2.0.0",
     "@types/markdown-it": "^14.1.2",
     "@vueuse/nuxt": "^13.9.0",
-    "daisyui": "^5.1.12",
+    "daisyui": "^5.1.13",
     "katex": "^0.16.22",
     "nuxt": "^4.1.2",
     "nuxt-icon": "1.0.0-beta.7",
