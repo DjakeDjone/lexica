@@ -86,3 +86,26 @@ Gibt an, wie viele Tage die Ware im Durchschnitt im Lager liegt.
 $$
 \text{Lagerumschlagsdauer} = \frac{365}{\text{Lagerumschlagshäufigkeit}}
 $$
+
+### Debitorenumschlagshäufigkeit
+
+Gibt an, wie oft sich die Forderungen während eines Jahres erneuern
+
+$$
+Debitorenumschlagshäufigkeit = \frac{\text{Umsatz} + \text{Umsatzsteuer}}{\text{Durchschnittliche Lieferforderungen}}
+$$
+
+### Debitorenumschlagsdauer
+
+Gibt die durchschnittliche Frist an, innerhalb derer die Lieferforderungen beglichen werden.
+
+$$
+Debitorenumschlagsdauer = \frac{365}{\text{Debitorenumschlagshäufigkeit}}
+$$
+
+>**Interpretation:**
+>
+> Eine **niedrige** Debitorenumschlagsdauer ist **gut**, weil sie kurzzeitige Zahlungsschwierigkeiten ausgleichen kann.
+
+### Kreditumschlagshäufigkeit
+
