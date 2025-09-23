@@ -1,4 +1,16 @@
-# **Titel: DNS**
+---
+generateTableOfContents: true
+title: "DNS"
+protocolAufgabenNr: 01
+protocolKlasse: "5AHIF"
+protocolName: "Benjamin Friedl"
+protocolGruppe: 1
+protocolAbgabetermin: "16.9.2025"
+protocolAbgabedatum: "16.9.2025"
+description: "Aufgabe zur Konfiguration eines DNS-Servers mit verschiedenen Einträgen."
+---
+
+<!-- # **Titel: DNS**
 
 | **AufgabenNr:** | 01 |
 |---|:---|
@@ -10,83 +22,7 @@
 
 ## **Kurzbeschreibung:**
 
-Aufgabe zur Konfiguration eines DNS-Servers mit verschiedenen Einträgen.
-
----
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-
-## Inhaltsverzeichnis
-
-::Inhaltsverzeichnis
-::
-
----
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
+Aufgabe zur Konfiguration eines DNS-Servers mit verschiedenen Einträgen. -->
 
 ## Bind
 
@@ -185,3 +121,70 @@ or to read the newest logs
 ```bash
 sudo journalctl -u bind9 -f
 ```
+
+## Sekundär DNS Server
+
+Einrichtung eines sekundären DNS-Servers:
+
+[Ubuntu Docs: Einrichtung eines Sekundären Nameservers](https://wiki.ubuntuusers.de/DNS-Server_Bind/Sekund%C3%A4re_Nameserver/)
+
+> Warum einen Sekundären DNS-Server?
+>
+> Ein Sekundärer DNS-Server dient als Backup für den Primären DNS-Server. Falls der Primäre DNS-Server ausfällt oder nicht erreichbar ist, kann der Sekundäre DNS-Server weiterhin DNS-Anfragen beantworten und die Verfügbarkeit der Domain gewährleisten.
+
+### Änderungen auf dem primären Server
+
+
+
+### Einrichtung des sekundären Servers
+
+edit `/etc/bind/named.conf.options`
+
+```text
+allow-notify { 10.139.0.128; };
+```
+
+and edit `/etc/bind/named.conf.local`
+
+notes:
+
+```text
+zone "hacker.lan" {
+        type slave;
+        masters { 10.139.0.128; };
+        file "back/hacker.lan.bak";
+};
+
+<!-- zone "0.168.192.in-addr.arpa" {
+        type slave;
+        masters { 10.139.0.128; };
+        file "back/0.168.192.bak";
+} -->
+```
+
+Create the backup directory and set the correct permissions:
+
+```bash
+sudo mkdir /var/cache/bind/back
+sudo chown bind /var/cache/bind/back
+```
+
+then restart bind9
+
+```bash
+sudo systemctl restart bind9
+```
+
+### Testen des sekundären Servers
+
+To test the secondary DNS server, you can use the `dig` command to query the secondary server for records from the primary zone.
+
+```bash
+dig @<IP_ADDRESS_OF_SECONDARY_DNS_SERVER> hacker.lan
+```
+
+```bash
+dig @10.139.0.125 hacker.lan
+```
+
+![test with dig](image-1.png)
