@@ -134,7 +134,12 @@ Einrichtung eines sekundären DNS-Servers:
 
 ### Änderungen auf dem primären Server
 
+edit `/etc/bind/named.conf.options`
 
+```text
+allow-transfer { 10.139.0.125; };
+notify yes;
+```
 
 ### Einrichtung des sekundären Servers
 
@@ -187,4 +192,4 @@ dig @<IP_ADDRESS_OF_SECONDARY_DNS_SERVER> hacker.lan
 dig @10.139.0.125 hacker.lan
 ```
 
-![test with dig](image-1.png)
+![test with dig](/public/images/dig-dns.png)
