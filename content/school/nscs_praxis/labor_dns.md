@@ -141,6 +141,32 @@ allow-transfer { 10.139.0.125; };
 notify yes;
 ```
 
+edit also: `/etc/bind/db.hacker.lan`
+so the changes are replicated to the secondary server
+
+```text
+;; db.hacker.lan  
+;; Forwardlookupzone für hacker.lan  
+;;  
+$TTL 2D  
+@       IN      SOA     ns.hacker.lan. mail.hacker.lan. (  
+                        2025091603      ; Serial  
+                                8H      ; Refresh  
+                                2H      ; Retry  
+                                4W      ; Expire  
+                                3H )    ; NX (TTL Negativ Cache)  
+@                               IN      NS      ns.hacker.lan.  
+@                               IN      NS      ns2.hacker.lan.  
+                                IN      MX      10 mailserver.hacker.lan.  
+                                IN      A       192.168.0.24  
+                                IN      AAAA    2001:db8::1  
+ns                              IN      A       192.168.0.24  
+ns2                             IN      A       10.139.0.125  
+rechner1                        IN      A       192.168.0.200  
+mailserver                      IN      A       192.168.0.201  
+rechner2                        IN      CNAME   mailserver  
+```
+
 ### Einrichtung des sekundären Servers
 
 edit `/etc/bind/named.conf.options`
@@ -192,4 +218,8 @@ dig @<IP_ADDRESS_OF_SECONDARY_DNS_SERVER> hacker.lan
 dig @10.139.0.125 hacker.lan
 ```
 
-![test with dig](/public/images/dig-dns.png)
+![test with dig](/images/dig-dns.png)
+
+sobald jetzt ein eintrag auf dem primären server geändert wird, wird dieser automatisch auf den sekundären server repliziert:
+
+![logs](/images/dns-logs.png)
