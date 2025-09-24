@@ -222,3 +222,46 @@ $$
 ![Gewinn/Verlust Kennzahlen](/images/kennzahlen-gewinn-verlust.png)
 
 weitere Begriffe auf Seite 212
+
+### Rentabilitätsanalyse
+
+$$
+Rentabilität des Eigenkapitals = \frac{\text{Ergebnis vor Steuern}}{\text{Eigenkapital}} * 100%
+$$
+
+Interpretation: für den Vergleich mit anderen Investitionsmöglichkeiten (z.B. Wertpapiere) -> soll das Unternehmen behalten werden (aus wirtschaftlicher Sicht)
+
+### Rentabilität des Gesamtkapitals
+
+Gibt die Verzinsung des gesamten eingesetzten Kapitals an
+
+$$
+Rentabilität des Gesamtkapitals = \frac{\text{Ergebnis vor Steuern + Fremdkapitalzinsen}}{\text{Durchschnittliches Gesamtkapital}} * 100%
+$$
+
+**Interpretation**: Eine hohe Rentabilität ist vorteilhaft, da sie auf eine effiziente Nutzung des Kapitals hinweist.
+
+> ### Leverage Effekt
+>
+> Ist die Rentabilität des Eigenkapitals höher als die des Gesamtkapitals, so spricht man vom Leverage Effekt.
+> Dies bedeutet, dass durch den Einsatz von Fremdkapital die Eigenkapitalrentabilität gesteigert wird.
+
+### Umsatzrentabilität
+
+Gibt an, wie viel Gewinn aus dem Umsatz erzielt wird.
+
+$$
+Umsatzrentabilität = \frac{\text{Ergebnis vor Steuern} + \text{Fremdkapitalzinsen}}{\text{Umsatz}} * 100%
+$$
+
+In der Regel hat ein größeres Unternehmen eine niedrigere Umsatzrentabilität als ein kleines Unternehmen.
+
+Bei großen Unternehmen sollte sie zwischen 1-3% liegen, bei kleinen Unternehmen zwischen 5-6%. Wichtig ist der Vergleich mit anderen Unternehmen der gleichen Branche.
+
+### Return on Investment (ROI)
+
+Die Rentabilität des eingesetzten Kapitals
+
+$$
+ROI = \text{Umsatzrentabilität} * \text{Kapitalumschlagshäufigkeit}
+$$
