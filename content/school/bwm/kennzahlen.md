@@ -32,7 +32,7 @@ $$
 Finanzanalyse (Passiva)
 ---
 
-### Enteil des Eigenkapitals (Eigenkapitalquote)
+### Anteil des Eigenkapitals (Eigenkapitalquote)
 
 $$
 \text{Anteil des Eigenkapitals} = \frac{\text{Eigenkapital}}{\text{Gesamtkapital}} \cdot 100
@@ -151,7 +151,7 @@ $$
 
 Ein positives Kapital, ca 30-50% des Umlaufvermögens wird als positiv angesehen.
 
-### Cashflow:
+### Cashflow
 
 Der Cashflow ist die Summe aus Jahresüberschuss und Abschreibungen.
 
@@ -166,16 +166,6 @@ Cashflow in \% der Betriebsleistung = \frac{Cashflow}{Betriebsleistung} * 100
 $$
 
 Interpretation: Ein hoher Cashflow in % der Betriebsleistung ist positiv, da er auf eine gute Liquidität hinweist.
-
-### Fiktive Schuldentilgungsdauer
-
-$$
-Fiktive Schuldentilgungsdauer = \frac{Fremdkapital - Zahlungsmittel
-}{Cashflow} \text{ in Jahren}
-$$
-- Zahlungsmittel = Kassa + Bank + Schecks
-- Fremdkapital = Verbindlichkeiten + Rückstellungen
-- Cashflow = meist angegeben
 
 ---
 
