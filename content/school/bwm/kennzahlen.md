@@ -109,3 +109,116 @@ $$
 
 ### Kreditumschlagshäufigkeit
 
+$$
+Kreditumschlagshäufigkeit = \frac{\text{Liefererungen} + \text{Vorsteuer}}{\text{Durchschnittliche Lieferverbindlichkeiten}}
+$$
+
+### Kreditorenumschlagsdauer
+
+$$
+\text{Krediturenumschlagsdauer} = \frac{\text{365}}{\text{Kreditorenumschlagshäufigkeit}}
+$$
+
+Interpredation: Eine **niedrige** Kreditorenumschlagsdauer ist **gut**, weil sie auf eine hohe Zahlungsfähigkeit des Unternehmens hinweist.
+
+### Kapitalumschlagshäufigkeit
+
+$$
+Kapitalumschlagshäufigkeit = \frac{\text{Umsatz}}{\text{Durchschnittliches Gesamtkapital}}
+$$
+
+> Durchschnittliches Gesamtkapital
+>
+> $$
+> \text{Durchschnittliches Gesamtkapital} = \frac{\text{Anfangsbestand} + \text{Endbestand}}{2}
+> $$
+
+## Liquiditätskennzahlen
+
+### Liquidität 2. Grades (Quick Ratio)
+
+$$
+Liquidität 2. Grad = \frac{\text{Zahlungsmittel + kurzfristig gebundene s Vermögen}}{\text{Kurzfristige Verbindlichkeiten}} * 100
+$$
+
+Liquidität sollte mindestens 100% betragen.
+
+### Working Capital
+
+$$
+Working Capital = \text{Umlaufvermögen} - \text{Kurzfristige Verbindlichkeiten} * 100
+$$
+
+Ein positives Kapital, ca 30-50% des Umlaufvermögens wird als positiv angesehen.
+
+### Cashflow:
+
+Der Cashflow ist die Summe aus Jahresüberschuss und Abschreibungen.
+
+$$
+Cashflow = Jahresüberschuss + Abschreibungen
+$$
+
+### Cashflow in % der Betriebsleistung
+
+$$
+Cashflow in \% der Betriebsleistung = \frac{Cashflow}{Betriebsleistung} * 100
+$$
+
+Interpretation: Ein hoher Cashflow in % der Betriebsleistung ist positiv, da er auf eine gute Liquidität hinweist.
+
+### Fiktive Schuldentilgungsdauer
+
+$$
+Fiktive Schuldentilgungsdauer = \frac{Fremdkapital - Zahlungsmittel
+}{Cashflow} \text{ in Jahren}
+$$
+- Zahlungsmittel = Kassa + Bank + Schecks
+- Fremdkapital = Verbindlichkeiten + Rückstellungen
+- Cashflow = meist angegeben
+
+---
+
+## Erfolgswirtschaftliche Ziele (S. 209)
+
+![Erfolgswirtschaftliche Ziele](/images/erflogswirtschaftliche-ziele.png)
+
+### Material-bzw. Warenintensität
+
+$$
+Material- bzw. Warenintensität = \frac{Materialaufwand}{Betriebsleistung} * 100
+$$
+
+### Personalintensität
+
+$$
+Personalintensität = \frac{Personalaufwand}{Betriebsleistung} * 100
+$$
+
+Grobe Richtwerte besagen, dass die Personal- und Materialintensität zusammen nicht über 70% liegen sollte, bei Groß und Einzelhandel eher nicht über 80%.
+
+### Umsatzkennzahlen
+
+$$
+Umsatz je Mitarbeiter = \frac{Umsatz}{Anzahl der Mitarbeiter}
+$$
+
+### Handelsspanne und Rohaufschlag
+
+Die Handelsspanne gibt an, wie viel Prozent des Verkaufspreises den Wareneinsatz übersteigt.
+
+$$
+Handelsspanne = \frac{\text{Bruttogewinn}}{\text{Erlöse} - \text{Retourwaren}} * 100
+$$
+
+Der Rohaufschlag gibt an, um wie viel Prozent der Wareneinsatz erhöht werden muss, um den Verkaufspreis zu erhalten.
+
+$$
+Rohaufschlag = \frac{\text{Bruttogewinn}}{\text{Wareneinsatz}} * 100
+$$
+
+### Gewinn/Verlust
+
+![Gewinn/Verlust Kennzahlen](/images/kennzahlen-gewinn-verlust.png)
+
+weitere Begriffe auf Seite 212
