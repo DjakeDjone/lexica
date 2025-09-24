@@ -64,6 +64,11 @@ const downloadPdf = () => {
 </template>
 
 <style>
+html {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+}
+
 @media print {
 
     /* new page after hr */
@@ -92,9 +97,9 @@ const downloadPdf = () => {
     /* h2:not(.no-page-break) {
         page-break-before: always;
     } */
-     /* table of contents and h2 after table of contents */
-     .table-of-contents,
-        .table-of-contents + * {
+    /* table of contents and h2 after table of contents */
+    .table-of-contents,
+    .table-of-contents+* {
         page-break-before: always;
     }
 
@@ -117,6 +122,10 @@ const downloadPdf = () => {
         left: 0;
         top: 0;
         width: 100%;
+    }
+
+    .pre {
+        background-color: #545454 !important;
     }
 }
 </style>

@@ -12,7 +12,6 @@ const route = useRoute();
 
 const setPath = (newPath: string) => {
     console.log('setPath', newPath);
-    // replace suffixes of viewPages
     let basePath = newPath;
     for (const page of viewPages) {
         if (basePath.endsWith(page.pathSuffix) && page.pathSuffix !== '') {
@@ -33,7 +32,7 @@ watch(() => route.path, (newPath) => {
 
 <template>
     <nav class="flex gap-4 mb-4 *:btn *:btn-sm">
-        <NuxtLink v-for="page in viewPages" :key="page.name" :to="`${filePath}${page.pathSuffix}`">{{ page.name }}
+        <NuxtLink v-for="page in viewPages" :key="page.name" :to="`${filePath === '/' ? '' : filePath}${page.pathSuffix}`">{{ page.name }}
         </NuxtLink>
     </nav>
 </template>

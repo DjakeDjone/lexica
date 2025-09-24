@@ -51,10 +51,39 @@ math {
         width: fit-content;
         margin-bottom: 1rem;
         margin-top: 1rem;
-
 }
+
+/* .prose pre {
+        width: fit-content;
+        max-width: 100%;
+        min-width: 50rem;
+} */
+/* .prose {
+        max-width: 80ch;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 1rem;
+        padding-right: 1rem;
+} */
+ /* TODO: fix layout */
 
 .katex-html {
         font-size: .8rem;
         opacity: .8;
+}
+
+.prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+        scroll-margin-top: 6rem;
+}
+
+/* a inside h1, h2... no underline */
+.prose h1 a, .prose h2 a, .prose h3 a, .prose h4 a, .prose h5 a, .prose h6 a {
+        text-decoration: none;
+        color: inherit;
+}
+
+/* add a '#' after the h1, h2... on hover */
+.prose h1 a:hover::after, .prose h2 a:hover::after, .prose h3 a:hover::after, .prose h4 a:hover::after, .prose h5 a:hover::after, .prose h6 a:hover::after {
+        content: "#";
+        margin-left: 0.5rem;
 }
