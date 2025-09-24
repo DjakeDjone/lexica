@@ -20,4 +20,3 @@ allwissend, steht über den Dingen, objektiv
 berichtet sachlich, ohne Kommentare, Gefühle und Gedanken der Figuren bleiben verborgen
 
 > kann auch als 'neutrale Erzählperspektive' bezeichnet werden
-
