@@ -52,7 +52,7 @@ const getLink = (tags: {
 <template>
     <nav class="table-of-contents">
         <slot name="title">
-            <h2 class="text-lg font-semibold mb-2">Table of Contents</h2>
+            <h2 class="text-2xl font-semibold mb-2">Table of Contents</h2>
         </slot>
         <ol>
             <TableOfContentsItem v-for="(item, index) in headings" :key="index"
