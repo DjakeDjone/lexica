@@ -41,10 +41,10 @@ const headings = computed(() => {
     return buildTree(flat);
 });
 
-const getLink = (text: {
-    id: string
+const getLink = (tags: {
+    [key: number]: { id: string }
 }) => {
-    return `#${text.id}`;
+    return `#${tags[1]!.id}`;
 }
 
 </script>
