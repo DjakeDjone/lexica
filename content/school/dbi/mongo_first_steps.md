@@ -10,6 +10,8 @@ protocolDescription: "Erste Schritte mit MongoDB, das Erstellen einer Datenbank,
 ---
 ## Verbindung zu MongoDB herstellen
 
+Die MongoDB shell ist basically eine JavaScript-Umgebung, die speziell für die Interaktion mit MongoDB-Datenbanken entwickelt wurde. Sie ermöglicht es, Datenbankoperationen durchzuführen, Abfragen zu schreiben und administrative Aufgaben zu erledigen.
+
 Shell:
 
 ```fish
@@ -25,6 +27,8 @@ show dbs
 ![mongoshell welcome](/images/mongosh_welcome_screen.png)
 
 ## Eine neue Collection erstellen
+
+Eine neue Collection in der Datenbank wird mit dem Befehl db.createCollection() erstellt. Dies legt eine strukturierte Sammlung von Dokumenten an, mit optionalen Parametern für spezielle Eigenschaften wie begrenzte Größe, Validierung oder Time-Series-Unterstützung.
 
 ```js
 db.createCollection(<name>, <options>)
@@ -42,18 +46,22 @@ Optionen (nicht alle):
 
 ## Viele Documents einfügen
 
+Mehrere Dokumente werden gleichzeitig in eine Collection mit db.collection.insertMany() eingefügt. Dies ist effizient für Bulk-Inserts und unterstützt Optionen wie geordnetes Einfügen oder das Fortfahren bei Fehlern.
+
 ```js
 db.news.insertMany(<object[]>, options)
 ```
 
 options:
 
-- ordered: boolean, wenn true (Standard), bricht den Vorgang ab, wenn ein Fehler auftritt; wenn false, fährt fort und überspringt fehlerhafte Inserts
+- ordered: boolean, wenn true (Standard), bricht der Vorgang ab, wenn ein Fehler auftritt; wenn false, fährt fort und überspringt fehlerhafte Inserts
 - comment: any, ein optionaler Kommentar zu dem Insert
 
 ![insert many](/images/insert_many_documents.png)
 
 ## Document finden
+
+Dokumente in einer Collection werden mit db.collection.find() gesucht und abgerufen. Dies filtert Dokumente basierend auf Kriterien und unterstützt Optionen für Projektion, Sortierung und Begrenzung der Ergebnisse.
 
 ```js
 db.posts.find( { field: value, ... }, <options> )
@@ -69,6 +77,8 @@ options:
 
 ## Advanced Find Queries mit Regular Expressions
 
+Für erweiterte Suchen mit Mustern, wie z.B. Textübereinstimmungen, werden reguläre Ausdrücke in db.collection.find() verwendet. Dies ermöglicht flexible Abfragen, z.B. nach Titeln, mit Optionen für Groß-/Kleinschreibung.
+
 ```js
 db.posts.find( { title: { $regex: /pattern/, $options: 'i' } } )
 ```
@@ -80,6 +90,8 @@ db.posts.find( { title: { $regex: /Post/, $options: 'i' } } )
 ```
 
 ## Document aktualisieren
+
+Ein einzelnes Dokument wird mit db.collection.updateOne() aktualisiert. Dies ändert spezifische Felder basierend auf einem Filter und kann optional ein neues Dokument erstellen, wenn keines gefunden wird.
 
 ```js
 db.posts.updateOne(
@@ -109,12 +121,14 @@ andere optionen:
 
 ## Document löschen
 
+Mehrere Dokumente, die einem Filter entsprechen, werden mit db.collection.deleteMany() gelöscht. Dies entfernt alle passenden Dokumente und unterstützt Optionen wie das Löschen nur eines Dokuments.
+
 ```js
 db.posts.deleteMany( { category: "News" } )
 ```
 
 options:
 
-- justOne: boolean, wenn true, löscht nur ein Document, das dem Filter entspricht (nur bei deleteMany)
+- justOne: boolean, wenn true, löscht nur ein Document, das dem Filter entsprecht (nur bei deleteMany)
 
 ![delete many](/images/delete_news_category_documents.png)
