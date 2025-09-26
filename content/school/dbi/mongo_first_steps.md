@@ -1,6 +1,10 @@
 ---
 title: "Erste Schritte mit MongoDB"
 protocolAbgabedatum: "19.09.2025"
+protocolAufgabenNr: 02
+protocolKlasse: "5AHIF"
+protocolName: "Benjamin Friedl"
+protocolGruppe: "1"
 protocolAbgabetermin: "19.09.2025" # TODO
 protocolDescription: "Erste Schritte mit MongoDB, das Erstellen einer Datenbank, das Einfügen von Documents und das einfache Abfragen von Daten."
 ---
@@ -19,7 +23,7 @@ und zeige alle verfügbaren Datenbanken an:
 show dbs
 ```
 
-![mongoshell welcome](/imagesmongosh_welcome_screen.png)
+![mongoshell welcome](/images/mongosh_welcome_screen.png)
 
 ### Eine neue Collection erstellen
 
@@ -35,7 +39,7 @@ Optionen (nicht alle):
 - timeseries: object, wenn angegeben, erstellt eine Time-Series-Collection mit den gegebenen Optionen
 - validator: object, JSON Schema zur Validierung von Documents in der Collection
 
-![create Collection](/imagescreate_collection_news.png)
+![create Collection](/images/create_collection_news.png)
 
 ### Viele Documents einfügen
 
@@ -48,7 +52,7 @@ options:
 - ordered: boolean, wenn true (Standard), bricht den Vorgang ab, wenn ein Fehler auftritt; wenn false, fährt fort und überspringt fehlerhafte Inserts
 - comment: any, ein optionaler Kommentar zu dem Insert
 
-![insert many](/imagesinsert_many_documents.png)
+![insert many](/images/insert_many_documents.png)
 
 ### Document finden
 
@@ -62,7 +66,19 @@ options:
 - sort: object, um die Ergebnisse zu sortieren (1 aufsteigend, -1 absteigend)
 - limit: number, um die Anzahl der zurückgegebenen Documents zu begrenzen
 
-![find documents](/imagesfind_by_category_technology.png)
+![find documents](/images/find_by_category_technology.png)
+
+### Advanced Find Queries mit Regular Expressions
+
+```js
+db.posts.find( { title: { $regex: /pattern/, $options: 'i' } } )
+```
+
+z.B.
+
+```js
+db.posts.find( { title: { $regex: /Post/, $options: 'i' } } )
+```
 
 ### Document aktualisieren
 
@@ -73,7 +89,7 @@ db.posts.updateOne(
 )
 ```
 
-![update documents](/imagesupdate_document_title.png)
+![update documents](/images/update_document_title.png)
 
 Wenn das Dokument nicht existiert und du es erstellen möchtest, verwende `upsert: true`
 
@@ -85,7 +101,12 @@ db.posts.updateOne(
 )
 ```
 
-![update documents with upsert](/imagesupdate_with_upsert_option.png)
+![update documents with upsert](/images/update_with_upsert_option.png)
+
+andere optionen:
+
+- multi: boolean, wenn true, aktualisiert mehrere Documents, die dem Filter entsprechen (nur bei updateMany)
+- arrayFilters: array, um Bedingungen für Array-Elemente in der Aktualisierung zu spezifizieren
 
 ### Document löschen
 
@@ -93,4 +114,8 @@ db.posts.updateOne(
 db.posts.deleteMany( { category: "News" } )
 ```
 
-![delete many](/imagesdelete_news_category_documents.png)
+options:
+
+- justOne: boolean, wenn true, löscht nur ein Document, das dem Filter entspricht (nur bei deleteMany)
+
+![delete many](/images/delete_news_category_documents.png)
