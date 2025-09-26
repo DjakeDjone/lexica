@@ -6,8 +6,11 @@ export default defineContentConfig({
       type: 'page',
       source: '**/*.md',
       schema: z.object({
-        rawbody: z.string(),
+        // rawbody: z.string(),
         generateTableOfContents: z.boolean().default(false),
+
+        tags: z.array(z.string()).default([]),
+        test: z.string().optional(),
 
         klasse: z.string().optional(),
         jahrgang: z.number().optional(),

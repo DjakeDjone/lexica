@@ -42,7 +42,7 @@ export const extraPages = [
 
 export const extendSearchResults = (results: SearchResult[]): SearchResult[] => {
     const extendedResults = [...results];
-    
+
     // add extra pages if they are not already in results
     extraPages.forEach(page => {
         if (!extendedResults.find(r => r.id === page.id)) {
@@ -56,7 +56,7 @@ export const extendSearchResults = (results: SearchResult[]): SearchResult[] => 
     return extendedResults;
 }
 
-export const scoreSection = (section: any, query: string): number => {
+export const scoreSection = (section: SearchResult, query: string): number => {
     const words = query.split(/\s+/).filter(w => w.length > 0);
     const wordScores = words.map(word => {
         const fuse = new Fuse([section], {
@@ -81,6 +81,21 @@ export const scoreSection = (section: any, query: string): number => {
     if (titleMatch) {
         score += 5;
     }
+
+    // boost score for tag matches
+    // const tags = section.tags || [];
+    // if (section.id === '/') {
+    //     console.log('Section tags:', tags, section);
+    // }
+    // const tagMatch = words.some(word =>
+    //     tags.some((tag: string) =>
+    //         tag.toLowerCase().includes(word.toLowerCase())
+    //     )
+    // );
+    // if (tagMatch) {
+    //     score += 6;
+    // }
+
     const MIN_SCORE = 5;
     if (score < MIN_SCORE) {
         return 0;

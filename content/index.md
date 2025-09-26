@@ -1,3 +1,8 @@
+---
+title: Welcome to Lexica
+tags: [welcome, home, intro, news]
+test: optional test field
+---
 # WELCOME TO LEXICA
 
 View my markdowns and use my calculators!
