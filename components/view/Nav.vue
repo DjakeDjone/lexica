@@ -1,9 +1,9 @@
 <script setup lang="ts">
 
-const filePath = defineModel<string>('filePath', { type: String, default: '/' });
+const filePath = defineModel<string>('filePath');
 
 const viewPages = [
-    { name: 'MD', pathSuffix: '' },
+    { name: 'MD', pathSuffix: '/' },
     { name: 'Protocol', pathSuffix: '/protocol' },
     { name: 'Learn Math', pathSuffix: '/learn-math' },
     { name: 'Learn Cards', pathSuffix: '/learn-cards' },
@@ -21,6 +21,9 @@ const setPath = (newPath: string) => {
         }
     }
     console.log('basePath', basePath);
+    if (basePath === '') {
+        basePath = '/';
+    }
     filePath.value = basePath;
 }
 
@@ -33,7 +36,9 @@ watch(() => route.path, (newPath) => {
 
 <template>
     <nav class="flex gap-4 mb-4 *:btn *:btn-sm">
-        <NuxtLink v-for="page in viewPages" :key="page.name" :to="`${filePath === '/' ? '' : filePath}${page.pathSuffix}`">{{ page.name }}
+        Path: {{ filePath }}
+        <NuxtLink v-for="page in viewPages" :key="page.name"
+            :to="`${filePath === '/' ? '' : filePath}${page.pathSuffix}`">{{ page.name }}
         </NuxtLink>
     </nav>
 </template>
