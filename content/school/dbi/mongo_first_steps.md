@@ -8,7 +8,6 @@ protocolGruppe: "1"
 protocolAbgabetermin: "19.09.2025" # TODO
 protocolDescription: "Erste Schritte mit MongoDB, das Erstellen einer Datenbank, das Einfügen von Documents und das einfache Abfragen von Daten."
 ---
-
 ## Verbindung zu MongoDB herstellen
 
 Shell:
@@ -25,7 +24,7 @@ show dbs
 
 ![mongoshell welcome](/images/mongosh_welcome_screen.png)
 
-### Eine neue Collection erstellen
+## Eine neue Collection erstellen
 
 ```js
 db.createCollection(<name>, <options>)
@@ -41,7 +40,7 @@ Optionen (nicht alle):
 
 ![create Collection](/images/create_collection_news.png)
 
-### Viele Documents einfügen
+## Viele Documents einfügen
 
 ```js
 db.news.insertMany(<object[]>, options)
@@ -54,7 +53,7 @@ options:
 
 ![insert many](/images/insert_many_documents.png)
 
-### Document finden
+## Document finden
 
 ```js
 db.posts.find( { field: value, ... }, <options> )
@@ -68,7 +67,7 @@ options:
 
 ![find documents](/images/find_by_category_technology.png)
 
-### Advanced Find Queries mit Regular Expressions
+## Advanced Find Queries mit Regular Expressions
 
 ```js
 db.posts.find( { title: { $regex: /pattern/, $options: 'i' } } )
@@ -80,7 +79,7 @@ z.B.
 db.posts.find( { title: { $regex: /Post/, $options: 'i' } } )
 ```
 
-### Document aktualisieren
+## Document aktualisieren
 
 ```js
 db.posts.updateOne(
@@ -108,7 +107,7 @@ andere optionen:
 - multi: boolean, wenn true, aktualisiert mehrere Documents, die dem Filter entsprechen (nur bei updateMany)
 - arrayFilters: array, um Bedingungen für Array-Elemente in der Aktualisierung zu spezifizieren
 
-### Document löschen
+## Document löschen
 
 ```js
 db.posts.deleteMany( { category: "News" } )
