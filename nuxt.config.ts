@@ -1,9 +1,14 @@
 import tailwindcss from "@tailwindcss/vite";
+import { remarkeImageFixerPlugin } from './utils/remarkImageFixer';
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
   preset: 'vercel',
+
+  alias: {
+    'imgs': '/content/images',
+  },
 
   modules: ['@nuxt/content', '@formkit/auto-animate', '@vueuse/nuxt', '@nuxt/icon'],
 
@@ -26,7 +31,8 @@ export default defineNuxtConfig({
 
       markdown: {
         remarkPlugins: {
-          'remark-math': require('remark-math')
+          'remark-math': require('remark-math'),
+          'remark-image-fixer': remarkeImageFixerPlugin,
         },
         rehypePlugins: {
           'rehype-katex': require('rehype-katex')

@@ -1,0 +1,191 @@
+{
+  "main": {
+    "id": "7c2908da1d15bd82",
+    "type": "split",
+    "children": [
+      {
+        "id": "5b3eca8edc020b95",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "c5b031522b4647d9",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "dev/Test.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Test"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "01eff1cad451ecb5",
+    "type": "split",
+    "children": [
+      {
+        "id": "beb781a298152eca",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f14d6df295ab9006",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "d89d27946a6e2903",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "a0907056cdf7bf49",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "0df07d94a1ceb124",
+    "type": "split",
+    "children": [
+      {
+        "id": "514e8575fd42d558",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "6b83b4703e10006e",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "dev/Test.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for Test"
+            }
+          },
+          {
+            "id": "e1a3ab7b473bd812",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "dev/Test.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from Test"
+            }
+          },
+          {
+            "id": "78f82c48b4c5d692",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "ad74a1c2953fcbef",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "dev/Test.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of Test"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "c5b031522b4647d9",
+  "lastOpenFiles": [
+    "images/image.png.png",
+    "images/tcp.png.md",
+    "Pasted image 20250926145524.png",
+    "dev/Test.md",
+    "images/Pasted image 20250926152055.png",
+    "images",
+    "school/math/differenzialrechnung.md",
+    "school/math/5_hü.pdf",
+    "school/dbi/4_klasse_3_test.md",
+    "summarized/nscs/1-tcp.md",
+    "summarized/nscs/index.md",
+    "summarized/nscs/X-active-directory.md",
+    "summarized/nscs/0-iso-osi-schichtenmodell.md",
+    "dev/index.md",
+    "school/nw/schwingungen.md",
+    "school/nscs/ospf_uebung.md"
+  ]
+}
