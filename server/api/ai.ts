@@ -8,12 +8,26 @@ export default defineEventHandler(async (event) => {
     const history = body.history as { role: 'user' | 'system' | 'assistant'; content: string }[] || [];
     const context = body.context as string[] | undefined;
     const withoutContext = body.withoutContext as boolean | undefined;
+    const useTools = body.useTools as boolean | undefined; // New parameter to enable tool-based search
+    const model = body.model as string | undefined;
 
     if (!question) {
         throw createError({ statusCode: 400, statusMessage: 'Question is required' });
     }
 
-    const { response: aiResponse, relevantSections } = await askLLM(question, history, event, context, withoutContext);
+    const aiSettings = {
+        model,
+        useTools: useTools ?? false // Default to false for backward compatibility
+    };
+
+    const { response: aiResponse, relevantSections } = await askLLM(
+        question, 
+        history, 
+        event, 
+        context, 
+        withoutContext,
+        aiSettings
+    );
     const readable = await createAiStream(aiResponse, relevantSections);
 
     return sendStream(event, readable);

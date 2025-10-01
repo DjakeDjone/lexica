@@ -1,3 +1,5 @@
+import { useStorage } from '@vueuse/core';
+
 export type ChatMessage = {
     role: 'user' | 'system' | 'assistant';
     content: string;
@@ -10,6 +12,7 @@ export const useAiHandler = () => {
         loading: false,
     });
     const history = ref<ChatMessage[]>([]);
+    const chats = useStorage<{ id: string; name: string; messages: ChatMessage[] }[]>("<chat-history>", []);
 
 
     const llmHistory = (h: ChatMessage[]) => {
@@ -23,7 +26,7 @@ export const useAiHandler = () => {
         history.value = [];
     }
 
-    const askAi = async (question: string, selectedContext: SearchResult[], autoContext: boolean) => {
+    const askAi = async (question: string, selectedContext: SearchResult[], autoContext: boolean, useTools: boolean = false, model?: string) => {
         status.value.error = null;
         status.value.loading = true;
 
@@ -41,6 +44,8 @@ export const useAiHandler = () => {
                     history: llmHistory(history.value),
                     context: selectedContext.length > 0 ? selectedContext.map(c => c.id) : undefined,
                     withoutContext: !autoContext,
+                    useTools,
+                    model,
                 })
             });
             if (!response.ok || !response.body) {

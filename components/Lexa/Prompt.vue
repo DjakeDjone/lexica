@@ -13,6 +13,10 @@ const autoContext = defineModel<boolean>("autoContext", {
     required: true,
     default: true
 });
+const useTools = defineModel<boolean>("useTools", {
+    type: Boolean,
+    default: true
+});
 
 const props = defineProps<{
     loading: boolean;
@@ -38,12 +42,20 @@ const selectedContext = defineModel<SearchResult[]>("context");
         <textarea autofocus ref="textarea" v-model="prompt" placeholder="Enter your question here..."
             class="border-none outline-none resize-none w-full p-2 border rounded max-h-48"></textarea>
 
-        <div v-auto-animate id="actions" class="flex justify-end gap-2">
-            <LexaContextSelect v-model="selectedContext" v-model:autoContext="autoContext" />
-            <button class="btn btn-sm btn-primary" :disabled="loading || prompt.trim() === ''" @click="ask()">
-                <Icon name="mdi:send" v-if="!loading" class="-rotate-90" />
-                <Icon name="mdi:loading" v-else class="animate-spin" />
-            </button>
+        <div v-auto-animate id="actions" class="flex justify-between items-center gap-2">
+            <div class="flex items-center gap-2">
+                <label class="label cursor-pointer gap-2">
+                    <input type="checkbox" v-model="useTools" class="toggle toggle-sm toggle-primary" />
+                    <span class="label-text text-xs">AI Search Tools</span>
+                </label>
+            </div>
+            <div class="flex gap-2">
+                <LexaContextSelect v-if="!useTools" v-model="selectedContext" v-model:autoContext="autoContext" />
+                <button class="btn btn-sm btn-primary" :disabled="loading || prompt.trim() === ''" @click="ask()">
+                    <Icon name="mdi:send" v-if="!loading" class="-rotate-90" />
+                    <Icon name="mdi:loading" v-else class="animate-spin" />
+                </button>
+            </div>
         </div>
     </div>
 </template>
