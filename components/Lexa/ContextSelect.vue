@@ -1,10 +1,17 @@
 <script setup lang="ts">
-
+import { onClickOutside
+ } from '@vueuse/core';
 const selectedContext = defineModel<SearchResult[]>();
 const autoContext = defineModel<boolean>("autoContext");
 const showSelect = ref(false);
 const showHoveredContext = ref(false);
 const searchInput = ref<HTMLInputElement | null>(null);
+
+const contextSelectEl = useTemplateRef<HTMLElement>('contextSelectEl');
+
+onClickOutside(contextSelectEl, () => {
+    showSelect.value = false;
+});
 
 const searchWord = ref('');
 const { data: searchResults } = useFetch('/api/search', {
@@ -36,8 +43,8 @@ watch(showSelect, (newVal) => {
 </script>
 
 <template>
-    <div @keydown.enter="showSelect = false" v-if="showSelect"
-        class="absolute bottom-16 bg-base-100 p-4 rounded shadow-lg flex flex-col gap-2">
+    <div v-auto-animate ref="contextSelectEl" @keydown.enter="showSelect = false" v-if="showSelect"
+        class="absolute bottom-12 bg-base-200 backdrop-blur-md p-4 rounded-xl shadow-lg flex flex-col gap-2">
         <h3 class="font-semibold">Select Context
             <button class="btn btn-xs btn-ghost float-right" @click="showSelect = false">
                 <Icon name="mdi:close" class="inline-block" />
@@ -89,17 +96,20 @@ watch(showSelect, (newVal) => {
         </div>
     </div>
     <div v-if="showHoveredContext && !showSelect" id="hover-context"
-        class="absolute bottom-16 bg-base-100 p-4 rounded shadow-lg flex flex-col gap-2">
-        <p class="text-sm text-gray-500">Selected Contexts:</p>
-        <ul class="flex flex-col gap-2">
+        class="absolute bottom-16 bg-base-200 p-4 rounded shadow-lg flex flex-col gap-2">
+        <p class="font-bold text-lg">Selected Contexts:</p>
+        <ul class="flex flex-col gap-2 text-sm">
             <li v-for="context in selectedContext" :key="context.id" class="w-full">
                 <div class="flex items-center justify-between gap-2 w-full">
                     <span>{{ context.title }}</span>
                 </div>
             </li>
+            <li v-if="!selectedContext || selectedContext.length === 0" class="w-full">
+                <span class="text-gray-500 italic">No context selected</span>
+            </li>
         </ul>
     </div>
-    <button class="btn btn-sm rounded-full" @click="showSelect = !showSelect" @mouseover="showHoveredContext = true"
+    <button class="btn btn-sm rounded-full" @click="if (!showSelect) showSelect = true;" @mouseover="showHoveredContext = true"
         @mouseleave="showHoveredContext = false">
         <Icon name="mdi:database" class="inline-block" />
         <span v-if="!autoContext">

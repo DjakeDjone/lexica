@@ -7,6 +7,7 @@ const viewPages = [
     { name: 'Protocol', pathSuffix: '/protocol' },
     { name: 'Learn Math', pathSuffix: '/learn-math' },
     { name: 'Learn Cards', pathSuffix: '/learn-cards' },
+    { name: 'LaTeX', pathSuffix: '/latex' },
 ];
 
 const route = useRoute();

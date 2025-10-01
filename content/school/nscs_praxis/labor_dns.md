@@ -10,20 +10,6 @@ protocolAbgabedatum: "16.9.2025"
 description: "Aufgabe zur Konfiguration eines DNS-Servers mit verschiedenen Einträgen."
 ---
 
-<!-- # **Titel: DNS**
-
-| **AufgabenNr:** | 01 |
-|---|:---|
-| **Klasse:** | 5AHIF |
-| **Name:** | Benjamin Friedl |
-| **Gruppe:** | 1 |
-| **Abgabetermin:** | 16.9.2025 |
-| **Abgabedatum:** | 16.9.2025 |
-
-## **Kurzbeschreibung:**
-
-Aufgabe zur Konfiguration eines DNS-Servers mit verschiedenen Einträgen. -->
-
 ## Bind
 
 ### Install
@@ -223,3 +209,140 @@ dig @10.139.0.125 hacker.lan
 sobald jetzt ein eintrag auf dem primären server geändert wird, wird dieser automatisch auf den sekundären server repliziert:
 
 ![logs](/images/dns-logs.png)
+
+## DNSSEC
+
+### Vorbereitung
+
+```bash
+sudo apt update; sudo apt-get install haveged  bind9utils
+```
+
+### Aufbau
+
+::mermaid
+
+::
+
+### Neue Zone erstellen
+
+name: `secure.friedl.lan`
+
+```bash
+sudo nano /etc/bind/zones/db.secure.friedl.lan
+```
+
+```text
+;; db.secure.friedl.lan
+;; Forwardlookupzone für friedl.lan
+;;
+$TTL 2D
+@       IN      SOA     ns.secure.friedl.lan. mail.secure.friedl.lan. (
+                        2006032201      ; Serial
+                                8H      ; Refresh
+                                2H      ; Retry
+                                4W      ; Expire
+                                3H )    ; NX (TTL Negativ Cache)
+
+@                               IN      NS      ns.secure.friedl.lan.
+                                IN      MX      10 mailserver.secure.friedl.lan.
+                                IN      A       192.168.0.24
+                                IN      AAAA    2001:db8::1
+
+ns                     IN      A       192.168.0.10
+rechner1                        IN      A       192.168.0.200
+mailserver                      IN      A       192.168.0.201
+rechner2                        IN      CNAME   mailserver
+```
+
+### Zonendatei in named.conf.local einbinden
+
+edit `/etc/bind/named.conf.local` (nano)
+
+```conf
+zone "secure.friedl.lan" {
+    type master;
+    file "/etc/bind/zones/db.secure.friedl.lan";
+};
+```
+
+### Schlüssel generieren
+
+Die Schlüssel werden mit dem `dnssec-keygen`-Befehl generiert. Es gibt zwei Arten von Schlüsseln: den Zonen-Signaturschlüssel (ZSK) und den Schlüssel-Signaturschlüssel (KSK).
+
+```bash
+dnssec-keygen -a RSASHA1 -b1024 -e -n ZONE secure.friedl.lan
+dnssec-keygen -a RSASHA1 -b1024 -e -n ZONE -f KSK secure.friedl.lan
+```
+
+- zsk: `Ksecure.friedl.lan.+005+56173`
+- ksk: `Ksecure.friedl.lan.+005+17048`
+
+diese Schlüssel müssen in das Zonendatei eingebunden werden:
+
+```bash
+cat K*.key >>db.secure.friedl.lan
+```
+
+> dieser Command muss mit einer sudo shell ausgeführt werden, da die Datei sonst nicht beschrieben werden kann. (z.B. `sudo fish`)
+> **Wichtig:** Die Schlüsseldateien (K*.private) sollten sicher aufbewahrt werden, da sie zum Signieren der DNS-Zone verwendet werden.
+
+### Zone signieren
+
+```bash
+dnssec-signzone -s now+0 -e now+2419200 -o secure.friedl.lan -k Ksecure.friedl.lan.+005+17048 db.secure.friedl.lan  Ksecure.friedl.lan.+005+56173
+```
+
+![alt text](image-1.png)
+
+Es sollte jetzt eine db.example.com.signed geben. Diese muss in der named.conf.local anstelle der db.example.com eingebunden werden.
+
+nano `/etc/bind/named.conf.local`
+
+```conf
+zone "secure.friedl.lan" {
+    type master;
+    file "/etc/bind/zones/db.secure.friedl.lan.signed";
+}
+```
+
+### Resolver konfigurieren
+
+Damit der Resolver die Signaturen des Masters überprüfen kann muss der KSK des Masters in den Resolver importiert werden. Im Normalfall würde er diese Keys vom Rootnameserver weg bis zur Zielzone überprüfen.
+
+patzls ksk:
+
+```text
+patzl.sec. IN DNSKEY 257 3 5 AwEAAbou11q7Sd0JXjlO8/Zi7mMQ7aCON/dU37n1fymHNocPHDG5Go5u KrEcKSYYhdARRSWNBXp8pFkfGYQR2En+9iSh4kVOLj7rVV+uU2NfU1/g kq/KWDKByGdT+yeyZcbJJTT2d7jHSWf7olfeq64pAyLI5PQRxf6IPoBt N3JAAxpZ
+```
+
+dieser Key muss in die Datei `/etc/bind/named.conf.options` eingefügt werden:
+
+> Vorsicht: Die Anführungszeichen müssen händisch hinzugefügt werden. DNSKEY muss durch initial-key ersetzt werden.
+
+```text
+options {
+        ...
+
+        forwarders {
+                192.168.0.1;
+        }
+}
+trust-anchors {
+        patzl.sec. initial-key 257 3 5 "AwEAAbou11q7Sd0JXjlO8/Zi7mMQ7aCON/dU37n1fymHNocPHDG5Go5u KrEcKSYYhdARRSWNBXp8pFkfGYQR2En+9iSh4kVOLj7rVV+uU2NfU1/g kq/KWDKByGdT+yeyZcbJJTT2d7jHSWf7olfeq64pAyLI5PQRxf6IPoBt N3JAAxpZ";
+};
+```
+
+### Bind9 neu starten
+
+```bash
+sudo systemctl restart bind9
+```
+
+### Testen
+
+```bash
+dig @127.0.0.1 +dnssec patzl.sec
+```
+
+![alt text](image-2.png)

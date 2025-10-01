@@ -62,7 +62,7 @@ const sellectSuggestion = (suggestion: string) => {
                 selectedCategory.slice(1) }} Suggestions</h3> -->
             <ul>
                 <li v-for="(suggestion, index) in suggestions![selectedCategory]" :key="index">
-                    <button class="btn btn-ghost" @click="selectSuggestion(suggestion)">
+                    <button class="btn btn-ghost text-start" @click="selectSuggestion(suggestion)">
                         {{ suggestion }}
                     </button>
                 </li>

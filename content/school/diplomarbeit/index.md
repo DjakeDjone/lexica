@@ -40,7 +40,7 @@ description:
 The amounts of data increase exponentially. Along the most used
 databases are Oracle and Mysql. Those databases are great at storing
 large amounts of data. What they leak in is the ability to select huge
-amounts of data over a long time period. Time series databases fill this 
+amounts of data over a long time period. Time series databases fill this
 gap. They are optimized to store and query large amounts of data over a long
 time period.
 
@@ -59,31 +59,29 @@ $$
 \text{1000} * 31536000 = 31536000000
 $$
 
-That are 31 billion observations, for just one year.
-
-
-## What are time series databases?
+That are 31 billion observations, for just one year. Even if this data doesn't need that much space, it can still lead to performance issues to query it. Time series databases can have a serious performance boost in this scenario.
 
 Time series databases are databases that are specialized and optimized
 for time stamps and data in a big time frame. For example, TimescaleDB,
 a Postgres extension, is able to improve performance to up to 350 times
 faster queries, 44% faster ingests, and 95% storage savings with
 time-series data.
+[@https://www.tigerdata.com/blog/postgresql-timescaledb-1000x-faster-queries-90-data-compression-and-much-more]
 
 ## What is time series data?
 
 Time-series data are a sequence of successive points in time. This could
 be any record with a time stamp. Common examples are as follows.
 
--   IOT sensors
+- IOT sensors
 
--   stock marked information
+- stock marked information
 
--   logs, error rates or request counts
+- logs, error rates or request counts
 
--   weather patterns/climate data
+- weather patterns/climate data
 
--   sales or demand forecasting
+- sales or demand forecasting
 
 # Comparison of the most popular time series databases
 
@@ -91,9 +89,9 @@ be any record with a time stamp. Common examples are as follows.
       Name          Description       Pros   Cons
   ------------- -------------------- ------ ------
     InfluxDB                                
-   TimescaleDB   Postgres extension         
-     RaimaDB                                
-      Redis                                 
+   TimescaleDB   Postgres extension
+     RaimaDB
+      Redis
 
   : Caption
 :::
@@ -116,10 +114,10 @@ The right compression algorithm can save over 90% of storage costs
 
 **compression methods:**
 
--   **delta encoding**: stores just the difference (delta), this makes
+- **delta encoding**: stores just the difference (delta), this makes
     this compression method highly efficient if the data repeats often
 
--   
+-
 
 ### Query Performance
 
@@ -127,4 +125,4 @@ $$Time for operations/count of operations$$
 
 # NOTES: (TODO: remove this)
 
-\- https://www.youtube.com/watch?v=69Tzh_0lHJ8
+\- <https://www.youtube.com/watch?v=69Tzh_0lHJ8>

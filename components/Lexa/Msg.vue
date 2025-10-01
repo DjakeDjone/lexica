@@ -10,10 +10,29 @@ const props = defineProps<{
 const openedSources = ref(false);
 const expandedThinking = ref(false);
 
+const copyToClipboard = async () => {
+    try {
+        await navigator.clipboard.writeText(props.message);
+        // notify user
+        alert('Copied to clipboard');
+    } catch (err) {
+        console.error('Failed to copy: ', err);
+    }
+};
+
+const openAllSources = () => {
+    if (!props.sources) return;
+    props.sources.forEach(source => {
+        window.open(source.url, '_blank', 'noopener,noreferrer');
+    });
+    // Focus back to the current window
+    window.focus();
+};
+
 </script>
 
 <template>
-    <div class="" :class="role === 'user' ? 'chat-bubble' : ''">
+    <div :class="role === 'user' ? 'chat-bubble' : ''">
         <p v-if="role == 'user'">
             {{ message }}
         </p>
@@ -51,6 +70,20 @@ const expandedThinking = ref(false);
                     </a>
                 </li>
             </ul>
+        </div>
+
+        <div id="actions" class="group *:group-hover:opacity-85 *:opacity-50 *:hover:opacity-100
+           w-fit gap-2 mt-2">
+            <slot name="actions" />
+            <!-- copy -->
+            <button class="btn btn-xs btn-ghost" @click="copyToClipboard">
+                <Icon name="mdi:content-copy" class="inline-block mr-1" />
+                Copy
+            </button>
+            <button v-if="sources && sources.length" class="btn btn-xs btn-ghost" @click="openAllSources">
+                <Icon name="mdi:open-in-new" class="inline-block mr-1" />
+                Open All Sources
+            </button>
         </div>
     </div>
 </template>

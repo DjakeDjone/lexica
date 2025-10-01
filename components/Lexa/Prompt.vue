@@ -38,7 +38,7 @@ const selectedContext = defineModel<SearchResult[]>("context");
         <textarea autofocus ref="textarea" v-model="prompt" placeholder="Enter your question here..."
             class="border-none outline-none resize-none w-full p-2 border rounded max-h-48"></textarea>
 
-        <div id="actions" class="flex justify-end gap-2">
+        <div v-auto-animate id="actions" class="flex justify-end gap-2">
             <LexaContextSelect v-model="selectedContext" v-model:autoContext="autoContext" />
             <button class="btn btn-sm btn-primary" :disabled="loading || prompt.trim() === ''" @click="ask()">
                 <Icon name="mdi:send" v-if="!loading" class="-rotate-90" />
