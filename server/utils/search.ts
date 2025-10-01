@@ -58,29 +58,84 @@ export const extendSearchResults = (results: SearchResult[]): SearchResult[] => 
 
 export const scoreSection = (section: SearchResult, query: string): number => {
     const words = query.split(/\s+/).filter(w => w.length > 0);
-    const wordScores = words.map(word => {
-        const fuse = new Fuse([section], {
-            keys: ['titles', 'content'],
-            includeScore: true,
-            threshold: 0.3
-        });
-        const result = fuse.search(word);
-        if (result.length === 0) {
-            return 0;
-        }
-        return Math.max(0, 10 - (result[0].score || 0) * 10);
-    });
-    let score = wordScores.reduce((a, b) => a + b, 0);
+    let score = 0;
+    let hasAnyMatch = false;
 
-    // Boost score for title matches
-    const titleMatch = words.some(word =>
-        section.titles.some((title: string) =>
-            title.toLowerCase().includes(word.toLowerCase())
-        )
-    );
-    if (titleMatch) {
-        score += 5;
-    }
+    words.forEach(word => {
+        const wordLower = word.toLowerCase();
+        let wordScore = 0;
+        let foundMatch = false;
+
+        // Check for exact matches in titles (highest priority)
+        const exactTitleMatch = section.titles.some((title: string) =>
+            title.toLowerCase().split(/\s+/).some(titleWord => titleWord === wordLower)
+        );
+        if (exactTitleMatch) {
+            wordScore += 20; // High boost for exact word match in title
+            foundMatch = true;
+        } else {
+            // Check for word boundary matches in titles (e.g., "median" matches "Median" but not "Medien")
+            const wordBoundaryTitleMatch = section.titles.some((title: string) => {
+                const regex = new RegExp(`\\b${word}\\b`, 'i');
+                return regex.test(title);
+            });
+            if (wordBoundaryTitleMatch) {
+                wordScore += 15; // Good boost for word boundary match in title
+                foundMatch = true;
+            } else {
+                // Check for partial matches in titles (lowest priority for titles)
+                const partialTitleMatch = section.titles.some((title: string) =>
+                    title.toLowerCase().includes(wordLower)
+                );
+                if (partialTitleMatch) {
+                    wordScore += 5; // Small boost for partial match in title
+                    foundMatch = true;
+                }
+            }
+        }
+
+        // Check for exact matches in content
+        if (section.content) {
+            const contentLower = section.content.toLowerCase();
+            const exactContentMatch = contentLower.split(/\s+/).some(contentWord => 
+                contentWord.replace(/[.,!?;:()]/g, '') === wordLower
+            );
+            if (exactContentMatch) {
+                wordScore += 10; // Good boost for exact word match in content
+                foundMatch = true;
+            } else {
+                // Check for word boundary matches in content
+                const regex = new RegExp(`\\b${word}\\b`, 'i');
+                if (regex.test(section.content)) {
+                    wordScore += 8; // Decent boost for word boundary match in content
+                    foundMatch = true;
+                }
+            }
+        }
+
+        // Use fuzzy matching as a fallback for both titles and content
+        if (!foundMatch) {
+            const fuse = new Fuse([section], {
+                keys: ['titles', 'content'],
+                includeScore: true,
+                threshold: 0.4, // Slightly more lenient for fuzzy matching
+                distance: 100
+            });
+            const result = fuse.search(word);
+            if (result.length > 0 && result[0].score !== undefined) {
+                // Score based on how good the fuzzy match is (0 = perfect, 1 = worst)
+                const fuzzyScore = Math.max(0, 4 - (result[0].score * 4));
+                wordScore += fuzzyScore; // Max 4 points for fuzzy matches
+                foundMatch = true;
+            }
+        }
+
+        if (foundMatch) {
+            hasAnyMatch = true;
+        }
+
+        score += wordScore;
+    });
 
     // boost score for tag matches
     // const tags = section.tags || [];
@@ -96,8 +151,8 @@ export const scoreSection = (section: SearchResult, query: string): number => {
     //     score += 6;
     // }
 
-    const MIN_SCORE = 5;
-    if (score < MIN_SCORE) {
+    // Only filter out if no matches found at all
+    if (!hasAnyMatch || score < 1) {
         return 0;
     }
 
