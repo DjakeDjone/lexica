@@ -1,5 +1,5 @@
 <template>
-    <div class="h-screen overflow-hidden">
+    <div>
         <Lexa />
     </div>
 </template>

@@ -31,7 +31,7 @@ const askAI = async () => {
         </div>
         <LexaSuggestions v-if="!history.length"
             @update:select="prompt = $event" />
-        <div class="mb-28">
+        <div class="mb-32">
             <div v-if="status.error" class="bg-red-100 text-red-700 p-2 mb-4 rounded">
                 {{ status.error }}
             </div>
