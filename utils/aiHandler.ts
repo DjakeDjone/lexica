@@ -6,14 +6,23 @@ export type ChatMessage = {
     sources?: { title: string; url: string }[];
     thinking?: string;
 };
+
+export type Chat = {
+    id: string;
+    name: string;
+    messages: ChatMessage[];
+    createdAt: number;
+    updatedAt: number;
+};
+
 export const useAiHandler = () => {
     const status = ref({
         error: null as string | null,
         loading: false,
     });
     const history = ref<ChatMessage[]>([]);
-    const chats = useStorage<{ id: string; name: string; messages: ChatMessage[] }[]>("<chat-history>", []);
-
+    const chats = useStorage<Chat[]>("chat-history", []);
+    const currentChatId = ref<string | null>(null);
 
     const llmHistory = (h: ChatMessage[]) => {
         return h.map(msg => ({
@@ -22,13 +31,95 @@ export const useAiHandler = () => {
         }));
     }
 
-    const clearHistory = () => {
+    const generateChatName = (firstMessage: string): string => {
+        const maxLength = 50;
+        const name = firstMessage.trim().slice(0, maxLength);
+        return name.length < firstMessage.trim().length ? `${name}...` : name;
+    }
+
+    const createNewChat = () => {
+        const newChat: Chat = {
+            id: Date.now().toString(),
+            name: 'New Chat',
+            messages: [],
+            createdAt: Date.now(),
+            updatedAt: Date.now(),
+        };
+        chats.value.unshift(newChat);
+        currentChatId.value = newChat.id;
         history.value = [];
+        return newChat.id;
+    }
+
+    const loadChat = (chatId: string) => {
+        const chat = chats.value.find(c => c.id === chatId);
+        if (chat) {
+            currentChatId.value = chatId;
+            history.value = [...chat.messages];
+        }
+    }
+
+    const saveCurrentChat = () => {
+        if (!currentChatId.value) return;
+        
+        const chatIndex = chats.value.findIndex(c => c.id === currentChatId.value);
+        if (chatIndex !== -1) {
+            const chat = chats.value[chatIndex];
+            if (!chat) return;
+            
+            chat.messages = [...history.value];
+            chat.updatedAt = Date.now();
+            
+            // Update chat name based on first user message if it's still "New Chat"
+            if (chat.name === 'New Chat' && history.value.length > 0) {
+                const firstUserMessage = history.value.find(msg => msg.role === 'user');
+                if (firstUserMessage) {
+                    chat.name = generateChatName(firstUserMessage.content);
+                }
+            }
+        }
+    }
+
+    const deleteChat = (chatId: string) => {
+        const index = chats.value.findIndex(c => c.id === chatId);
+        if (index !== -1) {
+            chats.value.splice(index, 1);
+            if (currentChatId.value === chatId) {
+                if (chats.value.length > 0) {
+                    const firstChat = chats.value[0];
+                    if (firstChat) {
+                        loadChat(firstChat.id);
+                    }
+                } else {
+                    createNewChat();
+                }
+            }
+        }
+    }
+
+    const clearHistory = () => {
+        createNewChat();
+    }
+
+    // Initialize with a new chat if no chats exist
+    if (chats.value.length === 0) {
+        createNewChat();
+    } else if (!currentChatId.value) {
+        // Load the most recent chat
+        const firstChat = chats.value[0];
+        if (firstChat) {
+            loadChat(firstChat.id);
+        }
     }
 
     const askAi = async (question: string, selectedContext: SearchResult[], autoContext: boolean, useTools: boolean = false, model?: string) => {
         status.value.error = null;
         status.value.loading = true;
+
+        // Create new chat if none exists
+        if (!currentChatId.value) {
+            createNewChat();
+        }
 
         history.value.push({ role: 'user', content: question });
 
@@ -110,6 +201,9 @@ export const useAiHandler = () => {
                 }
             }
 
+            // Save the chat after completion
+            saveCurrentChat();
+
         } catch (error: any) {
             console.error("Error in askAi:", error);
             status.value.error = error.message || 'An error occurred while communicating with the AI.';
@@ -121,7 +215,13 @@ export const useAiHandler = () => {
     return {
         status,
         history,
+        chats,
+        currentChatId,
         askAi,
         clearHistory,
+        createNewChat,
+        loadChat,
+        deleteChat,
+        saveCurrentChat,
     };
 }
