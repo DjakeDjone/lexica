@@ -25,7 +25,5 @@ const { data: page, error, status } = await useAsyncData(props.url, () => {
 </script>
 
 <template>
-    url:
-    {{ url }}
     <slot :page="page" :error="error" :status="status" />
 </template>

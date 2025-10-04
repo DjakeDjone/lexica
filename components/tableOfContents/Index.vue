@@ -7,6 +7,7 @@ const props = defineProps<{
     page: DocsCollectionItem,
     maxDepth?: number,
     exclude?: string[],
+    noH1?: boolean
 }>();
 
 const buildTree = (headings: any[]) => {
@@ -14,6 +15,8 @@ const buildTree = (headings: any[]) => {
     const stack: any[] = [];
     for (const tag of headings) {
         const level = parseInt(tag[0].substring(1));
+        // Skip H1 if noH1 is true
+        if (props.noH1 && level === 1) continue;
         const node = { tag, children: [] };
         while (stack.length && parseInt(stack[stack.length - 1].tag[0].substring(1)) >= level) {
             stack.pop();

@@ -5,7 +5,6 @@ import ThemeController from './components/ThemeController.vue';
 
 const navOpen = ref(false)
 const path = ref('')
-const scroller = ref(false);
 const searching = ref(false);
 
 // update path
@@ -35,19 +34,7 @@ onMounted(() => {
     }
     lastScrollPos = window.scrollY;
   }, 100);
-
-  window.addEventListener('scroll', () => {
-    if (window.scrollY < currentScroll) {
-      // scroller.value = window.scrollY > scrollActivationPoint;
-      scroller.value = (window.scrollY > scrollActivationPoint) && scrollingSpeed > 100;
-      if (scroller.value) {
-        lastShown = new Date().getTime();
-      }
-    } else {
-      scroller.value = false;
-    }
-    currentScroll = window.scrollY;
-  });
+  
   document.addEventListener('keydown', (e) => {
     // STRG + K
     if (e.ctrlKey && e.key === 'k' || e.metaKey && e.key === 'k' || e.key === '/') {
@@ -109,11 +96,6 @@ const scrollToTop = () => {
         <CopyWrapper>
           <NuxtPage />
         </CopyWrapper>
-      </div>
-      <div id="topScroll" class="fixed bottom-4 right-4">
-        <button v-if="scroller" class="btn btn-primary rounded-full p-1 h-fit shadow-xl" @click="scrollToTop()">
-          <Icon name="line-md:arrow-up-circle" size="35" />
-        </button>
       </div>
     </div>
     <div class="drawer-side">
