@@ -99,18 +99,19 @@ const scrollToTop = () => {
         </button>
         <h1 class="xl:ml-16 text-3xl font-bold max-w-[calc(100vw-2rem)] overflow-hidden whitespace-nowrap">{{
           getFileName(path)
-          }}</h1>
+        }}</h1>
       </nav>
       <!-- Page content here -->
       <div class="fixed top-0 left-0 z-30">
         <SearchAdvanced v-if="searching" @update:close="searching = false" />
       </div>
       <div class="xl:ml-16">
-        <NuxtPage />
+        <CopyWrapper>
+          <NuxtPage />
+        </CopyWrapper>
       </div>
       <div id="topScroll" class="fixed bottom-4 right-4">
-        <button v-if="scroller" class="btn btn-primary rounded-full p-1 h-fit shadow-xl"
-          @click="scrollToTop()">
+        <button v-if="scroller" class="btn btn-primary rounded-full p-1 h-fit shadow-xl" @click="scrollToTop()">
           <Icon name="line-md:arrow-up-circle" size="35" />
         </button>
       </div>
@@ -149,7 +150,8 @@ const scrollToTop = () => {
           </li>
           <li class="m-0">
             <NuxtLink to="/lexa" class="inline-flex items-center">
-              Lexa <Icon name="hugeicons:ai-search-02" />
+              Lexa
+              <Icon name="hugeicons:ai-search-02" />
             </NuxtLink>
           </li>
           <NestedNavItem @update:navOpen="navOpen = false" :navigation="navigation" />
