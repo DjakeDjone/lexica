@@ -1,12 +1,12 @@
 ---
-title: "MongoDB CRUD Operations"
+title: "MongoDB Queries"
 protocolAbgabedatum: "10.10.2025"
-protocolAufgabenNr: 02
+protocolAufgabenNr: 04
 protocolKlasse: "5AHIF"
 protocolName: "Benjamin Friedl"
 protocolGruppe: "1"
 protocolAbgabetermin: "10.10.2025"
-protocolDescription: "MongoDB CRUD operations"
+protocolDescription: "Advanced MongoDB queries including filtering, sorting, and aggregation"
 ---
 
 ## Connect to MongoDB
