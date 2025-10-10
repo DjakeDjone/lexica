@@ -6,14 +6,10 @@ description:
 ## Table of Contents
 
 1. Introduction (**3P**)  
-   1. Why Time-Series Databases? (1P)  
+   1. Why Time-Series Databases? (1P)
    2. Use Cases of Time-Series Databases (2P)  
 2. Overview of Popular Time-Series Databases (**7P**)  
    1. Comparison (3P)  
-   2. InfluxDB (1P)  
-   3. TimescaleDB (Deep Dive) (2P)  
-   4. Prometheus (0.5P)  
-   5. OpenTSDB (0.5P)  
 3. How Time-Series Databases Work (**2P**)  
    1. Data Ingestion (0.5P)  
    2. Data Storage (0.5P)  

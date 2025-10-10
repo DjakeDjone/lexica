@@ -37,7 +37,7 @@ to import data into mongodb, the options are:
 
 I used the mongodb compass
 
-![alt text](image.png)
+![alt text](/images/mongodb-compass-insert-data.png)
 
 How the 5ahif user can access the dbi database:
 
@@ -78,7 +78,7 @@ db.teachers.insertOne(
 )
 ```
 
-![alt text](image-1.png)
+![alt text](/images/mongodb-compass-insert-one.png)
 
 ### Read (Find) Documents
 
@@ -88,7 +88,7 @@ db.teachers.insertOne(
 db.teachers.find({ "name": { $regex: "Raab" } })
 ```
 
-![query 1: get prof. raab using regex](image-2.png)
+![query 1: get prof. raab using regex](/images/mongodb-query-one.png)
 
 #### all Abteilungsvorstand
 
@@ -96,7 +96,7 @@ db.teachers.find({ "name": { $regex: "Raab" } })
 db.teachers.find({ "role": "Abteilungsvorstand" })
 ```
 
-![query 2: get all Abteilungsvorstand](image-3.png)
+![query 2: get all Abteilungsvorstand](/images/mongodb-query-many.png)
 
 #### How many teachers are in the department 'Informatik'?
 
@@ -104,7 +104,7 @@ db.teachers.find({ "role": "Abteilungsvorstand" })
 db.teachers.countDocuments({ "departments": "Informatik" })
 ```
 
-![query 3: get all teachers in the department 'Informatik'](image-4.png)
+![query 3: get how many teachers are in the department 'Informatik'](/images/mongodb-query-many-all-teachers.png)
 
 ### Update Documents
 
@@ -115,7 +115,7 @@ db.teachers.updateOne(
 )
 ```
 
-![query 4: update teacher Friedl's age](image-5.png)
+![query 4: update teacher Friedl's age](/images/mongodb-update-one.png)
 
 ```js
 db.teachers.updateMany(
@@ -124,7 +124,7 @@ db.teachers.updateMany(
 )
 ```
 
-![alt text](image-6.png)
+![alt text](/images/mongodb-update-many.png)
 
 **Upsert Example**
 
@@ -138,7 +138,12 @@ db.teachers.updateOne(
 )
 ```
 
-<!-- TODO: third update -->
+```js
+db.teachers.updateMany(
+  { "department": "Informatik" },
+  { $set: { "image": "htl-logo.png" } }
+)
+```
 
 ### Delete Documents
 
