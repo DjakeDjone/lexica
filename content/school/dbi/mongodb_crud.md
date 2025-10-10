@@ -1,5 +1,13 @@
-
-# MongoDB CRUD Operations
+---
+title: "MongoDB CRUD Operations"
+protocolAbgabedatum: "10.10.2025"
+protocolAufgabenNr: 02
+protocolKlasse: "5AHIF"
+protocolName: "Benjamin Friedl"
+protocolGruppe: "1"
+protocolAbgabetermin: "10.10.2025"
+protocolDescription: "MongoDB CRUD operations"
+---
 
 ## Data selection and Imports
 
@@ -9,8 +17,8 @@ cluster name: 'school'
 database_name: 'dbi'
 collection_name: 'teachers'
 
-username: 5ahif
-password: 5ahif
+username: `5ahif`
+password: `5ahif`
 
 ### Find/Extract Data
 
