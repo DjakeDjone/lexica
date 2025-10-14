@@ -92,7 +92,7 @@ this should return the A record for `friedl.lan`.
 
 we got the following records:
 
-![alt text](/images/image.png)
+![dig result](/images/dig-result.png)
 
 ## Debugging
 
@@ -293,7 +293,7 @@ cat K*.key >>db.secure.friedl.lan
 dnssec-signzone -s now+0 -e now+2419200 -o secure.friedl.lan -k Ksecure.friedl.lan.+005+17048 db.secure.friedl.lan  Ksecure.friedl.lan.+005+56173
 ```
 
-![alt text](/images/image-1.png)
+![]
 
 Es sollte jetzt eine db.example.com.signed geben. Diese muss in der named.conf.local anstelle der db.example.com eingebunden werden.
 
@@ -345,4 +345,4 @@ sudo systemctl restart bind9
 dig @127.0.0.1 +dnssec patzl.sec
 ```
 
-![alt text](/images/image-2.png)
+![dnssec dig test](/images/dnssec-dig.png)

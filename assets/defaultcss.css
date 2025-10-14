@@ -24,7 +24,7 @@
         border-radius: calc(infinity * 1px);
         opacity: 30%;
         box-shadow: 1.4em 0, 2.8em 0, 4.2em 0;
-        margin-left: -1.5rem;
+        margin-left: -1rem;
 }
 
 /* line numbers */
@@ -86,4 +86,9 @@ math {
 .prose h1 a:hover::after, .prose h2 a:hover::after, .prose h3 a:hover::after, .prose h4 a:hover::after, .prose h5 a:hover::after, .prose h6 a:hover::after {
         content: "#";
         margin-left: 0.5rem;
+}
+
+.prose pre code {
+        display: block;
+        overflow-x: scroll;
 }
