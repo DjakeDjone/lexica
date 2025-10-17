@@ -346,3 +346,57 @@ dig @127.0.0.1 +dnssec patzl.sec
 ```
 
 ![dnssec dig test](/images/dnssec-dig.png)
+
+## DOH
+
+### Vorbereitung
+
+```bash
+sudo apt install easy-rsa
+```
+
+```bash
+make-cadir ~/myca auf
+cd ~/myca
+./easyrsa init-pki
+./easyrsa build-ca
+```
+
+![alt text](image.png)
+
+### Zertifikat für den Server erstellen
+
+```bash
+cd ~/myca
+./easyrsa build-server-full dns.friedl.lan nopass
+```
+
+### Zertifikat kopieren und Rechte setzen
+
+```bash
+sudo cp ~/myca/pki/issued/dns.friedl.lan.crt /etc/bind
+
+sudo cp ~/myca/pki/private/dns.friedl.lan.key /etc/bind
+
+sudo chgrp bind /etc/bind/dns.friedl.lan.*
+sudo chmod g+r /etc/bind/dns.friedl.lan.key
+sudo chmod a+r /etc/bind/dns.friedl.lan.crt
+```
+
+![alt text](image-1.png)
+
+### Eintragen in die named.conf.options
+
+edit `/etc/bind/named.conf.options`
+
+![alt text](image-2.png)
+
+### Dienst neu starten und testen
+
+```bash
+sudo systemctl restart bind9
+sudo cat /var/log/syslog
+dig @127.0.0.1 +https rechner1.friedl.lan
+```
+
+![alt text](image-3.png)

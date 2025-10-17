@@ -98,6 +98,39 @@ db.museum.find({ "properties.ADRESSE": { $regex: " 5$" } }, { "properties.NAME":
 
 ![museum addresses with house number 5](/images/mongodb_queries_img7.png)
 
+### Which districts, in ascending order, have 5 or more, and how many, museums?
+
+```js
+db.museum.aggregate([
+  { $group: { _id: "$properties.BEZIRK", museumCount: { $sum: 1 } } },
+  { $match: { museumCount: { $gte: 5 } } },
+  { $sort: { _id: 1 } }
+])
+```
+
+- `$group` groups input documents by the specified _id expression and applies the accumulator expressions
+- `$sum` calculates the sum of numeric values
+- `$match` filters the documents to pass only the documents that match the specified condition(s)
+- `$sort` sorts the documents based on the specified field(s) (1 for ascending, -1 for descending)
+
+![districts with 5 or more museums - result](/images/mongodb_queries_img13.png)
+
+### Finding the top 3 districts with the most museums
+
+```js
+db.museum.aggregate([
+  { $group: { _id: "$properties.BEZIRK", museumCount: { $sum: 1 } } },
+  { $sort: { museumCount: -1 }},
+  { $limit: 3 }
+])
+```
+
+- `$limit` limits the number of documents returned to n
+
+![districts with top 3 museums - result](/images/mongodb_queries_img14.png)
+
+---
+
 ## Twitter (collection tweets)
 
 ### 2.1) How many tweets in the collection origin from users with friends’ count in [80,90]?
@@ -153,3 +186,30 @@ db.tweets.countDocuments({ "entities.hashtags.text": { $regex: "love", $options:
 - `i` makes the search case-insensitive (default is case-sensitive)
 
 ![tweets with hashtag love (case-insensitive)](/images/mongodb_queries_img12.png)
+
+### 2.6) What is the number of tweets per user language in descending order?
+
+```js
+db.tweets.aggregate([
+  { $group: { _id: "$user.lang", tweetCount: { $sum: 1 } } },
+  { $sort: { tweetCount: -1 } }
+])
+```
+
+![tweets per user language - result](/images/mongodb_queries_img15.png)
+
+### 2.7) Extend 2.6 and include the average number of followers and the size in bytes of the longest tweet text per user language
+
+```js
+db.tweets.aggregate([
+  { $group: { _id: "$user.lang", tweetCount: { $sum: 1 }, avgFollowers: { $avg: "$user.followers_count" }, 
+    longestTweetSize: { $max: { $strLenBytes: { $ifNull: ["$text", ""] } } } }},
+  { $sort: { tweetCount: -1 } }
+])
+```
+
+- `$avg` calculates the average of numeric values
+- `$max` returns the maximum value
+- `$strLenBytes` returns the number of bytes in a string
+
+![tweets per user language with avg followers and longest tweet size - result](/images/mongodb_queries_img16.png)
