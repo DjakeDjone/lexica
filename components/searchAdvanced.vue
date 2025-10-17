@@ -43,9 +43,16 @@ const handleKeyDown = (e: KeyboardEvent) => {
     } else if (e.key === 'Enter') {
         const result = results.value.results[selected.value];
         if (result) {
-            searchVlue.value = '';
-            close();
-            useRouter().replace(`/${result.id}`);
+            if (e.ctrlKey || e.metaKey) {
+                // Open in new tab
+                e.preventDefault();
+                window.open(`/${result.id}`, '_blank');
+            } else {
+                // Navigate in current tab
+                searchVlue.value = '';
+                close();
+                useRouter().replace(`/${result.id}`);
+            }
         }
     }
 };
