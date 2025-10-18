@@ -1,0 +1,18 @@
+{
+    "version": "0.2",
+    "language": "en,de",
+    "ignorePaths": [],
+    "dictionaryDefinitions": [],
+    "dictionaries": [],
+    "words": [
+        "Avalkredit",
+        "betriebsnotwendigen",
+        "erfolgswirksam",
+        "rückgelegte",
+        "Umschichtungsfinanzierung",
+        "zahlungswirksam",
+        "zahlungswirksame"
+    ],
+    "ignoreWords": [],
+    "import": []
+}
