@@ -149,7 +149,7 @@ Möglichkeiten:
   - **Finanzierungs-Leasing**: langfristige Miete, Vermögenswert wird am Ende oft gekauft
 - **Crowdfunding**: Finanzierung durch viele kleine Beiträge von einer großen Anzahl von Personen, meist über Online-Plattformen
 
-![leasingarten](images/bwm_leasingarten.png)
+![leasingarten](/images/bwm_leasingarten.png)
 
 #### Arten des Crowdfunding
 
