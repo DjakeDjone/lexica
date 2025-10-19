@@ -65,7 +65,7 @@ es gibt:
   - Forderungsmanagement
   - Lagermanagement
 
-- [**Rückstellungsfinanzierung**](#rueckstellungsfinanzierung) durch:
+- [**Rückstellungsfinanzierung**](#rückstellungsfinanzierung) durch:
   - Abfertigungsrückstellungen
   - Garantierückstellungen
 
@@ -110,9 +110,9 @@ Das kleine Produktionsunternehmen "Fila" für Leuchtstoffen bildet für das lauf
 
 - [**Beteiligungsfinanzierung**](#beteiligungsfinanzierung)
 - [**Kreditfinanzierung**](#kreditfinanzierung)
-- [**weitere Möglichkeiten**](#weitere-moeglichkeiten): Factoring, Haftungsübernahme, Leasing, Crowdfunding
+- [**weitere Möglichkeiten**](#weitere-möglichkeiten): Factoring, Haftungsübernahme, Leasing, Crowdfunding
 
-![möglichkeiten der Außenfinanzierung](/images/bwm_moeglichkeiten-der-aussenfinanzierung.png)
+![Möglichkeiten der Außenfinanzierung](/images/bwm_moeglichkeiten-der-aussenfinanzierung.png)
 
 ### Beteiligungsfinanzierung
 
@@ -141,5 +141,19 @@ Möglichkeiten:
 > - stilles Factoring: der Kunde wird nicht informiert
 
 - **Haftungsübernahme** (Avalkredit): Ein Dritter (z.B. eine Bank) übernimmt die Haftung für einen Kredit, was die Kreditwürdigkeit des Unternehmens verbessert
+  - **Gewährleistungsaval**: Bank garantiert die Erfüllung von Vertragsverpflichtungen
+  - **Zahlungsaval**: Bank garantiert die Zahlung eines bestimmten Betrags
+  - **Anzahlungsaval**: Bank garantiert die Rückzahlung einer Anzahlung, falls der Vertrag nicht erfüllt wird
+- **Leasing**: Miete von Vermögenswerten (z.B. Maschinen, Fahrzeuge) anstatt Kauf
+  - **Operating-Leasing**: kurzfristige Miete, Vermögenswert wird nach Ablauf zurückgegeben
+  - **Finanzierungs-Leasing**: langfristige Miete, Vermögenswert wird am Ende oft gekauft
+- **Crowdfunding**: Finanzierung durch viele kleine Beiträge von einer großen Anzahl von Personen, meist über Online-Plattformen
 
-TODO: **S. 143-148** 😁
+![leasingarten](images/bwm_leasingarten.png)
+
+#### Arten des Crowdfunding
+
+- **Donation-based Crowdfunding**: Unterstützer spenden Geld ohne Gegenleistung
+- **Reward-based Crowdfunding**: Unterstützer erhalten eine nicht-finanzielle Gegenleistung, z.B. ein Produkt oder eine Dienstleistung
+- **Lending-based Crowdfunding**: Unterstützer verleihen Geld und erhalten Zinsen zurück
+- **Equity-based Crowdfunding**: Unterstützer investieren Geld und erhalten Anteile am Unternehmen
