@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
 import type { DocsCollectionItem, MinimarkElement } from '@nuxt/content';
 
 interface LearningCard {
@@ -85,10 +86,93 @@ const flipCard = () => {
     isFlipped.value = !isFlipped.value;
 }
 
+
+const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.key === 'd' || e.key === 'ArrowRight') {
+        // Next card
+        nextCard();
+    } else if (e.key === 'a' || e.key === 'ArrowLeft') {
+        // Previous card
+        prevCard();
+    } else if (e.key === ' ') {
+        // Flip card
+        e.preventDefault();
+        flipCard();
+    } else if (e.key === 'f' || e.key === 'F') {
+        // Toggle fullscreen
+        e.preventDefault();
+        toggleFullscreen();
+    }
+};
+
+const fullscreen = ref(false);
+
+// New: root element ref for fullscreen requests
+const rootEl = ref<HTMLElement | null>(null);
+
+// New: toggle fullscreen using Fullscreen API with vendor fallbacks
+const toggleFullscreen = async () => {
+    if (!rootEl.value) return;
+    try {
+        if (!document.fullscreenElement) {
+            // Request fullscreen on the root element
+            const el: any = rootEl.value as any;
+            if (el.requestFullscreen) {
+                await el.requestFullscreen();
+            } else if (el.webkitRequestFullscreen) {
+                await el.webkitRequestFullscreen();
+            } else if (el.mozRequestFullScreen) {
+                await el.mozRequestFullScreen();
+            } else if (el.msRequestFullscreen) {
+                await el.msRequestFullscreen();
+            }
+            // focus so key handlers continue to work
+            rootEl.value.focus();
+        } else {
+            if (document.exitFullscreen) {
+                await document.exitFullscreen();
+            } else if ((document as any).webkitExitFullscreen) {
+                await (document as any).webkitExitFullscreen();
+            } else if ((document as any).mozCancelFullScreen) {
+                await (document as any).mozCancelFullScreen();
+            } else if ((document as any).msExitFullscreen) {
+                await (document as any).msExitFullscreen();
+            }
+        }
+    } catch (err) {
+        console.warn('Fullscreen toggle failed', err);
+    }
+};
+
+// New: keep fullscreen ref in sync with browser state
+const onFsChange = () => {
+    fullscreen.value = !!document.fullscreenElement;
+    // ensure focus remains on our root for keyboard shortcuts
+    if (fullscreen.value && rootEl.value) {
+        rootEl.value.focus();
+    }
+};
+
+onMounted(() => {
+    document.addEventListener('fullscreenchange', onFsChange);
+    // vendor prefixed events (some browsers)
+    document.addEventListener('webkitfullscreenchange', onFsChange as any);
+    document.addEventListener('mozfullscreenchange', onFsChange as any);
+});
+
+onBeforeUnmount(() => {
+    document.removeEventListener('fullscreenchange', onFsChange);
+    document.removeEventListener('webkitfullscreenchange', onFsChange as any);
+    document.removeEventListener('mozfullscreenchange', onFsChange as any);
+});
+
 </script>
 
 <template>
-    <div class="min-h-screen bg-base-100">
+    <div
+     ref="rootEl"
+     @keydown="handleKeyDown" tabindex="0"
+     class="min-h-screen bg-base-100">
         <div class="max-w-4xl mx-auto">
             <!-- Header -->
             <div class="text-center mb-8">
@@ -177,6 +261,15 @@ const flipCard = () => {
                     </button>
                     <button class="btn btn-ghost btn-xs" @click="isFlipped = false" v-if="isFlipped">
                         Show All Fronts
+                    </button>
+
+                    <!-- New: Fullscreen toggle -->
+                    <button
+                        class="btn btn-ghost btn-xs"
+                        :class="{ 'btn-active': fullscreen }"
+                        @click="toggleFullscreen"
+                        title="Toggle fullscreen (F)">
+                        Fullscreen
                     </button>
                 </div>
             </div>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { ParsedContent } from '@nuxt/content';
+import type { ParsedContentv2 } from '@nuxt/content';
 
 
 const props = defineProps<{
@@ -19,10 +19,9 @@ const getMD = async (path: string) => {
 };
 
 onMounted(() => {
-
 });
 
-const parseCards = (d: ParsedContent) => {
+const parseCards = (d: ParsedContentv2) => {
     const cards: Card[] = [];
 }
 
@@ -34,7 +33,7 @@ const cards = useState('cards', () => [
 
 
 <template>
-    <main>
+    <main class="p-4">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <div v-for="card in cards" :key="card.front" class="bg-white shadow-md p-4">
                 <div v-html="card.front"></div>

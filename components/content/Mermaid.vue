@@ -1,6 +1,6 @@
 <template>
   <div ref="mermaidContainer" class="mermaid">
-    <slot></slot>
+      <slot></slot>
   </div>
 </template>
 
@@ -12,8 +12,10 @@ const mermaidContainer = ref<HTMLPreElement | null>(null);
 
 onMounted(async () => {
   if (mermaidContainer.value) {
+    console.log("Mermaid container found:", mermaidContainer.value.innerHTML);
     const graphDefinition = mermaidContainer.value.textContent?.trim() ?? '';
     mermaidContainer.value.innerHTML = ''; // Clear the container
+    console.log("Rendering Mermaid diagram:", graphDefinition);
     if (graphDefinition) {
         mermaid.initialize({
             startOnLoad: false,
