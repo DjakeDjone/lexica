@@ -36,7 +36,7 @@ watch(() => route.path, (newPath) => {
 
 
 <template>
-    <nav class="flex gap-4 mb-4 *:btn *:btn-sm">
+    <nav class="flex gap-4 w-full overflow-x-auto mb-4 *:btn *:btn-sm">
         <NuxtLink v-for="page in viewPages" :key="page.name"
             :to="`${filePath === '/' ? '' : filePath}${page.pathSuffix}`">{{ page.name }}
         </NuxtLink>
