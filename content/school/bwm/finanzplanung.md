@@ -32,7 +32,7 @@ es gibt:
 | zahlungswirksam | erfolgswirksam |
 | z.B. Kassa und Bank | z.B. Geldvermögen, Anlagenvermögen, Vorrat |
 
-![Ein/Auszahlungen vs. Erträge und Aufwendungen](bwm_ein-auszahlungen-vs-ertraege-und-aufwendungen.png)
+![Ein/Auszahlungen vs. Erträge und Aufwendungen](/images/bwm_ein-auszahlungen-vs-ertraege-und-aufwendungen.png)
 
 <!-- sollte eig. easy und eh klar sein -->
 > **Nettovermögen**: Vermögen - Schulden
