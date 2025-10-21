@@ -362,7 +362,7 @@ cd ~/myca
 ./easyrsa build-ca
 ```
 
-![alt text](image.png)
+![run easyrsa](/images/easyrsa.png)
 
 ### Zertifikat für den Server erstellen
 
@@ -383,13 +383,13 @@ sudo chmod g+r /etc/bind/dns.friedl.lan.key
 sudo chmod a+r /etc/bind/dns.friedl.lan.crt
 ```
 
-![alt text](image-1.png)
+![result of permissions](/images/bind-permissions.png)
 
 ### Eintragen in die named.conf.options
 
 edit `/etc/bind/named.conf.options`
 
-![alt text](image-2.png)
+![edit named.conf.options](/images/named-conf-options.png)
 
 ### Dienst neu starten und testen
 
@@ -399,4 +399,4 @@ sudo cat /var/log/syslog
 dig @127.0.0.1 +https rechner1.friedl.lan
 ```
 
-![alt text](image-3.png)
+![doh dig test](/images/doh-dig.png)
