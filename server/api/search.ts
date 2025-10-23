@@ -19,12 +19,12 @@ export default defineEventHandler(async (event): Promise<SearchResultsResponse> 
   });
 
   // folders
-  const folders = buildFolders(filteredResults);
+  // const folders = buildFolders(filteredResults);
 
   return {
     results: paginatedResults,
     total: filteredResults.length,
-    folders,
+    folders: [],
     page,
     pageSize
   };

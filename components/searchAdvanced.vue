@@ -55,6 +55,12 @@ const handleKeyDown = (e: KeyboardEvent) => {
             }
         }
     }
+    // scroll to selected item
+    const resultElements = document.querySelectorAll('.searchResult');
+    const selectedElement = resultElements[selected.value] as HTMLElement;
+    if (selectedElement) {
+        selectedElement.scrollIntoView({ block: 'nearest', behavior: 'instant' });
+    }
 };
 
 onMounted(() => {
@@ -96,9 +102,9 @@ onUnmounted(() => {
                         class="m-0 no-underline">
                         <div class="flex w-full">
                             <div class="w-full">
-                                <h3 class="text-lg font-bold mt-0">{{ result.title }}</h3>
+                                <h3 class="text-lg font-bold mt-0 text-accent">{{ result.title }}</h3>
                                 <!-- {{ result.titles }} {{ result.tag ? ' - ' + result.tag : '' }} -->
-                                <p v-if="resultExpaned" class="mt-1 text-base-content/80">
+                                <p v-if="resultExpaned" class="mt-1 text-base-content/80 border-l-2 pl-2 border-base-content/20">
                                     {{ result.description }}
                                 </p>
                             </div>
@@ -106,14 +112,12 @@ onUnmounted(() => {
                                 <span v-if="result.score !== undefined" class="badge badge-info badge-sm ml-2">
                                     {{ result.score.toFixed(2) }}
                                 </span>
-
-                                <!-- <button @click.prevent="addToContext(result.id)"
-                                    class="btn btn-sm !h-6 btn-outline btn-primary ml-2">
-                                    <Icon name="mdi:plus" />
-                                </button> -->
                             </div>
                         </div>
-                        <div class="divider m-0 mt-2"></div>
+                        <span class="text-sm relative">
+                            {{ result.url }}
+                        </span>
+                        <div class="divider m-0"></div>
                     </NuxtLink>
                 </div>
                 <div v-if="status === 'pending'" class="p-3 text-center text-base-content/60">

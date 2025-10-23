@@ -135,6 +135,11 @@ export const scoreSection = (section: SearchResult, query: string): number => {
         }
 
         score += wordScore;
+
+        // reward if the id has no 'id'
+        if (section.id && !section.id.includes(' ')) {
+            score += 2;
+        }
     });
 
     // boost score for tag matches
@@ -171,6 +176,8 @@ export const processSearchResults = (sections: any[], query: string): SearchResu
         if (section.id.startsWith('/')) {
             section.id = section.id.substring(1);
         }
+        console.log(section);
+        console.log("----------------")
         return {
             id: section.id,
             title: section.titles[section.titles.length - 1],
