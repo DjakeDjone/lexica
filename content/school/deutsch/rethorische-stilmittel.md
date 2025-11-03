@@ -40,13 +40,13 @@ Beispiel: „Je früher der Abschied, desto kürzer die Qual.“
 
 Einschub eines Nebensatzes, der zusätzliche Informationen gibt
 
-Beispiel: „Das Buch, das ich gestern gekauft habe, ist spannend.“
+Beispiel: „Das Buch - es war ein Geschenk - ist spannend.“
 
 ### Epipher
 
 Wiederholung eines Wortes oder einer Wortgruppe am Ende aufeinander folgender Sätze
 
-Beispiel: „Ich will Freiheit, ich will Frieden.“
+Beispiel: „Doch alle Lust will Ewigkeit -, will tiefe, tiefe Ewigkeit!“
 
 ### Ironie
 
