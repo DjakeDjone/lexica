@@ -31,3 +31,9 @@ with options:
 - `-q` : do not print headers
 - `-v` : always print headers
 - `-f` : print all lines and keep file open for new lines (like `tail -f`)
+
+### Free Storage
+
+```bash
+df -h
+```
