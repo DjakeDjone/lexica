@@ -4,4 +4,4 @@
 - letzter Operator: INTERPRETATION
 - Aufbau: siehe TA
 
-[Erzählperspektiven](/school/deutsch/textsorten/erz%C3%A4hlperspektiven) beachten!
+[Erzählperspektiven](/school/deutsch/textsorten/erzahlperspektiven) beachten!
