@@ -59,6 +59,12 @@ db.museum.find({}, { "properties.NAME": 1 }).sort({ "properties.NAME": 1 }).limi
 db.museum.find({ "properties.BEZIRK": { $in: [13, 14] } }).sort({ "properties.BEZIRK": 1, "properties.NAME": 1 })
 ```
 
+or with `$or` operator:
+
+```js
+db.museum.find({ $or: [ { "properties.BEZIRK": 13 }, { "properties.BEZIRK": 14 } ] }).sort({ "properties.BEZIRK": 1, "properties.NAME": 1 })
+```
+
 ![museum addresses in 4th district](/images/mongodb_queries_img2.png)
 
 ### 1.5) How many museums are located outside the 1st district?
@@ -108,7 +114,7 @@ db.museum.aggregate([
 ])
 ```
 
-- `$group` groups input documents by the specified _id expression and applies the accumulator expressions
+- `$group` groups input documents by the specified _id expression and applies the accumulator expressions, $properties.BEZIRK is the field to group by (the $ indicates a field)
 - `$sum` calculates the sum of numeric values
 - `$match` filters the documents to pass only the documents that match the specified condition(s)
 - `$sort` sorts the documents based on the specified field(s) (1 for ascending, -1 for descending)
