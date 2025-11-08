@@ -10,9 +10,9 @@ const filePath = ref<string>();
         <FetchDoc v-if="filePath" :url="filePath">
             <template #default="{ page, error, status }">
                 <div v-if="page" class="prose dark:prose-invert max-w-screen flex gap-8">
-                    <div class="relative hidden md:block">
+                    <!-- <div class="relative hidden md:block">
                         <TableOfContentsSidebar :page="page" />
-                    </div>
+                    </div> -->
                     <div class="overflow-x-scroll">
                         <h1 v-if="page && page.title" class="font-bold">
                             {{ page?.title }}
