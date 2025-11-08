@@ -89,7 +89,8 @@ const searchTool = {
                               description: "The search query to find relevant documentation. Can be in English or German. Should be 2-5 words describing what you're looking for."
                         }
                   },
-                  required: ["query"]
+                  required: ["query"],
+                  additionalProperties: false
             }
       }
 };
@@ -155,16 +156,35 @@ export const askLLMWithTools = async (
             }
 
             // Non-streaming call to check for tool usage
-            const response = await groq.chat.completions.create({
-                  model: aiSettings.model || "llama-3.3-70b-versatile",
-                  messages,
-                  tools,
-                  tool_choice: "auto",
-                  max_completion_tokens: 4096,
-                  temperature: 0.1,
-                  top_p: 1,
-                  stream: false,
-            });
+            let response;
+            try {
+                  response = await groq.chat.completions.create({
+                        model: aiSettings.model || "llama-3.3-70b-versatile",
+                        messages,
+                        tools,
+                        tool_choice: "auto",
+                        max_completion_tokens: 4096,
+                        temperature: 0.1,
+                        top_p: 1,
+                        stream: false,
+                  });
+            } catch (error: any) {
+                  console.error("[LLM] Error during tool call:", error);
+                  // If tool use failed, try without tools
+                  console.log("[LLM] Retrying without tools...");
+                  const streamResponse = await groq.chat.completions.create({
+                        model: aiSettings.model || "llama-3.3-70b-versatile",
+                        messages: messages.filter(m => m.role !== "tool"), // Remove any tool messages
+                        max_completion_tokens: 4096,
+                        temperature: 0.1,
+                        top_p: 1,
+                        stream: true,
+                  });
+                  return {
+                        response: streamResponse,
+                        relevantSections: allRelevantSections
+                  };
+            }
 
             // Handle non-streaming response (check for tool calls)
             const message = response.choices[0].message;

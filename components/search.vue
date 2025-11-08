@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue';
-import Fuse, { type FuseResult } from 'fuse.js';
+import { ref, onMounted } from 'vue';
 
 const searchVlue = ref('');
 
@@ -9,46 +8,7 @@ const selected = ref(0);
 
 const emit = defineEmits(['update:close']);
 const searchResults = ref([] as any[]);
-
-
-// Initialize search data
-const { data: searchSections } = await useAsyncData('search-sections', () =>
-    queryCollectionSearchSections('docs')
-);
-
-const customPages = [
-    {
-        title: 'Lohnrechner',
-        path: '/lohnrechner',
-        description: 'Berechnen Sie Ihren Nettolohn',
-        content: 'Berechnen Sie Ihren Nettolohn mit unserem Lohnrechner'
-    },
-    {
-        title: 'Impressum',
-        path: '/impressum',
-        description: 'Impressum',
-        content: 'Impressum und rechtliche Informationen'
-    },
-    {
-        title: 'Datenschutz',
-        path: '/datenschutz',
-        description: 'Datenschutz',
-        content: 'Datenschutzerklärung und Informationen zum Datenschutz'
-    }
-];
-
-// Initialize Fuse.js with search sections and custom pages
-const allSearchData = computed(() => [
-    ...(searchSections.value || []),
-    ...customPages
-]);
-
-const fuse = computed(() => new Fuse(allSearchData.value, {
-    keys: ['title', 'description', 'content'],
-    threshold: 0.3,
-    includeScore: true,
-    minMatchCharLength: 2
-}));
+const isLoading = ref(false);
 
 const searchEvent = async (e: KeyboardEvent | MouseEvent) => {
     if (e instanceof KeyboardEvent && e.key !== 'Enter') return;
@@ -59,7 +19,7 @@ const searchEvent = async (e: KeyboardEvent | MouseEvent) => {
         
         const result = searchResults.value[selected.value];
         if (result) {
-            useRouter().push(result.id);
+            useRouter().push(result.url);
             searchVlue.value = '';
             close();
         }
@@ -71,14 +31,22 @@ const searchEvent = async (e: KeyboardEvent | MouseEvent) => {
 const search = async (value: string) => {
     value = value.trim();
     if (value.length > 1) {
-        // Use Fuse.js for fuzzy search
-        const results = fuse.value.search(value).slice(0, 7);
-        searchResults.value = results.map(result => ({
-            ...result.item,
-            score: result.score
-        }));
-
-        console.log("Search results:", searchResults.value);
+        isLoading.value = true;
+        try {
+            // Use the server API endpoint for search
+            const response = await $fetch('/api/search', {
+                params: {
+                    q: value,
+                    pageSize: 7
+                }
+            });
+            searchResults.value = response.results || [];
+        } catch (error) {
+            console.error('Search error:', error);
+            searchResults.value = [];
+        } finally {
+            isLoading.value = false;
+        }
     } else {
         searchResults.value = [];
     }
@@ -104,7 +72,7 @@ const searchOnTypeEnd = async (event: KeyboardEvent | FocusEvent) => {
         if (searchResults.value.length > 0) {
             const result = searchResults.value[selected.value];
             if (result) {
-                await useRouter().push(result._path);
+                await useRouter().push(result.url);
                 searchVlue.value = '';
                 close();
             }
@@ -149,13 +117,16 @@ const close = () => {
                 </button>
             </div>
             <div v-auto-animate id="search-results" class="mt-2 bg-base-100 rounded-lg">
-                <div v-for="result, idx in searchResults" :key="result.id"
+                <div v-if="isLoading" class="p-3 text-center">
+                    <span class="loading loading-spinner loading-md"></span>
+                </div>
+                <div v-else v-for="result, idx in searchResults" :key="result.id"
                     class="searchResult rounded-lg p-3 pb-0 hover:bg-base-100/50"
                     :style="{ border: selected === idx ? '1px solid var(--color-primary)' : '1px solid transparent' }">
 
-                    <NuxtLink :to="result.id" @click="searchVlue = ''; close()" class="m-0 hover:no-underline">
+                    <NuxtLink :to="result.url" @click="searchVlue = ''; close()" class="m-0 hover:no-underline">
                         <h3 class="text-lg font-bold mt-0">{{ result.title }}</h3>
-                        {{ result.content?.slice(0, 100) + '...' }}
+                        {{ result.description }}
                         <div class="divider m-0 mt-2"></div>
                     </NuxtLink>
                 </div>

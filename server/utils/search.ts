@@ -56,6 +56,23 @@ export const extendSearchResults = (results: SearchResult[]): SearchResult[] => 
     return extendedResults;
 }
 
+// Cache for Fuse instances to avoid recreating them
+const fuseCache = new Map<string, Fuse<any>>();
+
+const getFuseInstance = (section: SearchResult): Fuse<any> => {
+    const cacheKey = section.id;
+    if (!fuseCache.has(cacheKey)) {
+        const fuse = new Fuse([section], {
+            keys: ['titles', 'content'],
+            includeScore: true,
+            threshold: 0.4,
+            distance: 100
+        });
+        fuseCache.set(cacheKey, fuse);
+    }
+    return fuseCache.get(cacheKey)!;
+};
+
 export const scoreSection = (section: SearchResult, query: string): number => {
     const words = query.split(/\s+/).filter(w => w.length > 0);
     let score = 0;
@@ -115,12 +132,7 @@ export const scoreSection = (section: SearchResult, query: string): number => {
 
         // Use fuzzy matching as a fallback for both titles and content
         if (!foundMatch) {
-            const fuse = new Fuse([section], {
-                keys: ['titles', 'content'],
-                includeScore: true,
-                threshold: 0.4, // Slightly more lenient for fuzzy matching
-                distance: 100
-            });
+            const fuse = getFuseInstance(section);
             const result = fuse.search(word);
             if (result.length > 0 && result[0].score !== undefined) {
                 // Score based on how good the fuzzy match is (0 = perfect, 1 = worst)
@@ -142,20 +154,6 @@ export const scoreSection = (section: SearchResult, query: string): number => {
         }
     });
 
-    // boost score for tag matches
-    // const tags = section.tags || [];
-    // if (section.id === '/') {
-    //     console.log('Section tags:', tags, section);
-    // }
-    // const tagMatch = words.some(word =>
-    //     tags.some((tag: string) =>
-    //         tag.toLowerCase().includes(word.toLowerCase())
-    //     )
-    // );
-    // if (tagMatch) {
-    //     score += 6;
-    // }
-
     // Only filter out if no matches found at all
     if (!hasAnyMatch || score < 1) {
         return 0;
@@ -176,8 +174,6 @@ export const processSearchResults = (sections: any[], query: string): SearchResu
         if (section.id.startsWith('/')) {
             section.id = section.id.substring(1);
         }
-        console.log(section);
-        console.log("----------------")
         return {
             id: section.id,
             title: section.titles[section.titles.length - 1],

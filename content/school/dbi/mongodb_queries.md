@@ -12,7 +12,7 @@ protocolDescription: "Advanced MongoDB queries including filtering, sorting, and
 ## Connect to MongoDB
 
 Connect via Mongo Shell to the database mongodbqueries on a DBI5 cluster.
-mongosh `mongodb+srv://dbi5.4e2bjau.mongodb.net/` --username `5hif`
+mongosh `mongodb+srv://5hif:5hif@dbi5.4e2bjau.mongodb.net/` --username `5hif`
 
 Password is `5hif`
 
