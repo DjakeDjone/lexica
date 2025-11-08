@@ -82,7 +82,7 @@ onUnmounted(() => {
     <main class="w-screen h-screen flex justify-center">
         <label @click="close()"
             class="drawer-overlay h-full w-full absolute top-0 left-0 bg-black/10 backdrop-blur-sm"></label>
-        <div class="z-[500] p-2 rounded-[.625rem] w-full max-w-2xl mt-[15vh] mb-16">
+        <div class="spawn-animation z-[500] p-2 rounded-[.625rem] w-full max-w-2xl mt-[15vh] mb-16">
             <div class="w-full flex items-start gap-2">
                 <input type="text" class="input w-full" v-model="searchVlue" placeholder="Type to search..."
                     ref="searchInputRef" />
@@ -136,4 +136,35 @@ onUnmounted(() => {
     transition: .2s;
     text-decoration: underline;
 }
+
+.spawn-animation {
+    animation: spawnAnimation 400ms cubic-bezier(.16,.84,.32,1) both, popIn 320ms cubic-bezier(.2,.9,.3,1) both;
+}
+
+@keyframes spawnAnimation {
+    0% {
+        opacity: 0;
+        transform: scale(0.95); 
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes popIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-8px) scale(0.98);
+    }
+    60% {
+        opacity: 1;
+        transform: translateY(2px) scale(1.02);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
 </style>
