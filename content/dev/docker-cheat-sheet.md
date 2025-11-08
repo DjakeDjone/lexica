@@ -103,3 +103,4 @@ docker-compose restart frontend
 # Nur Backend und Datenbank starten (ohne Frontend)
 docker-compose up postgres backend
 ```
+ 

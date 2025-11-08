@@ -14,11 +14,38 @@ const resultExpaned = ref(false);
 
 const searchInputRef = ref<HTMLInputElement | null>(null);
 
+const possibleBangs = {
+    '!rebuild': 'Rebuild search index'
+}
 
-// Initialize search data
+const query = computed(() => {
+    const value = searchVlue.value ?? '';
+    let valueWithoutBangs = value;
+    const bangs: string[] = [];
+
+    for (const bang in possibleBangs) {
+        if (value.startsWith(bang)) {
+            valueWithoutBangs = value.slice(bang.length).trim();
+            bangs.push(bang);
+            break;
+        } else if (value.endsWith(bang)) {
+            valueWithoutBangs = value.slice(0, -bang.length).trim();
+            bangs.push(bang);
+            break;
+        }
+    }
+
+    console.log('valueWithoutBangs:', valueWithoutBangs, 'bangs:', bangs);
+
+    return {
+        q: valueWithoutBangs,
+        rebuildCache: bangs.includes('!rebuild')
+    };
+});
+
 const { data: results, status } = await useFetch('/api/search', {
     method: 'GET',
-    query: { q: searchVlue }
+    query,
 });
 
 

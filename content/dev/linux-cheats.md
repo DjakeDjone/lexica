@@ -37,3 +37,9 @@ with options:
 ```bash
 df -h
 ```
+
+### Change User Password
+
+```bash
+passwd
+```
