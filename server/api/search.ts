@@ -1,12 +1,6 @@
-import { processSearchResults, buildFolders, type SearchResult, type SearchResultFolder, type SearchResultsResponse } from '../utils/search';
+import { processSearchResults, buildFolders, type SearchResult, type SearchResultFolder, type SearchResultsResponse, Section } from '../utils/search';
 
-const SECTIONS:  {
-    id: string;
-    title: string;
-    titles: string[];
-    level: number;
-    content: string;
-}[] = [];
+const SECTIONS: Section[] = [];
 
 const getSectionsCached = (event: any, rebuild: boolean = false) => {
   if (SECTIONS.length > 0 && !rebuild) {

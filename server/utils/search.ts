@@ -8,8 +8,17 @@ export type SearchResult = {
     level: number;
     description: string;
     content?: string;
+    contentRaw?: string;
     score: number;
     url: string;
+};
+
+export type Section = {
+    id: string;
+    title: string;
+    titles: string[];
+    level: number;
+    content: string;
 };
 
 export type SearchResultFolder = {
@@ -39,9 +48,23 @@ export const extraPages = [
     }
 ];
 
+export const getContentFromRaw = (raw: string): string => {
+    return raw; // Placeholder
+};
 
-export const extendSearchResults = (results: SearchResult[]): SearchResult[] => {
-    const extendedResults = [...results];
+
+export const extendSearchResults = (results: Section[]): SearchResult[] => {
+    const extendedResults: SearchResult[] = results.map(section => ({
+        id: section.id,
+        title: section.title,
+        titles: section.titles,
+        level: section.level,
+        description: section.content.length > 200 ? section.content.substring(0, 197) + '...' : section.content,
+        content: section.content,
+        contentRaw: section.content,
+        score: 0,
+        url: section.id,
+    }));
 
     // add extra pages if they are not already in results
     extraPages.forEach(page => {
@@ -63,7 +86,7 @@ const getFuseInstance = (section: SearchResult): Fuse<any> => {
     const cacheKey = section.id;
     if (!fuseCache.has(cacheKey)) {
         const fuse = new Fuse([section], {
-            keys: ['titles', 'content'],
+            keys: ['titles', 'content', 'title', 'id'],
             includeScore: true,
             threshold: 0.4,
             distance: 100
@@ -165,11 +188,14 @@ export const scoreSection = (section: SearchResult, query: string): number => {
     return score;
 };
 
-export const processSearchResults = (sections: any[], query: string): SearchResult[] => {
+export const processSearchResults = (sections: Section[], query: string): SearchResult[] => {
     sections = extendSearchResults(sections);
     const results: SearchResult[] = sections.map((section) => {
         const score = scoreSection(section, query);
-        const description = section.content.length > 200 ? section.content.substring(0, 197) + '...' : section.content;
+        let description = '';
+        if (section.content) {
+            description = section.content.length > 200 ? section.content.substring(0, 197) + '...' : section.content;
+        }
         // remove the '/' from the id if it exists
         if (section.id.startsWith('/')) {
             section.id = section.id.substring(1);
