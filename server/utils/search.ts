@@ -189,8 +189,8 @@ export const scoreSection = (section: SearchResult, query: string): number => {
 };
 
 export const processSearchResults = (sections: Section[], query: string): SearchResult[] => {
-    sections = extendSearchResults(sections);
-    const results: SearchResult[] = sections.map((section) => {
+    const extendedSections = extendSearchResults(sections);
+    const results: SearchResult[] = extendedSections.map((section) => {
         const score = scoreSection(section, query);
         let description = '';
         if (section.content) {
