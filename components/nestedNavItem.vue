@@ -30,16 +30,16 @@ const toggleOpen = (item: ContentNavigationItem) => {
     <ul class="w-full m-0">
         <li v-for="item in navigation" :key="item.path" class="w-full m-0 !bg-transparent">
             <div v-if="item.children" class="flex flex-col justify-start items-start">
-                <div @click="toggleOpen(item)" class="w-full mt-0">
+                <button @click="toggleOpen(item)" class="w-full mt-0 flex justify-start cursor-pointer">
                     <span>
                         <Icon name="line-md:chevron-down" class="-mb-1 transition-transform duration-150"
                             :class="item.open ? 'transform rotate-180' : ''" size="15">
                         </Icon>
                     </span>
                     {{ getNameOfPath(item.path) }}
-                </div>
-                <NestedNavItem v-if="item.open && item.children" @update:navOpen="closeNav()"
-                    :navigation="item.children" />
+                </button>
+                <NestedNavItem @update:navOpen="closeNav()"
+                    :navigation="item.children" :class="item.open ? '' : 'hidden'" />
             </div>
             <NuxtLink v-else :to="item.path" @click="closeNav()">{{ item.title }}</NuxtLink>
         </li>

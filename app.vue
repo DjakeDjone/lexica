@@ -34,7 +34,7 @@ onMounted(() => {
     }
     lastScrollPos = window.scrollY;
   }, 100);
-  
+
   document.addEventListener('keydown', (e) => {
     // STRG + K
     if (e.ctrlKey && e.key === 'k' || e.metaKey && e.key === 'k' || e.key === '/') {
@@ -86,7 +86,7 @@ const scrollToTop = () => {
         </button>
         <h1 class="xl:ml-16 text-3xl font-bold max-w-[calc(100vw-2rem)] overflow-hidden whitespace-nowrap">{{
           getFileName(path)
-        }}</h1>
+          }}</h1>
       </nav>
       <!-- Page content here -->
       <div class="fixed top-0 left-0 z-30">
@@ -100,16 +100,16 @@ const scrollToTop = () => {
     </div>
     <div class="drawer-side">
       <label for="my-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
-      <ul v-auto-animate class="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
-        <li class="m-0 flex flex-row items-center">
+      <div v-auto-animate class="p-4 w-80 min-h-full bg-base-200 text-base-content">
+        <div class="m-0 flex flex-row items-center">
           <div class="inline w-fit relative">
             <NuxtLink class="w-fit mt-0 text-2xl" to="/">
               FRI3DL DOCS
             </NuxtLink>
             <ThemeController></ThemeController>
           </div>
-        </li>
-        <li class="m-0" @click="navOpen = false; searching = !searching">
+        </div>
+        <div class="m-0" @click="navOpen = false; searching = !searching">
           <button class="inline-flex justify-between items-end">
             <div class="flex gap-1">
               <Icon name="icon-park-twotone:search" size="25" />
@@ -121,24 +121,30 @@ const scrollToTop = () => {
               <kbd class="kbd kbd-sm">k</kbd>
             </div>
           </button>
-        </li>
+        </div>
         <div class="divider mb-0"></div>
         <h2 class="text-lg font-bold">Navigation</h2>
         <Navigation v-slot="{ navItems: navigation }">
-          <li class="m-0">
-            <NuxtLink to="/lohnrechner">
-              Lohnrechner
-            </NuxtLink>
-          </li>
           <li class="m-0">
             <NuxtLink to="/lexa" class="inline-flex items-center">
               Lexa
               <Icon name="hugeicons:ai-search-02" />
             </NuxtLink>
           </li>
+          <li class="m-0 pb-2 border-b border-dotted border-b-base-content/20">
+            <NuxtLink to="/preferences">
+              Preferences
+              <Icon name="mdi:cog-outline" class="mr-1" />
+            </NuxtLink>
+          </li>
+          <li class="m-0">
+            <NuxtLink to="/lohnrechner">
+              Lohnrechner
+            </NuxtLink>
+          </li>
           <NestedNavItem @update:navOpen="navOpen = false" :navigation="navigation" />
         </Navigation>
-      </ul>
+      </div>
     </div>
   </div>
 </template>
