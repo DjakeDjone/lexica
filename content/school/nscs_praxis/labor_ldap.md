@@ -204,3 +204,7 @@ done
 ```
 
 ![changed table](image-2.png)
+
+
+
+![script output](image-3.png)
