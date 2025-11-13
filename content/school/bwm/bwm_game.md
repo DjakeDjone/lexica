@@ -35,4 +35,4 @@ Entscheide, wann man von Profiling im Sinne des DSG spricht, und kreuze die rich
 
 ## Ü 5.54
 
-![alt text](image.png)
+![alt text](/images/image.png)
