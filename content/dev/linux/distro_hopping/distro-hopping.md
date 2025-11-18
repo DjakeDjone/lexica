@@ -1,8 +1,10 @@
 # Distro Hopping
 
+## Saving Home Files and GIT Repositories
+
 Um besser OS zu wechseln habe ich ein Script geschriben, welches alle Files im Home ordner zipt und alle GIT repos in einem Textfile speichert, damit man diese später wieder klonen kann.
 
-## Download Script
+### Download Script
 
 <!-- [script](/scripts/distro-hopping.sh) -->
 ::download-link
@@ -12,18 +14,32 @@ link: /scripts/distro-hopping.sh
 Distro Hopping Script herunterladen
 ::
 
-## Usage
+> ## Note
+> The script will ignore certain directories like `Downloads`, `Videos`, `Pictures`, `Music`, and `Documents` to avoid unnecessary large files. Migrate these files manually if needed.
 
-1. Download the script from the link above.
-2. Make the script executable:
-   ```bash
-   chmod +x distro-hopping.sh
-   ```
-3. Run the script:
-   ```bash
-   ./distro-hopping.sh
-   ```
-4. The script will create a zip file containing your home directory files (excluding certain directories) and a text file with the list of your GIT repositories.
-5. Transfer the zip file and the GIT repositories list to your new OS.
-6. Unzip the zip file in your home directory on the new OS.
-7. Use the GIT repositories list to clone your repositories:
+## Setting Up File Structure
+
+::download-link
+---
+link: /scripts/init-file-structure.sh
+---
+Init File Structure Script herunterladen
+::
+
+### Usage
+
+Create a file with your desired file structure:
+
+```
+- school
+- dev
+   - frontend
+   - backend
+   - fullstack
+   - mobile
+   - scripts
+- lexica
+- tmp
+```
+
+> How many spaces one hiarchy represent is up to you, the script counts the change in whitespace to determine nesting levels.
