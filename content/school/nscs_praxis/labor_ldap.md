@@ -1,4 +1,15 @@
-# LDAP - Übung
+---
+generateTableOfContents: true
+title: "LDAP"
+protocolAufgabenNr: 02
+protocolKlasse: "5AHIF"
+protocolName: "Benjamin Friedl"
+protocolGruppe: 1
+protocolAbgabetermin: "18.11.2025"
+protocolAbgabedatum: "18.11.2025"
+description: "Labor LDAP - NSCS Praxis: Einrichtung und Verwaltung eines LDAP-Servers + LDAPS Verbindung"
+---
+
 
 ## Einrichtung eines LDAP-Servers
 
