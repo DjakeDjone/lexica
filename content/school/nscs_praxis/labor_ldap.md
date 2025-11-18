@@ -23,7 +23,7 @@ Admin-Passwort: `123456`
 sudo systemctl status slapd
 ```
 
-![slapd status](/images/slapd-status.png)
+![slapd service status output](/images/slapd-status.png)
 
 ### ou.idif
 
@@ -50,7 +50,7 @@ objectclass: organizationalUnit
     ldapadd -x -D cn=admin,dc=friedl,dc=lan -W -f ou.ldif
 ```
 
-![result of command: success](/images/ldap-ou-import-success.png)
+![LDAP OU import success message](/images/ldap-ou-import-success.png)
 
 user.ldif:
 
@@ -85,7 +85,7 @@ loginShell: /bin/bash
     ldapadd -x -D cn=admin,dc=friedl,dc=lan -W -f user.ldif
 ```
 
-![result of command: success](/images/ldap-user-import-success.png)
+![LDAP user import success message](/images/ldap-user-import-success.png)
 
 > TODO: laufender Server + Client verbinden
 
@@ -99,9 +99,9 @@ ldap:
   basedn: dc=friedl,dc=lan
 ```
 
-![Connecting via jXplorer](/images/jxplorer-connection.png)
+![jXplorer connection dialog](/images/jxplorer-connection.png)
 
-![jXplorer - connected](/images/jxplorer-connected.png)
+![jXplorer connected view showing directory contents](/images/jxplorer-connected.png)
 
 ### Script to automatically create users
 
@@ -157,7 +157,7 @@ done
 
 and it worked:
 
-![Bulk user import success](/images/ldap-bulk-users-success.png)
+![LDAP bulk user import success message](/images/ldap-bulk-users-success.png)
 
 to update all fields, for example to change the title
 
@@ -203,8 +203,61 @@ for file in mod_*.ldif; do
 done
 ```
 
-![changed table](image-2.png)
+![LDAP entry table after modification](/images/ldap-modified-table.png)
 
 
+## Einrichten von LDAPS v7
 
-![script output](image-3.png)
+Dafür kann das tool `ldap_ssl_script.sh` verwendet werden.
+
+```bash
+./ldap_ssl_script.sh friedl
+```
+
+![Output from ldap_ssl_script.sh showing certificate generation steps](/images/ldap-ssl-script-output.png)
+
+## Connecting via LDAPS
+
+```bash
+ldapsearch -H ldaps://friedl.lan -x -D "cn=admin,dc=friedl,dc=lan" -W -b "dc=friedl,
+dc=lan"
+```
+
+## Lösung
+
+
+### 1) CA aus der Zertifikatskette des LDAP-Servers extrahiert und als System-CA installiert.
+
+```fish
+openssl s_client -connect 10.139.0.125:636 -showcerts </dev/null 2>/dev/null \
+    | awk 'BEGIN{n=0} /-----BEGIN CERTIFICATE-----/{n++; fname=sprintf("/tmp/cert%d.pem",n)} {print > fname} /-----END CERTIFICATE-----/{close(fname)}'
+# Datei mit Subject==Issuer identifizieren (das ist die CA)
+for f in /tmp/cert*.pem
+    openssl x509 -noout -subject -issuer -in $f
+end
+sudo cp /tmp/cert2.pem /usr/local/share/ca-certificates/friedl-ca.crt
+sudo update-ca-certificates
+rm -f /tmp/cert*.pem
+```
+
+### 2) Hostname-Mismatch behoben (Server-Zertifikat hatte CN=friedl): lokaler `/etc/hosts`-Eintrag hinzugefügt und mit dem im Zertifikat verwendeten Namen verbunden.
+
+```fish
+printf "%s\t%s\n" "10.139.0.125" "friedl" | sudo tee -a /etc/hosts
+```
+
+### 3) Verbindungstest (erfolgreich):
+
+```fish
+ldapsearch -H ldaps://friedl -x -D "cn=admin,dc=friedl,dc=lan" -W -b "dc=friedl,dc=lan"
+```
+
+Ergebnis: LDAPS-Bind und Suche funktionieren – das System vertraut nun der internen Easy-RSA CA und der verwendete Hostname stimmt mit dem Zertifikat überein.
+
+![LDAPS successful connection output](/images/ldap-successful-connection.png)
+
+> Andere Lösung wäre gewesen, eine andere Version des JXplorer zu verwenden, die auch für Linux mit selbstsignierten Zertifikaten funktioniert.
+
+![Alternate LDAP explorer screenshot](/images/ldap-explorer-fallback.png)
+
+![LDAP explorer screenshot](/images/ldap-explorer.png)
