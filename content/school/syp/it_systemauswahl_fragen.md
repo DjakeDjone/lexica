@@ -66,7 +66,7 @@ oder langfristig kann auch der **Wirtschaftliche Ausblick**, sprich die Stabilit
 
 ### 5. Marktüberblick - Auswahlebenen
 
-![marktüberblick - auswahlebenen](syp_test1_marktueberblick-auswahlebenen.png)
+![marktüberblick - auswahlebenen](/images/syp_test1_marktueberblick-auswahlebenen.png)
 
 #### Erklärung
 
@@ -115,7 +115,7 @@ Im letzteren Fall sind alle Zuschlagskriterien in der Reihenfolge ihrer Bedeutun
 
 ## Vergabeverfahren
 
-![Arten Vergabeverfahren](<20 Arten Vergabeverfahren(1).jpeg>)
+![Arten Vergabeverfahren](/images/20_Arten_Vergabeverfahren(1).jpeg)
 
 ### 10. Vergabeverfahren: Offenes Verfahren (öffentliche Ausschreibung)
 
@@ -151,3 +151,7 @@ Verhandlungsverfahren werden genutzt, um Angebote zu erhalten, die den Anforderu
 ### 15. Vergabeverfahren: Rahmenvereinbarung (Sonderfall)
 
 ### 16. Vergabeverfahren: Verfahrensauswahl
+
+- **Hardwarebeschaffung** IT: [offenes Verfahren](#10-vergabeverfahren-offenes-verfahren-öffentliche-ausschreibung)/[nicht-offenes Verfahren](#11-vergabeverfahren-nicht-offenes-verfahren-beschränkte-ausschreibung)
+- **Dienstleistungen** mit geistig-schöpferischer Leistung (schwer beschreibbar): [Verhandlungsverfahren](#12-vergabeverfahren-verhandlungsverfahren)
+- **Sandardbeschaffung** (z.B. Büromaterial): elektronische Autkion oder [Rahmenvereinbarung](#15-vergabeverfahren-rahmenvereinbarung-sonderfall)
