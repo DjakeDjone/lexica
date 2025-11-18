@@ -4,4 +4,10 @@ Um besser OS zu wechseln habe ich ein Script geschriben, welches alle Files im H
 
 ## Download Script
 
-[script](./distro-hopping.sh)
+<!-- [script](/scripts/distro-hopping.sh) -->
+::download-link
+---
+link: /scripts/distro-hopping.sh
+---
+Distro Hopping Script herunterladen
+::

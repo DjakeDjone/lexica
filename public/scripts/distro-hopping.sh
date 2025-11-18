@@ -52,8 +52,31 @@ echo "*/node_modules/*" >> "$EXCLUDE_TEMP_FILE"
 echo "*/venv/*" >> "$EXCLUDE_TEMP_FILE"
 echo "*/.venv/*" >> "$EXCLUDE_TEMP_FILE"
 
+# Exclude IDE/editor folders (recursive)
+echo "VirtualBox VMs/*" >> "$EXCLUDE_TEMP_FILE"
+echo "vmware/*" >> "$EXCLUDE_TEMP_FILE"
+
 # Exclude Snap folder (Visible folder in Home, but system specific)
 echo "snap/*" >> "$EXCLUDE_TEMP_FILE"
+
+# exclude miniconda3 folder
+echo "miniconda3/*" >> "$EXCLUDE_TEMP_FILE"
+# exclude .db files
+echo "*.db" >> "$EXCLUDE_TEMP_FILE"
+# exclude .iso files
+echo "*.iso" >> "$EXCLUDE_TEMP_FILE"
+# exclude .tar.gz files
+echo "*.tar.gz" >> "$EXCLUDE_TEMP_FILE"
+# exclude .zip files
+echo "*.zip" >> "$EXCLUDE_TEMP_FILE"
+# exclude packet tracer (pt folder)
+echo "pt/*" >> "$EXCLUDE_TEMP_FILE"
+# exclude go folder
+echo "go/*" >> "$EXCLUDE_TEMP_FILE"
+# exclude Applications folder
+echo "Applications/*" >> "$EXCLUDE_TEMP_FILE"
+# exclude Android folder
+echo "Android/*" >> "$EXCLUDE_TEMP_FILE"
 
 
 # --- 3. FINDING GIT REPOS ---
@@ -86,7 +109,7 @@ fi
 
 # Zip command
 # shellcheck disable=SC2086
-zip -r -y "$ZIP_FILE" $FILES_TO_ZIP -x@"$EXCLUDE_TEMP_FILE" > /dev/null
+zip -r -y "$ZIP_FILE" $FILES_TO_ZIP -x@$EXCLUDE_TEMP_FILE > /dev/null
 
 # --- 5. CLEANUP ---
 rm "$EXCLUDE_TEMP_FILE"
