@@ -1,14 +1,4 @@
----
-generateTableOfContents: true
-title: "LDAP"
-protocolAufgabenNr: 02
-protocolKlasse: "5AHIF"
-protocolName: "Benjamin Friedl"
-protocolGruppe: 1
-protocolAbgabetermin: "18.11.2025"
-protocolAbgabedatum: "02.12.2025"
-description: "Aufgabe zur Konfiguration eines LDAP-Servers + LDAPS-Verbindung."
----
+# LDAP - Übung
 
 ## Einrichtung eines LDAP-Servers
 
@@ -33,7 +23,7 @@ Admin-Passwort: `123456`
 sudo systemctl status slapd
 ```
 
-![slapd service status output](/images/slapd-status.png)
+![slapd status](/images/slapd-status.png)
 
 ### ou.idif
 
@@ -60,7 +50,7 @@ objectclass: organizationalUnit
     ldapadd -x -D cn=admin,dc=friedl,dc=lan -W -f ou.ldif
 ```
 
-![LDAP OU import success message](/images/ldap-ou-import-success.png)
+![result of command: success](/images/ldap-ou-import-success.png)
 
 user.ldif:
 
@@ -95,7 +85,7 @@ loginShell: /bin/bash
     ldapadd -x -D cn=admin,dc=friedl,dc=lan -W -f user.ldif
 ```
 
-![LDAP user import success message](/images/ldap-user-import-success.png)
+![result of command: success](/images/ldap-user-import-success.png)
 
 > TODO: laufender Server + Client verbinden
 
@@ -109,9 +99,9 @@ ldap:
   basedn: dc=friedl,dc=lan
 ```
 
-![jXplorer connection dialog](/images/jxplorer-connection.png)
+![Connecting via jXplorer](/images/jxplorer-connection.png)
 
-![jXplorer connected view showing directory contents](/images/jxplorer-connected.png)
+![jXplorer - connected](/images/jxplorer-connected.png)
 
 ### Script to automatically create users
 
@@ -167,7 +157,7 @@ done
 
 and it worked:
 
-![LDAP bulk user import success message](/images/ldap-bulk-users-success.png)
+![Bulk user import success](/images/ldap-bulk-users-success.png)
 
 to update all fields, for example to change the title
 
@@ -213,9 +203,6 @@ for file in mod_*.ldif; do
 done
 ```
 
-![LDAP entry table after modification](/images/ldap-modified-table.png)
-
-
 ## Einrichten von LDAPS v7
 
 Dafür kann das tool `ldap_ssl_script.sh` verwendet werden.
@@ -224,7 +211,7 @@ Dafür kann das tool `ldap_ssl_script.sh` verwendet werden.
 ./ldap_ssl_script.sh friedl
 ```
 
-![Output from ldap_ssl_script.sh showing certificate generation steps](/images/ldap-ssl-script-output.png)
+![LDAP SSL setup script output](/images/nscs_praxis-image-3.png)
 
 ## Connecting via LDAPS
 
@@ -264,10 +251,10 @@ ldapsearch -H ldaps://friedl -x -D "cn=admin,dc=friedl,dc=lan" -W -b "dc=friedl,
 
 Ergebnis: LDAPS-Bind und Suche funktionieren – das System vertraut nun der internen Easy-RSA CA und der verwendete Hostname stimmt mit dem Zertifikat überein.
 
-![LDAPS successful connection output](/images/ldap-successful-connection.png)
+![Successful LDAPS connection output](/images/ldap-successful-connection.png)
 
 > Andere Lösung wäre gewesen, eine andere Version des JXplorer zu verwenden, die auch für Linux mit selbstsignierten Zertifikaten funktioniert.
 
-![Alternate LDAP explorer screenshot](/images/ldap-explorer-fallback.png)
+![Alternate jXplorer screenshot (fallback)](/images/nscs_praxis-image-5.png)
 
-![LDAP explorer screenshot](/images/ldap-explorer.png)
+![jXplorer LDAP explorer screenshot](/images/nscs_praxis-image-4.png)
