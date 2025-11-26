@@ -92,3 +92,8 @@ math {
         display: block;
         overflow-x: scroll;
 }
+
+/* mark */
+mark {
+        background-color: var(--color-accent);
+}

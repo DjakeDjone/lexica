@@ -13,7 +13,7 @@ Zur Erinnerung: Donnerstag SMÜ über die beiden Kapitel Management und Führung
 
 ## Personenzentrierte Theorien
 
-Führen sollen "geborene Leader" sein; Kopiert von militärischen Organisationen 
+Führen sollen "geborene Leader" sein; Kopiert von militärischen Organisationen
 
 zwei vorherschende Theorien:
 
@@ -81,13 +81,13 @@ TODO: S. 197
 
 ![Systematische Führung](/images/systematische-führung.png)
 
-<!-- TODO: link to Führungsinstrument Führungsrad -->
+das wichtigste Führunsinstrument ist das [Führungsrad](#führungsrad-der-systemischen-führungstheorie)
 
 > Kritik: Die Systemtheorie sagt, dass jeder eine gute Führungskraft sein kann, wenn er das System richtig versteht. Das System zu interpretieren ist jedoch sehr komplex und nicht immer eindeutig.
 
 ## Führungsinstrumente
 
-### Direkte Führungsinstrumente
+### Direkte Beeinflussung
 
 - Aufgabezuteilung an einen Mitarbeiter
 - Übergabe von Verantwortung und Entscheidungsspielraum
@@ -105,5 +105,63 @@ TODO: S. 197
 - Erstellen von **Regeln**
 - Gestaltung einer ansprechenden **Arbeitsumgebung/Klima**
 - Ausschreibung von Mitarbeiter**wettbewerben**
-- **Belohnung/Anreizsystem**
-- geziehlte 
+- Belohnung/Anreizsystem
+- <mark>**geziehlte Personalauswahl**</mark>
+- <mark>**Teamzusammensetzung**</mark>
+
+### Management by Objectives (MbO)
+
+*Führen mit Zielvereinbarungen*
+
+MbO verbindet mehrere allgemeine Führungsinstrumente.
+
+Jeder einzelne Mitarbeiter schließt mit der Führungskraft eine individuelle Zielvereinbarung ab.
+
+##### Vor/Nachteile MbO
+
+**Vorteile für Mitarbeiter:**
+
+- Ziele werden **vereinbart** -> MA hat Möglichkeit, mitzureden
+- **Belohnung** bei Zielerreichung kann vereinbart werden
+- MA kann **selbstständig** an Zielen arbeiten
+
+**Nachteile für Mitarbeiter:**
+
+- mögliche Probleme bei **nichterreichung** der Ziele
+- **externe Faktoren** können Zielerreichung beeinflussen
+
+**Vorteile für Führungskraft:**
+
+- **motivierung** der Mitarbeiter durch Zielvereinbarung
+- bessere **kontrolle** der Zielerreichung
+
+**Nachteile für Führungskraft:**
+
+- hoher **Aufwand** für Zielvereinbarungen und Kontrollen
+- Belohnung kostet **Geld**
+
+### Führungsrad der systemischen Führungstheorie
+
+nach Fredmund Malik
+
+![führungsrad der systemiscnehn Führungstheorie](/images/führungsrad.png)
+
+<!-- S. 204 sechs Grundsätze -->
+
+#### fünf Aufgaben wirksamer Führung
+
+- Für Ziele sorgen
+- Organisieren
+- Entscheiden
+- Kontrollieren, messen beurteilen
+- Menschen fördern und entwickeln
+
+#### sieben wichtigsten Werkzeuge wirksamer Führung
+
+- **Sitzungen**
+- Berichte, schriftliche Kommunikation
+- Stellengestaltung
+- Persöhnliche Arbeitsmethodik
+- Budget und Budgetierung
+- Leistungsbeurteilung
+- **Systematische Müllabfuhr**
