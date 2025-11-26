@@ -77,7 +77,9 @@ Das optimale Führungsverhalten hängt vom Reifegrad der Mitarbeiter ab:
 
 ## Systematische Theorien
 
-TODO: S. 197
+S. 197
+
+Die Systemische Führungstheorie nach Fredmund Malik kurz gesagt die Auffassung, dass ein Unternehmen ein komplexes, lebendiges System ist.
 
 ![Systematische Führung](/images/systematische-führung.png)
 
