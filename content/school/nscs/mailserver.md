@@ -5,7 +5,7 @@
 
 port 10000 web admin
 
-anmelden mit schüler credentials
+anmelden mit schueler/schueler credentials
 
 #### Create Masterzone
 
