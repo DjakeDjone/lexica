@@ -87,6 +87,18 @@ das wichtigste Führunsinstrument ist das [Führungsrad](#führungsrad-der-syste
 
 > Kritik: Die Systemtheorie sagt, dass jeder eine gute Führungskraft sein kann, wenn er das System richtig versteht. Das System zu interpretieren ist jedoch sehr komplex und nicht immer eindeutig.
 
+Das System ist eingebettet in:
+
+- die **Umwelt**
+- die grundlegende **Unternehmenspolitik**
+- die Regeln, an die sich das Unternehmen halten möchte
+
+Führungskräfte müssen sich:
+
+- and der **Kultur** des Unternehmens orientieren
+- müssen mithelfen, die **strategie** des Unternehmens umzusetzen
+- sind in die **Struktur** des Unternehmens eingebettet
+
 ## Führungsinstrumente
 
 ### Direkte Beeinflussung
