@@ -1,6 +1,10 @@
-# Management und Führung BWM Zusammenfassung
+# Führung BWM Zusammenfassung
 
 Zur Erinnerung: Donnerstag SMÜ über die beiden Kapitel Management und Führung aus BO IV/
+
+möglicherweise auch relevant für den Test:
+
+[Management Zusammenfassung](https://lexica.fri3dl.dev/school/bwm/management)
 
 ## Führungstheorien im Überblick
 
