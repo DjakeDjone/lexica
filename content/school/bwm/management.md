@@ -30,12 +30,14 @@ sind alle Tätigkeiten, die zur Steuerung eines Unternehmens notwendig sind:
 
 ## Ebenen des Managements
 
-- **Nomitative Ebene** - langfristig <mark>(ca. 10 Jahre)</mark>
+- [Nominative Ebene](#nominative-ebene) - langfristig <mark>(ca. 10 Jahre)</mark>
   - Vision, Mission, Werte
-- **Strategische Evene** - mittelfristig <mark>(ca. 1-5 Jahre)</mark>
+- [Strategische Ebene](#strategische-ebene) - mittelfristig <mark>(ca. 1-5 Jahre)</mark>
   - Strategie, Strukturen
-- **Operative Ebene** - kurzfristig <mark>(bis 1 Jahr)</mark>
-    - Ziele, Management, Prozesse, Projekte
+- [Operative Ebene](#operative-ebene) - kurzfristig <mark>(bis 1 Jahr)</mark>
+  - Ziele, Management, Prozesse, Projekte
+
+---
 
 ### Nominative Ebene
 
