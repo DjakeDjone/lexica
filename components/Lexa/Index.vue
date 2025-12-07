@@ -7,13 +7,12 @@ const md = new MarkdownIt();
 const { history, status, askAi, clearHistory } = useAiHandler();
 
 const selectedContext = defineModel<SearchResult[]>("context");
-const autoContext = ref(true);
 const useTools = ref(true); // Enable tool-based search by default
 const selectedModel = ref('llama-3.3-70b-versatile'); // Default model for tool usage
 
 const askAI = async () => {
     if (!prompt.value.trim()) return;
-    await askAi(prompt.value, selectedContext.value || [], autoContext.value, useTools.value, selectedModel.value);
+    await askAi(prompt.value, selectedContext.value || [], useTools.value, selectedModel.value);
     prompt.value = '';
 };
 
@@ -43,7 +42,7 @@ const askAI = async () => {
             </div>
         </div>
         <div class="fixed bottom-0 left-0 right-0 flex flex-col justify-center">
-            <LexaPrompt v-model:context="selectedContext" v-model:autoContext="autoContext" v-model:useTools="useTools" v-model="prompt" :loading="status.loading" @ask="askAI" />
+            <LexaPrompt v-model:context="selectedContext" v-model:useTools="useTools" v-model="prompt" :loading="status.loading" @ask="askAI" />
         </div>
     </div>
 </template>

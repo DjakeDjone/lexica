@@ -112,7 +112,7 @@ export const useAiHandler = () => {
         }
     }
 
-    const askAi = async (question: string, selectedContext: SearchResult[], autoContext: boolean, useTools: boolean = false, model?: string) => {
+    const askAi = async (question: string, selectedContext: SearchResult[], useTools: boolean = false, model?: string) => {
         status.value.error = null;
         status.value.loading = true;
 
@@ -134,10 +134,11 @@ export const useAiHandler = () => {
                     question,
                     history: llmHistory(history.value),
                     context: selectedContext.length > 0 ? selectedContext.map(c => c.id) : undefined,
-                    withoutContext: !autoContext,
+                    withoutContext: !useTools && selectedContext.length === 0,
                     useTools,
                     model,
                 })
+
             });
             if (!response.ok || !response.body) {
                 throw new Error(`Error: ${response.status} ${response.statusText}`);

@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { onClickOutside
- } from '@vueuse/core';
+import {
+    onClickOutside
+} from '@vueuse/core';
 const selectedContext = defineModel<SearchResult[]>();
-const autoContext = defineModel<boolean>("autoContext");
 const showSelect = ref(false);
 const showHoveredContext = ref(false);
 const searchInput = ref<HTMLInputElement | null>(null);
@@ -50,9 +50,9 @@ watch(showSelect, (newVal) => {
                 <Icon name="mdi:close" class="inline-block" />
             </button>
         </h3>
-        <input v-if="!autoContext" ref="searchInput" type="text" v-model="searchWord" placeholder="Search context..."
+        <input ref="searchInput" type="text" v-model="searchWord" placeholder="Search context..."
             class="input w-full mb-2" />
-        <div v-if="!autoContext" class="max-h-60 flex gap-2">
+        <div class="max-h-60 flex gap-2">
             <div v-if="searchResults && searchResults.results.length" class="max-h-60 w-52 overflow-y-auto">
                 <div v-for="(result, index) in searchResults.results" :key="index"
                     class="p-2 rounded cursor-pointer hover:bg-base-200 flex justify-between items-center"
@@ -85,15 +85,6 @@ watch(showSelect, (newVal) => {
                 </ul>
             </div>
         </div>
-        <!-- switch for auto context -->
-        <div class="form-control">
-            <label class="cursor-pointer label">
-                <span class="label-text">Auto Context</span>
-                <input type="checkbox" class="toggle toggle-primary" v-model="autoContext"
-                    :disabled="selectedContext && selectedContext.length > 0" />
-            </label>
-            <p class="text-sm text-gray-500">Enable automatic context selection</p>
-        </div>
     </div>
     <div v-if="showHoveredContext && !showSelect" id="hover-context"
         class="absolute bottom-16 bg-base-200 p-4 rounded shadow-lg flex flex-col gap-2">
@@ -109,14 +100,11 @@ watch(showSelect, (newVal) => {
             </li>
         </ul>
     </div>
-    <button class="btn btn-sm rounded-full" @click="if (!showSelect) showSelect = true;" @mouseover="showHoveredContext = true"
-        @mouseleave="showHoveredContext = false">
+    <button class="btn btn-sm rounded-full" @click="if (!showSelect) showSelect = true;"
+        @mouseover="showHoveredContext = true" @mouseleave="showHoveredContext = false">
         <Icon name="mdi:database" class="inline-block" />
-        <span v-if="!autoContext">
+        <span class="ml-1">
             context ({{ selectedContext?.length || 0 }})
-        </span>
-        <span v-else>
-            auto context
         </span>
     </button>
 </template>

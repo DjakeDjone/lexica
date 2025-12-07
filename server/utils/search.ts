@@ -283,5 +283,41 @@ export const openLink = async (link: string, event: any): Promise<SearchResult |
     if (link.includes('#')) {
         link = link.split('#')[0];
     }
-    return await queryCollection(event, 'docs').path(link).first();
+
+    // check if it is an extra page
+    const extraPage = extraPages.find(p => p.url === link);
+    if (extraPage) {
+        return {
+            ...extraPage,
+            id: extraPage.id,
+            score: 1,
+            titles: extraPage.titles,
+            content: extraPage.content,
+            contentRaw: extraPage.content,
+            url: extraPage.url,
+            level: extraPage.level,
+            description: extraPage.description
+        };
+    }
+
+    const result = await queryCollection(event, 'docs').path(link).first();
+    
+    if (!result) return null;
+
+    // Map result to SearchResult, ensuring content is present
+    // Nuxt Content usually puts content in 'body' as AST, but we might need a string representation
+    // If 'content' field is missing, we need to handle it.
+    // Assuming 'content' or 'description' might be available or we need to fallback.
+    
+    return {
+        id: result._path || result.id || link, // Use _path if available
+        title: result.title || 'Untitled',
+        titles: [result.title || 'Untitled'],
+        level: 1,
+        content: result.rawbody || result.content || result.description || '', // Use rawbody for markdown content
+        contentRaw: result.rawbody || result.content || result.description || '',
+        score: 1,
+        url: result.path || result._path || link, // Use path from result
+        description: result.description || ''
+    };
 };

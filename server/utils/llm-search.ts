@@ -14,7 +14,7 @@ export const getRelevantSections = async (query: string, event: any): Promise<Se
 
       // ai creates search queries
       const searches = await groq.chat.completions.create({
-            model: "gemma2-9b-it",
+            model: "openai/gpt-oss-120b",
             messages: [
                   {
                         role: "system",

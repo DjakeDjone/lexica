@@ -8,11 +8,6 @@ const prompt = defineModel({
     type: String,
     required: true
 });
-const autoContext = defineModel<boolean>("autoContext", {
-    type: Boolean,
-    required: true,
-    default: true
-});
 const useTools = defineModel<boolean>("useTools", {
     type: Boolean,
     default: true
@@ -46,11 +41,11 @@ const selectedContext = defineModel<SearchResult[]>("context");
             <div class="flex items-center gap-2">
                 <label class="label cursor-pointer gap-2">
                     <input type="checkbox" v-model="useTools" class="toggle toggle-sm toggle-primary" />
-                    <span class="label-text text-xs">AI Search Tools</span>
+                    <span class="label-text text-xs">RAG Mode</span>
                 </label>
             </div>
             <div class="flex gap-2">
-                <LexaContextSelect v-if="!useTools" v-model="selectedContext" v-model:autoContext="autoContext" />
+                <LexaContextSelect v-if="!useTools" v-model="selectedContext" />
                 <button class="btn btn-sm btn-primary" :disabled="loading || prompt.trim() === ''" @click="ask()">
                     <Icon name="mdi:send" v-if="!loading" class="-rotate-90" />
                     <Icon name="mdi:loading" v-else class="animate-spin" />
