@@ -1,4 +1,6 @@
 import Groq from "groq-sdk";
+import { openLink, processSearchResults, SearchResult } from "./search";
+import { searchVectors } from "./vector-search";
 
 const groqApiKey = useRuntimeConfig().groqApiKey;
 
@@ -55,6 +57,22 @@ The search queries should be in english and german.
             const filteredResults = processSearchResults(sections, searchQuery);
             filteredResults.forEach(r => r.score += (3 - i));
             results.push(...filteredResults);
+            results.push(...filteredResults);
+      }
+
+      // Add vector search results
+      try {
+            console.log("Executing vector search...");
+            const vectorResults = await searchVectors(query, sections);
+            console.log(`Found ${vectorResults.length} vector results`);
+            
+            // Normalize scores to match keyword search magnitude (roughly 0-100+)
+            // Vector scores are 0-1. Let's multiply by 50 to give them weight but not override exact matches
+            vectorResults.forEach(r => r.score = r.score * 50);
+            
+            results.push(...vectorResults.slice(0, 10));
+      } catch (e) {
+            console.error("Vector search failed:", e);
       }
 
       // deduplicate results

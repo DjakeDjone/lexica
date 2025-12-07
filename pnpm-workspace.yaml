@@ -1,5 +1,5 @@
 packages:
-  - '.'
+  - .
 
 onlyBuiltDependencies:
   - '@parcel/watcher'
@@ -7,3 +7,5 @@ onlyBuiltDependencies:
   - better-sqlite3
   - core-js
   - esbuild
+  - protobufjs
+  - sharp
