@@ -42,7 +42,7 @@ const isTestMode = defineModel<boolean>("isTestMode", { default: false });
 
         <div v-auto-animate id="actions" class="flex justify-between items-center gap-2">
             <div class="flex items-center gap-2">
-                <label class="label cursor-pointer gap-2">
+                <label class="label cursor-pointer gap-2" v-if="!isTestMode">
                     <input type="checkbox" v-model="useTools" :disabled="isTestMode"
                         class="toggle toggle-sm toggle-primary" />
                     <span class="label-text text-xs">RAG Mode</span>
@@ -56,7 +56,8 @@ const isTestMode = defineModel<boolean>("isTestMode", { default: false });
                 <LexaContextSelect v-if="!useTools || isTestMode" v-model="selectedContext" />
                 <button class="btn btn-sm btn-primary" :disabled="loading || (prompt.trim() === '' && !isTestMode)"
                     @click="ask()">
-                    <span v-if="isTestMode && !loading" class="mr-1">Generate Test</span>
+                    <!-- <span v-if="isTestMode && !loading" class="mr-1">Generate Test</span> -->
+                     <Icon name="mdi:robot" v-if="isTestMode && !loading" class="mr-1" />
                     <Icon name="mdi:send" v-if="!loading && !isTestMode" class="-rotate-90" />
                     <Icon name="mdi:loading" v-else-if="loading" class="animate-spin" />
                 </button>
