@@ -80,7 +80,7 @@ export const initializeVectorStore = async (sections: Section[]) => {
     console.log('[VectorSearch] Initializing vector store with', sections.length, 'sections');
     
     // Load pre-computed embeddings using Nitro storage (assets)
-    let preComputedEmbeddings: Record<string, number[]> = {};
+    let preComputedEmbeddings: Record<string, any> = {};
     try {
         const data = await useStorage().getItem('assets:embeddings:embeddings.json') as any[];
         if (data) {
@@ -89,12 +89,9 @@ export const initializeVectorStore = async (sections: Section[]) => {
              // Create a map for faster lookup
              data.forEach((item: any) => {
                  if (item.embedding) {
-                     preComputedEmbeddings[item.id] = item.embedding;
+                     preComputedEmbeddings[item.id] = item;
                  }
              });
-        } else {
-             const keys = await useStorage().getKeys('assets');
-             console.log('[VectorSearch] No pre-computed embeddings found in assets:embeddings:embeddings.json. All available asset keys:', keys);
         }
     } catch (e) {
         console.error('[VectorSearch] Failed to load pre-computed embeddings:', e);
@@ -107,6 +104,7 @@ export const initializeVectorStore = async (sections: Section[]) => {
         const cacheKey = section.id;
         
         let embedding: number[] | undefined;
+        let content = section.content;
         
         // 1. Try memory cache (if re-initializing same session)
         if (embeddingCache.has(cacheKey)) {
@@ -114,7 +112,11 @@ export const initializeVectorStore = async (sections: Section[]) => {
         } 
         // 2. Try pre-computed file
         else if (preComputedEmbeddings[cacheKey]) {
-             embedding = preComputedEmbeddings[cacheKey];
+             embedding = preComputedEmbeddings[cacheKey].embedding;
+             // Hydrate content if missing locally but present in cache
+             if ((!content || content.length < 10) && preComputedEmbeddings[cacheKey].content) {
+                 content = preComputedEmbeddings[cacheKey].content;
+             }
              // Add to memory cache for future access
              embeddingCache.set(cacheKey, embedding);
         }
@@ -122,26 +124,24 @@ export const initializeVectorStore = async (sections: Section[]) => {
         else {
              if (calculatedCount < 5) {
                  // limit content length to avoid token limit issues
-                 const contentForEmbedding = (section.title + " " + section.content).slice(0, 1000); 
+                 const contentForEmbedding = (section.title + " " + content).slice(0, 1000); 
                  embedding = await getEmbedding(contentForEmbedding);
                  if (embedding) {
                      embeddingCache.set(cacheKey, embedding);
                      calculatedCount++;
                  }
              } else {
-                 // Too many missing embeddings, skip to prevent timeout
                  if (calculatedCount === 5) {
                      console.warn(`[VectorSearch] Limit of 5 on-the-fly calculations reached. Skipping remaining missing embeddings. First missing ID: ${cacheKey}`);
-                     calculatedCount++; // Increment to only log once
+                     calculatedCount++;
                  }
-                 // Optional: Log every missing ID if needed for debugging, but spammy
-                 // console.debug(`[VectorSearch] Missing embedding for: ${cacheKey}`);
              }
         }
         
         if (embedding) {
             newStore.push({
                 ...section,
+                content, // Use the potentially hydrated content
                 embedding
             });
         }
