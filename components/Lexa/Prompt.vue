@@ -35,7 +35,7 @@ const isTestMode = defineModel<boolean>("isTestMode", { default: false });
 
 <template>
     <div @keydown.ctrl.enter="ask()"
-        class="w-full max-w-3xl mx-auto md:rounded-t-2xl backdrop-blur-md flex flex-col gap-2 bg-accent/10 p-4">
+        class="relative w-full max-w-3xl mx-auto md:rounded-t-2xl backdrop-blur-md flex flex-col gap-2 bg-accent/10 p-4">
         <textarea autofocus ref="textarea" v-model="prompt"
             :placeholder="isTestMode ? 'Describe the test topic (optional)...' : 'Enter your question here...'"
             class="border-none outline-none resize-none w-full p-2 border rounded max-h-48"></textarea>
@@ -45,11 +45,11 @@ const isTestMode = defineModel<boolean>("isTestMode", { default: false });
                 <label class="label cursor-pointer gap-2" v-if="!isTestMode">
                     <input type="checkbox" v-model="useTools" :disabled="isTestMode"
                         class="toggle toggle-sm toggle-primary" />
-                    <span class="label-text text-xs">RAG Mode</span>
+                    <span class="label-text text-xs">RAG</span>
                 </label>
                 <label class="label cursor-pointer gap-2">
                     <input type="checkbox" v-model="isTestMode" class="toggle toggle-sm toggle-secondary" />
-                    <span class="label-text text-xs">Test Mode</span>
+                    <span class="label-text text-xs">Test</span>
                 </label>
             </div>
             <div class="flex gap-2">
