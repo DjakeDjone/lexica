@@ -84,13 +84,19 @@ Your task is to generate a test/quiz based EXCLUSIVELY on the provided documenta
 
 **INSTRUCTIONS:**
 - Generate 3-5 multiple choice or short answer questions.
-- Return the result as a strictly formatted JSON array of objects.
-- Each object must have:
-  - \`id\`: string (unique id)
-  - \`question\`: string
-  - \`type\`: "multiple_choice" | "short_answer"
-  - \`options\`: string[] (only for multiple_choice)
-  - \`correctAnswer\`: string (for internal validation)
+- Return the result as a strictly formatted JSON object with a "questions" key.
+- The object must follow this structure:
+  {
+      "questions": [
+          {
+              "id": "unique_string",
+              "question": "string",
+              "type": "multiple_choice" | "short_answer",
+              "options": ["string"] (only for multiple_choice),
+              "correctAnswer": "string"
+          }
+      ]
+  }
 - Do NOT output markdown formatting (like \`\`\`json), just the raw JSON string.
 - The questions must be answerable from the context.
 `;
@@ -101,11 +107,17 @@ Your task is to grade a user's answers to a test based on the provided documenta
 **INSTRUCTIONS:**
 - You will receive the Questions, the User's Answers, and the Context.
 - For each answer, determine if it is correct based on the context.
-- Return the result as a strictly formatted JSON array of objects.
-- Each object must have:
-  - \`questionId\`: string
-  - \`correct\`: boolean
-  - \`explanation\`: string (short explanation of why it is correct or incorrect, citing the context).
+- Return the result as a strictly formatted JSON object with a "grading" key.
+- The object must follow this structure:
+  {
+      "grading": [
+          {
+              "questionId": "string",
+              "correct": boolean,
+              "explanation": "string"
+          }
+      ]
+  }
 - Do NOT output markdown formatting, just the raw JSON string.
 `;
 
@@ -133,8 +145,9 @@ export const generateTest = async (contextLinks: string[], event: any) => {
             temperature: 0.1,
       });
 
+      const parsedContent = JSON.parse(response.choices[0].message.content || "{}");
       return {
-            test: JSON.parse(response.choices[0].message.content || "[]"),
+            test: parsedContent.questions || [],
             relevantSections: relevantSections.map(s => ({ title: s.title, url: s.url }))
       };
 };
@@ -162,7 +175,8 @@ export const gradeTest = async (questions: any[], answers: any[], contextLinks: 
             temperature: 0.1,
       });
 
-      return JSON.parse(response.choices[0].message.content || "[]");
+      const parsedContent = JSON.parse(response.choices[0].message.content || "{}");
+      return parsedContent.grading || [];
 };
 
 
