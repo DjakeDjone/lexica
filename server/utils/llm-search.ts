@@ -83,6 +83,27 @@ The search queries should be in english and german.
 
       uniqueResults.sort((a, b) => b.score - a.score);
       const slicedResults = uniqueResults.slice(0, 10);
+      
+      // Enrich results with full content if missing
+      for (const r of slicedResults) {
+          if (!r.content || r.content.length < 50) {
+                try {
+                    // Use openLink to fetch full content via Nuxt Content query
+                    // Use 'id' as it matches the internal path structure better than 'url'
+                    const enriched = await openLink(r.id, event);
+                    if (enriched && enriched.content) {
+                        r.content = enriched.content;
+                        // Update title if needed
+                        if (!r.title || r.title === 'undefined') {
+                            r.title = enriched.title;
+                        }
+                    }
+                } catch (e) {
+                    console.error(`Failed to enrich content for ${r.id}:`, e);
+                }
+          }
+      }
+
       // fix links
       slicedResults.forEach(r => {
             // remove '/docs' from the start of the url

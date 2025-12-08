@@ -80,7 +80,7 @@ export const initializeVectorStore = async (sections: Section[]) => {
     console.log('[VectorSearch] Initializing vector store with', sections.length, 'sections');
     
     // Load pre-computed embeddings using Nitro storage (assets)
-    let preComputedEmbeddings: Record<string, any> = {};
+    let preComputedEmbeddings: Record<string, number[]> = {};
     try {
         const data = await useStorage().getItem('assets:embeddings:embeddings.json') as any[];
         if (data) {
@@ -89,7 +89,7 @@ export const initializeVectorStore = async (sections: Section[]) => {
              // Create a map for faster lookup
              data.forEach((item: any) => {
                  if (item.embedding) {
-                     preComputedEmbeddings[item.id] = item;
+                     preComputedEmbeddings[item.id] = item.embedding;
                  }
              });
         }
@@ -104,7 +104,6 @@ export const initializeVectorStore = async (sections: Section[]) => {
         const cacheKey = section.id;
         
         let embedding: number[] | undefined;
-        let content = section.content;
         
         // 1. Try memory cache (if re-initializing same session)
         if (embeddingCache.has(cacheKey)) {
@@ -112,11 +111,7 @@ export const initializeVectorStore = async (sections: Section[]) => {
         } 
         // 2. Try pre-computed file
         else if (preComputedEmbeddings[cacheKey]) {
-             embedding = preComputedEmbeddings[cacheKey].embedding;
-             // Hydrate content if missing locally but present in cache
-             if ((!content || content.length < 10) && preComputedEmbeddings[cacheKey].content) {
-                 content = preComputedEmbeddings[cacheKey].content;
-             }
+             embedding = preComputedEmbeddings[cacheKey];
              // Add to memory cache for future access
              embeddingCache.set(cacheKey, embedding);
         }
@@ -124,7 +119,7 @@ export const initializeVectorStore = async (sections: Section[]) => {
         else {
              if (calculatedCount < 5) {
                  // limit content length to avoid token limit issues
-                 const contentForEmbedding = (section.title + " " + content).slice(0, 1000); 
+                 const contentForEmbedding = (section.title + " " + section.content).slice(0, 1000); 
                  embedding = await getEmbedding(contentForEmbedding);
                  if (embedding) {
                      embeddingCache.set(cacheKey, embedding);
@@ -141,7 +136,6 @@ export const initializeVectorStore = async (sections: Section[]) => {
         if (embedding) {
             newStore.push({
                 ...section,
-                content, // Use the potentially hydrated content
                 embedding
             });
         }
