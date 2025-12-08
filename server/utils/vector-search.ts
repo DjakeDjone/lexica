@@ -79,24 +79,54 @@ let vectorStore: VectorSection[] = [];
 export const initializeVectorStore = async (sections: Section[]) => {
     console.log('[VectorSearch] Initializing vector store with', sections.length, 'sections');
     
-    // Filter out sections that are already in the store and haven't changed (simplified check)
-    // For now, we'll just rebuild based on ID match, but ideally we'd hash content
+    // Load pre-computed embeddings if available
+    let preComputedEmbeddings: Record<string, number[]> = {};
+    try {
+        const assetsPath = path.resolve('server/assets/embeddings.json');
+        if (fs.existsSync(assetsPath)) {
+             const rawData = fs.readFileSync(assetsPath, 'utf-8');
+             const data = JSON.parse(rawData);
+             console.log(`[VectorSearch] Loaded ${data.length} pre-computed embeddings`);
+             
+             // Create a map for faster lookup
+             data.forEach((item: any) => {
+                 if (item.embedding) {
+                     preComputedEmbeddings[item.id] = item.embedding;
+                 }
+             });
+        } else {
+             console.log('[VectorSearch] No pre-computed embeddings found at', assetsPath);
+        }
+    } catch (e) {
+        console.error('[VectorSearch] Failed to load pre-computed embeddings:', e);
+    }
     
     const newStore: VectorSection[] = [];
+    let calculatedCount = 0;
     
     for (const section of sections) {
-        // limit content length to avoid token limit issues (approx 200 words)
-        const contentForEmbedding = (section.title + " " + section.content).slice(0, 1000); 
-        const cacheKey = section.id; // Simple cache key on ID
+        const cacheKey = section.id;
         
         let embedding: number[] | undefined;
         
+        // 1. Try memory cache (if re-initializing same session)
         if (embeddingCache.has(cacheKey)) {
              embedding = embeddingCache.get(cacheKey);
-        } else {
+        } 
+        // 2. Try pre-computed file
+        else if (preComputedEmbeddings[cacheKey]) {
+             embedding = preComputedEmbeddings[cacheKey];
+             // Add to memory cache for future access
+             embeddingCache.set(cacheKey, embedding);
+        }
+        // 3. Fallback: Calculate on the fly
+        else {
+             // limit content length to avoid token limit issues
+             const contentForEmbedding = (section.title + " " + section.content).slice(0, 1000); 
              embedding = await getEmbedding(contentForEmbedding);
              if (embedding) {
                  embeddingCache.set(cacheKey, embedding);
+                 calculatedCount++;
              }
         }
         
@@ -106,6 +136,12 @@ export const initializeVectorStore = async (sections: Section[]) => {
                 embedding
             });
         }
+    }
+    
+    if (calculatedCount > 0) {
+        console.log(`[VectorSearch] Calculated ${calculatedCount} embeddings on the fly (others were pre-computed/cached)`);
+    } else {
+        console.log('[VectorSearch] All embeddings loaded from cache/pre-computed file');
     }
     
     vectorStore = newStore;

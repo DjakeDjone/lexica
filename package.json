@@ -2,8 +2,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
+    "build": "npm run generate:embeddings && nuxt build",
+    "dev": "npm run generate:embeddings && nuxt dev",
+    "generate:embeddings": "node server/scripts/generate-embeddings.js",
     "generate": "nuxt generate",
     "preview": "nuxt preview"
   },
