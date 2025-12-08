@@ -5,7 +5,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   preset: 'vercel',
 
-  modules: ['@nuxt/content', '@formkit/auto-animate', '@vueuse/nuxt', '@nuxt/icon'],
+  modules: ['@nuxt/content', '@formkit/auto-animate', '@vueuse/nuxt', '@nuxt/icon', '~/modules/embeddings'],
 
   vite: {
     plugins: [tailwindcss()],
