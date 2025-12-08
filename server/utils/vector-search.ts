@@ -93,8 +93,8 @@ export const initializeVectorStore = async (sections: Section[]) => {
                  }
              });
         } else {
-             const keys = await useStorage().getKeys('assets:embeddings');
-             console.log('[VectorSearch] No pre-computed embeddings found in assets:embeddings:embeddings.json. Available keys:', keys);
+             const keys = await useStorage().getKeys('assets');
+             console.log('[VectorSearch] No pre-computed embeddings found in assets:embeddings:embeddings.json. All available asset keys:', keys);
         }
     } catch (e) {
         console.error('[VectorSearch] Failed to load pre-computed embeddings:', e);

@@ -9,6 +9,15 @@ export default defineNuxtModule({
         name: 'embeddings-generator'
     },
     setup(options, nuxt) {
+        // Register the server asset directory dynamically
+        nuxt.hook('nitro:config', (nitroConfig) => {
+            nitroConfig.serverAssets = nitroConfig.serverAssets || [];
+            nitroConfig.serverAssets.push({
+                baseName: 'embeddings',
+                dir: path.resolve(nuxt.options.srcDir, 'server/assets')
+            });
+        });
+
         nuxt.hook('build:before', async () => {
             console.log('[Embeddings] Starting embedding generation...');
 
@@ -162,10 +171,13 @@ export default defineNuxtModule({
                 }
 
                 await fs.promises.writeFile(outputFile, JSON.stringify(outputData, null, 2));
-                console.log(`[Embeddings] Saved ${outputData.length} embeddings to ${outputFile}`);
+                const stats = await fs.promises.stat(outputFile);
+                console.log(`[Embeddings] Saved ${outputData.length} embeddings to ${outputFile} (Size: ${stats.size} bytes)`);
                 
             } catch (err) {
                 console.error('[Embeddings] Fatal error:', err);
+                // Fail the build if embeddings fail!
+                process.exit(1); 
             }
         });
     }

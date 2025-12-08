@@ -48,12 +48,7 @@ export default defineNuxtConfig({
     },
   },
 
-  nitro: {
-    serverAssets: [{
-      baseName: 'embeddings',
-      dir: './server/assets'
-    }]
-  },
+
 
   runtimeConfig: {
     groqApiKey: process.env.GROQ_API_KEY,
