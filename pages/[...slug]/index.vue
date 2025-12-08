@@ -14,9 +14,16 @@ const filePath = ref<string>();
                         <TableOfContentsSidebar :page="page" />
                     </div> -->
                     <div class="overflow-x-scroll">
-                        <h1 v-if="page && page.title" class="font-bold">
-                            {{ page?.title }}
-                        </h1>
+                        <div class="flex justify-between items-center mb-4">
+                            <h1 v-if="page && page.title" class="font-bold">
+                                {{ page?.title }}
+                            </h1>
+                            <NuxtLink v-if="page"
+                                :to="{ path: '/lexa', query: { test: 'true', contextUrl: filePath, contextTitle: page.title } }"
+                                class="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition text-sm font-medium">
+                                Test with AI
+                            </NuxtLink>
+                        </div>
                         <TableOfContents :page="page" v-if="page?.generateTableOfContents" />
                         <ImagePopupContainer>
                             <ContentRenderer v-if="page" :value="page">

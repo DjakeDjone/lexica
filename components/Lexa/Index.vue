@@ -9,7 +9,8 @@ const { history, status, askAi, clearHistory } = useAiHandler();
 const selectedContext = defineModel<SearchResult[]>("context");
 const useTools = ref(true); // Enable tool-based search by default
 const selectedModel = ref('llama-3.3-70b-versatile'); // Default model for tool usage
-const isTestMode = ref(false);
+const route = useRoute();
+const isTestMode = ref(route.query.test === 'true');
 
 const askAI = async () => {
     // If test mode is on, we ignore the prompt text for generation usually, or use it as topic?
