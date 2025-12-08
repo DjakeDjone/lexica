@@ -1,6 +1,11 @@
 # DNS
 
-Treeförmig:
+Empfehlung: [DNS Explained in 100 Seconds @fireship](https://www.youtube.com/watch?v=UVR9lhUGAyU)
+
+![dns tree](/images/dns_tree.png)
+
+**Treeförmig**:
+
 Root-Punkt -> Top Level Domain -> Second Label Domain -> Third Level Domain ...
 
 eg.: . -> com -> wikipedia -> de :::=> de.wikipedia.org.
@@ -18,6 +23,15 @@ wir wollen moodle.htlstp.at aufrufen:
 7. Der htlstp.at-Server antwortet mit der IP-Adresse von moodle.htlstp.at
 8. Der lokale DNS-Server antwortet mit der IP-Adresse von moodle.htlstp.at an den Client
 9. Der Client verbindet sich mit der IP-Adresse von moodle.htlstp.at
+
+## Wichtige DNS Einträge
+
+- `A`/`AAAA`: Zuordnung eines Hostnamens zu einer IPv4/IPv6-Adresse
+- `CNAME`: Alias für einen anderen Hostnamen
+- `MX`: Mail Exchange, gibt Mailserver für eine Domain an
+- `NS`: Name Server, gibt autoritative DNS-Server für eine Domain an
+- `SOA`: Start of Authority, gibt grundlegende Informationen über die Domain und den DNS-Server an
+- `PTR`: Pointer Record, Zuordnung einer IP-Adresse zu einem Hostnamen (Reverse DNS)
 
 ## Tools
 
@@ -59,3 +73,12 @@ DNSSEC: Erweiterung des DNS-Protokolls, die digitale **Signaturen** verwendet, u
 - DNSSEC schützt nicht vor Spoofing, wenn der Angreifer den privaten Schlüssel der Zone kennt
 
 > **Chain of Trust**: Jede Zone wird von der übergeordneten Zone signiert, beginnend bei der Root-Zone. Clients können die Signaturkette überprüfen, um sicherzustellen, dass die Antwort authentisch ist.
+
+### Verschlüsselung
+
+DNSSEC gewährleistet Authentizität und Integrität, aber keine Vertraulichkeit. Desshalb werden oft noch zusätzliche Protokolle verwendet:
+
+- DNS over HTTPS (DoH)
+- DNS over TLS (DoT)
+
+Diese Protokolle verschlüsseln die DNS-Anfragen und -Antworten, um zu verhindern, dass Dritte mitlesen können, welche Domains abgefragt werden.
