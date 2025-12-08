@@ -18,11 +18,13 @@ const filePath = ref<string>();
                             <h1 v-if="page && page.title" class="font-bold">
                                 {{ page?.title }}
                             </h1>
-                            <NuxtLink v-if="page"
-                                :to="{ path: '/lexa', query: { test: 'true', contextUrl: filePath, contextTitle: page.title } }"
-                                class="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition text-sm font-medium">
-                                Test with AI
-                            </NuxtLink>
+                            <button class="btn btn-sm btn-accent">
+                                <NuxtLink v-if="page" class="no-underline"
+                                    :to="{ path: '/lexa', query: { test: 'true', contextUrl: filePath, contextTitle: page.title } }">
+                                    <Icon name="mdi:lightbulb" />
+                                    Test
+                                </NuxtLink>
+                            </button>
                         </div>
                         <TableOfContents :page="page" v-if="page?.generateTableOfContents" />
                         <ImagePopupContainer>
