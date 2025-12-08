@@ -37,17 +37,31 @@ export default defineNuxtModule({
                 return;
             }
 
+            // Define interfaces for our data structures
+            interface Section {
+                id: string;
+                title: string;
+                titles: string[];
+                level: number;
+                content: string;
+                url: string;
+            }
+
+            interface EmbeddingOutput extends Section {
+                embedding: number[];
+            }
+
             const md = new MarkdownIt();
 
             // Function to split markdown into sections based on headers
-            function parseMarkdown(content, id, filePath) {
+            function parseMarkdown(content: string, id: string, filePath: string): Section[] {
                 const tokens = md.parse(content, {});
-                const sections = [];
+                const sections: Section[] = [];
 
                 let currentTitle = 'Untitled';
                 let currentTitles = ['Untitled'];
                 let currentLevel = 1;
-                let currentContent = [];
+                let currentContent: string[] = [];
 
                 // Helper to push current section
                 const pushSection = () => {
@@ -106,20 +120,20 @@ export default defineNuxtModule({
                 return sections;
             }
 
-            async function getAllFiles(dir) {
+            async function getAllFiles(dir: string): Promise<string[]> {
                 const entries = await fs.promises.readdir(dir, { withFileTypes: true });
                 const files = await Promise.all(entries.map((entry) => {
                     const res = path.resolve(dir, entry.name);
-                    return entry.isDirectory() ? getAllFiles(res) : res;
+                    return entry.isDirectory() ? getAllFiles(res) : Promise.resolve([res]);
                 }));
-                return files.flat().filter(file => file.endsWith('.md'));
+                return (files.flat() as string[]).filter(file => file.endsWith('.md'));
             }
 
             try {
                 const files = await getAllFiles(contentDir);
                 console.log(`[Embeddings] Found ${files.length} markdown files.`);
 
-                const allSections = [];
+                const allSections: Section[] = [];
 
                 for (const file of files) {
                     const content = await fs.promises.readFile(file, 'utf-8');
@@ -141,7 +155,7 @@ export default defineNuxtModule({
 
                 const pipe = await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2');
 
-                const outputData = [];
+                const outputData: EmbeddingOutput[] = [];
 
                 let processed = 0;
                 for (const section of allSections) {

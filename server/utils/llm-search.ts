@@ -1,10 +1,11 @@
 import Groq from "groq-sdk";
+import type { H3Event } from "h3";
 import { openLink, processSearchResults, SearchResult } from "./search";
 import { searchVectors } from "./vector-search";
 
 const groqApiKey = useRuntimeConfig().groqApiKey;
 
-export const getRelevantSections = async (query: string, event: any): Promise<SearchResult[]> => {
+export const getRelevantSections = async (query: string, event: H3Event): Promise<SearchResult[]> => {
       const sections = await queryCollectionSearchSections(event, 'docs');
 
       const groq = new Groq({

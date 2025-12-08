@@ -13,6 +13,7 @@ View my markdowns and use my calculators!
 
 ## News
 
+- TEST MODE in Lexa! [lexa](/lexa) Generate tests out of summaries to better understand the content.
 - MATH Formulas are now supported with **KaTeX**.
 - [Quizzes](/else/textquiz): **The platform now supports quizzes** directly in the markdowns. Check out the sample [quiz](/else/textquiz) page for more information.
 - The platform now supports **code highlighting** for multiple languages.

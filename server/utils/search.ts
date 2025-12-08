@@ -268,7 +268,9 @@ export const buildFolders = (results: SearchResult[]): SearchResultFolder[] => {
     return folders;
 };
 
-export const openLink = async (link: string, event: any): Promise<SearchResult | null> => {
+import type { H3Event } from "h3";
+
+export const openLink = async (link: string, event: H3Event): Promise<SearchResult | null> => {
     // remove '/docs/' from the link if it exists
     if (link.startsWith('/docs/')) {
         link = link.substring(6);

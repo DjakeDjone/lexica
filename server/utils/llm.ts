@@ -1,4 +1,6 @@
 import Groq from "groq-sdk";
+import type { ChatCompletionMessageParam } from "groq-sdk/resources/chat/completions";
+import type { H3Event } from "h3";
 import { openLink, processSearchResults, SearchResult } from "./search";
 import { getRelevantSections } from "./llm-search";
 
@@ -121,8 +123,27 @@ Your task is to grade a user's answers to a test based on the provided documenta
 - Do NOT output markdown formatting, just the raw JSON string.
 `;
 
+interface TestQuestion {
+    id: string;
+    question: string;
+    type: "multiple_choice" | "short_answer";
+    options?: string[];
+    correctAnswer: string;
+}
 
-export const generateTest = async (contextLinks: string[], event: any) => {
+interface TestGrading {
+    questionId: string;
+    correct: boolean;
+    explanation: string;
+}
+
+interface TestAnswer {
+    questionId: string;
+    answer: string;
+}
+
+
+export const generateTest = async (contextLinks: string[], event: H3Event) => {
       let relevantSections: SearchResult[] = [];
       for (const link of contextLinks) {
             const section = await openLink(link, event);
@@ -133,10 +154,10 @@ export const generateTest = async (contextLinks: string[], event: any) => {
       const context = sectionsToContext(relevantSections);
 
       const groq = new Groq({ apiKey: groqApiKey });
-      const messages = [
+      const messages: ChatCompletionMessageParam[] = [
             { role: "system", content: systemPromptForTestGeneration },
             { role: "user", content: `Context:\n${context}\n\nGenerate a test.` }
-      ] as any[];
+      ];
 
       const response = await groq.chat.completions.create({
             model: "llama-3.3-70b-versatile", // Use a capable model for JSON generation
@@ -147,12 +168,12 @@ export const generateTest = async (contextLinks: string[], event: any) => {
 
       const parsedContent = JSON.parse(response.choices[0].message.content || "{}");
       return {
-            test: parsedContent.questions || [],
+            test: (parsedContent.questions || []) as TestQuestion[],
             relevantSections: relevantSections.map(s => ({ title: s.title, url: s.url }))
       };
 };
 
-export const gradeTest = async (questions: any[], answers: any[], contextLinks: string[], event: any) => {
+export const gradeTest = async (questions: TestQuestion[], answers: TestAnswer[], contextLinks: string[], event: H3Event) => {
        let relevantSections: SearchResult[] = [];
       for (const link of contextLinks) {
             const section = await openLink(link, event);
@@ -163,10 +184,10 @@ export const gradeTest = async (questions: any[], answers: any[], contextLinks: 
       const context = sectionsToContext(relevantSections);
 
       const groq = new Groq({ apiKey: groqApiKey });
-      const messages = [
+      const messages: ChatCompletionMessageParam[] = [
             { role: "system", content: systemPromptForGrading },
             { role: "user", content: `Context:\n${context}\n\nQuestions:\n${JSON.stringify(questions)}\n\nUser Answers:\n${JSON.stringify(answers)}\n\nGrade the test.` }
-      ] as any[];
+      ];
 
       const response = await groq.chat.completions.create({
             model: "llama-3.3-70b-versatile",
@@ -176,13 +197,13 @@ export const gradeTest = async (questions: any[], answers: any[], contextLinks: 
       });
 
       const parsedContent = JSON.parse(response.choices[0].message.content || "{}");
-      return parsedContent.grading || [];
+      return (parsedContent.grading || []) as TestGrading[];
 };
 
 
 
 
-const contextualizeQuery = async (query: string, history: { role: string; content: string }[]) => {
+const contextualizeQuery = async (query: string, history: ChatCompletionMessageParam[]) => {
       if (!history || history.length === 0) return query;
 
       const groq = new Groq({ apiKey: groqApiKey });
@@ -210,7 +231,7 @@ const contextualizeQuery = async (query: string, history: { role: string; conten
       Do NOT answer the question. ONLY output the rephrased question.
       `
                   },
-                  ...relevantHistory.map(h => ({ role: h.role as any, content: h.content })),
+                  ...relevantHistory,
                   { role: "user", content: `Rephrase this question: "${query}"` }
             ],
             temperature: 0.1,
@@ -222,7 +243,7 @@ const contextualizeQuery = async (query: string, history: { role: string; conten
       return rephrasedQuery;
 }
 
-export const askLLM = async (prompt: string, history: { role: string; content: string }[] = [], event: any,
+export const askLLM = async (prompt: string, history: ChatCompletionMessageParam[] = [], event: H3Event,
       contextLinks?: string[]
       , withoutContext?: boolean
       , aiSettings: { model?: string; useTools?: boolean } = {},
@@ -284,11 +305,11 @@ export const askLLM = async (prompt: string, history: { role: string; content: s
         ${prompt}
       `;
 
-      const messages = [
+      const messages: ChatCompletionMessageParam[] = [
             { role: "system", content: withoutContext ? systemPromptWithoutContext : systemPromptWithContext },
             ...history,
             { role: "user", content: withoutContext ? prompt : promptWithContext },
-      ] as { role: 'user' | 'system' | 'assistant'; content: string }[];
+      ];
       
       console.log("------------------------------------------------------------------");
       console.log("DEBUG: RAG Mode:", !withoutContext);

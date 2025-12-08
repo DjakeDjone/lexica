@@ -82,12 +82,12 @@ export const initializeVectorStore = async (sections: Section[]) => {
     // Load pre-computed embeddings using Nitro storage (assets)
     let preComputedEmbeddings: Record<string, number[]> = {};
     try {
-        const data = await useStorage().getItem('assets:embeddings:embeddings.json') as any[];
+        const data = await useStorage().getItem('assets:embeddings:embeddings.json') as { id: string, embedding: number[] }[];
         if (data) {
              console.log(`[VectorSearch] Loaded ${data.length} pre-computed embeddings from assets`);
              
              // Create a map for faster lookup
-             data.forEach((item: any) => {
+             data.forEach((item) => {
                  if (item.embedding) {
                      preComputedEmbeddings[item.id] = item.embedding;
                  }
