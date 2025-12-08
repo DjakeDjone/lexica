@@ -76,7 +76,7 @@ DNSSEC: Erweiterung des DNS-Protokolls, die digitale **Signaturen** verwendet, u
 
 ### Verschlüsselung
 
-DNSSEC gewährleistet Authentizität und Integrität, aber keine Vertraulichkeit. Desshalb werden oft noch zusätzliche Protokolle verwendet:
+DNSSEC gewährleistet Authentizität und Integrität, aber keine Vertraulichkeit. Deshalb werden oft noch zusätzliche Protokolle verwendet:
 
 - DNS over HTTPS (DoH)
 - DNS over TLS (DoT)

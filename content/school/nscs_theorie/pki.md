@@ -1,10 +1,10 @@
 # PKI
 
-Ausgangsdukument: [Moodle PKI und Vertrauensmodelle](https://moodle.htlstp.ac.at/pluginfile.php/32436/mod_resource/content/2/PKI_und_Vertrauensmodelle_v1.pdf)
+Ausgangsdokument: [Moodle PKI und Vertrauensmodelle](https://moodle.htlstp.ac.at/pluginfile.php/32436/mod_resource/content/2/PKI_und_Vertrauensmodelle_v1.pdf)
 
 ## Digitale Signaturen
 
-Ziel: **Authentizität** und **Intigrität** sicherstellen
+Ziel: **Authentizität** und **Integrität** sicherstellen
 
 > Digitale Signaturen dienen nicht der Geheimhaltung
 
@@ -55,8 +55,8 @@ Ein X.509-Zertifikat enthält:
 - **Zertifikatsperrliste (CRL)**: Liste von Zertifikaten, die vor Ablaufdatum widerrufen wurden. Alternativ könnte auch eine White-List verwendet werden.
 - **Verzeichnisdienste**: ein durchsuchbares Verzeichnis, in dem Zertifikate und CRLs zu  den Usern/Maschinen gespeichert werden (z.B. LDAP)
 - **Dokumentation**: Richtlinien und Verfahren zur Verwaltung der PKI
-- **Certificate Policies (CP)**: das ANforderungsprofil für Zertifikate, wichtig für die Vertrauenskette
-- **Certification Practise Statement (CPS)**: beschreibt die Konkrete Umsetzung der CP
+- **Certificate Policies (CP)**: das Anforderungsprofil für Zertifikate, wichtig für die Vertrauenskette
+- **Certification Practice Statement (CPS)**: beschreibt die Konkrete Umsetzung der CP
 
 ### Zertifizierungspfad/Validierungspfad
 
@@ -81,6 +81,6 @@ Ein Zertifizierungspfad ist eine Kette von Zertifikaten, die von einer vertrauen
 
 ## Implementierungen
 
-- **Microsoft**: windows Server (Zertifikatsdienst) enthalten eine CA-Losung
+- **Microsoft**: Windows Server (Zertifikatsdienst) enthalten eine CA-Lösung
 - **Linux**: OpenSSL, EJBCA, Dogtag
 - **Dogtag Certificate System**: Open-Source-PKI-Lösung, die von Red Hat entwickelt wurde. Bietet eine umfassende Suite von PKI-Diensten, einschließlich CA, RA, OCSP und mehr.
