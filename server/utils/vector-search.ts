@@ -118,14 +118,24 @@ export const initializeVectorStore = async (sections: Section[]) => {
              // Add to memory cache for future access
              embeddingCache.set(cacheKey, embedding);
         }
-        // 3. Fallback: Calculate on the fly
+        // 3. Fallback: Calculate on the fly (limited to avoid timeout)
         else {
-             // limit content length to avoid token limit issues
-             const contentForEmbedding = (section.title + " " + section.content).slice(0, 1000); 
-             embedding = await getEmbedding(contentForEmbedding);
-             if (embedding) {
-                 embeddingCache.set(cacheKey, embedding);
-                 calculatedCount++;
+             if (calculatedCount < 5) {
+                 // limit content length to avoid token limit issues
+                 const contentForEmbedding = (section.title + " " + section.content).slice(0, 1000); 
+                 embedding = await getEmbedding(contentForEmbedding);
+                 if (embedding) {
+                     embeddingCache.set(cacheKey, embedding);
+                     calculatedCount++;
+                 }
+             } else {
+                 // Too many missing embeddings, skip to prevent timeout
+                 if (calculatedCount === 5) {
+                     console.warn(`[VectorSearch] Limit of 5 on-the-fly calculations reached. Skipping remaining missing embeddings. First missing ID: ${cacheKey}`);
+                     calculatedCount++; // Increment to only log once
+                 }
+                 // Optional: Log every missing ID if needed for debugging, but spammy
+                 // console.debug(`[VectorSearch] Missing embedding for: ${cacheKey}`);
              }
         }
         
@@ -138,7 +148,7 @@ export const initializeVectorStore = async (sections: Section[]) => {
     }
     
     if (calculatedCount > 0) {
-        console.log(`[VectorSearch] Calculated ${calculatedCount} embeddings on the fly (others were pre-computed/cached)`);
+        console.log(`[VectorSearch] Calculated ${Math.min(calculatedCount, 5)} embeddings on the fly. Skipped ${calculatedCount > 5 ? 'rest' : '0'}.`);
     } else {
         console.log('[VectorSearch] All embeddings loaded from cache/pre-computed file');
     }
