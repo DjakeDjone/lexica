@@ -1,10 +1,25 @@
 
 import { pipeline, env } from '@xenova/transformers';
 import type { Section, SearchResult } from './search';
+import fs from 'node:fs';
+import path from 'node:path';
 
 // Configure transformers to use /tmp for caching (needed for Vercel/serverless)
-env.cacheDir = '/tmp';
+const cacheDir = '/tmp/.cache';
+
+try {
+    if (!fs.existsSync(cacheDir)) {
+        fs.mkdirSync(cacheDir, { recursive: true });
+        console.log(`[VectorSearch] Created cache directory at ${cacheDir}`);
+    }
+} catch (e) {
+    console.error(`[VectorSearch] Failed to create cache directory: ${e}`);
+}
+
+env.cacheDir = cacheDir;
+env.localModelPath = cacheDir;
 env.allowLocalModels = false;
+console.log(`[VectorSearch] Configured transformers cacheDir to: ${env.cacheDir}`);
 
 
 // Using a singleton for the pipeline to avoid reloading the model
