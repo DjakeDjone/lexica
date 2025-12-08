@@ -181,6 +181,47 @@ export const gradeTest = async (questions: any[], answers: any[], contextLinks: 
 
 
 
+
+const contextualizeQuery = async (query: string, history: { role: string; content: string }[]) => {
+      if (!history || history.length === 0) return query;
+
+      const groq = new Groq({ apiKey: groqApiKey });
+      
+      // Keep only the last few messages to avoid token limits and keep it relevant
+      const relevantHistory = history.slice(-6); 
+
+      const response = await groq.chat.completions.create({
+            model: "llama-3.3-70b-versatile",
+            messages: [
+                  {
+                        role: "system",
+                        content: `You are an AI assistant that rephrases user questions to be standalone based on the conversation history.
+      The user is asking a follow-up question that might refer to previous context (e.g., "What is it used for?", "How does that work?").
+      Your task is to rewrite the LAST user question so that it contains all necessary context from the history to be understood without the history.
+      
+      Examples:
+      History: User: "What is HTTP?" Assistant: "HTTP is..." User: "Is it secure?"
+      Output: "Is HTTP secure?"
+      
+      History: User: "Tell me about Nginx." Assistant: "Nginx is..." User: "How do I install it?"
+      Output: "How do I install Nginx?"
+      
+      If the question is already standalone, output it exactly as is.
+      Do NOT answer the question. ONLY output the rephrased question.
+      `
+                  },
+                  ...relevantHistory.map(h => ({ role: h.role as any, content: h.content })),
+                  { role: "user", content: `Rephrase this question: "${query}"` }
+            ],
+            temperature: 0.1,
+            max_tokens: 200,
+      });
+
+      const rephrasedQuery = response.choices[0].message.content?.trim() || query;
+      console.log(`[Contextualization] Original: "${query}" -> Rephrased: "${rephrasedQuery}"`);
+      return rephrasedQuery;
+}
+
 export const askLLM = async (prompt: string, history: { role: string; content: string }[] = [], event: any,
       contextLinks?: string[]
       , withoutContext?: boolean
@@ -196,9 +237,22 @@ export const askLLM = async (prompt: string, history: { role: string; content: s
       // Legacy approach with pre-fetched context
       let context = ""
       let relevantSections: SearchResult[] = [];
+      
+      // Contextualize the query using history if we are going to search for context
+      let searchPrompt = prompt;
+      if (!withoutContext && !contextLinks && history.length > 0) {
+            try {
+                  searchPrompt = await contextualizeQuery(prompt, history);
+            } catch (e) {
+                  console.error("Failed to contextualize query:", e);
+                  // Fallback to original prompt
+            }
+      }
+
       if (!withoutContext) {
             if (!contextLinks) {
-                  relevantSections = await getRelevantSections(prompt, event);
+                  // Use the contextualized prompt for search
+                  relevantSections = await getRelevantSections(searchPrompt, event);
                   context = sectionsToContext(relevantSections);
             } else {
                   relevantSections = [];
