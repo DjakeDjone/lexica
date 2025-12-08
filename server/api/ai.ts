@@ -1,4 +1,4 @@
-import { askLLM } from "../utils/llm";
+import { askLLM, generateTest, gradeTest } from "../utils/llm";
 
 export default defineEventHandler(async (event) => {
     console.log("Received request at /api/ai");
@@ -11,6 +11,27 @@ export default defineEventHandler(async (event) => {
         const withoutContext = body.withoutContext as boolean | undefined;
         const useTools = body.useTools as boolean | undefined; // New parameter to enable tool-based search
         const model = body.model as string | undefined;
+        const action = body.action as 'chat' | 'generate_test' | 'grade_test' || 'chat';
+
+        if (action === 'generate_test') {
+            if (!context || context.length === 0) {
+                 throw createError({ statusCode: 400, statusMessage: 'Context is required for test generation' });
+            }
+            const result = await generateTest(context, event);
+            return result;
+        }
+
+        if (action === 'grade_test') {
+             const questions = body.questions as any[];
+             const answers = body.answers as any[];
+             
+             if (!questions || !answers || !context) {
+                  throw createError({ statusCode: 400, statusMessage: 'Questions, answers, and context are required for grading' });
+             }
+
+             const result = await gradeTest(questions, answers, context, event);
+             return result;
+        }
 
         if (!question) {
             throw createError({ statusCode: 400, statusMessage: 'Question is required' });

@@ -1,6 +1,11 @@
 
-import { pipeline } from '@xenova/transformers';
+import { pipeline, env } from '@xenova/transformers';
 import type { Section, SearchResult } from './search';
+
+// Configure transformers to use /tmp for caching (needed for Vercel/serverless)
+env.cacheDir = '/tmp';
+env.allowLocalModels = false;
+
 
 // Using a singleton for the pipeline to avoid reloading the model
 let extractor: any = null;

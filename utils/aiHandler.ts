@@ -5,6 +5,10 @@ export type ChatMessage = {
     content: string;
     sources?: { title: string; url: string }[];
     thinking?: string;
+    type?: 'chat' | 'test';
+    testData?: any;
+    userAnswers?: any;
+    grading?: any;
 };
 
 export type Chat = {
@@ -112,7 +116,7 @@ export const useAiHandler = () => {
         }
     }
 
-    const askAi = async (question: string, selectedContext: SearchResult[], useTools: boolean = false, model?: string) => {
+    const askAi = async (question: string, selectedContext: SearchResult[], useTools: boolean = false, model?: string, action: 'chat' | 'generate_test' | 'grade_test' = 'chat', extraBody: any = {}) => {
         status.value.error = null;
         status.value.loading = true;
 
@@ -121,7 +125,14 @@ export const useAiHandler = () => {
             createNewChat();
         }
 
-        history.value.push({ role: 'user', content: question });
+        if (action === 'chat') {
+             history.value.push({ role: 'user', content: question });
+        } else if (action === 'generate_test') {
+             history.value.push({ role: 'user', content: "Generate a test based on the context." });
+        } else if (action === 'grade_test') {
+             // User submitted answers, maybe we don't need a separate user message or just a confirmation
+             history.value.push({ role: 'user', content: "Submitted test answers." });
+        }
 
         try {
             const response = await fetch(`/api/ai`, {
@@ -137,11 +148,47 @@ export const useAiHandler = () => {
                     withoutContext: !useTools && selectedContext.length === 0,
                     useTools,
                     model,
+                    action,
+                    ...extraBody
                 })
 
             });
-            if (!response.ok || !response.body) {
-                throw new Error(`Error: ${response.status} ${response.statusText}`);
+
+            if (!response.ok) {
+                 throw new Error(`Error: ${response.status} ${response.statusText}`);
+            }
+
+            if (action === 'generate_test') {
+                const data = await response.json();
+                history.value.push({
+                    role: 'assistant',
+                    content: 'Test Generated',
+                    type: 'test',
+                    testData: data.test,
+                    sources: data.relevantSections
+                });
+                saveCurrentChat();
+                status.value.loading = false;
+                return;
+            }
+
+            if (action === 'grade_test') {
+                const data = await response.json();
+                history.value.push({
+                    role: 'assistant',
+                    content: 'Test Results',
+                    type: 'test',
+                    testData: extraBody.questions,
+                    userAnswers: extraBody.answers,
+                    grading: data
+                });
+                saveCurrentChat();
+                status.value.loading = false;
+                return;
+            }
+
+            if (!response.body) {
+                throw new Error(`Error: No response body`);
             }
             const reader = response.body.getReader();
             const decoder = new TextDecoder();

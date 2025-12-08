@@ -5,6 +5,14 @@ const props = defineProps<{
     thinking?: string;
     role: 'user' | 'system' | 'assistant';
     sources: { title: string; url: string }[] | undefined;
+    type?: 'chat' | 'test';
+    testData?: any[];
+    userAnswers?: any[];
+    grading?: any[];
+}>();
+
+const emit = defineEmits<{
+    (e: 'submit', answers: any[]): void;
 }>();
 
 const openedSources = ref(false);
@@ -37,20 +45,24 @@ const openAllSources = () => {
             {{ message }}
         </p>
         <div v-else class="prose !first:pt-0">
-            <div>
-                <div @click="expandedThinking = !expandedThinking">
-                    <strong class="opacity-70">
-                        <Icon name="emojione-monotone:thinking-face" /> Thinking
-                    </strong>
-                    <button v-if="thinking" class="cursor-pointer">
-                        <Icon name="line-md:arrow-down" size="15" class="inline-block ml-2 transition-transform"
-                            :class="{ 'rotate-180': expandedThinking }" />
-                    </button>
+            <LexaTest v-if="type === 'test' && testData" :questions="testData" :userAnswers="userAnswers"
+                :grading="grading" @submit="emit('submit', $event)" />
+            <div v-else>
+                <div>
+                    <div @click="expandedThinking = !expandedThinking">
+                        <strong class="opacity-70">
+                            <Icon name="emojione-monotone:thinking-face" /> Thinking
+                        </strong>
+                        <button v-if="thinking" class="cursor-pointer">
+                            <Icon name="line-md:arrow-down" size="15" class="inline-block ml-2 transition-transform"
+                                :class="{ 'rotate-180': expandedThinking }" />
+                        </button>
+                    </div>
+                    <p v-if="thinking && expandedThinking" class="italic text-gray-500 mb-2">{{ thinking }}</p>
                 </div>
-                <p v-if="thinking && expandedThinking" class="italic text-gray-500 mb-2">{{ thinking }}</p>
-            </div>
-            <div class="ai-message">
-                <div v-html="message"></div>
+                <div class="ai-message">
+                    <div v-html="message"></div>
+                </div>
             </div>
         </div>
 

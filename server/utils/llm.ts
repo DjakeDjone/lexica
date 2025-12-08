@@ -79,6 +79,92 @@ export const sectionsToContext = (sections: SearchResult[]): string => {
       return sections.map(section => `Title: ${section.title}\nContent: ${section.content}\nURL: ${section.url}`).join('\n\n');
 }
 
+const systemPromptForTestGeneration = `You are Lexa, an educational AI assistant.
+Your task is to generate a test/quiz based EXCLUSIVELY on the provided documentation sections (context).
+
+**INSTRUCTIONS:**
+- Generate 3-5 multiple choice or short answer questions.
+- Return the result as a strictly formatted JSON array of objects.
+- Each object must have:
+  - \`id\`: string (unique id)
+  - \`question\`: string
+  - \`type\`: "multiple_choice" | "short_answer"
+  - \`options\`: string[] (only for multiple_choice)
+  - \`correctAnswer\`: string (for internal validation)
+- Do NOT output markdown formatting (like \`\`\`json), just the raw JSON string.
+- The questions must be answerable from the context.
+`;
+
+const systemPromptForGrading = `You are Lexa, an educational AI assistant.
+Your task is to grade a user's answers to a test based on the provided documentation sections (context) and the original questions.
+
+**INSTRUCTIONS:**
+- You will receive the Questions, the User's Answers, and the Context.
+- For each answer, determine if it is correct based on the context.
+- Return the result as a strictly formatted JSON array of objects.
+- Each object must have:
+  - \`questionId\`: string
+  - \`correct\`: boolean
+  - \`explanation\`: string (short explanation of why it is correct or incorrect, citing the context).
+- Do NOT output markdown formatting, just the raw JSON string.
+`;
+
+
+export const generateTest = async (contextLinks: string[], event: any) => {
+      let relevantSections: SearchResult[] = [];
+      for (const link of contextLinks) {
+            const section = await openLink(link, event);
+            if (section) {
+                  relevantSections.push(section);
+            }
+      }
+      const context = sectionsToContext(relevantSections);
+
+      const groq = new Groq({ apiKey: groqApiKey });
+      const messages = [
+            { role: "system", content: systemPromptForTestGeneration },
+            { role: "user", content: `Context:\n${context}\n\nGenerate a test.` }
+      ] as any[];
+
+      const response = await groq.chat.completions.create({
+            model: "llama-3.3-70b-versatile", // Use a capable model for JSON generation
+            messages,
+            response_format: { type: "json_object" },
+            temperature: 0.1,
+      });
+
+      return {
+            test: JSON.parse(response.choices[0].message.content || "[]"),
+            relevantSections: relevantSections.map(s => ({ title: s.title, url: s.url }))
+      };
+};
+
+export const gradeTest = async (questions: any[], answers: any[], contextLinks: string[], event: any) => {
+       let relevantSections: SearchResult[] = [];
+      for (const link of contextLinks) {
+            const section = await openLink(link, event);
+            if (section) {
+                  relevantSections.push(section);
+            }
+      }
+      const context = sectionsToContext(relevantSections);
+
+      const groq = new Groq({ apiKey: groqApiKey });
+      const messages = [
+            { role: "system", content: systemPromptForGrading },
+            { role: "user", content: `Context:\n${context}\n\nQuestions:\n${JSON.stringify(questions)}\n\nUser Answers:\n${JSON.stringify(answers)}\n\nGrade the test.` }
+      ] as any[];
+
+      const response = await groq.chat.completions.create({
+            model: "llama-3.3-70b-versatile",
+            messages,
+            response_format: { type: "json_object" },
+            temperature: 0.1,
+      });
+
+      return JSON.parse(response.choices[0].message.content || "[]");
+};
+
 
 
 export const askLLM = async (prompt: string, history: { role: string; content: string }[] = [], event: any,
