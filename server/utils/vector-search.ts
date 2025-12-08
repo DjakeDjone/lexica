@@ -2,7 +2,7 @@
 import { pipeline, env } from '@xenova/transformers';
 import type { Section, SearchResult } from './search';
 import fs from 'node:fs';
-import path from 'node:path';
+
 
 // Configure transformers to use /tmp for caching (needed for Vercel/serverless)
 const cacheDir = '/tmp/.cache';
@@ -79,14 +79,12 @@ let vectorStore: VectorSection[] = [];
 export const initializeVectorStore = async (sections: Section[]) => {
     console.log('[VectorSearch] Initializing vector store with', sections.length, 'sections');
     
-    // Load pre-computed embeddings if available
+    // Load pre-computed embeddings using Nitro storage (assets)
     let preComputedEmbeddings: Record<string, number[]> = {};
     try {
-        const assetsPath = path.resolve('server/assets/embeddings.json');
-        if (fs.existsSync(assetsPath)) {
-             const rawData = fs.readFileSync(assetsPath, 'utf-8');
-             const data = JSON.parse(rawData);
-             console.log(`[VectorSearch] Loaded ${data.length} pre-computed embeddings`);
+        const data = await useStorage().getItem('assets:server:embeddings.json') as any[];
+        if (data) {
+             console.log(`[VectorSearch] Loaded ${data.length} pre-computed embeddings from assets`);
              
              // Create a map for faster lookup
              data.forEach((item: any) => {
@@ -95,7 +93,7 @@ export const initializeVectorStore = async (sections: Section[]) => {
                  }
              });
         } else {
-             console.log('[VectorSearch] No pre-computed embeddings found at', assetsPath);
+             console.log('[VectorSearch] No pre-computed embeddings found in assets:server:embeddings.json');
         }
     } catch (e) {
         console.error('[VectorSearch] Failed to load pre-computed embeddings:', e);

@@ -48,6 +48,13 @@ export default defineNuxtConfig({
     },
   },
 
+  nitro: {
+    serverAssets: [{
+      baseName: 'server',
+      dir: './server/assets'
+    }]
+  },
+
   runtimeConfig: {
     groqApiKey: process.env.GROQ_API_KEY,
     baseUrl: process.env.BASE_URL || 'http://localhost:3000',

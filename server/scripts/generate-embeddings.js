@@ -126,6 +126,11 @@ async function generateEmbeddings() {
         // Replace backslashes for Windows
         relativeId = relativeId.replace(/\\/g, '/');
 
+        // Ensure leading slash to match Nuxt Content _path
+        if (!relativeId.startsWith('/')) {
+            relativeId = '/' + relativeId;
+        }
+
         const sections = parseMarkdown(content, relativeId, file);
         allSections.push(...sections);
     }
