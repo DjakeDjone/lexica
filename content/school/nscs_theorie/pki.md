@@ -1,4 +1,4 @@
-# PKI
+# PKI - Public Key Infrastructure
 
 Ausgangsdokument: [Moodle PKI und Vertrauensmodelle](https://moodle.htlstp.ac.at/pluginfile.php/32436/mod_resource/content/2/PKI_und_Vertrauensmodelle_v1.pdf)
 
