@@ -82,7 +82,7 @@ export const initializeVectorStore = async (sections: Section[]) => {
     // Load pre-computed embeddings using Nitro storage (assets)
     let preComputedEmbeddings: Record<string, number[]> = {};
     try {
-        const data = await useStorage().getItem('assets:server:embeddings.json') as any[];
+        const data = await useStorage().getItem('assets:embeddings:embeddings.json') as any[];
         if (data) {
              console.log(`[VectorSearch] Loaded ${data.length} pre-computed embeddings from assets`);
              
@@ -93,7 +93,7 @@ export const initializeVectorStore = async (sections: Section[]) => {
                  }
              });
         } else {
-             console.log('[VectorSearch] No pre-computed embeddings found in assets:server:embeddings.json');
+             console.log('[VectorSearch] No pre-computed embeddings found in assets:embeddings:embeddings.json');
         }
     } catch (e) {
         console.error('[VectorSearch] Failed to load pre-computed embeddings:', e);

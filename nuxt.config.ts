@@ -50,7 +50,7 @@ export default defineNuxtConfig({
 
   nitro: {
     serverAssets: [{
-      baseName: 'server',
+      baseName: 'embeddings',
       dir: './server/assets'
     }]
   },
