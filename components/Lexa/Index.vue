@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import MarkdownIt from 'markdown-it';
 import { useAiHandler } from '~/utils/aiHandler';
+import type { SearchResult } from '~/server/utils/search';
 
 const prompt = ref('');
 const md = new MarkdownIt();
@@ -34,6 +35,17 @@ const handleTestSubmit = async (msg: any, answers: any[]) => {
     await askAi('', context, true, selectedModel.value, 'grade_test', { questions: msg.testData, answers });
 };
 
+const handleSuggestionSelect = (selection: { text: string, mode: 'test' | 'rag', context: SearchResult[] }) => {
+    prompt.value = selection.text;
+    selectedContext.value = selection.context;
+    if (selection.mode === 'test') {
+        isTestMode.value = true;
+    } else {
+        isTestMode.value = false;
+        useTools.value = true;
+    }
+};
+
 </script>
 
 <template>
@@ -45,7 +57,7 @@ const handleTestSubmit = async (msg: any, answers: any[]) => {
                 <Icon name="mdi:plus" />
             </button>
         </div>
-        <LexaSuggestions v-if="!history.length" @update:select="prompt = $event" />
+        <LexaSuggestions v-if="!history.length" @update:select="handleSuggestionSelect" />
         <div class="mb-32">
             <div v-if="status.error" class="bg-red-100 text-red-700 p-2 mb-4 rounded">
                 {{ status.error }}
