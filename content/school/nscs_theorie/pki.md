@@ -10,6 +10,8 @@ Ziel: **Authentizität** und **Integrität** sicherstellen
 
 ### Funktionsweise
 
+![digitale signatur](/images/digital_signature.png)
+
 Digitale Signaturen verwenden asymmetrische Kryptographie:
 
 1. Der **Absender** erstellt eine Nachricht (z.B. ein Dokument)
