@@ -30,7 +30,8 @@ wir wollen moodle.htlstp.at aufrufen:
 - `CNAME`: Alias für einen anderen Hostnamen
 - `MX`: Mail Exchange, gibt Mailserver für eine Domain an
 - `NS`: Name Server, gibt autoritative DNS-Server für eine Domain an
-- `SOA`: Start of Authority, gibt grundlegende Informationen über die Domain und den DNS-Server an
+- `SOA`: <mark>Start of Authority</mark>, gibt grundlegende Informationen über die Domain und den DNS-Server an, steht am Anfang einer Zonendatei
+- `TXT`: Text Record, kann beliebige Textinformationen enthalten (z.B. für SPF~Sender Policy Framework oder DKIM~DomainKeys Identified Mail)
 - `PTR`: Pointer Record, Zuordnung einer IP-Adresse zu einem Hostnamen (Reverse DNS)
 
 ## Tools
@@ -71,6 +72,11 @@ DNSSEC: Erweiterung des DNS-Protokolls, die digitale **Signaturen** verwendet, u
 - Signaturen werden in DNS-Antworten als zusätzliche Resource Records (RRs) gesendet
 - Clients, die DNSSEC unterstützen, können die Signatur überprüfen und sicherstellen, dass die Antwort authentisch ist
 - DNSSEC schützt nicht vor Spoofing, wenn der Angreifer den privaten Schlüssel der Zone kennt
+
+#### Nachteil von DNSSEC
+
+- Erhöht die **Größe der DNS-Antworten**, was zu Fragmentierung und Problemen bei der Übertragung führen kann
+- Erhöht die **Komplexität** der DNS-Verwaltung
 
 > **Chain of Trust**: Jede Zone wird von der übergeordneten Zone signiert, beginnend bei der Root-Zone. Clients können die Signaturkette überprüfen, um sicherzustellen, dass die Antwort authentisch ist.
 
