@@ -9,9 +9,9 @@ const showAi = ref(false);
 const showAiApiKey = ref(false);
 const ai = useStorage('ai', {
     apiKey: '',
-    model: 'llama3-8b-8192',
+    model: 'openai/gpt-oss-120b',
     id: 1,
-    name: 'llama3-8b-8192',
+    name: 'openai/gpt-oss-120b',
 } as Ai);
 const aiLoading = ref(false);
 
@@ -236,8 +236,8 @@ text.value = genTextFromJSON(data.value);
                                 <!-- formated as Currency -->
                                 <span v-if="item.value1 !== undefined" class="">
                                     {{ (item.subtract ? '- ' : '') + item.value1.toLocaleString('de-DE', {
-                                    style:
-                                    'currency', currency: 'EUR'
+                                        style:
+                                            'currency', currency: 'EUR'
                                     }) }}
                                 </span>
                             </td>
@@ -246,8 +246,8 @@ text.value = genTextFromJSON(data.value);
                                 <!-- formated as Currency -->
                                 <span v-if="item.value2 !== undefined" class="text-right">
                                     {{ (item.subtract ? '- ' : '') + item.value2.toLocaleString('de-DE', {
-                                    style:
-                                    'currency', currency: 'EUR'
+                                        style:
+                                            'currency', currency: 'EUR'
                                     }) }}
                                 </span>
                             </td>

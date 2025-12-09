@@ -55,3 +55,18 @@ testen auf eigener Linux machine, auf der auch der Mailserver rennen wird:
 nslookup mail.<name>.nscs.lan
 nslookup ns.<name>.nscs.lan
 ```
+
+### Davcot 
+
+installieren:
+
+```bash
+apt install dovcot-imapd
+```
+
+config ändern
+
+```bash
+sudo systemctl restart postfix
+sudo systemctl restart dovcot
+```
