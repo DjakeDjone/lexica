@@ -12,7 +12,8 @@ function runExplain(label, cursor) {
     printjson({
         plan: stageName,
         docsExamined: exp.executionStats.totalDocsExamined,
-        keysExamined: exp.executionStats.totalKeysExamined
+        keysExamined: exp.executionStats.totalKeysExamined,
+        time: exp.executionStats.executionTimeMillis
     });
 }
 
