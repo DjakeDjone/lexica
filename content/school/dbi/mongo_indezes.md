@@ -53,7 +53,7 @@ db.museum.createIndex({ "properties.BEZIRK": 1 })
   "time": 0
 }
 ```
-- **Conclusion:** Huge improvement. Only relevant documents are examined.
+- **Conclusion:** Less documents examined, but the dataset is small so the performance boost is not really visible.
 
 ---
 
