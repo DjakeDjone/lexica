@@ -1,11 +1,11 @@
 ---
 title: "MongoDB Indizes"
-protocolAbgabedatum: "10.10.2025"
+protocolAbgabedatum: "10.11.2025"
 protocolAufgabenNr: 04
 protocolKlasse: "5AHIF"
 protocolName: "Benjamin Friedl"
 protocolGruppe: "1"
-protocolAbgabetermin: "10.10.2025"
+protocolAbgabetermin: "11.12.2025"
 protocolDescription: "MongoDB Indexes, how to create and use them"
 ---
 
