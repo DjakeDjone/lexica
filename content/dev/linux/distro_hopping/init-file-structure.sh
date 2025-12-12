@@ -1,10 +1,10 @@
 #!/bin/bash
 
 FILE_STRUCTURE_PATH="$1"
-BASE_PATH="./test"
+BASE_PATH="${2:-./test}"
 
 if [ -z "$FILE_STRUCTURE_PATH" ]; then
-    echo "Usage: $0 <file_structure_output_path>"
+    echo "Usage: $0 <file_structure_output_path> <base_path>"
     exit 1
 fi
 

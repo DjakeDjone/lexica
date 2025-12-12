@@ -127,5 +127,9 @@ html {
     .pre {
         background-color: #545454 !important;
     }
+
+    .copy-button-wrapper {
+        display: none !important;
+    }
 }
 </style>
