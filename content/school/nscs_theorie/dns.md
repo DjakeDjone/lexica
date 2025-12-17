@@ -34,6 +34,25 @@ wir wollen moodle.htlstp.at aufrufen:
 - `TXT`: Text Record, kann beliebige Textinformationen enthalten (z.B. für SPF~Sender Policy Framework oder DKIM~DomainKeys Identified Mail)
 - `PTR`: Pointer Record, Zuordnung einer IP-Adresse zu einem Hostnamen (Reverse DNS)
 
+## Beispiel eines DNS Eintrags (bind)
+
+```bind
+@ IN SOA dns.foxplex.local. mail.foxplex.local. (
+                1        ; Serial: Version der Zonendatei
+                604800   ; Refresh: Wie oft sekundär Server die Zone aktualisieren sollen
+                86400    ; Retry: Wie oft sekundär Server bei Fehlern erneut versuchen sollen
+                2419200  ; Expire: Wie lange sekundär Server die Zone cachen sollen
+                86400 )  ; Negative Cache TTL: Wie lange fehlgeschlagene Anfragen gecacht werden sollen
+;
+@ IN NS dns.foxplex.local.
+@ IN MX 10 mail.foxplex.local.
+;
+dns    IN A 192.168.1.1
+mail   IN A 192.168.1.2
+client1 IN A 192.168.1.10
+client2 IN A 192.168.1.11
+```
+
 ## Tools
 
 - nslookup: fragt einen DNS-Server nach der IP-Adresse eines Hostnamens
