@@ -10,5 +10,6 @@
             "file": "./.vscode/daisyui.md"
         }
     ],
-    "cSpell.language": "en,de"
+    "cSpell.language": "en,de",
+    "deno.enable": true
 }
