@@ -2,7 +2,7 @@
  * Defines the structure of a single data record.
  */
 interface Record {
-    id: number;
+    id: string;
     val: string;
 }
 
@@ -10,7 +10,7 @@ interface Record {
  * Defines the structure of a sparse index entry.
  */
 interface IndexEntry {
-    key: number;
+    key: string;
     pageIdx: number;
 }
 
@@ -39,7 +39,9 @@ class ISAMSystem {
         if (sortedRecords.length === 0) return;
 
         // Ensure initial load is sorted by ID
-        const records = [...sortedRecords].sort((a, b) => a.id - b.id);
+        const records = [...sortedRecords].sort((a, b) =>
+            a.id.localeCompare(b.id)
+        );
 
         const numPages = Math.ceil(records.length / this.pageSize);
         this.dataPages = [];
@@ -52,7 +54,7 @@ class ISAMSystem {
 
             this.dataPages.push(page);
             // Add entry to sparse index (first key of the page)
-            this.index.push({ key: page[0].id, pageIdx: i });
+            this.index.push({ key: page[0]!.id, pageIdx: i });
         }
 
         console.log(`Loaded ${records.length} records into ${numPages} pages.`);
@@ -61,7 +63,7 @@ class ISAMSystem {
     /**
      * Searches for a record using the sparse index.
      */
-    public search(recordId: number): string | null {
+    public search(recordId: string): string | null {
         if (this.index.length === 0) {
             return "Index is empty.";
         }
@@ -69,7 +71,7 @@ class ISAMSystem {
         // 1. Search the index to find which page the key should be in
         let targetPageIdx = -1;
         for (const entry of this.index) {
-            if (recordId >= entry.key) {
+            if (recordId.localeCompare(entry.key) >= 0) {
                 targetPageIdx = entry.pageIdx;
             } else {
                 break;
@@ -82,7 +84,7 @@ class ISAMSystem {
 
         // 2. Search the specific data page (Primary Area)
         const page = this.dataPages[targetPageIdx];
-        const foundInPrimary = page.find((r) => r.id === recordId);
+        const foundInPrimary = page!.find((r) => r.id === recordId);
         if (foundInPrimary) {
             return `Found in Primary Page ${targetPageIdx}: ${
                 JSON.stringify(foundInPrimary)
@@ -109,13 +111,13 @@ class ISAMSystem {
         );
         this.overflowArea.push(record);
         // Keep overflow sorted to maintain searchable order
-        this.overflowArea.sort((a, b) => a.id - b.id);
+        this.overflowArea.sort((a, b) => a.id.localeCompare(b.id));
     }
 
     /**
      * Deletes a record by ID from primary or overflow areas.
      */
-    public delete(recordId: number): boolean {
+    public delete(recordId: string): boolean {
         for (let i = 0; i < this.dataPages.length; i++) {
             const idx = this.dataPages[i]!.findIndex((r) => r.id === recordId);
             if (idx !== -1) {
@@ -166,7 +168,7 @@ class ISAMSystem {
             const ids = page.map((r) => r.id).join(", ");
             console.log(
                 `${prefix}[Key: ${
-                    entry.key.toString().padStart(2)
+                    entry.key.padEnd(10)
                 }] ──► Page ${entry.pageIdx}: [${ids}]`,
             );
         });
@@ -190,21 +192,23 @@ const names = [
     "David",
     "Nadine",
     "Marko",
-    "Christian",
     "Aghajhani",
     "Florian",
     "Julian",
     "Max",
     "Michael",
     "Sabinus",
+    "Christian",
 ];
 
-isam.loadData(names.map((name, idx) => ({ id: idx + 1, val: name })));
+// Use lowercase names as IDs for string indexing
+isam.loadData(names.map((name) => ({ id: name.toLowerCase(), val: name })));
 isam.displayStructure();
 
-// delete 5
-for (let i = 1; i <= 5; i++) {
-    isam.delete(i * 3);
+// delete 5 schüler
+for (let i = 0; i < 5; i++) {
+    const nameToDelete = names[i]!.toLowerCase();
+    isam.delete(nameToDelete);
     isam.reformat();
     isam.displayStructure();
 }
