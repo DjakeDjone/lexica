@@ -1,246 +1,185 @@
 /**
- * ISAM (Indexed Sequential Access Method) Tree Implementation Demo
- * * Concepts:
- * - Records are stored in Leaf Nodes (Primary Data Area).
- * - Index Nodes guide the search to the correct Leaf Node.
- * - If a Leaf Node is full, records are added to an Overflow Node chain linked to that leaf.
+ * Defines the structure of a single data record.
  */
-
-type Record<T> = {
+interface Record {
     id: number;
-    data: T;
-};
+    val: string;
+}
 
-type IndexNode<T> = {
-    type: "index";
-    id: number;
-    children: Node<T>[];
-};
+/**
+ * Defines the structure of a sparse index entry.
+ */
+interface IndexEntry {
+    key: number;
+    pageIdx: number;
+}
 
-type LeafNode<T> = {
-    type: "leaf";
-    id: number;
-    children: Record<T>[];
-    overflow: LeafNode<T> | null;
-};
+/**
+ * A simplified Indexed Sequential Access Method (ISAM) implementation.
+ * * ISAM works by keeping data in sorted blocks (data pages) and maintaining
+ * a separate sparse index that points to the first key of each block.
+ */
+class ISAMSystem {
+    private pageSize: number;
+    private dataPages: Record[][];
+    private index: IndexEntry[];
+    private overflowArea: Record[];
 
-type Node<T> = IndexNode<T> | LeafNode<T>;
-
-class ISAMTree<T> {
-    private root: Node<T> | null = null;
-    public maxRecordsPerNode: number = 3;
-    private nodeIdCounter: number = 0;
-
-    constructor(maxRecordsPerNode: number = 3) {
-        this.maxRecordsPerNode = maxRecordsPerNode;
+    constructor(pageSize: number = 4) {
+        this.pageSize = pageSize;
+        this.dataPages = [];
+        this.index = [];
+        this.overflowArea = [];
     }
 
     /**
-     * Helper to get the largest ID in a subtree or node.
-     * Used for navigation in the Index layers.
+     * Initializes the ISAM structure with a sorted list of records.
      */
-    private getMaxKey(node: Node<T>): number {
-        if (node.children.length === 0) return -Infinity;
+    public loadData(sortedRecords: Record[]): void {
+        if (sortedRecords.length === 0) return;
 
-        if (node.type === "leaf") {
-            // For a leaf, checks its own children and its overflow chain
-            const lastRecord = node.children[node.children.length - 1];
-            let max = lastRecord!.id;
+        // Ensure initial load is sorted by ID
+        const records = [...sortedRecords].sort((a, b) => a.id - b.id);
 
-            // If there is an overflow chain, the max key is effectively in the overflow
-            // (depending on strict sorting, but usually overflow extends the range)
-            let currentOverflow = node.overflow;
-            while (currentOverflow) {
-                if (currentOverflow.children.length > 0) {
-                    const lastOverflowRecord = currentOverflow
-                        .children[currentOverflow.children.length - 1];
-                    if (lastOverflowRecord!.id > max) {
-                        max = lastOverflowRecord!.id;
-                    }
-                }
-                currentOverflow = currentOverflow.overflow;
-            }
-            return max;
-        } else {
-            // For Index, the max key is the max key of its last child
-            return this.getMaxKey(node.children[node.children.length - 1]!);
+        const numPages = Math.ceil(records.length / this.pageSize);
+        this.dataPages = [];
+        this.index = [];
+
+        for (let i = 0; i < numPages; i++) {
+            const start = i * this.pageSize;
+            const end = start + this.pageSize;
+            const page = records.slice(start, end);
+
+            this.dataPages.push(page);
+            // Add entry to sparse index (first key of the page)
+            this.index.push({ key: page[0].id, pageIdx: i });
         }
+
+        console.log(`Loaded ${records.length} records into ${numPages} pages.`);
     }
 
     /**
-     * Traverses the tree to find the correct Leaf Node where the key belongs.
+     * Searches for a record using the sparse index.
      */
-    findLeafNodeForKey(key: number): LeafNode<T> | null {
-        if (!this.root) return null;
+    public search(recordId: number): string | null {
+        if (this.index.length === 0) {
+            return "Index is empty.";
+        }
 
-        let currentNode: Node<T> = this.root;
-
-        while (currentNode.type === "index") {
-            // Linear search within the index node to find the child range
-            let foundChild = false;
-
-            for (const child of currentNode.children) {
-                // In ISAM, we find the first child whose max key is >= our search key
-                // OR we take the last child if we are larger than everything (append case)
-                if (key <= this.getMaxKey(child)) {
-                    currentNode = child;
-                    foundChild = true;
-                    break;
-                }
-            }
-
-            // If key is larger than all intervals in this index node, go to the last child
-            if (!foundChild && currentNode.children.length > 0) {
-                currentNode = currentNode
-                    .children[currentNode.children.length - 1] as Node<T>;
-            } else if (!foundChild && currentNode.children.length === 0) {
-                // Should not happen in a valid tree
-                return null;
+        // 1. Search the index to find which page the key should be in
+        let targetPageIdx = -1;
+        for (const entry of this.index) {
+            if (recordId >= entry.key) {
+                targetPageIdx = entry.pageIdx;
+            } else {
+                break;
             }
         }
 
-        // Now currentNode is a LeafNode
-        return currentNode as LeafNode<T>;
-    }
+        if (targetPageIdx === -1) {
+            return null; // Key is smaller than the first index entry
+        }
 
-    hasNodeSpace(node: LeafNode<T>): boolean {
-        return node.children.length < this.maxRecordsPerNode;
+        // 2. Search the specific data page (Primary Area)
+        const page = this.dataPages[targetPageIdx];
+        const foundInPrimary = page.find((r) => r.id === recordId);
+        if (foundInPrimary) {
+            return `Found in Primary Page ${targetPageIdx}: ${
+                JSON.stringify(foundInPrimary)
+            }`;
+        }
+
+        // 3. If not found, search the Overflow Area
+        const foundInOverflow = this.overflowArea.find((r) =>
+            r.id === recordId
+        );
+        if (foundInOverflow) {
+            return `Found in Overflow Area: ${JSON.stringify(foundInOverflow)}`;
+        }
+
+        return "Record not found.";
     }
 
     /**
-     * Traverses the overflow chain to find a node with space, or the last node.
+     * Inserts a new record. Redirects to overflow to maintain primary sort order.
      */
-    getOverflowNode(leaf: LeafNode<T>): LeafNode<T> | null {
-        let current = leaf.overflow;
-
-        // Traverse to the end of the chain
-        while (current) {
-            if (this.hasNodeSpace(current)) {
-                return current;
-            }
-            if (current.overflow === null) {
-                // This is the last node in the chain, but it's full.
-                // We return null to signal we need a NEW overflow node attached to this one.
-                return null;
-            }
-            current = current.overflow;
-        }
-
-        return null;
+    public insert(record: Record): void {
+        console.log(
+            `Inserting ID ${record.id} (${record.val})... (Redirected to Overflow Area)`,
+        );
+        this.overflowArea.push(record);
+        // Keep overflow sorted to maintain searchable order
+        this.overflowArea.sort((a, b) => a.id - b.id);
     }
 
     /**
-     * Gets the absolute last node in the overflow chain to attach a new one.
+     * Deletes a record by ID from primary or overflow areas.
      */
-    private getLastOverflowNode(leaf: LeafNode<T>): LeafNode<T> {
-        let current = leaf;
-        while (current.overflow) {
-            current = current.overflow;
+    public delete(recordId: number): boolean {
+        for (let i = 0; i < this.dataPages.length; i++) {
+            const idx = this.dataPages[i]!.findIndex((r) => r.id === recordId);
+            if (idx !== -1) {
+                this.dataPages[i]!.splice(idx, 1);
+                console.log(`Deleted ID ${recordId} from Primary Page ${i}.`);
+                return true;
+            }
         }
-        return current;
+
+        const overflowIdx = this.overflowArea.findIndex((r) =>
+            r.id === recordId
+        );
+        if (overflowIdx !== -1) {
+            this.overflowArea.splice(overflowIdx, 1);
+            console.log(`Deleted ID ${recordId} from Overflow Area.`);
+            return true;
+        }
+
+        console.log(`ID ${recordId} not found.`);
+        return false;
     }
 
-    createOverflowNode(): LeafNode<T> {
-        return {
-            type: "leaf",
-            id: ++this.nodeIdCounter,
-            children: [],
-            overflow: null,
-        };
+    /**
+     * Merges overflow into primary pages and rebuilds the index.
+     */
+    public reformat(): void {
+        console.log("Reformatting ISAM structure (Merging Overflow)...");
+        const allRecords = [...this.dataPages.flat(), ...this.overflowArea];
+        this.overflowArea = [];
+        this.loadData(allRecords);
     }
 
-    insertInISAM(record: Record<T>) {
-        const key = record.id;
-
-        if (!this.root) {
-            // Tree is empty, create root as a leaf
-            this.root = {
-                type: "leaf",
-                id: ++this.nodeIdCounter,
-                children: [record],
-                overflow: null,
-            };
+    /**
+     * Visualizes the current state of the ISAM file.
+     */
+    public displayStructure(): void {
+        console.log("\nISAM Tree Structure");
+        if (this.index.length === 0 && this.overflowArea.length === 0) {
+            console.log("└── (Empty)");
             return;
         }
 
-        const leafNode = this.findLeafNodeForKey(key);
-
-        if (!leafNode) {
-            console.error("Critical: Could not find leaf node for key", key);
-            return;
-        }
-
-        // 1. Try to insert into the primary leaf node
-        if (this.hasNodeSpace(leafNode)) {
-            leafNode.children.push(record);
-            leafNode.children.sort((a, b) => (a.id - b.id));
-        } // 2. Try to insert into existing overflow chain
-        else {
-            let targetNode = this.getOverflowNode(leafNode);
-
-            if (!targetNode) {
-                // No space in existing chain, or no chain exists.
-                // Create new overflow node and attach to the end of the chain.
-                const newOverflow = this.createOverflowNode();
-                const lastNode = this.getLastOverflowNode(leafNode);
-                lastNode.overflow = newOverflow;
-                targetNode = newOverflow;
-            }
-
-            targetNode.children.push(record);
-            targetNode.children.sort((a, b) => (a.id - b.id));
-        }
-
-        // NOTE: A real ISAM/B-Tree implementation would handle splitting the root
-        // and growing the Index layers here if the primary data area grew too large.
-        // For this demo, we assume a static index or a single root leaf that just
-        // grows infinite overflow chains (Classic degraded ISAM behavior).
-    }
-
-    /**
-     * Debug print helper
-     */
-    printTree() {
-        console.log("--- ISAM Tree Structure ---");
-        if (!this.root) {
-            console.log("(Empty)");
-            return;
-        }
-        this.printNode(this.root, 0);
-        console.log("---------------------------");
-    }
-
-    private printNode(node: Node<T>, depth: number) {
-        const indent = "  ".repeat(depth);
-        if (node.type === "index") {
-            console.log(`${indent}[Index Node ${node.id}]`);
-            node.children.forEach((child) => this.printNode(child, depth + 1));
-        } else {
-            const dataStr = node.children.map((c) => `${c.id}:${c.data}`).join(
-                ", ",
-            );
+        this.index.forEach((entry, i) => {
+            const isLast = i === this.index.length - 1 &&
+                this.overflowArea.length === 0;
+            const prefix = isLast ? "└── " : "├── ";
+            const page = this.dataPages[entry.pageIdx] || [];
+            const ids = page.map((r) => r.id).join(", ");
             console.log(
-                `${indent}[Leaf Node ${node.id}] Records: [${dataStr}]`,
+                `${prefix}[Key: ${
+                    entry.key.toString().padStart(2)
+                }] ──► Page ${entry.pageIdx}: [${ids}]`,
             );
+        });
 
-            let ovf = node.overflow;
-            let ovfDepth = 1;
-            while (ovf) {
-                const ovfData = ovf.children.map((c) => `${c.id}:${c.data}`)
-                    .join(", ");
-                console.log(
-                    `${indent}  -> (Overflow ${ovfDepth}) [Node ${ovf.id}] Records: [${ovfData}]`,
-                );
-                ovf = ovf.overflow;
-                ovfDepth++;
-            }
+        if (this.overflowArea.length > 0) {
+            const ids = this.overflowArea.map((r) => r.id).join(", ");
+            console.log(`└── Overflow: [${ids}]`);
         }
     }
 }
 
-// --- DEMO USAGE ---
-
-const tree = new ISAMTree<string>(4);
+// --- Demo Execution with User Names ---
+const isam = new ISAMSystem(4);
 
 const names = [
     "Benjamin",
@@ -259,9 +198,13 @@ const names = [
     "Michael",
     "Sabinus",
 ];
-console.log(names.length);
 
-for (const [idx, name] of names.entries()) {
-    tree.insertInISAM({ id: idx, data: name });
-    tree.printTree();
+isam.loadData(names.map((name, idx) => ({ id: idx + 1, val: name })));
+isam.displayStructure();
+
+// delete 5
+for (let i = 1; i <= 5; i++) {
+    isam.delete(i * 3);
+    isam.reformat();
+    isam.displayStructure();
 }
