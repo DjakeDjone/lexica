@@ -181,13 +181,19 @@ class BTree {
     }
 
     private _printNode(node: BTreeNode, prefix: string, isLast: boolean): void {
-        console.log(`${prefix}${isLast ? "└── " : "├── "}[${node.keys.join(", ")}]`);
+        console.log(
+            `${prefix}${isLast ? "└── " : "├── "}[${node.keys.join(", ")}]`,
+        );
         if (!node.leaf) {
             const newPrefix = prefix + (isLast ? "    " : "│   ");
             for (let i = 0; i < node.children.length; i++) {
                 const child = node.children[i];
                 if (child) {
-                    this._printNode(child, newPrefix, i === node.children.length - 1);
+                    this._printNode(
+                        child,
+                        newPrefix,
+                        i === node.children.length - 1,
+                    );
                 }
             }
         }
