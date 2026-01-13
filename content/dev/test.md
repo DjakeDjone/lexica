@@ -1,6 +1,16 @@
+---
+title: Test page
+generateTableOfContents: false
+tags: []
+---
+
 # Test page
 
-## Cool
+## Cool Luca
+
+- test
+- cool
+- funktioniert
 
 - test
 - cool
@@ -8,6 +18,4 @@
 
 ---
 
-![image-4.png](/image-4.png)
-
-![alt text](public/images/image.png)
+![image-4.png](/image-4.png)![alt text](public/images/image.png)

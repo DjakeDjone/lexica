@@ -1,15 +1,7 @@
 {
-    // "markdown.copyFiles.destination": {
-    //     "**/*.md": "/home/benjamin-f/Documents/school/lexica/public/images" // hardcoded because %{workspaceFolder} is not supported 😐 
-    // },
-    // "markdown.editor.filePaste.enabled": "always",
-    // "markdown.editor.drop.enabled": "always",
-    // "markdown.editor.filePaste.copyIntoWorkspace": "mediaFiles",
-    "github.copilot.chat.codeGeneration.instructions": [
-        {
-            "file": "./.vscode/daisyui.md"
-        }
-    ],
-    "cSpell.language": "en,de",
-    "deno.enable": true
+  "cSpell.language": "en,de",
+  "deno.enable": true,
+  "markdown.marp.themes": [
+    "./content/school/airscout/presentations/htl-theme.css"
+  ]
 }

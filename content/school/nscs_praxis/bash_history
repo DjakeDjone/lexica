@@ -1,0 +1,437 @@
+sudo vim /etc/docker/daemon.json 
+sudo rm /home/schueler/.bash_history 
+sudo rm /root/.bash_history 
+sudo shutdown -h now
+sudo vim /etc/docker/daemon.json 
+sudo shutdown -r now
+passwd
+77777
+sudo apt install bind9
+cd /etc/bind
+ls
+vim named.conf.local 
+ls -la
+exit
+htop
+cd /etc/bind7
+cd /etc/bind
+ls
+vim named.conf.local 
+tail -f /var/log/syslog
+cd /etc/bind
+ls
+vim db.patzl.lan
+sudo vim db.patzl.lan
+sudoedit named.conf.local
+sudo vim named.conf.local 
+sudo vim named.conf
+sudo vim named.conf.local 
+sudo systemctl restart bind
+sudo systemctl restart bind9
+sudo systemctl status bind9
+nslookup 
+dig @127.0.0.1 rechner1.patzl.lan
+sudo vim named.conf.o
+sudo vim named.conf.options 
+sudo vim named.conf.local 
+sudo mkdir /var/cache/bind/back
+sudo chown bind /var/cache/bind/back/
+sudo vim named.conf.local 
+sudo vim named.conf.options 
+sudo vim named.conf.local 
+sudo systemctl restart bind9
+tail -f /var/log/syslog
+sudo vim named.conf.local 
+sudo systemctl restart bind9
+tail -f /var/log/syslog
+sudo vim named.conf.options 
+sudo systemctl restart bind9
+sudo systemctl status bind9
+sudo systemctl restart bind9
+dig @127.0.0.1 rechner1.reisenbichler.lan
+dig @127.0.0.1 rechner1.patzl.lan
+cd /var/cache/bind
+ls
+ls -la
+cd back
+ls
+sudo vim reisenbichler.lan.bak 
+cd /etc/bind
+ls
+sudo vim named.conf.local 
+cd /etc/bin
+cd /etc/bind
+sudo vim db.patzl.lan 
+sudo systemctl restart bind0
+sudo systemctl restart bind9
+dig @10.139.0.141 rechner1.patzl.lan
+tail -n 40 -f /var/log/syslog
+cd /etc/bind/
+ls
+cp db.patzl.lan db.patzl.sec
+sudo cp db.patzl.lan db.patzl.sec
+sudoedit --help
+edit7
+edit
+sudo vim db.patzl.sec 
+sudo vim named.conf.local 
+sudo apt update
+sudo apt-get install haveged  bind9utils
+dnssec-keygen --help
+dnssec-keygen -a RSASHA1 -b1024 -e -n ZONE patzl.sec
+sudo dnssec-keygen -a RSASHA1 -b1024 -e -n ZONE patzl.sec
+sudo dnssec-keygen -a RSASHA1 -b1024 -e -n ZONE -f KSK patzl.sec
+ls
+sudo cat K*.key >>db.patzl.sec
+sudo bash
+su
+sudo bash
+sudo vim db.patzl.sec 
+sudo dnssec-signzone -s now+0 -e now+2419200 -o patzl.sec -K Kpatzl.sec.+005+48613 db.patzl.sec Kpatzl.sec.+005+62542
+sudo dnssec-signzone -s now+0 -e now+2419200 -o patzl.sec -K Kpatzl.sec.+005+48613 db.patzl.sec Kpatzl.sec.+005+62542.key
+ls
+sudo dnssec-signzone -s now+0 -e now+2419200 -o patzl.sec -K Kpatzl.sec.+005+48613 db.patzl.sec Kpatzl.sec.+005+62542.private
+sudo dnssec-signzone -s now+0 -e now+2419200 -o patzl.sec -K Kpatzl.sec.+005+48613 db.patzl.sec Kpatzl.sec.+005+62542
+dnssec-signzone --help
+sudo dnssec-signzone -s now+0 -e now+2419200 -o patzl.sec -k Kpatzl.sec.+005+48613 db.patzl.sec Kpatzl.sec.+005+62542
+sudoedit named.conf.local 
+sudo vim db.patzl.sec
+sudo systemctl resetart bind 
+sudo systemctl restart bind 
+sudo systemctl restart bind9
+sudo systemctl stop bind9
+sudo systemctl start bind9
+systemctl status named.service
+sudo vim named.conf.local 
+systemctl status named.service
+sudo systemctl restart bind9
+systemctl status named.service
+sudo vim db.patzl.sec.signed 
+ls
+vim bind.keys
+sudo vim named.conf.options 
+sudo vim db.patzl.sec
+vim Kpatzl.sec.+005+48613.key 
+sudo vim named.conf.options
+sudo systemctl restart bind9
+dig @127.0.0.1 +dnssec secure.friedl.lan
+cp named.conf.options named.conf.masterslave
+sudo cp named.conf.options named.conf.masterslave
+sudo vim named.conf.options
+sudo cp named.conf.local named.conf.local.old
+sudo vim named.conf.local
+sudo systemctl restart bind9
+dig @127.0.0.1 +dnssec secure.friedl.lan
+apt list --upgradable
+cd /etc/bind
+ls
+vim db.patzl.lan
+vim db.patzl.sec
+vim named.conf
+vim named.conf.local
+ls
+vim Kpatzl.sec.+005+48613.private 
+sudo vim Kpatzl.sec.+005+48613.private
+sudo vim named.conf.options 
+sudo systemctl restart bind0
+sudo systemctl restart bind9
+sudo vim 
+sudo systemctl status bind9
+sudo vim named.conf.options 
+sudo systemctl restart bind9
+dig @127.0.0.1 +dnssec uenlue.lan
+sudo vim named.conf.options 
+sudo systemctl restart bind9
+sudo systemctl status bind9
+tail -n 50 /var/log/syslog
+sudo vim named.conf.options 
+sudo systemctl restart bind9
+dig @127.0.0.1 +dnssec uenlue.lan
+sudo vim named.conf.local
+dig @127.0.0.1 +dnssec uenlue.sec
+sudo vim named.conf.options 
+vim named.conf.options 
+sudo apt update && sudo apt upgrade && sudo apt install easy-rsa
+sudo apt autoremove
+sudo apt install sl
+reboot
+sudo reboot
+make-cadir ~/myca
+cd myca/
+ls
+ls -la
+./easyrsa init-pki
+ls -la
+./easyrsa build-ca
+./easyrsa build-server-full dns.paztl.lan nopass
+chgrp
+chgrp --help
+chmod --help
+sudo cp ~/myca/pki/issued/dns.paztl.lan.crt /etc/bind
+sudo cp pki/private/dns.paztl.lan.key /etc/bind
+cd /etc/bind
+sudo chgrp bind dns.paztl.lan.*
+sudo chmod g+r dns.paztl.lan.key
+sudo chmod a+r dns.paztl.lan.crt
+vim named.conf.options 
+sudo vim named.conf.options 
+cd /etc/bind
+ls
+sudo vim db.patzl.lan
+cd
+cat .bash_history | grep apt
+cat .bash_history | grep dig
+cat .bash_history | grep nslookup
+cd /etc/bind
+ls
+vim db.patzl.lan
+vim named.conf.options
+clear
+vim named.conf.options
+sl
+ls -la
+sl -la
+cat .bash_history | grep dig
+cat ~/.bash_history | grep dig
+dig @127.0.0.1 rechner1.patzl.lan
+ls
+vim named.conf.local
+cat ~/.bash_history | grep systemctl
+sudo vim named.conf.local
+sudo vim named.conf.options
+sudo vim named.conf.local
+sudo vim named.conf.options
+sudo vim named.conf.local
+sudo systemctl restart bind
+sudo systemctl restart bind9
+sudo systemctl status bind0
+sudo systemctl status bind9
+sudo systemctl restart bind9
+sudo vim /var/log/syslog
+sudo vim named.conf.options 
+sudo systemctl restart bind9
+sudo vim named.conf.local
+cat ~/.bash_history | grep dig
+dig @127.0.0.1 rechner1.reisenbichler.lan
+tail -20 /var/log/syslog
+vim /var/log/syslog
+cat /var/log/syslog | grep reisenbichler
+clear
+ls
+ls -la | Kpatzl.sec.*
+ls -la | grep Kpatzl.sec.*
+ls -la
+ls --help
+ls -la | grep Kpatzl.sec.
+vim Kpatzl.sec.+005+48613.key
+sudo bash
+sudo vim named.conf.local
+sudo vim named.conf.options
+vim named.conf.options 
+sudo dpkg-reconfigure slapd
+vim ou.ldif
+cat ou.ldif 
+vim ou.ldif 
+cat ou.ldif 
+ldapadd -x -D cn=admin,dc=patzl,dc=lan -W -f ou.ldif 
+btop
+sudo apt install btop
+btop
+htop
+docker container ps
+sudo docker container ps
+sudo docker container ps -a
+ls
+vim ou.ldif 
+python
+sudo apt install python3
+python3
+vim import_csv.py
+vim schuelers.csv
+vim import_csv.py schuelers.csv 
+python3 import_csv.py schuelers.csv 
+vim import_csv.py
+python3 import_csv.py schuelers.csv 
+vim import_csv.py
+python3 import_csv.py schuelers.csv 
+vim import_csv.py
+python3 import_csv.py schuelers.csv 
+vim import_csv.py
+python3 import_csv.py schuelers.csv 
+vim out.ldif 
+vim import_csv.py
+python3 import_csv.py schuelers.csv 
+ldapadd
+ldapadd --help
+ldapadd -x -D cn=admin,dc=<Ihrname>,dc=lan -W
+ldapadd -x -D cn=admin,dc=patzl,dc=lan -W
+vim out.ldif 
+vim import_csv.py
+python3 import_csv.py schuelers.csv 
+vim out.ldif 
+ldapadd -x -D cn=admin,dc=<Ihrname>,dc=lan -W -f out.ldif 
+ldapadd -x -D cn=admin,dc=patzl,dc=lan -W -f out.ldif 
+vim import_csv.py
+python3 import_csv.py schuelers.csv 
+ldapadd -x -D cn=admin,dc=patzl,dc=lan -W -f out.ldif 
+uname
+uname -a
+vim import_csv.py 
+7
+clear
+sl
+sl -l
+clear
+sl
+sl -l
+sl
+sl -lsaslleasefafea
+sl
+sl -l | less
+wqqqq4
+sl -e
+sl -alFe
+sl -l
+sl -le
+sl
+sl -l
+sl -e
+sl
+lear
+clear
+which clear
+which which
+$($(which which) which) which
+$($($(which which) which) sl) -l
+celar
+clear
+vim import_csv.py 
+sl -el
+sl -l
+sudo apt update && sudo apt install easy-rsa
+cd myca
+ls
+./easyrsa init-pki
+./easyrsa build-ca
+./easyrsa build-server-full patzl-ldap
+./easyrsa build-server-full patzl-ldap nopass
+./easyrsa init-pki
+./easyrsa build-ca
+./easyrsa build-server-full patzl-ldap nopass
+nix
+./easyrsa build-server-full patzl-ldap nopass
+cp pki/ca.crt /etc/ssl/certs
+sudo cp pki/ca.crt /etc/ssl/certs
+sudo cp pki/issued/patzl-ldap.crt /etc/ssl/certs
+sudo cp pki/private/patzl-ldap.key /etc/ssl/private
+sudo addgroup ssl-cert
+sudo adduser openldap ssl-cert
+sudo chgrp ssl-cert /etc/ssl/private/
+sudo chmod g+rx /etc/ssl/private/
+sudo chgrp ssl-cert /etc/ssl/private/patzl-ldap.key
+sudo chmod g+r /etc/ssl/private/patzl-ldap.key
+sudo chmod a+r /etc/ssl/certs/ca.crt
+sudo chmod a+r /etc/ssl/certs/patzl-ldap.crt
+cd
+sudo aa-status 
+vscode
+code
+ll
+sl
+cd /etc/ssl
+sudo chmod a+r /etc/ssl/certs/patzl-ldap.crt 
+sudo chgrp ssl-cert /etc/ssl/private
+sudo chmod g+rx /etc/ssl/private/
+sudo chgrp ssl-cert /etc/ssl/private/patzl-ldap.crt
+sudo chgrp ssl-cert /etc/ssl/private/patzl-ldap.key
+sudo chmod g+r /etc/ssl/private/patzl-ldap.key
+sudo chmod a+r /etc/ssl/certs/ca.crt
+sudo chmod a+r /etc/ssl/certs/patzl-ldap.crt 
+sudo aa-status
+sudo ln -s /etc/apparmor.d/usr.sbin.slapd /etc/apparmor.d/disable
+sudo apparmor_parser -R /etc/apparmor.d/disable/usr.sbin.slapd 
+sudo aa-status 
+cd
+vim certs.ldif
+sudo su
+vim certs.ldif
+sudo su
+vim certs.ldif
+sudo su
+vim certs.ldif
+sudo su
+vim certs.ldif
+sudo su
+cat /etc/ssl/certs/ca.crt 
+scp /etc/ssl/certs/ca.crt christian@coder.patzl.dev:~
+mail
+sudo apt update && sudo apt install mailutils
+sudo dpkg reconfigure postfix
+sudo dpkg --help
+sudo dpkg-reconfigure postfix
+adduser
+sudo useradd
+sudo adduser
+sudo adduser sekund
+mail
+sudo systemctl reload postfix
+mail
+mail -s "Funktioniert die Email"
+mail
+mail -s "Emoji"
+mail -s "Rust"
+mail
+mail -s "Rust"
+uname -a
+sudo apt install nitidus
+sudo apt update && sudo apt upgrade
+sudo apt install himalaya
+curl -sSL https://raw.githubusercontent.com/pimalaya/himalaya/master/install.sh | PREFIX=~/.local sh
+curl -sSL https://raw.githubusercontent.com/pimalaya/himalaya/master/install.sh | sudo sh
+himalaya
+sudo vim /etc/postfix/main.cf#
+sudo vim /etc/postfix/main.cf
+vim .config/himalaya/config.toml 
+himalaya
+vim .config/himalaya/config.toml 
+himalaya
+sudo apt install dovecot
+sudo apt install dovecot-imapd
+sudo vim /etc/dovecot/conf.d/10-master.conf 
+sudo vim /etc/dovecot/conf.d/10-mail.conf 
+sudo systemctl restart postfix
+sudo systemctl restart dovecot
+himalaya 
+vim .config/himalaya/config.toml 
+himalaya 
+himalaya --debug
+himalaya --trace
+vim .config/himalaya/config.toml 
+himalaya --trace
+7
+vim .config/himalaya/config.toml 
+himalaya
+himalaya --debug
+detach
+./nitidus 
+ls
+./nitidus 
+btop
+dovecot
+sudo vim /etc/postfix/main.cf
+sudo vim /etc/dovecot/conf.d/10-master.conf 
+sudo vim /etc/dovecot/conf.d/10-mail.conf 
+sudo systemctl restart dovecot
+dovecto
+dovecot
+/usr/lib/dovecot/deliver
+sudo systemctl restart postfix
+sudo systemctl restart dovecot
+dovecot
+sudo /etc/postfix/main.cf
+ls
+cd /etc/postfix/
+ls
+sudo vim main.cf
+sudo vim master.cf
+sudo dpkg-reconfigure postfix
