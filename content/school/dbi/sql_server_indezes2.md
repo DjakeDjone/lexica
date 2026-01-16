@@ -14,9 +14,9 @@ protocolDescription: "SQL Server Indexes"
 Die Übung (wir verwenden die gleiche Datenbank:
 <https://www.mssqltips.com/tutorial/sql-server-index-maintenance/>)
 
-![Screenshot des Restore-Dialogs im SSMS](adventureworks_restore_1.png)
+![Screenshot des Restore-Dialogs im SSMS](/images/content_school_dbi_adventureworks_restore_1.png)
 
-![Datenvorschau der wiederhergestellten AdventureWorks Tabelle](adventureworks_restore_2.png)
+![Datenvorschau der wiederhergestellten AdventureWorks Tabelle](/images/content_school_dbi_adventureworks_restore_2.png)
 
 <!-- SalesOrderID SalesOrderDetailID CarrierTrackingNumber OrderQty ProductID SpecialOfferID UnitPrice UnitPriceDiscount LineTotal rowguid ModifiedDate
 43659 1 4911-403C-98 1 776 1 2024,994 0,00 2024.994000 B207C96D-D9E6-402B-8470-2CC176C42283 2011-05-31 00:00:00.000 -->
@@ -71,7 +71,7 @@ SELECT * FROM [Sales].[SalesOrderDetail_Heap] WHERE SalesOrderID = 43659;
 **Ergebnis:** Scananzahl 1, **logische Lesevorgänge 1498**, CPU-Zeit = 15 ms,
 verstrichene Zeit = 15 ms.
 
-![Execution Plan: Table Scan on Heap table showing 1498 logical reads](execution_plan_heap_scan.png)
+![Execution Plan: Table Scan on Heap table showing 1498 logical reads](/images/content_school_dbi_execution_plan_heap_scan.png)
 
 **Tooltip-Analyse:**
 
@@ -115,7 +115,7 @@ SELECT * FROM [Sales].[SalesOrderDetail_Clustered] WHERE SalesOrderID = 43659;
 **Ergebnis:** Scananzahl 1, **logische Lesevorgänge 3**, CPU-Zeit = 0 ms,
 verstrichene Zeit = 0 ms.
 
-![Execution Plan: Clustered Index Seek showing direct access with only 3 logical reads](execution_plan_clustered_index_seek.png)
+![Execution Plan: Clustered Index Seek showing direct access with only 3 logical reads](/images/content_school_dbi_execution_plan_clustered_index_seek.png)
 
 **Tooltip-Analyse:**
 
@@ -168,7 +168,7 @@ SELECT * FROM [Sales].[SalesOrderDetail_NonClustered] WHERE SalesOrderID = 43659
 **Ergebnis:** Scananzahl 1, **logische Lesevorgänge 14**, CPU-Zeit = 0 ms,
 verstrichene Zeit = 0 ms.
 
-![Execution Plan: Non-Clustered Index Seek followed by Key Lookup operation](execution_plan_nonclustered_index_seek.png)
+![Execution Plan: Non-Clustered Index Seek followed by Key Lookup operation](/images/content_school_dbi_execution_plan_nonclustered_index_seek.png)
 
 **Tooltip-Analyse:**
 
@@ -221,7 +221,7 @@ SELECT * FROM [Sales].[SalesOrderDetail_ClusteredColumnstore] WHERE SalesOrderID
 **Ergebnis:** Scananzahl 1, **logische Lesevorgänge 0** (Segment-basiert),
 CPU-Zeit = 15 ms, verstrichene Zeit = 10 ms.
 
-![Execution Plan: Columnstore Index Scan showing high performance batch mode processing](execution_plan_columnstore_scan.png)
+![Execution Plan: Columnstore Index Scan showing high performance batch mode processing](/images/content_school_dbi_execution_plan_columnstore_scan.png)
 
 **Tooltip-Analyse:**
 
@@ -315,9 +315,9 @@ WHERE CONTAINS(Description, 'comfortable');
 > jedes Wort eine Liste der Dokumente enthält. Dadurch kann "comfortable" direkt
 > gefunden werden, ohne alle Zeilen zu scannen.
 
-![Execution Plan: LIKE search without FullText Index](execution_plan_fulltext_no_index.png)
+![Execution Plan: LIKE search without FullText Index](/images/content_school_dbi_execution_plan_fulltext_no_index.png)
 
-![Execution Plan: CONTAINS search with FullText Index](execution_plan_fulltext_with_index.png)
+![Execution Plan: CONTAINS search with FullText Index](/images/content_school_dbi_execution_plan_fulltext_with_index.png)
 
 ---
 
@@ -357,8 +357,8 @@ JOIN sys.indexes i ON ips.object_id = i.object_id AND ips.index_id = i.index_id
 WHERE ips.avg_fragmentation_in_percent > 0;
 ```
 
-![alt text](image.png)
-![alt text](image-1.png)
+![alt text](/images/content_school_dbi_image.png)
+![alt text](/images/content_school_dbi_image-1.png)
 
 ### Wartungsstrategien
 

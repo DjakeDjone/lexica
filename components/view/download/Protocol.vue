@@ -42,7 +42,7 @@ const downloadPdf = () => {
             <div class="text-lg font-semibold">
                 Abteilung für INFORMATIK
             </div>
-            <img src="/assets/images/htl-logo.png" alt="HTL Logo" class="h-16">
+            <img src="/images/assets_images_htl-logo.png" alt="HTL Logo" class="h-16">
         </div>
         <!-- <div class="header flex justify-between items-center mb-8">
             <span>

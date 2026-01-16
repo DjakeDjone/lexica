@@ -14,9 +14,9 @@ protocolDescription: "SQL Server Indexes"
 Die Übung (wir verwenden die gleiche Datenbank:
 <https://www.mssqltips.com/tutorial/sql-server-index-maintenance/>)
 
-![alt text](image.png)
+![alt text](/images/content_school_dbi_image.png)
 
-![alt text](image-1.png)
+![alt text](/images/content_school_dbi_image-1.png)
 
 <!-- SalesOrderID SalesOrderDetailID CarrierTrackingNumber OrderQty ProductID SpecialOfferID UnitPrice UnitPriceDiscount LineTotal rowguid ModifiedDate
 43659 1 4911-403C-98 1 776 1 2024,994 0,00 2024.994000 B207C96D-D9E6-402B-8470-2CC176C42283 2011-05-31 00:00:00.000 -->

@@ -1,6 +1,12 @@
-
-# Gruppe 2 (Kurzfassung)
-
+---
+title: "SQL Server Indexes"
+protocolAbgabedatum: "16.01.2026"
+protocolAufgabenNr: 02
+protocolKlasse: "5AHIF"
+protocolName: "Benjamin Friedl"
+protocolGruppe: "1"
+protocolAbgabetermin: "16.01.2026"
+protocolDescription: "SQL Server Indexes: Übungen und Beispiele"
 ---
 
 ## AUFGABE 1
@@ -9,7 +15,7 @@
 dabei einen Bezug zur Bilanz und G&V, sowie auf weitere relevante Parameter
 her.**
 
-![alt text](image.png)
+![alt text](/images/content_school_bwm_abschlussbeispiel_image.png)
 
 ---
 

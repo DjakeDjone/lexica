@@ -11,7 +11,7 @@ footer: 'Benjamin Friedl, Luca Reisenbichler'
 
 <div class="cover-layout">
  <div class="cover-image">
-  <img src="team.png" alt="Team Airscout" />
+  <img src="/images/content_school_airscout_presentations_team.png" alt="Team Airscout" />
  </div>
  <div class="cover-text">
   <h1 class="cover-title">PROJEKT AIRSCOUT</h1>
