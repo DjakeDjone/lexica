@@ -32,7 +32,7 @@ Kapitalverwendung (Investitionsanalyse), Kapitalaufbringung
 <u>Erfolgswirtschaftliche Kennzahlen:</u> Einblick in die Ertragskraft von
 Unternehmen (Ergebnis-, Rentabilitäts- und Break-Even-Analyse) verbessern.
 
-### Investitionsanalyse:
+### Investitionsanalyse
 
 **Anlagenintensität:**
 $\frac{\text{Anlagevermögen}}{\text{Gesamtvermögen}} \cdot 100 (\%) \Rightarrow \frac{31.500,-}{139.300,-} \cdot 100 (\%) = \underline{\underline{22,61\%}}$
@@ -50,7 +50,7 @@ Ich bleibe beim Textwert aus dem Bild, falls dort andere Zahlen stehen.)_
   Unternehmen an Beschäftigungsschwankungen anpassen. Ein zu hoher Wert kann
   jedoch auch auf überhöhte Lagerbestände hinweisen.
 
-### Finanzierungsanalyse:
+### Finanzierungsanalyse
 
 **Eigenkapitalquote:**
 $\frac{\text{Eigenkapital}}{\text{Gesamtkapital}} \cdot 100 (\%) \Rightarrow \frac{50.700,-}{139.300,-} \cdot 100 (\%) = \underline{\underline{36,40\%}}$
@@ -81,7 +81,7 @@ $\frac{\text{Fremdkapital} - \text{Zahlungsmittel}}{\text{Cashflow}} \Rightarrow
 
 ---
 
-### Beziehung zwischen Vermögen und Kapital:
+### Beziehung zwischen Vermögen und Kapital
 
 **Anlagendeckung / "Goldene Finanzierungsregel":**
 $\frac{\text{langfristiges Kapital}}{\text{Anlagevermögen}} \cdot 100 (\%) \Rightarrow \frac{90.700,-}{31.500,-} \cdot 100 (\%) = \underline{\underline{287,94\%}}$
@@ -91,7 +91,7 @@ $\frac{\text{langfristiges Kapital}}{\text{Anlagevermögen}} \cdot 100 (\%) \Rig
 - Langfristiges Kapital = Eigenkapital + langfristiges Fremdkapital (Darlehen)
 - Hier: "Gut"
 
-### Umschlagskennzahlen:
+### Umschlagskennzahlen
 
 **Lagerumschlagshäufigkeit:**
 $\frac{\text{Wareneinsatz}}{\text{Durchschnittslager}} = \frac{458.500,-}{61.900,-} = \underline{\underline{7,41}}$
@@ -147,7 +147,7 @@ $\frac{\text{Umsatz}}{\text{durchschnittliches Gesamtkapital}} = \frac{591.500,-
   eingesetzten Kapitals ein Umsatz von € 2,- erzielt.
 - durchschnittliches Gesamtkapital = (Anfangsbestand + Endbestand) / 2
 
-### Liquiditätsanalyse:
+### Liquiditätsanalyse
 
 **Liquidität 2. Grades (Quick Ratio):**
 $\frac{\text{Zahlungsmittel} + \text{kurzfristig gebundenes Vermögen}}{\text{kurzfristige Verbindlichkeiten}} \cdot 100 (\%) = \frac{13.100,- + 32.600,-}{46.750,-} \cdot 100 (\%) = \underline{\underline{97,75\%}}$
@@ -192,7 +192,7 @@ $\frac{\text{Cashflow}}{\text{Betriebsleistung}} \cdot 100 (\%) = \underline{\un
   Tilgung von Verbindlichkeiten usw. zur Verfügung.
 - Hier: "Schlecht"
 
-### Aufwandskennzahlen:
+### Aufwandskennzahlen
 
 **Material- bzw. Warenintensität:**
 $\frac{\text{Material- bzw. Wareneinsatz}}{\text{Betriebsleistung}} \cdot 100 (\%) = \underline{\underline{77,53\%}}$
@@ -210,13 +210,13 @@ $\frac{\text{Personalaufwand}}{\text{Betriebsleistung}} \cdot 100 (\%) = \underl
   Personalaufwandes abhängt. Sie ist häufig relativ rasch beeinflussbar.
 - Hier: "Gut"
 
-### Umsatzkennzahlen:
+### Umsatzkennzahlen
 
 **Umsatz je Beschäftigten:**
 $\frac{\text{Umsatz}}{\text{Zahl der Beschäftigten}} = \frac{462.000,-}{2.650,-} = \underline{\underline{€ 174,34}}$
 **Umsatz je Arbeiter:** $\frac{\text{Umsatz}}{\text{Zahl der Arbeiter}}$
 
-### Ergebniskennzahlen:
+### Ergebniskennzahlen
 
 **Handelsspanne:**
 $\frac{\text{Bruttogewinn}}{\text{Erlöse - Retourwaren}} \cdot 100 (\%) = \frac{132.700,-}{591.500,-} \cdot 100 (\%) = \underline{\underline{22,43\%}}$
@@ -230,7 +230,7 @@ $\frac{\text{Bruttogewinn}}{\text{Wareneinsatz}} \cdot 100 (\%) = \frac{132.700,
 
 ---
 
-### Rentabilitätsanalyse:
+### Rentabilitätsanalyse
 
 **Rentabilität des Eigenkapitals:**
 $\frac{\text{Ergebnis vor Steuern}}{\text{durchschnittliches Eigenkapital}} \cdot 100 (\%) = \frac{19.500,-}{50.200,-} \cdot 100 (\%) = \underline{\underline{38,84\%}}$
@@ -337,7 +337,7 @@ als Diskriminanzfunktion bezeichnet.
 **a) Treffen Sie eine rechnerische, nachvollziehbare Entscheidung auf Basis der
 Kapitalwertmethode für eine Alternative.**
 
-### System X:
+### System X
 
 | Jahr | Anschaffungswert | Kostenersparnis | Restwert |   Wert    | Abzinsungsfaktor |  Barwerte  |
 | :--: | :--------------: | :-------------: | :------: | :-------: | :--------------: | :--------: |
@@ -354,7 +354,7 @@ Kapitalwertmethode für eine Alternative.**
 - Abzinsungsfaktor = $(1+0,08)^{-\text{Jahr}}$
 - Barwert = Wert $\cdot$ Abzinsungsfaktor
 
-### System Y:
+### System Y
 
 | Jahr | Anschaffungswert | Kostenersparnis | Restwert |   Wert    | Abzinsungsfaktor |  Barwerte  |
 | :--: | :--------------: | :-------------: | :------: | :-------: | :--------------: | :--------: |
@@ -1061,7 +1061,7 @@ eingesetzt werden.
 Welche Beschaffungsprinzipien sind Ihnen bekannt und welche Bestellsysteme gibt
 es?**
 
-### Beschaffungsprinzipien:
+### Beschaffungsprinzipien
 
 **Einzelbeschaffung:** Die Beschaffung erfolgt erst bei Eingang eines Auftrags.
 Dieses Prinzip wird vorwiegend bei Einzelfertigungen angewandt.
@@ -1099,7 +1099,7 @@ knapp vor Verarbeitung bzw. Verkauf, z.B. verderbliche Ware wie Obst und Gemüse
     Krisen
   - Lieferverzögerungen oder Lieferausfälle aufgrund unregelmäßiger Beschaffung
 
-### Bestellsysteme:
+### Bestellsysteme
 
 **Bestellpunktsystem:** Beim Bestellpunktsystem werden die Bestellmenge und ein
 bestimmter **Meldebestand** (Lagerbestand) festgelegt. Das ist jener Bestand,
@@ -1204,7 +1204,7 @@ Kapitals wird sowohl in der Bilanz als auch in der G&V ausgewiesen.)_
 werden können, wie Versicherungen abgeschlossen werden und welche
 Vertragspartner es geben kann.**
 
-### Arten von Versicherungen:
+### Arten von Versicherungen
 
 - **gesetzliche Sozialversicherung:**
   - Krankenversicherung
@@ -1218,7 +1218,7 @@ Vertragspartner es geben kann.**
     - Unfallversicherung
     - Krankenversicherung („Zusatzversicherung“)
 
-### Abschluss von Versicherungen:
+### Abschluss von Versicherungen
 
 Der Kunde stellt einen Antrag auf Abschluss einer Versicherung. Innerhalb einer
 bestimmten Frist prüft die Versicherung den Antrag und entscheidet, ob sie die
@@ -1535,7 +1535,7 @@ Chemiekalientankwagen:
      Kammer bis 240°C/V4A)
    - 4-Kammer 33 m³ (10,5/5/5,5/10,5/100 mm Isolierung/Dampfanschluss/2 bar/V4A)
 
-### 7. Unser Ziel:
+### 7. Unser Ziel
 
 Als expandierendes Unternehmen bilden wir immer weiter sichere Arbeitsplätze für
 engagierte neue Mitarbeiter aus und fördern sie gerne in ein erfolgreiches Team
@@ -1548,7 +1548,7 @@ Standort in Luxemburg angeboten um eine weitere Niederlassung zu gründen.
 
 ## ANHANG - ZU DEN AUFGABEN
 
-### zu Aufgabe 1:
+### zu Aufgabe 1
 
 Ein Freund überlegt, einen eigenen Standort in Luxemburg zu übernehmen. Sie
 erhalten folgende Bilanzen und die entsprechenden G&V-Rechnungen:
@@ -1590,7 +1590,7 @@ _(Anmerkung: In der Tabelle oben stehen Werte, die nicht ganz mit der Summe
 3. Die Rückstellungen haben zu 50% kurzfristigen, zu 50% mittelfristigen
    Charakter. Die Kreditorenschulden sind kurzfristig.
 
-### zu Aufgabe 2:
+### zu Aufgabe 2
 
 Herr Paul Trucker erkennt, dass eine weitere Rationalisierung durch Anschaffung
 einer EDV-Anlage für den LKW-Fuhrpark (inkl. neuer Programme) wichtig ist. Er
@@ -1609,7 +1609,7 @@ dem Markt zur Verfügung stehenden unterschiedliche Systeme entscheiden möchte.
   - Restwert € 3.000,-
 - Zinssatz 8%
 
-### zu Aufgabe 3:
+### zu Aufgabe 3
 
 Sie benötigen einen neuen Minibus. Der Minibus soll nach einer Nutzungsdauer von
 5 Jahren wieder verkauft werden. Nach einer ersten Analyse stehen 5 Typen (1, 2,
@@ -1631,7 +1631,7 @@ Sie benötigen einen neuen Minibus. Der Minibus soll nach einer Nutzungsdauer vo
 - Gute Fahrstabilität, da u.U. auch unwegsame Wege (z.B. enge Kurven) befahren
   werden müssen.
 
-### zu Aufgabe 5:
+### zu Aufgabe 5
 
 Sie sollen überprüfen, ob sich die Beschaffungs- und Lagerkosten für die
 Werkstoffe W1 bis W6 verringern lassen. Dazu wurde von der Einkaufsabteilung
@@ -1646,19 +1646,19 @@ folgende Daten über den Verbrauch zusammengestellt:
 | 5   | W5      | 72.000,-                | 3,-             |
 | 6   | W6      | 4.800,-                 | 415,-           |
 
-### zu Aufgabe 6:
+### zu Aufgabe 6
 
 Am Weg in Ihr Büro kommen Sie an einem Lager vorbei. Ein Lehrling spricht Sie an
 und fragt, ob Sie wissen, was eigentlich der Zusatz KG bedeutet.
 
-### zu Aufgabe 7:
+### zu Aufgabe 7
 
 In wenigen Wochen soll das 150-jährige Firmenjubiläum gefeiert werden. Herr Paul
 Trucker bittet Sie daher zu einem kurzen Brainstorming. Sie machen sich
 pflichtbewusst schon im Vorfeld bereits Gedanken über eine mögliche
 Werbestrategie.
 
-### zu Aufgabe 8:
+### zu Aufgabe 8
 
 - Am 20.05.2024 wird die Feuerversicherung in Höhe von € 3.600,- für ein Jahr im
   Voraus mittels Banküberweisung bezahlt.
