@@ -2,17 +2,10 @@
 import { useStorage } from '@vueuse/core'
 import { genTextFromJSON } from '~/model/exportLst';
 import { type LstDataOut, calcLohnabrechnung, type LstDataIn } from '~/model/lohnsteuer';
-import { genGehaltInputByAi, type Ai } from '~/model/lstAi';
 
 const text = ref("");
 const showAi = ref(false);
-const showAiApiKey = ref(false);
-const ai = useStorage('ai', {
-    apiKey: '',
-    model: 'openai/gpt-oss-120b',
-    id: 1,
-    name: 'openai/gpt-oss-120b',
-} as Ai);
+
 const aiLoading = ref(false);
 
 const data = useStorage<LstDataIn>('data', {
@@ -45,8 +38,14 @@ watch(data, () => {
 const parseAi = async () => {
     aiLoading.value = true;
     try {
+        const json = await $fetch<LstDataIn>('/api/ai', {
+            method: 'POST',
+            body: {
+                action: 'parse_salary',
+                text: text.value
+            }
+        });
 
-        const json = await genGehaltInputByAi(text.value, ai.value);
         data.value = json;
         calcLohn();
         aiLoading.value = false;
@@ -88,17 +87,7 @@ text.value = genTextFromJSON(data.value);
                 <textarea v-model="text" placeholder="Enter text to parse"
                     class="textarea textarea-bordered textarea-primary w-full"></textarea>
                 <div class="w-full flex justify-between gap-2 mt-1">
-                    <div class="flex tooltip tooltip-primary tooltip-bottom w-full max-w-sm"
-                        data-tip="API Key from groq.com">
-                        <input :type="showAiApiKey ? 'text' : 'password'" v-model="ai.apiKey"
-                            class="input input-bordered input-primary w-full" placeholder="API KEY from groq" />
-                        <button @click="showAiApiKey = !showAiApiKey"
-                            class="w-fit -ml-7 backdrop-blur-sm h-3/4 my-auto p-1">
-                            <Icon name="heroicons-solid:eye" size="18" v-if="!showAiApiKey" />
-                            <Icon name="heroicons-solid:eye-off" size="18" v-else />
-                        </button>
-                    </div>
-                    <div class="w-40">
+                    <div class="w-40 ml-auto">
                         <button v-if="!aiLoading" @click="parseAi()" class="btn btn-primary w-full">Parse with
                             AI</button>
                         <button v-else class="btn btn-primary w-full">
@@ -106,11 +95,6 @@ text.value = genTextFromJSON(data.value);
                         </button>
                     </div>
                 </div>
-                <p>
-                    For a free API Key visit <a href="https://console.groq.com/keys" target="_blank"
-                        class="link">groq.com</a>,
-                    login with Google and copy paste your API Key here.
-                </p>
             </div>
         </div>
         <div class="w-full md:flex gap-4 mt-4">

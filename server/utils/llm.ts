@@ -6,7 +6,8 @@ import { getRelevantSections } from "./llm-search";
 
 const groqApiKey = useRuntimeConfig().groqApiKey;
 
-export const systemPromptWithTools = `You are Lexa, a helpful and professional AI assistant for the documentation website of Benjamin Friedl, a student at the HTL St. Pölten.
+export const systemPromptWithTools =
+      `You are Lexa, a helpful and professional AI assistant for the documentation website of Benjamin Friedl, a student at the HTL St. Pölten.
 
 You have access to a search tool that allows you to search through the documentation. Use this tool whenever you need to find specific information to answer the user's question.
 
@@ -38,7 +39,8 @@ Provide a concise, one or two-sentence summary that directly answers the user's 
 - List the titles and URLs of the documentation sections you found as properly formatted Markdown links.
 `;
 
-export const systemPromptWithContext = `You are Lexa, a helpful and professional AI assistant for the documentation website of Benjamin Friedl, a student at the HTL St. Pölten.
+export const systemPromptWithContext =
+      `You are Lexa, a helpful and professional AI assistant for the documentation website of Benjamin Friedl, a student at the HTL St. Pölten.
 
 Your primary task is to provide structured answers to user questions based *exclusively* on the provided documentation sections (context).
 
@@ -63,7 +65,6 @@ Provide a concise summary that directly answers the user's question based ONLY o
 - ONLY use the Title and URL provided in the context blocks.
 `;
 
-
 const systemPromptWithoutContext = `
 You are Zenia, a helpful and professional AI assistant for the documentation website of Benjamin Friedl, a student at the HTL St. Pölten.
 
@@ -78,10 +79,13 @@ answer short and concisely.
 `;
 
 export const sectionsToContext = (sections: SearchResult[]): string => {
-      return sections.map(section => `Title: ${section.title}\nContent: ${section.content}\nURL: ${section.url}`).join('\n\n');
-}
+      return sections.map((section) =>
+            `Title: ${section.title}\nContent: ${section.content}\nURL: ${section.url}`
+      ).join("\n\n");
+};
 
-const systemPromptForTestGeneration = `You are Lexa, an educational AI assistant.
+const systemPromptForTestGeneration =
+      `You are Lexa, an educational AI assistant.
 Your task is to generate a test/quiz based EXCLUSIVELY on the provided documentation sections (context).
 
 **INSTRUCTIONS:**
@@ -124,24 +128,23 @@ Your task is to grade a user's answers to a test based on the provided documenta
 `;
 
 interface TestQuestion {
-    id: string;
-    question: string;
-    type: "multiple_choice" | "short_answer";
-    options?: string[];
-    correctAnswer: string;
+      id: string;
+      question: string;
+      type: "multiple_choice" | "short_answer";
+      options?: string[];
+      correctAnswer: string;
 }
 
 interface TestGrading {
-    questionId: string;
-    correct: boolean;
-    explanation: string;
+      questionId: string;
+      correct: boolean;
+      explanation: string;
 }
 
 interface TestAnswer {
-    questionId: string;
-    answer: string;
+      questionId: string;
+      answer: string;
 }
-
 
 export const generateTest = async (contextLinks: string[], event: H3Event) => {
       let relevantSections: SearchResult[] = [];
@@ -156,7 +159,10 @@ export const generateTest = async (contextLinks: string[], event: H3Event) => {
       const groq = new Groq({ apiKey: groqApiKey });
       const messages: ChatCompletionMessageParam[] = [
             { role: "system", content: systemPromptForTestGeneration },
-            { role: "user", content: `Context:\n${context}\n\nGenerate a test.` }
+            {
+                  role: "user",
+                  content: `Context:\n${context}\n\nGenerate a test.`,
+            },
       ];
 
       const response = await groq.chat.completions.create({
@@ -166,15 +172,25 @@ export const generateTest = async (contextLinks: string[], event: H3Event) => {
             temperature: 0.1,
       });
 
-      const parsedContent = JSON.parse(response.choices[0].message.content || "{}");
+      const parsedContent = JSON.parse(
+            response.choices[0].message.content || "{}",
+      );
       return {
             test: (parsedContent.questions || []) as TestQuestion[],
-            relevantSections: relevantSections.map(s => ({ title: s.title, url: s.url }))
+            relevantSections: relevantSections.map((s) => ({
+                  title: s.title,
+                  url: s.url,
+            })),
       };
 };
 
-export const gradeTest = async (questions: TestQuestion[], answers: TestAnswer[], contextLinks: string[], event: H3Event) => {
-       let relevantSections: SearchResult[] = [];
+export const gradeTest = async (
+      questions: TestQuestion[],
+      answers: TestAnswer[],
+      contextLinks: string[],
+      event: H3Event,
+) => {
+      let relevantSections: SearchResult[] = [];
       for (const link of contextLinks) {
             const section = await openLink(link, event);
             if (section) {
@@ -186,7 +202,14 @@ export const gradeTest = async (questions: TestQuestion[], answers: TestAnswer[]
       const groq = new Groq({ apiKey: groqApiKey });
       const messages: ChatCompletionMessageParam[] = [
             { role: "system", content: systemPromptForGrading },
-            { role: "user", content: `Context:\n${context}\n\nQuestions:\n${JSON.stringify(questions)}\n\nUser Answers:\n${JSON.stringify(answers)}\n\nGrade the test.` }
+            {
+                  role: "user",
+                  content: `Context:\n${context}\n\nQuestions:\n${
+                        JSON.stringify(questions)
+                  }\n\nUser Answers:\n${
+                        JSON.stringify(answers)
+                  }\n\nGrade the test.`,
+            },
       ];
 
       const response = await groq.chat.completions.create({
@@ -196,27 +219,30 @@ export const gradeTest = async (questions: TestQuestion[], answers: TestAnswer[]
             temperature: 0.1,
       });
 
-      const parsedContent = JSON.parse(response.choices[0].message.content || "{}");
+      const parsedContent = JSON.parse(
+            response.choices[0].message.content || "{}",
+      );
       return (parsedContent.grading || []) as TestGrading[];
 };
 
-
-
-
-const contextualizeQuery = async (query: string, history: ChatCompletionMessageParam[]) => {
+const contextualizeQuery = async (
+      query: string,
+      history: ChatCompletionMessageParam[],
+) => {
       if (!history || history.length === 0) return query;
 
       const groq = new Groq({ apiKey: groqApiKey });
-      
+
       // Keep only the last few messages to avoid token limits and keep it relevant
-      const relevantHistory = history.slice(-6); 
+      const relevantHistory = history.slice(-6);
 
       const response = await groq.chat.completions.create({
             model: "llama-3.3-70b-versatile",
             messages: [
                   {
                         role: "system",
-                        content: `You are an AI assistant that rephrases user questions to be standalone based on the conversation history.
+                        content:
+                              `You are an AI assistant that rephrases user questions to be standalone based on the conversation history.
       The user is asking a follow-up question that might refer to previous context (e.g., "What is it used for?", "How does that work?").
       Your task is to rewrite the LAST user question so that it contains all necessary context from the history to be understood without the history.
       
@@ -229,25 +255,33 @@ const contextualizeQuery = async (query: string, history: ChatCompletionMessageP
       
       If the question is already standalone, output it exactly as is.
       Do NOT answer the question. ONLY output the rephrased question.
-      `
+      `,
                   },
                   ...relevantHistory,
-                  { role: "user", content: `Rephrase this question: "${query}"` }
+                  {
+                        role: "user",
+                        content: `Rephrase this question: "${query}"`,
+                  },
             ],
             temperature: 0.1,
             max_tokens: 200,
       });
 
-      const rephrasedQuery = response.choices[0].message.content?.trim() || query;
-      console.log(`[Contextualization] Original: "${query}" -> Rephrased: "${rephrasedQuery}"`);
+      const rephrasedQuery = response.choices[0].message.content?.trim() ||
+            query;
+      console.log(
+            `[Contextualization] Original: "${query}" -> Rephrased: "${rephrasedQuery}"`,
+      );
       return rephrasedQuery;
-}
+};
 
-export const askLLM = async (prompt: string, history: ChatCompletionMessageParam[] = [], event: H3Event,
-      contextLinks?: string[]
-      , withoutContext?: boolean
-      , aiSettings: { model?: string; useTools?: boolean } = {},
-
+export const askLLM = async (
+      prompt: string,
+      history: ChatCompletionMessageParam[] = [],
+      event: H3Event,
+      contextLinks?: string[],
+      withoutContext?: boolean,
+      aiSettings: { model?: string; useTools?: boolean } = {},
 ) => {
       // Use tool-based approach if enabled
       // Use tool-based approach if enabled
@@ -256,9 +290,9 @@ export const askLLM = async (prompt: string, history: ChatCompletionMessageParam
        } */
 
       // Legacy approach with pre-fetched context
-      let context = ""
+      let context = "";
       let relevantSections: SearchResult[] = [];
-      
+
       // Contextualize the query using history if we are going to search for context
       let searchPrompt = prompt;
       if (!withoutContext && !contextLinks && history.length > 0) {
@@ -273,7 +307,10 @@ export const askLLM = async (prompt: string, history: ChatCompletionMessageParam
       if (!withoutContext) {
             if (!contextLinks) {
                   // Use the contextualized prompt for search
-                  relevantSections = await getRelevantSections(searchPrompt, event);
+                  relevantSections = await getRelevantSections(
+                        searchPrompt,
+                        event,
+                  );
                   context = sectionsToContext(relevantSections);
             } else {
                   relevantSections = [];
@@ -282,10 +319,15 @@ export const askLLM = async (prompt: string, history: ChatCompletionMessageParam
                         if (section) {
                               relevantSections.push(section);
                         } else {
-                              console.warn(`Could not fetch section for link: ${link}, ${section}`);
+                              console.warn(
+                                    `Could not fetch section for link: ${link}, ${section}`,
+                              );
                         }
                   }
-                  console.log("Fetched sections for provided links:", relevantSections);
+                  console.log(
+                        "Fetched sections for provided links:",
+                        relevantSections,
+                  );
                   console.log("withoutContext:", contextLinks);
                   context = sectionsToContext(relevantSections);
             }
@@ -306,18 +348,32 @@ export const askLLM = async (prompt: string, history: ChatCompletionMessageParam
       `;
 
       const messages: ChatCompletionMessageParam[] = [
-            { role: "system", content: withoutContext ? systemPromptWithoutContext : systemPromptWithContext },
+            {
+                  role: "system",
+                  content: withoutContext
+                        ? systemPromptWithoutContext
+                        : systemPromptWithContext,
+            },
             ...history,
-            { role: "user", content: withoutContext ? prompt : promptWithContext },
+            {
+                  role: "user",
+                  content: withoutContext ? prompt : promptWithContext,
+            },
       ];
-      
-      console.log("------------------------------------------------------------------");
+
+      console.log(
+            "------------------------------------------------------------------",
+      );
       console.log("DEBUG: RAG Mode:", !withoutContext);
       console.log("DEBUG: Context Length:", context.length);
       console.log("DEBUG: Context Preview:", context.substring(0, 500));
-      console.log("DEBUG: Messages sent to LLM:", JSON.stringify(messages, null, 2));
-      console.log("------------------------------------------------------------------");
-
+      console.log(
+            "DEBUG: Messages sent to LLM:",
+            JSON.stringify(messages, null, 2),
+      );
+      console.log(
+            "------------------------------------------------------------------",
+      );
 
       const response = await groq.chat.completions.create({
             model: aiSettings.model || "openai/gpt-oss-120b",
@@ -332,10 +388,68 @@ export const askLLM = async (prompt: string, history: ChatCompletionMessageParam
 
       return {
             response,
-            relevantSections: relevantSections.map(section => {
+            relevantSections: relevantSections.map((section) => {
                   const { content, ...rest } = section; // remove content for smaller payload
                   return rest;
-            })
-      }
+            }),
+      };
 };
 
+export const SystemPromptForSalaryParsing = `
+Convert the text to JSON in the format: \`\`\` 
+  export interface LstDataIn {
+  brutto: number;
+
+  ueberstunden50?: number; // wie viele Stunden wurden mit 50% Zuschlag bezahlt
+  ueberstunden100?: number;
+  ueberstundenTeiler?: number;
+
+  fabo: boolean;
+  fabo_voll: boolean; // voller Bonus/halber Bonus
+  avabae: boolean;
+  minderj_kinder: number;
+  vollj_kinder: number;
+
+  freibetrag?: number;
+  pendlerpauschale?: number;
+  pendlerpauschaleKostenUebername?: number;
+  pendlereuro_km?: number;
+
+  gewerkschaftsbeitrag?: number;
+  betriebsratsumlage?: number;
+  serviceentgelt?: number;
+  akontozahlung?: number;
+}
+}\`\`\`
+The 'ueberstundenTeiler' should be the divisor.
+`;
+
+export const parseSalaryFromText = async (
+      text: string,
+      model: string = "openai/gpt-oss-120b",
+) => {
+      const groq = new Groq({ apiKey: groqApiKey });
+      const answer = await groq.chat.completions.create({
+            messages: [
+                  {
+                        role: "system",
+                        content: SystemPromptForSalaryParsing,
+                  },
+                  {
+                        role: "user",
+                        content: text,
+                  },
+            ],
+            model: model,
+            temperature: 0,
+            max_tokens: 1024,
+            top_p: 1,
+            stream: false,
+            response_format: {
+                  type: "json_object",
+            },
+            stop: null,
+      });
+      const response = answer.choices[0]!.message.content;
+      return JSON.parse(response!);
+};

@@ -6,78 +6,117 @@ export default defineEventHandler(async (event) => {
     try {
         const body = await readBody(event);
         const question = body.question as string;
-        const history = body.history as { role: 'user' | 'system' | 'assistant'; content: string }[] || [];
+        const history = body.history as {
+            role: "user" | "system" | "assistant";
+            content: string;
+        }[] || [];
         const context = body.context as string[] | undefined;
         const withoutContext = body.withoutContext as boolean | undefined;
         const useTools = body.useTools as boolean | undefined; // New parameter to enable tool-based search
         const model = body.model as string | undefined;
-        const action = body.action as 'chat' | 'generate_test' | 'grade_test' || 'chat';
+        const action =
+            body.action as
+                | "chat"
+                | "generate_test"
+                | "grade_test"
+                | "parse_salary" ||
+            "chat";
 
-        if (action === 'generate_test') {
+        if (action === "generate_test") {
             if (!context || context.length === 0) {
-                 throw createError({ statusCode: 400, statusMessage: 'Context is required for test generation' });
+                throw createError({
+                    statusCode: 400,
+                    statusMessage: "Context is required for test generation",
+                });
             }
             const result = await generateTest(context, event);
             return result;
         }
 
-        if (action === 'grade_test') {
-             const questions = body.questions as any[];
-             const answers = body.answers as any[];
-             
-             if (!questions || !answers || !context) {
-                  throw createError({ statusCode: 400, statusMessage: 'Questions, answers, and context are required for grading' });
-             }
+        if (action === "grade_test") {
+            const questions = body.questions as any[];
+            const answers = body.answers as any[];
 
-             const result = await gradeTest(questions, answers, context, event);
-             return result;
+            if (!questions || !answers || !context) {
+                throw createError({
+                    statusCode: 400,
+                    statusMessage:
+                        "Questions, answers, and context are required for grading",
+                });
+            }
+
+            const result = await gradeTest(questions, answers, context, event);
+            return result;
+        }
+
+        if (action === "parse_salary") {
+            const text = body.text as string;
+            if (!text) {
+                throw createError({
+                    statusCode: 400,
+                    statusMessage: "Text is required for salary parsing",
+                });
+            }
+            // Use the model from body if provided, otherwise default will be used in util
+            const result = await parseSalaryFromText(text, model);
+            return result;
         }
 
         if (!question) {
-            throw createError({ statusCode: 400, statusMessage: 'Question is required' });
+            throw createError({
+                statusCode: 400,
+                statusMessage: "Question is required",
+            });
         }
 
         const aiSettings = {
             model,
-            useTools: useTools ?? false // Default to false for backward compatibility
+            useTools: useTools ?? false, // Default to false for backward compatibility
         };
 
         const { response: aiResponse, relevantSections } = await askLLM(
-            question, 
-            history, 
-            event, 
-            context, 
+            question,
+            history,
+            event,
+            context,
             withoutContext,
-            aiSettings
+            aiSettings,
         );
         const readable = await createAiStream(aiResponse, relevantSections);
 
         return sendStream(event, readable);
     } catch (error: any) {
         console.error("[API] Error in /api/ai:", error);
-        throw createError({ 
-            statusCode: error.status || 500, 
-            statusMessage: error.message || 'Internal server error',
+        throw createError({
+            statusCode: error.status || 500,
+            statusMessage: error.message || "Internal server error",
             data: {
-                error: error.error || error.message
-            }
+                error: error.error || error.message,
+            },
         });
     }
-
 });
 
-const createAiStream = async (groqStream: any, relevantSections: SearchResult[]) => {
-    const { Readable } = await import('stream');
+const createAiStream = async (
+    groqStream: any,
+    relevantSections: SearchResult[],
+) => {
+    const { Readable } = await import("stream");
 
     const readable = new Readable({
-        read() { }
+        read() {},
     });
 
     // Send relevantSections as the first chunk (JSON stringified, prefixed for client parsing)
-    readable.push(`$SOURCES$${JSON.stringify(relevantSections.map(section => ({
-        title: section.title, url: section.url
-            ?? section.id.replace('docs', '').replace('.md', '')
-    })))}\n$SOURCES$\n`);
+    readable.push(
+        `$SOURCES$${
+            JSON.stringify(relevantSections.map((section) => ({
+                title: section.title,
+                url: section.url ??
+                    section.id.replace("docs", "").replace(".md", ""),
+            })))
+        }\n$SOURCES$\n`,
+    );
 
     (async () => {
         try {
@@ -89,10 +128,10 @@ const createAiStream = async (groqStream: any, relevantSections: SearchResult[])
             }
             readable.push(null); // End of stream
         } catch (error) {
-            console.error('Error in AI stream processing:', error);
-            readable.emit('error', error);
+            console.error("Error in AI stream processing:", error);
+            readable.emit("error", error);
         }
     })();
 
     return readable;
-}
+};

@@ -3,9 +3,17 @@ import tailwindcss from "@tailwindcss/vite";
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  preset: 'vercel',
+  preset: "vercel",
 
-  modules: ['@nuxt/content', '@formkit/auto-animate', '@vueuse/nuxt', '@nuxt/icon', '~/modules/embeddings', 'nuxt-studio', 'nuxt-component-meta'],
+  modules: [
+    "@nuxt/content",
+    "@formkit/auto-animate",
+    "@vueuse/nuxt",
+    "@nuxt/icon",
+    "~/modules/embeddings",
+    "nuxt-studio",
+    "nuxt-component-meta",
+  ],
 
   vite: {
     plugins: [tailwindcss()],
@@ -14,32 +22,44 @@ export default defineNuxtConfig({
 
   router: {
     options: {
-      scrollBehaviorType: 'smooth'
-    }
+      scrollBehaviorType: "smooth",
+    },
   },
 
   css: ["~/assets/app.css"],
 
-
   content: {
     build: {
-
       markdown: {
         remarkPlugins: {
-          'remark-math': require('remark-math')
+          "remark-math": require("remark-math"),
         },
         rehypePlugins: {
-          'rehype-katex': require('rehype-katex')
+          "rehype-katex": require("rehype-katex"),
         },
 
         highlight: {
           theme: {
             // Default theme (same as single string)
-            default: 'github-light',
+            default: "github-light",
             // Theme used if `html.dark`
-            dark: 'one-dark-pro',
+            dark: "one-dark-pro",
           },
-          langs: ['javascript', 'typescript', 'dart', 'json', 'java', 'rust', 'bash', 'sql', 'python', 'markdown', 'xml', 'nginx', 'bash'],
+          langs: [
+            "javascript",
+            "typescript",
+            "dart",
+            "json",
+            "java",
+            "rust",
+            "bash",
+            "sql",
+            "python",
+            "markdown",
+            "xml",
+            "nginx",
+            "bash",
+          ],
         },
         // experimental: {
         //   advanceQuery: true,
@@ -48,12 +68,10 @@ export default defineNuxtConfig({
     },
   },
 
-
-
   runtimeConfig: {
     groqApiKey: process.env.GROQ_API_KEY,
-    baseUrl: process.env.BASE_URL || 'http://localhost:3000',
+    baseUrl: process.env.BASE_URL || "http://localhost:3000",
   },
 
-  compatibilityDate: '2024-09-23'
-})
+  compatibilityDate: "2024-09-23",
+});
