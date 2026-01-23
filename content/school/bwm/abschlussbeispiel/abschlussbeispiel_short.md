@@ -102,10 +102,7 @@ möchten, errechnen Sie es schon einmal im Voraus.** Gehalt: Bruttogehalt €
 3.272,94; ohne AVA(E)B; keine Kinder; Freibetrag € 18,40/Monat;
 Gewerkschaftsbeitrag € 18,58/Monat. Berechnen Sie den Auszahlungsbetrag.
 
-- SV lfd (18,12%): **593,06**
-- Lohnsteuer lfd: **311,60**
-- Gewerkschaft: **18,58**
-- **Auszahlung: € 2.349,70**
+![alt text](image.png)
 
 ---
 
@@ -116,11 +113,7 @@ Angestellter; Bruttogehalt € 3.272,94; ohne AVA(E)B; Freibetrag € 18,40/Mona
 Überstundenteiler 1/173; 26 Überstunden zu 50%; Gewerkschaftsbeitrag € 18,58
 Durchführung Ihrer Gehaltsabrechnung inklusive Überstunden für Mai.
 
-- Gesamtbrutto: **€ 4.010,77**
-- SV lfd (18,12%): **€ 726,75**
-- Lohnsteuer lfd: **€ 518,86**
-- **Auszahlung: € 2.746,58**
-- Hinweis: **18 ÜZ steuerfrei** (bis max. Betrag), restliche ÜZ steuerpflichtig.
+![alt text](image-1.png)
 
 ---
 
