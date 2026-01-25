@@ -176,6 +176,7 @@ Berechnung in Form einer Tabelle.)**
 diese Begriffe näher.**
 
 - **X:** stabil/planbar, **Y:** schwankend, **Z:** unregelmäßig/kaum planbar.
+- **yA
 - Kombi ABC/XYZ hilft, **Beschaffungsstrategie** (Sicherheitsbestand/JIT/Einzelbeschaffung) festzulegen.
 
 ---
@@ -268,14 +269,45 @@ Vertragspartner es geben kann.**
 - **Abschluss:** Antrag → Risikoprüfung → Polizze.
 - **Partner:** Versicherungsnehmer, Versicherer, Versicherter, Begünstigter.
 
-**g) Um welche Form von Wertpapieren handelt es sich im obigen Fall
+**g)** Um welche Form von Wertpapieren handelt es sich im obigen Fall
 wahrscheinlich? Benennen Sie diese und erklären Sie die Unterschiede zu den
 gängigsten weiteren. Es handelt sich wahrscheinlich um Anleihen.**
 
 - **Anleihen:** Schuldverschreibungen (Zins, Rückzahlung).
 - Abgrenzung kurz: **Aktien** (Eigentumsanteil/Dividende), **Fonds** (Bündel/streuend), **Pfand-/Kommunalbriefe** (sehr sicher, meist geringere Rendite).
 
-**h) Der Handel mit Wertpapieren ist eine Aufgabe der Banken. Erläutern Sie
+**h)** Der Handel mit Wertpapieren ist eine Aufgabe der Banken. Erläutern Sie
 mögliche Grundgeschäfte einer Bank und gliedern Sie diese systematisch ein.**
 
 - **Einlagengeschäft**, **Kreditgeschäft**, **Dienstleistungsgeschäft** (Zahlungsverkehr/Wertpapiere/sonstiges), **Garantiegeschäft**.
+
+**i)** Unter Punkt d) haben Sie einen Zusammenhang zwischen Bilanz und G&V hergestellt.
+Wozu benötigt die Kostenrechnung die G&V?
+Wie berechnet sich der tatsächliche Wert eines Kostenträgers? Welche Schritte sind dabei notwendig?
+Trifft man Entscheidungen in der Kostenrechnung auf Basis der Voll- oder der Teilkosten?
+Welche Kerngröße wird dabei zum Entscheidungskriterium?
+Stellen Sie einen Zusammenhang zum
+Engpassproblem her und erläutern Sie im Anschluss kurz die Break-even-Analyse.
+
+**Zusammenhang Kostenrechnung & G&V**
+Die Kostenrechnung benötigt die G&V (aus der Buchführung) als Datenbasis. Sie nutzt diese Zahlen für Kalkulationen, Preisfindung und unternehmerische Entscheidungen.
+
+**Berechnung des Kostenträgers & Schritte**
+Der tatsächliche Wert eines Kostenträgers (Produkt/Dienstleistung) entspricht den **Selbstkosten**. Diese werden mittels der **Zuschlagskalkulation** berechnet.
+Notwendige Schritte:
+
+1. **Kostenartenrechnung:** Erfassung, welche Kosten angefallen sind.
+2. **Kostenstellenrechnung:** Ermittlung von Zuschlagssätzen für Gemeinkosten (wo sind Kosten angefallen?).
+3. **Kostenträgerrechnung:** Zurechnung von Einzelkosten (direkt) und Gemeinkosten (via Zuschläge) auf das Produkt.
+
+**Entscheidungsgrundlage & Kerngröße**
+
+- **Langfristige** Preisentscheidungen basieren auf **Vollkosten**.
+- **Kurzfristige** Entscheidungen basieren auf **Teilkosten**.
+- Die zentrale Kerngröße ist dabei der **Deckungsbeitrag** (Nettoverkaufspreis minus variable Kosten). Er zeigt, wie viel ein Produkt zur Deckung der Fixkosten beiträgt.
+
+**Zusammenhang zum Engpassproblem**
+Wenn Kapazitäten knapp sind (Engpass), reicht der absolute Gewinn nicht als Maßstab. Stattdessen werden Produkte priorisiert produziert, die den **höchsten Deckungsbeitrag** (bezogen auf den Engpass) liefern, um den Gesamtgewinn zu maximieren.
+
+**Break-even-Analyse (Kurzerklärung)**
+Sie ermittelt den Punkt (**Break-even-Point**), an dem die Erlöse genau den Gesamtkosten entsprechen. An diesem Punkt macht das Unternehmen weder Gewinn noch Verlust. Wird der Punkt überschritten, entsteht Gewinn; wird er unterschritten, entsteht Verlust.
