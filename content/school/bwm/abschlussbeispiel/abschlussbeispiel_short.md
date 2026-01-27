@@ -1,13 +1,4 @@
----
-title: "SQL Server Indexes"
-protocolAbgabedatum: "16.01.2026"
-protocolAufgabenNr: 02
-protocolKlasse: "5AHIF"
-protocolName: "Benjamin Friedl"
-protocolGruppe: "1"
-protocolAbgabetermin: "16.01.2026"
-protocolDescription: "SQL Server Indexes: Übungen und Beispiele"
----
+# Abschlussbeispiel
 
 ## AUFGABE 1
 
@@ -15,12 +6,26 @@ protocolDescription: "SQL Server Indexes: Übungen und Beispiele"
 dabei einen Bezug zur Bilanz und G&V, sowie auf weitere relevante Parameter
 her.**
 
-![alt text](/images/content_school_bwm_abschlussbeispiel_image.png)
+| Finanzwirtschaftliche Kennzahlen | Beschreibung | Erfolgswirtschaftliche Kennzahlen | Beschreibung |
+| --- | --- | --- | --- |
+| **Investitionsanalyse** | Informationen über Kapitalverwendung | **Ergebnisanalyse** | *Einblick in die Ertragskraft des Unternehmens* |
+| **Finanzierungsanalyse** | Informationen über Kapitalaufbringung | **Rentabilitätsanalyse** |  |
+| **Liquiditätsanalyse** | Darstellung des Zusammenhangs zwischen Kapitalaufbringung u. Kapitalverwendung | **Break-even Analyse** |  |
 
 ---
 
 **b) Erstellung der multiplen Diskriminanzanalyse und Ermittlung der
 Diskriminanzfunktion. Was bedeutet das Ergebnis?**
+
+| Nr. | Kennzahl Formel | Berechnung | Wert | Gewichtungsfaktor | Gewichtete Kennzahl |
+| :---: | :--- | :--- | :---: | :---: | :---: |
+| 1 | Cashflow / Verbindlichkeiten | 26.700 / 88.600 | 0,3 | 1,5 | 0,45 |
+| 2 | Bilanzsumme / Verbindlichkeiten | 139,3 / 88,6 | 1,57 | 0,08 | 0,13 |
+| 3 | Erg. vor Steuern / Bilanzsumme | 19,5 / 139,3 | 0,14 | 10 | 1,40 |
+| 4 | Erg. vor Steuern / Betriebsleistung | 19,5 / 591,5 | 0,03 | 5 | 0,16 |
+| 5 | Vorräte / Betriebsleistung | 61,35 / 591,5 | 0,10 | 0,3 | 0,03 |
+| 6 | Betriebsleistung / Bilanzsumme | 591.500 / 139.300 | 4,25 | 0,1 | 0,42 |
+| | | | | **Summe:** | **2,60** |
 
 - Diskriminanzfunktion (Summe gewichteter Kennzahlen): **2,60**
 - Interpretation laut Skala: **sehr gut** → **keine Insolvenzgefährdung**.
@@ -42,6 +47,38 @@ Erklären Sie diese kurz.**
 
 **a) Treffen Sie eine rechnerische, nachvollziehbare Entscheidung auf Basis der
 Kapitalwertmethode für eine Alternative.**
+
+### System X
+
+| Jahr | Anschaffungswert | Kostenersparnis | Restwert | Wert | Abzinsungsfaktor | Barwert |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| 0 | -50.000 | | | 50 t | 1 | 50.000 |
+| 1 | | 5.000 | | 45 t | 0,926 | 41.666 |
+| 2 | | 5.000 | | 40 t | 0,8573 | 34.293,58 |
+| 3 | | ⋮ | | 35 t | 0,7938 | 27.783,13 |
+| 4 | | | | 30 t | 0,7350 | 22.050,90 |
+| 5 | | | | 25 t | 0,6806 | 17.014,58 |
+| 6 | | | | 20 t | 0,6302 | 12.603,10 |
+| 7 | | | -7.000 | 8 t | 0,5835 | **4.667,92** |
+
+- **Wert** = Vorjahr - Kostenersparnis
+- **Abzinsungsfaktor** = $(1 + 0,08)^{-\text{Jahr}}$
+- **Barwert** = Wert $\cdot$ Abzinsungsfaktor
+
+---
+
+### System Y
+
+| Jahr | Anschaffungswert | Kostenersparnis | Restwert | Wert | Abzinsungsfaktor | Barwert |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| 0 | -40.000 | - | - | 40.000 | 1 | 40.000 |
+| 1 | - | 6.000 | - | 34.000 | 0,9259 | 31.481,40 |
+| 2 | - | 6.000 | - | 28.000 | 0,8573 | 24.005,49 |
+| 3 | - | ⋮ | - | 22.000 | 0,7938 | 17.463,53 |
+| 4 | - | | - | 16.000 | 0,7350 | 11.760,48 |
+| 5 | - | | - | 10.000 | 0,6806 | 6.805,63 |
+| 6 | - | | - | 4.000 | 0,6302 | 2.520,68 |
+| 7 | - | | 5.000 | 5.000 | 0,5835 | **2.917,45** |
 
 - Ergebnis laut Berechnung: **System Y** wählen (Endbarwert/Ergebnis positiv, System X bleibt negativ).
 
