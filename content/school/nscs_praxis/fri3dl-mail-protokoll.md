@@ -59,6 +59,20 @@ asymmetrischen Verschlüsselung erstellt und dann für die Sitzung verwendet.
 Versionen sind closed-source. GPG (GNU Privacy Guard) ist eine OpenSource
 Implementierung vom OpenPGP Standard.
 
+### Alias
+
+Ein Alias ist wie eine Weiterleitung oder Verknüpfung. Sowohl lokale Benutzer
+als auch andere E-Mail-Adressen können als Ziel verwendet werden. Bei Postfix
+werden Aliase in `/etc/aliases` gespeichert.
+
+### E-Mail-Speicherung
+
+Standardmäßig werden Emails bei UNIX in `/var/mail/<user>` in einer Datei
+gespeichert (Mbox). Zugriff auf die Emails erfolgt mit dem Befehl `mail`, der
+über das Paket `mailutils` installiert werden kann. Das unterscheidet sich vom
+**Maildir**-Format (in dieser Übung verwendet), wo E-Mails als einzelne Dateien
+in `~/Maildir` gespeichert werden.
+
 ## Postfix und Dovecot Configuration für fri3dl.nscs.lan
 
 ### DNS-Konfiguration
@@ -92,21 +106,7 @@ sudo apt update
 sudo apt install postfix dovecot-imapd mailutils -y
 ```
 
-_Log Output:_
-
-```text
-Reading package lists... Done
-Building dependency tree... Done
-Reading state information... Done
-The following additional packages will be installed:
-  dovecot-core libexttextcat-2.0-0 libexttextcat-data liblua5.4-0 libnsl2
-  ssl-cert
-...
-postfix (3.8.6-1build2) wird eingerichtet ...
-setting myhostname: 5AHIF5.htl-stp.if
-...
-INSTALL_DONE
-```
+![Postfix and Dovecot Installation Output](/images/postfix-dovecot-install.png)
 
 ### Konfiguration Postfix (Main.cf)
 
@@ -130,13 +130,6 @@ myhostname = mail.fri3dl.nscs.lan
 alias_maps = hash:/etc/aliases
 alias_database = hash:/etc/aliases
 
-# Alias Erklärung & Erstellung
-# Ein Alias ist ein alternativer Name für eine E-Mail-Adresse. Mails an den Alias
-# werden an das eigentliche Ziel weitergeleitet.
-# Erstellt in /etc/aliases:
-# postmaster:    root
-# fri3dl-alias:  fri3dl
-# Danach muss 'sudo newaliases' ausgeführt werden, um die Datenbank zu aktualisieren.
 myorigin = /etc/mailname
 mydestination = $myhostname, fri3dl.nscs.lan, localhost.nscs.lan, localhost
 relayhost = 
@@ -211,12 +204,7 @@ gpg --export -a "fri3dl" > public.key
 gpg --export-secret-key -a "fri3dl" > private.key
 ```
 
-_Prüfung:_
-
-```text
--rw-rw-r-- 1 fri3dl fri3dl 740 Jan 20 10:45 /home/fri3dl/private.key
--rw-rw-r-- 1 fri3dl fri3dl 640 Jan 20 10:45 /home/fri3dl/public.key
-```
+![GPG Key Generation and Export](/images/gpg-key-export.png)
 
 ### Server-side Verification
 
@@ -228,21 +216,11 @@ echo "Hello from terminal" | mail -s "Terminal Test" fri3dl@fri3dl.nscs.lan
 ls -R ~/Maildir/new
 ```
 
-_Output:_
-
-```text
-/home/fri3dl/Maildir/new:
-1768906582.M961934P334838.5AHIF5,S=450,W=463
-```
-
-Das bestätigt, dass Postfix die E-Mail korrekt erhält und in das Maildir des
-Users zustellt.
-
 ### Troubleshooting (Externe E-Mail)
 
 Falls E-Mails an externe Domains (z.B. `schueler@prima.nscs.lan`) mit dem Fehler
 `Sender address rejected: Domain not found` abgelehnt werden, liegt das meist am
-falschen System-Hostname.
+falschen System-Hostname (wie halt bei mir zB).
 
 _Lösung:_ Hostname korrekt auf den FQDN setzen:
 
@@ -260,13 +238,57 @@ Auf dem Client wird Thunderbird eingerichtet mit:
 - IMAP Port 143 (STARTTLS)
 - SMTP Port 25 (STARTTLS)
 
+#### Troubleshooting (Zertifikat)
+
+Beim Senden von Nachrichten kann folgende Fehlermeldung auftreten:
+
+> Sending of the message failed. The certificate is not trusted because it is
+> self-signed. The configuration related to mail.fri3dl.nscs.lan must be
+> corrected.
+
+**Lösung:** Da wir selbst-signierte Zertifikate verwenden, muss in Thunderbird
+eine **Sicherheits-Ausnahmeregel** (Security Exception) hinzugefügt werden.
+Klicke dazu im Warn-Dialog auf "Sicherheits-Ausnahmeregel bestätigen" (Confirm
+Security Exception).
+
 ### PGP-Nutzung im Client
 
-Nach dem Import des Private/Public Keys in Thunderbird (OpenPGP Key Manager)
-können E-Mails signiert und verschlüsselt gesendet werden.
+Um PGP im Client nutzen zu können, müssen die Schlüssel vom Server auf den
+lokalen Rechner kopiert werden. Da wir das Passwort für den User `fri3dl` evtl.
+nicht haben (oder SSH-Login deaktiviert ist), kopieren wir die Keys zuerst zum
+User `schueler`.
+
+1. **Keys am Server vorbereiten:** Logge dich als `schueler` am Server ein und
+   kopiere die Keys:
+
+   ```bash
+   ssh schueler@10.139.0.125
+   sudo sh -c 'cp /home/fri3dl/*.key /home/schueler/'
+   sudo chown schueler:schueler /home/schueler/*.key
+   exit
+   ```
+
+2. **Keys herunterladen (SCP):** Führe diesen Befehl **auf deinem lokalen
+   Client** aus:
+
+   ```bash
+   scp schueler@10.139.0.125:~/public.key .
+   scp schueler@10.139.0.125:~/private.key .
+   ```
+
+3. **Import in Thunderbird:**
+   - Gehe zu **Konten-Einstellungen** -> **End-to-End Encryption**
+     (End-zu-Ende-Verschlüsselung).
+   - Klicke auf **Add Key...** (Schlüssel hinzufügen).
+   - Wähle **Import an existing OpenPGP Key** (Vorhandenen OpenPGP-Schlüssel
+     importieren).
+   - Wähle die Datei `private.key` aus.
+   - _Hinweis:_ Der Public Key ist im Private Key enthalten bzw. wird
+     automatisch mit importiert. Du benötigst vor allem den **Private Key**, um
+     Nachrichten als "fri3dl" signieren und entschlüsseln zu können.
+
+Nach dem Import können E-Mails signiert und verschlüsselt gesendet werden.
 
 ![Thunderbird PGP Test](/images/fri3dl-thunderbird-pgp.png)
 
-Die Abbildung zeigt eine erfolgreich signierte und verschlüsselte E-Mail in
-Thunderbird. Der grüne Haken bzw. das Schloss-Symbol bestätigen die sichere
-Übertragung.
+![Decrypted Email in Thunderbird](/images/thunderbird-pgp-decrypted.png)
