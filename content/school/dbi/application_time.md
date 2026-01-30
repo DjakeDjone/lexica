@@ -162,4 +162,4 @@ ADD CONSTRAINT CK_NoOverlap CHECK (dbo.CheckOverlap(SubscriptionID, ValidFrom, V
 **Ergebnis:** Wie im Screenshot unten zu sehen ist, wurde der Versuch, einen
 überlappenden Zeitraum einzufügen, erfolgreich blockiert:
 
-![Bonus Results](images/dbi_applicationtime/bonus.png)
+![Bonus Results](/images/dbi_applicationtime/bonus.png)
