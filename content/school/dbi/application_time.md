@@ -1,6 +1,4 @@
 ---
-title: "Application Time"
-protocolAbgabedatum: "30.01.2026"
 protocolAufgabenNr: 07
 protocolKlasse: "5AHIF"
 protocolName: "Benjamin Friedl"
@@ -31,7 +29,7 @@ etc.
 ## Create a temporal table, following the application time approach with interval representation
 
 ```sql
-DROP DATABASE ApplicationTimeDB
+DROP DATABASE ApplicationTimeDB;
 CREATE DATABASE ApplicationTimeDB;
 USE ApplicationTimeDB;
 CREATE TABLE Customer (
@@ -54,6 +52,8 @@ CREATE TABLE Contract (
 -- DECLARE @Snap DATETIME2 = '2024-01-15';
 -- SELECT * FROM Contract WHERE @Snap >= ValidFrom AND @Snap < ValidTo;
 ```
+
+![alt text](/images/dbi_applicationtime/application-time-schema.png)
 
 ## c. Decide on a primary key and give a rationale for your personal choice
 
@@ -103,7 +103,7 @@ SELECT * FROM Contract
 WHERE @Birthday >= ValidFrom AND @Birthday < ValidTo;
 ```
 
-![alt text](image.png)
+![alt text](/images/dbi_applicationtime/contract-snapshot-birthday.png)
 
 ## f. Simulate a managing application (SQL statements)
 
@@ -112,22 +112,22 @@ WHERE @Birthday >= ValidFrom AND @Birthday < ValidTo;
 ```sql
 INSERT INTO Contract (ContractID, CustomerID, ContractDetails, ValidFrom, ValidTo)
 VALUES
-(4, 1, 'Vertrag C - Initial', '2025-01-01', '9999-12-31'),
-(5, 2, 'Vertrag D - Initial', '2025-02-01', '9999-12-31');
+(4, 1, 'Vertrag C - Initial', '2012-02-01', '9999-12-31'),
+(5, 2, 'Vertrag D - Initial', '2012-03-01', '9999-12-31');
 ```
 
 -- ii. Terminate the existence of two entities (set ValidTo to termination date)
 
 ```sql
--- terminate contract 2's current version as of 2024-06-30
+-- terminate contract 2's current version as of 2010-06-30
 UPDATE Contract
-SET ValidTo = '2024-06-30'
-WHERE ContractID = 2 AND ValidFrom = '2024-04-01';
+SET ValidTo = '2010-06-30'
+WHERE ContractID = 2 AND ValidFrom = '2008-04-01';
 
--- terminate contract 3's current version as of 2024-12-31
+-- terminate contract 3's current version as of 2011-12-31
 UPDATE Contract
-SET ValidTo = '2024-12-31'
-WHERE ContractID = 3 AND ValidFrom = '2024-03-01';
+SET ValidTo = '2011-12-31'
+WHERE ContractID = 3 AND ValidFrom = '2008-03-01';
 ```
 
 -- iii. Change the state of at least three entities and change at least one
@@ -135,22 +135,30 @@ entity twice
 
 ```sql
 -- Change 1: Contract 1, add a new version (change once)
-UPDATE Contract SET ValidTo = '2025-06-30' WHERE ContractID = 1 AND ValidFrom = '2024-07-01';
+UPDATE Contract SET ValidTo = '2012-06-30' WHERE ContractID = 1 AND ValidFrom = '2008-07-01';
 INSERT INTO Contract (ContractID, CustomerID, ContractDetails, ValidFrom, ValidTo)
-VALUES (1, 1, 'Vertrag A - Änderung 4', '2025-07-01', '9999-12-31');
+VALUES (1, 1, 'Vertrag A - Änderung 4', '2012-07-01', '9999-12-31');
 
 -- Change 2: Contract 2, change twice (two sequential versions)
-UPDATE Contract SET ValidTo = '2024-08-31' WHERE ContractID = 2 AND ValidFrom = '2023-10-01';
+UPDATE Contract SET ValidTo = '2010-08-31' WHERE ContractID = 2 AND ValidFrom = '2008-04-01';
 INSERT INTO Contract (ContractID, CustomerID, ContractDetails, ValidFrom, ValidTo)
-VALUES (2, 1, 'Vertrag A2 - Änderung 1b', '2024-09-01', '2024-12-31');
+VALUES (2, 1, 'Vertrag A2 - Änderung 1b', '2010-09-01', '2011-12-31');
 INSERT INTO Contract (ContractID, CustomerID, ContractDetails, ValidFrom, ValidTo)
-VALUES (2, 1, 'Vertrag A2 - Änderung 2b', '2025-01-01', '9999-12-31');
+VALUES (2, 1, 'Vertrag A2 - Änderung 2b', '2012-01-01', '9999-12-31');
 
 -- Change 3: Contract 3, single change
-UPDATE Contract SET ValidTo = '2024-05-31' WHERE ContractID = 3 AND ValidFrom = '2023-08-01';
+UPDATE Contract SET ValidTo = '2010-05-31' WHERE ContractID = 3 AND ValidFrom = '2008-03-01';
 INSERT INTO Contract (ContractID, CustomerID, ContractDetails, ValidFrom, ValidTo)
-VALUES (3, 2, 'Vertrag B - Änderung 3', '2024-06-01', '9999-12-31');
+VALUES (3, 2, 'Vertrag B - Änderung 3', '2010-06-01', '9999-12-31');
 ```
+
+```sql
+DECLARE @Snap DATETIME2 = '2011-01-01';
+SELECT * FROM Contract
+WHERE @Snap >= ValidFrom AND @Snap < ValidTo;
+```
+
+![alt text](/images/dbi_applicationtime/contract-snapshot-2011-01-01.png)
 
 ## g. Alternate solution: point representation (brief)
 
@@ -178,10 +186,12 @@ INSERT INTO Contract_Point (ContractID, CustomerID, ContractDetails, EffectiveDa
 -- ORDER BY EffectiveDate DESC;
 ```
 
+![alt text](/images/dbi_applicationtime/contract-point-example.png)
+
+
 ## h. Bonus Exercise: Ensure that no overlaps can occur on your table
 
--- Simple trigger-based protection to prevent overlapping intervals for the same
-ContractID
+-- Simple trigger-based protection um sicherzustellen, dass keine überlappenden Zeitintervalle für die gleiche ContractID eingefügt oder aktualisiert werden können:
 
 ```sql
 CREATE OR ALTER TRIGGER TRG_Contract_NoOverlap
@@ -204,5 +214,13 @@ BEGIN
 END;
 ```
 
--- Note: The trigger checks inserted/updated rows against existing rows and
-aborts if any overlapping interval for the same ContractID is found.
+-- Note: Der Trigger prüft, ob es für die gleiche ContractID überlappende Zeitintervalle gibt. Wenn ja, wird eine Fehlermeldung ausgegeben und die Transaktion zurückgesetzt.
+
+> Validating the trigger by attempting to insert an overlapping version for ContractID 1:
+
+```sql
+INSERT INTO Contract (ContractID, CustomerID, ContractDetails, ValidFrom, ValidTo)
+VALUES (1, 1, 'Vertrag A - Overlap Test', '2012-01-01', '2012-12-31'); -- This should fail due to overlap
+```
+
+![failed query due overlap](/images/dbi_applicationtime/overlap-trigger-error.png)

@@ -79,3 +79,27 @@ gewählten Rechtsformen näher ein.
 Ein Firmenbuch ist ein öffentliches Verzeichnis, in dem alle wichtigen Informationen über Unternehmen eingetragen sind.
 
 Eintragen müssen sich Personen- u. Kapitalgesellschaften sowie Einzelunternehmen, die die doppelte Buchhaltung führen müssen.
+               benjaminf@djakedjone
+          .+=========================.                    --------------------
+         :++===++==================-       :++-           OS: CachyOS x86_64
+        :*++====+++++=============-        .==:           Host: 83LX (Yoga Pro 7 14ASP10)
+       -*+++=====+***++==========:                        Kernel: Linux 6.18.9-2-cachyos
+      =*++++========------------:                         Uptime: 16 mins
+     =*+++++=====-                     ...                Packages: 1239 (pacman), 9 (flatpak)
+   .+*+++++=-===:                    .=+++=:              Shell: fish 4.4.0
+  :++++=====-==:                     -*****+              Display (LEN8AC2): 2944x1840 @ 2x in 15", 90 Hz [Built-in]
+ :++========-=.                      .=+**+.              DE: GNOME 49.4
+.+==========-.                          .                 WM: Mutter (Wayland)
+ :+++++++====-                                .--==-.     WM Theme: Adwaita
+  :++==========.                             :+++++++:    Theme: Adwaita [GTK2/3/4]
+   .-===========.                            =*****+*+    Icons: Adwaita [GTK2/3/4]
+    .-===========:                           .+*****+:    Font: Adwaita Sans (11pt) [GTK2/3/4]
+      -=======++++:::::::::::::::::::::::::-:  .---:      Cursor: Adwaita (24px)
+       :======++++====+++******************=.             Terminal: kitty 0.45.0
+        :=====+++==========++++++++++++++*-               Terminal Font: NotoSansMono-Regular (11pt)
+         .====++==============++++++++++*-                CPU: AMD Ryzen AI 9 365 (20) @ 2.00 GHz
+          .===+==================+++++++:                 GPU: AMD Radeon 890M Graphics [Integrated]
+           .-=======================+++:                  Memory: 13.13 GiB / 30.63 GiB (43%)
+             ..........................                   Swap: 0 B / 30.63 GiB (0%)
+                                                          Disk (/): 115.38 GiB / 949.77 GiB (12%) - btrfs
+                                                          Local IP (wlan0): 172.21.5
