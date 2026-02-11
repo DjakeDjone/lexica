@@ -1,30 +1,57 @@
 <template>
-  <div ref="mermaidContainer" class="mermaid">
-      <slot></slot>
+  <div v-if="show" ref="mermaidContainer" class="mermaid bg-white p-4 rounded-lg my-4 overflow-x-auto">
+    <slot>{{ code }}</slot>
   </div>
 </template>
 
 <script setup lang="ts">
 import mermaid from 'mermaid';
-import { onMounted, ref } from "vue";
+import { onMounted, ref, nextTick, watch } from "vue";
 
-const mermaidContainer = ref<HTMLPreElement | null>(null);
+const props = defineProps({
+  code: {
+    type: String,
+    default: ''
+  }
+});
+
+const mermaidContainer = ref<HTMLDivElement | null>(null);
+const show = ref(true);
+
+const renderMermaid = async () => {
+  if (!mermaidContainer.value) return;
+  
+  // Use prop code if available, otherwise fallback to slot content
+  const graphDefinition = props.code || mermaidContainer.value.textContent?.trim() || '';
+  
+  if (!graphDefinition) return;
+  
+  // Clear the container
+  mermaidContainer.value.innerHTML = '';
+  
+  try {
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: "forest", 
+      securityLevel: 'loose',
+    });
+    
+    const id = `mermaid-svg-${Math.random().toString(36).substring(2)}`;
+    const { svg } = await mermaid.render(id, graphDefinition);
+    mermaidContainer.value.innerHTML = svg;
+  } catch (error) {
+    console.error('Mermaid rendering error:', error);
+    mermaidContainer.value.innerHTML = `<div class="text-red-500">Error rendering diagram: ${error}</div><pre>${graphDefinition}</pre>`;
+  }
+};
 
 onMounted(async () => {
-  if (mermaidContainer.value) {
-    console.log("Mermaid container found:", mermaidContainer.value.innerHTML);
-    const graphDefinition = mermaidContainer.value.textContent?.trim() ?? '';
-    mermaidContainer.value.innerHTML = ''; // Clear the container
-    console.log("Rendering Mermaid diagram:", graphDefinition);
-    if (graphDefinition) {
-        mermaid.initialize({
-            startOnLoad: false,
-            theme: "forest",
-        });
-        const id = `mermaid-svg-${Math.random().toString(36).substring(2)}`;
-        const { svg } = await mermaid.render(id, graphDefinition);
-        mermaidContainer.value.innerHTML = svg;
-    }
-  }
+  await nextTick();
+  await renderMermaid();
+});
+
+watch(() => props.code, async () => {
+    await nextTick();
+    await renderMermaid();
 });
 </script>
