@@ -1,11 +1,11 @@
 ---
-protocolAufgabenNr: 07
+protocolAufgabenNr: 09
 protocolKlasse: "5AHIF"
 protocolName: "Benjamin Friedl"
 protocolGruppe: "1"
 protocolAbgabetermin: "30.01.2026"
 protocolAbgabedatum: "22.02.2026"
-protocolDescription: "Your task is to create a temporal table based on application time on your MS SQL Server database."
+protocolDescription: "Your task is to perform research regarding System-Versioned Tables in MS SQL Server."
 ---
 
 ## 1. Szenario Beschreibung

@@ -79,27 +79,56 @@ gewählten Rechtsformen näher ein.
 Ein Firmenbuch ist ein öffentliches Verzeichnis, in dem alle wichtigen Informationen über Unternehmen eingetragen sind.
 
 Eintragen müssen sich Personen- u. Kapitalgesellschaften sowie Einzelunternehmen, die die doppelte Buchhaltung führen müssen.
-               benjaminf@djakedjone
-          .+=========================.                    --------------------
-         :++===++==================-       :++-           OS: CachyOS x86_64
-        :*++====+++++=============-        .==:           Host: 83LX (Yoga Pro 7 14ASP10)
-       -*+++=====+***++==========:                        Kernel: Linux 6.18.9-2-cachyos
-      =*++++========------------:                         Uptime: 16 mins
-     =*+++++=====-                     ...                Packages: 1239 (pacman), 9 (flatpak)
-   .+*+++++=-===:                    .=+++=:              Shell: fish 4.4.0
-  :++++=====-==:                     -*****+              Display (LEN8AC2): 2944x1840 @ 2x in 15", 90 Hz [Built-in]
- :++========-=.                      .=+**+.              DE: GNOME 49.4
-.+==========-.                          .                 WM: Mutter (Wayland)
- :+++++++====-                                .--==-.     WM Theme: Adwaita
-  :++==========.                             :+++++++:    Theme: Adwaita [GTK2/3/4]
-   .-===========.                            =*****+*+    Icons: Adwaita [GTK2/3/4]
-    .-===========:                           .+*****+:    Font: Adwaita Sans (11pt) [GTK2/3/4]
-      -=======++++:::::::::::::::::::::::::-:  .---:      Cursor: Adwaita (24px)
-       :======++++====+++******************=.             Terminal: kitty 0.45.0
-        :=====+++==========++++++++++++++*-               Terminal Font: NotoSansMono-Regular (11pt)
-         .====++==============++++++++++*-                CPU: AMD Ryzen AI 9 365 (20) @ 2.00 GHz
-          .===+==================+++++++:                 GPU: AMD Radeon 890M Graphics [Integrated]
-           .-=======================+++:                  Memory: 13.13 GiB / 30.63 GiB (43%)
-             ..........................                   Swap: 0 B / 30.63 GiB (0%)
-                                                          Disk (/): 115.38 GiB / 949.77 GiB (12%) - btrfs
-                                                          Local IP (wlan0): 172.21.5
+
+## Gruppe 3 - Haslinger
+
+### Kostenrechnung vs Buchhaltung
+
+> Variator: in zehntel wie hoch der variable Anteil ist
+
+wozu trennt man fix und variable Kosten?
+
+Für die Entscheidungsfindung werden nur die variablen Kosten berücksichtigt, da die fixen Kosten unabhängig von der Entscheidung anfallen.
+
+Direct Costing: Es werden nur die variablen Kosten auf die Produkte verrechnet, während die fixen Kosten als Periodenkosten behandelt werden.
+
+### 2. Führungsstile
+
+- Autoritär: Der Vorgesetzte trifft alle Entscheidungen und erwartet Gehorsam von den Mitarbeitern.
+- Demokratisch: Der Vorgesetzte bezieht die Mitarbeiter in Entscheidungsprozesse ein und fördert die Zusammenarbeit.
+- Laissez-faire: Der Vorgesetzte gibt den Mitarbeitern viel Freiheit und Verantwortung, trifft aber kaum Entscheidungen selbst.
+
+### X- und Y-Theorie
+
+- X-Theorie: Menschen sind von Natur aus faul und müssen kontrolliert und motiviert werden, um zu arbeiten.
+- Y-Theorie: Menschen sind von Natur aus motiviert und suchen nach Selbstverwirklichung, wenn sie die richtigen Bedingungen haben.
+
+### Motivationstheorien
+
+- Maslow's Bedürfnishierarchie: Menschen haben fünf Ebenen von Bedürfnissen (physiologische, Sicherheits-, soziale, Wertschätzungs- und Selbstverwirklichungsbedürfnisse), die in einer Hierarchie angeordnet sind.
+- Herzberg's Zwei-Faktoren-Theorie: Es gibt Motivatoren (z.B. Anerkennung, Verantwortung) und Hygienefaktoren (z.B. Gehalt, Arbeitsbedingungen), die die Arbeitszufriedenheit beeinflussen.
+- McGregor's Theorie X und Y: Siehe oben.
+Episode 11/50 - Reward: -23210.2963, Return: -99.54%, Epsilon: 0.9464, Loss: 0.039395
+## 3.2
+
+### Arten der Investitionen
+
+- Ersatzinvestition
+- Umstellungsinvestition
+- Erweiterungsinvestition
+- Sachinvestition
+- Finanzinvestition
+
+### Arten der Finanzierung
+
+#### Möglichkeiten der Innenfinanzierung
+
+- Selbstfinanzierung: Gewinne werden im Unternehmen belassen und nicht ausgeschüttet.
+- Rückstellungen: Bildung von Rücklagen für zukünftige Ausgaben.
+- Abschreibungen: Nicht zahlungswirksame Kosten, die den Gewinn reduzieren und somit
+die Steuerlast senken.
+
+#### Möglichkeiten der Außenfinanzierung
+
+- Beteiligungsfinanzierung: Aufnahme von Eigenkapital durch Ausgabe von Aktien oder Beteiligungen.
+- 
