@@ -116,19 +116,33 @@ Episode 11/50 - Reward: -23210.2963, Return: -99.54%, Epsilon: 0.9464, Loss: 0.0
 - Ersatzinvestition
 - Umstellungsinvestition
 - Erweiterungsinvestition
-- Sachinvestition
-- Finanzinvestition
+ig (Verträge ohne Folgen/Folgekosten können abgeschlossen werden, z.B. Handyvertrag)
 
-### Arten der Finanzierung
+## 3f - Hacker
 
-#### Möglichkeiten der Innenfinanzierung
+### Arten von Mängeln
 
-- Selbstfinanzierung: Gewinne werden im Unternehmen belassen und nicht ausgeschüttet.
-- Rückstellungen: Bildung von Rücklagen für zukünftige Ausgaben.
-- Abschreibungen: Nicht zahlungswirksame Kosten, die den Gewinn reduzieren und somit
-die Steuerlast senken.
+- Offener Mangel
+- Verborgener Mangel
+- Verschwiegener Mangel
+- behebbarer Mangel
+- wesentlicher/unwesentlicher Mangel
 
-#### Möglichkeiten der Außenfinanzierung
+### Gewährleistung vs. Garantie
 
-- Beteiligungsfinanzierung: Aufnahme von Eigenkapital durch Ausgabe von Aktien oder Beteiligungen.
-- 
+**Gewährleistung**: gesetzlich verpflichtend (in Österreich 2 Jahre), der Verkäufer haftet für Mängel, die bereits zum Zeitpunkt des Kaufs vorhanden waren.
+
+**Garantie**: freiwillige Leistung des Herstellers oder Verkäufers, die über die gesetzliche Gewährleistung hinausgeht, kann bestimmte Mängel oder Schäden abdecken und hat oft eine längere Laufzeit.
+
+### i
+
+- Fixgeschäft
+- Termingeschäft
+- Kauf auf Probe
+- Kauf zur Probe
+
+### Deckungskauf/Mehrkosten
+
+
+Verkäufer muss die Mehrkosten tragen, wenn er nicht rechtzeitig liefert oder eine mangelhafte Lieferung vornimmt. Der Käufer kann dann einen Deckungskauf tätigen, um die benötigten Waren zu beschaffen, und der Verkäufer muss die Differenz zwischen dem ursprünglichen Kaufpreis und den Kosten des Deckungskaufs tragen.
+
