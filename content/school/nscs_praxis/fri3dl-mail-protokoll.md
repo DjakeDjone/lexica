@@ -522,17 +522,37 @@ smtpd_recipient_restrictions =
 
 SPF ist ein DNS-Eintrag (TXT-Record), der angibt, welche Server berechtigt sind,
 E-Mails für eine Domain zu senden. Der empfangende Mailserver prüft, ob die
-sendende IP-Adresse in diesem Eintrag vorkommt. Beispiel-Eintrag:
+sendende IP-Adresse des eingehenden Mails in diesem Eintrag vorkommt. Stimmt die
+IP nicht überein, kann die Mail als Spam markiert oder abgelehnt werden.
+
+SPF schützt gegen **E-Mail-Spoofing**: Ein Angreifer, der vorgibt, von
+`@fri3dl.nscs.lan` zu senden, kann damit erkannt und abgewiesen werden, da sein
+Server nicht in der SPF-Liste steht.
+
+**SPF-Record für `fri3dl.nscs.lan`** – erlaubt alle MX-Server der Domain:
 
 ```text
 v=spf1 mx ~all
 ```
 
+- `v=spf1` – SPF-Version
+- `mx` – alle im MX-Record eingetragenen Server sind berechtigt zu senden
+- `~all` – alle anderen Server werden als SoftFail markiert (empfohlen statt
+  `-all` für den Anfang, um legitime Mails nicht zu blockieren)
+
+Dieser TXT-Record wird in der DNS-Zone `fri3dl.nscs.lan` eingetragen.
+
 ### DKIM (DomainKeys Identified Mail)
 
-DKIM **signiert** (nicht verschlüsselt) E-Mails mithilfe eines DNS-Eintrags.
-Dadurch kann der Empfänger prüfen, ob die Mail wirklich vom angegebenen Server
-stammt und nicht verändert wurde.
+DKIM **signiert** (nicht verschlüsselt) ausgehende E-Mails mit einem privaten
+Schlüssel. Der dazugehörige öffentliche Schlüssel wird als TXT-Record im DNS
+veröffentlicht. Der empfangende Mailserver kann damit prüfen, ob:
+
+- die Mail wirklich vom angegebenen Server stammt (Authentizität), und
+- der Inhalt der Mail während der Übertragung nicht verändert wurde (Integrität).
+
+Anders als SPF schützt DKIM auch gegen **Manipulation auf dem Übertragungsweg**,
+da die Signatur über den Mail-Header und -Body erstellt wird.
 
 Installation:
 
@@ -611,11 +631,64 @@ sudo systemctl restart opendkim postfix
 
 ### DMARC (Domain-based Message Authentication, Reporting & Conformance)
 
-DMARC kombiniert SPF und DKIM und legt fest, was passiert, wenn eine Prüfung
-fehlschlägt (z.B. Signatur falsch → löschen, Absender auf Blacklist → als Spam
-markieren). Konfiguration per TXT-Record `_dmarc.fri3dl.nscs.lan`:
+DMARC baut auf SPF und DKIM auf und legt **verbindlich** fest, was mit Mails
+passieren soll, bei denen beide Prüfungen fehlschlagen. Außerdem ermöglicht
+DMARC das Versenden von Berichten (Reports) an den Domaininhaber, sodass dieser
+sehen kann, wer E-Mails in seinem Namen versendet.
+
+**DMARC-Policy-Optionen (`p=`):**
+- `none` – nur Monitoring, keine Maßnahmen
+- `quarantine` – verdächtige Mails in Spam-Ordner verschieben
+- `reject` – Mails mit fehlgeschlagener Prüfung ablehnen
+
+Konfiguration per TXT-Record `_dmarc.fri3dl.nscs.lan`:
 
 ```text
 v=DMARC1; p=quarantine; rua=mailto:postmaster@fri3dl.nscs.lan
 ```
 
+- `rua=` – Adresse, an die aggregierte Reports gesendet werden
+
+### Test
+
+#### DKIM-Key prüfen
+
+Mit `opendkim-testkey` kann geprüft werden, ob der veröffentlichte DNS-Eintrag
+zum lokalen Private Key passt:
+
+```bash
+sudo opendkim-testkey -d fri3dl.nscs.lan -s default -vvv
+```
+b
+Eine erfolgreiche Ausgabe endet mit:
+
+```text
+opendkim-testkey: key OK
+```
+
+![DKIM Key Test](/images/fri3dl-dkim-testkey.png)
+
+#### DKIM-Signatur in Mail-Headern prüfen
+
+Nach dem Senden einer Test-Mail (z.B. von Thunderbird) können die rohen
+Mail-Header inspiziert werden. Eine korrekt signierte Mail enthält einen
+`DKIM-Signature`-Header:
+
+```text
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=fri3dl.nscs.lan;
+    s=default; t=...; bh=...; h=From:To:Subject:...; b=...
+```
+
+#### SPF-Eintrag im DNS prüfen
+
+```bash
+dig TXT fri3dl.nscs.lan
+```
+
+Erwartete Ausgabe enthält den SPF-Record:
+
+```text
+fri3dl.nscs.lan. 300 IN TXT "v=spf1 mx ~all"
+```
+
+![SPF DNS Lookup](/images/fri3dl-spf-dig.png)

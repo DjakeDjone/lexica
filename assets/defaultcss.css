@@ -97,3 +97,8 @@ math {
 mark {
         background-color: var(--color-accent);
 }
+
+/* img not found */
+.prose img {
+        color: red;
+}
