@@ -1,12 +1,14 @@
 ---
-title: "E-Mail"
-protocolAbgabedatum: "32.02.2026"
-protocolAufgabenNr: 03
-protocolKlasse: "5AHIF"
-protocolName: "Christian Patzl & Benjamin Friedl"
-protocolGruppe: "1"
-protocolAbgabetermin: "32.02.2026"
+title: E-Mail
+generateTableOfContents: false
+protocolAbgabedatum: 32.02.2026
+protocolAbgabetermin: 32.02.2026
+protocolAufgabenNr: 3
 protocolDescription: "NSCS Praxis: E-Mail-Protokolle & Serverkonfiguration - Einrichtung eines Mailservers mit Postfix und Dovecot, DNS-Konfiguration, PGP-Setup, SPAM- und Virenschutz"
+protocolGruppe: "1"
+protocolKlasse: 5AHIF
+protocolName: Christian Patzl & Benjamin Friedl
+tags: []
 ---
 
 ## Theorie E-Mail-Protokolle
@@ -90,19 +92,14 @@ Für den E-Mail-Server wurde eine funktionierende DNS-Konfiguration auf
 `10.139.0.111:10000` erstellt. Zone: `fri3dl.nscs.lan`.
 
 1. **Zone Creation**: ![Create Zone](/images/fri3dl-dns-create.png)
-   ![Zone Created](/images/fri3dl-dns-created.png)
-
 2. **Records**:
    - NS: `ns.fri3dl.nscs.lan`
    - A (ns): `10.139.0.111`
    - A (mail): `10.139.0.125` (Updated from placeholder .138)
    - MX: `mail.fri3dl.nscs.lan` (Priority 10)
-
-   ![Add NS](/images/fri3dl-dns-2.png) ![Add MX](/images/fri3dl-dns-3.png)
-   ![Overview](/images/fri3dl-dns-overview.png)
-
-3. **Final Configuration Applied**: ![Final](/images/fri3dl-dns-final.png)
-   ![Applied](/images/fri3dl-dns-applied.png)
+     :br![Add NS](/images/fri3dl-dns-2.png)
+   ![Add MX (1)](/images/fri3dl-dns-mx-1.png)
+   ![Add MX (2)](/images/fri3dl-dns-mx-2.png)
 
 ### Installation auf Server 10.139.0.125
 
@@ -231,7 +228,7 @@ Falls E-Mails an externe Domains (z.B. `schueler@prima.nscs.lan`) mit dem Fehler
 `Sender address rejected: Domain not found` abgelehnt werden, liegt das meist am
 falschen System-Hostname (wie halt bei mir zB).
 
-_Lösung:_ Hostname korrekt auf den FQDN setzen:
+*Lösung:* Hostname korrekt auf den FQDN setzen:
 
 ```bash
 sudo hostnamectl set-hostname mail.fri3dl.ncs.lan
@@ -268,42 +265,33 @@ nicht haben (oder ich die vergessen habe), kopieren wir die Keys zuerst zum
 User `schueler`.
 
 1. **Keys am Server vorbereiten:**
-
    ```bash
    ssh schueler@10.139.0.125
    sudo sh -c 'cp /home/fri3dl/*.key /home/schueler/'
    sudo chown schueler:schueler /home/schueler/*.key
    exit
    ```
-
 2. **Keys herunterladen (SCP):**
-
    ```bash
    scp schueler@10.139.0.125:~/public.key .
    scp schueler@10.139.0.125:~/private.key .
    ```
-
 3. **Import in Thunderbird:**
    - **Konten-Einstellungen** -> **End-to-End Encryption**
    - **Add Key...**
    - **Import an existing OpenPGP Key**
    - die Datei `private.key`
-   - _Hinweis:_ Der Public Key ist im Private Key enthalten bzw. wird
+   - *Hinweis:* Der Public Key ist im Private Key enthalten bzw. wird
      automatisch mit importiert. Es wird vor allem den **Private Key** benötigt, um
      Nachrichten als "fri3dl" signieren und entschlüsseln zu können.
 
 Nach dem Import können E-Mails signiert und verschlüsselt gesendet werden.
 
-![Thunderbird PGP Test](/images/fri3dl-thunderbird-pgp.png)
-
-![Decrypted Email in Thunderbird](/images/thunderbird-pgp-decrypted.png)
+![Thunderbird PGP Test](/images/fri3dl-thunderbird-pgp.png)![Decrypted Email in Thunderbird](/images/thunderbird-pgp-decrypted.png)
 
 Damit die Verschlüsselung auch funktioniert, muss der Empfänger (z.B. `martin.weixelbaum@weixmail.llan`) den Public Key von `fri3dl` importieren, damit er die Signatur überprüfen und die Nachricht entschlüsseln kann. Außerdem muss der Empfänger ebenfalls einen eigenen Key besitzen, damit `fri3dl` die Nachricht mit dem Public Key des Empfängers verschlüsseln kann. Diesen Key sendet der Empfänger dann an `fri3dl`, damit er ihn in Thunderbird importieren kann.
 
-![Thunderbird key response](/images/thunderbird-pgp-key-response.png)
-
-![Thunderbird import key](/images/thunderbird-pgp-import-key.png)
-
+![Thunderbird key response](/images/thunderbird-pgp-key-response.png)![Thunderbird import key](/images/thunderbird-pgp-import-key.png)
 
 Jetzt verschickte Nachrichten haben ein Vorhängeschloss-Symbol, das anzeigt, dass sie verschlüsselt sind. Beim Öffnen der Nachricht wird die Verschlüsselung automatisch erkannt und die Nachricht entschlüsselt, sofern der Private Key korrekt importiert wurde.
 
@@ -418,7 +406,6 @@ wurde:
 
 ![EICAR Virustest - Mail entfernt](/images/fri3dl-eicar-virus-log.png)
 
-
 Für den Spamfilter gibt es ebenfalls einen Teststring (**GTUBE**):
 
 ```text
@@ -447,9 +434,7 @@ $final_spam_destiny = D_DISCARD; # Spam-Mails verwerfen
 
 Nach einem Neustart von Amavis ist der Score in den Mail-Headern sichtbar.
 
-![Spam-Score in Mail-Headern](/images/fri3dl-amavis-spam-score-1.png)
-
-![Spam-Score in Mail-Headern (2)](/images/fri3dl-amavis-spam-score-2.png)
+![Spam-Score in Mail-Headern](/images/fri3dl-amavis-spam-score-1.png)![Spam-Score in Mail-Headern (2)](/images/fri3dl-amavis-spam-score-2.png)
 
 ### Whitelist / Blacklist / Greylist
 
@@ -487,8 +472,7 @@ smtpd_sender_restrictions =
 
 Postfix neustarten – danach kann `uok` normal senden, `spammer` wird abgelehnt.
 
-![Sender Whitelist - uok erlaubt](/images/fri3dl-sender-whitelist.png)
-![Sender Blacklist - spammer abgelehnt](/images/fri3dl-sender-blacklist.png)
+![Sender Whitelist - uok erlaubt](/images/fri3dl-sender-whitelist.png)![Sender Blacklist - spammer abgelehnt](/images/fri3dl-sender-blacklist.png)
 
 Für **Greylisting** die Library `postgrey` installieren:
 
@@ -529,7 +513,7 @@ SPF schützt gegen **E-Mail-Spoofing**: Ein Angreifer, der vorgibt, von
 `@fri3dl.nscs.lan` zu senden, kann damit erkannt und abgewiesen werden, da sein
 Server nicht in der SPF-Liste steht.
 
-**SPF-Record für `fri3dl.nscs.lan`** – erlaubt alle MX-Server der Domain:
+**SPF-Record für** `fri3dl.nscs.lan` – erlaubt alle MX-Server der Domain:
 
 ```text
 v=spf1 mx ~all
@@ -601,6 +585,7 @@ sudo mkdir -p /etc/opendkim/keys/fri3dl.nscs.lan
 sudo opendkim-genkey -D /etc/opendkim/keys/fri3dl.nscs.lan -d fri3dl.nscs.lan -s default
 sudo chown -R opendkim:opendkim /etc/opendkim/keys/
 ```
+
 ![DKIM Key Generierung](/images/fri3dl-dkim-keygen.png)
 
 In `/etc/postfix/main.cf` eintragen:
@@ -622,6 +607,7 @@ Diesen Wert als TXT-Record `default._domainkey.fri3dl.nscs.lan` in der
 DNS-Konfiguration eintragen (Anführungszeichen entfernen, jeden String in eine
 eigene Zeile).
 ![DKIM DNS TXT-Record](/images/fri3dl-dkim-dns-record.png)
+![DKIM DNS Zone (raw)](/images/fri3dl-dkim-dns-raw.png)
 
 Beide Services neustarten:
 
@@ -636,7 +622,8 @@ passieren soll, bei denen beide Prüfungen fehlschlagen. Außerdem ermöglicht
 DMARC das Versenden von Berichten (Reports) an den Domaininhaber, sodass dieser
 sehen kann, wer E-Mails in seinem Namen versendet.
 
-**DMARC-Policy-Optionen (`p=`):**
+**DMARC-Policy-Optionen (**`p=`**):**
+
 - `none` – nur Monitoring, keine Maßnahmen
 - `quarantine` – verdächtige Mails in Spam-Ordner verschieben
 - `reject` – Mails mit fehlgeschlagener Prüfung ablehnen
@@ -672,6 +659,17 @@ Mail-Header inspiziert werden. Eine korrekt signierte Mail enthält einen
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=fri3dl.nscs.lan;
     s=default; t=...; bh=...; h=From:To:Subject:...; b=...
 ```
+
+#### MX-Record im DNS prüfen
+
+Von einem anderen Rechner im Netzwerk (z.B. von `prima.nscs.lan`) kann geprüft
+werden, ob der MX-Record korrekt aufgelöst wird:
+
+```bash
+dig fri3dl.nscs.lan MX
+```
+
+![MX Record Lookup](/images/fri3dl-mx-dig.png)
 
 #### SPF-Eintrag im DNS prüfen
 
