@@ -1,9 +1,9 @@
 ---
 title: "E-Mail"
 protocolAbgabedatum: "32.02.2026"
-protocolAufgabenNr: 07
+protocolAufgabenNr: 03
 protocolKlasse: "5AHIF"
-protocolName: "Benjamin Friedl"
+protocolName: "Christian Patzl & Benjamin Friedl"
 protocolGruppe: "1"
 protocolAbgabetermin: "32.02.2026"
 protocolDescription: "NSCS Praxis: E-Mail-Protokolle & Serverkonfiguration - Einrichtung eines Mailservers mit Postfix und Dovecot, DNS-Konfiguration, PGP-Setup, SPAM- und Virenschutz"
