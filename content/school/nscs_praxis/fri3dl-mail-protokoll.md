@@ -1,4 +1,13 @@
-# NSCS Email Configuration Practice - fri3dl.nscs.lan
+---
+title: "E-Mail"
+protocolAbgabedatum: "32.02.2026"
+protocolAufgabenNr: 07
+protocolKlasse: "5AHIF"
+protocolName: "Benjamin Friedl"
+protocolGruppe: "1"
+protocolAbgabetermin: "32.02.2026"
+protocolDescription: "NSCS Praxis: E-Mail-Protokolle & Serverkonfiguration - Einrichtung eines Mailservers mit Postfix und Dovecot, DNS-Konfiguration, PGP-Setup, SPAM- und Virenschutz"
+---
 
 ## Theorie E-Mail-Protokolle
 
@@ -73,7 +82,7 @@ gespeichert (Mbox). Zugriff auf die Emails erfolgt mit dem Befehl `mail`, der
 **Maildir**-Format (in dieser Übung verwendet), wo E-Mails als einzelne Dateien
 in `~/Maildir` gespeichert werden.
 
-## Postfix und Dovecot Configuration für fri3dl.nscs.lan
+## Postfix und Dovecot Confskiguration für fri3dl.nscs.lan
 
 ### DNS-Konfiguration
 
