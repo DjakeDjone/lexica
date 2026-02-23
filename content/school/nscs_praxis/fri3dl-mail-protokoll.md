@@ -203,6 +203,8 @@ su - fri3dl
 gpg --full-generate-key
 ```
 
+![alt text](/images/fri3dl-mail-gpg.png)
+
 Export der Keys:
 
 ```bash
