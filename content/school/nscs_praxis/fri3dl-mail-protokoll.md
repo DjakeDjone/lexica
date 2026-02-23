@@ -1,8 +1,8 @@
 ---
 title: E-Mail
 generateTableOfContents: false
-protocolAbgabedatum: 32.02.2026
-protocolAbgabetermin: 32.02.2026
+protocolAbgabedatum: 23.02.2026
+protocolAbgabetermin: 23.02.2026
 protocolAufgabenNr: 3
 protocolDescription: "NSCS Praxis: E-Mail-Protokolle & Serverkonfiguration - Einrichtung eines Mailservers mit Postfix und Dovecot, DNS-Konfiguration, PGP-Setup, SPAM- und Virenschutz"
 protocolGruppe: "1"
@@ -12,6 +12,8 @@ tags: []
 ---
 
 ## Theorie E-Mail-Protokolle
+
+> Note: In diesem Protokoll wurden zwei Server konfiguriert: `mail.prima.nscs.lan` + `mail.fri3dl.nscs.lan`.`
 
 **SMTP (Simple Mail Transfer Protocol)** Zwischen Mail-Clients und Servern und
 zwischen zwei Servern, normalerweise auf Port 25.
