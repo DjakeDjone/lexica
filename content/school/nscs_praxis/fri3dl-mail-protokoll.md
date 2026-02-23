@@ -255,11 +255,10 @@ Security Exception).
 
 Um PGP im Client nutzen zu können, müssen die Schlüssel vom Server auf den
 lokalen Rechner kopiert werden. Da wir das Passwort für den User `fri3dl` evtl.
-nicht haben (oder SSH-Login deaktiviert ist), kopieren wir die Keys zuerst zum
+nicht haben (oder ich die vergessen habe), kopieren wir die Keys zuerst zum
 User `schueler`.
 
-1. **Keys am Server vorbereiten:** Logge dich als `schueler` am Server ein und
-   kopiere die Keys:
+1. **Keys am Server vorbereiten:**
 
    ```bash
    ssh schueler@10.139.0.125
@@ -268,8 +267,7 @@ User `schueler`.
    exit
    ```
 
-2. **Keys herunterladen (SCP):** Führe diesen Befehl **auf deinem lokalen
-   Client** aus:
+2. **Keys herunterladen (SCP):**
 
    ```bash
    scp schueler@10.139.0.125:~/public.key .
@@ -277,14 +275,12 @@ User `schueler`.
    ```
 
 3. **Import in Thunderbird:**
-   - Gehe zu **Konten-Einstellungen** -> **End-to-End Encryption**
-     (End-zu-Ende-Verschlüsselung).
-   - Klicke auf **Add Key...** (Schlüssel hinzufügen).
-   - Wähle **Import an existing OpenPGP Key** (Vorhandenen OpenPGP-Schlüssel
-     importieren).
-   - Wähle die Datei `private.key` aus.
+   - **Konten-Einstellungen** -> **End-to-End Encryption**
+   - **Add Key...**
+   - **Import an existing OpenPGP Key**
+   - die Datei `private.key`
    - _Hinweis:_ Der Public Key ist im Private Key enthalten bzw. wird
-     automatisch mit importiert. Du benötigst vor allem den **Private Key**, um
+     automatisch mit importiert. Es wird vor allem den **Private Key** benötigt, um
      Nachrichten als "fri3dl" signieren und entschlüsseln zu können.
 
 Nach dem Import können E-Mails signiert und verschlüsselt gesendet werden.
@@ -292,3 +288,14 @@ Nach dem Import können E-Mails signiert und verschlüsselt gesendet werden.
 ![Thunderbird PGP Test](/images/fri3dl-thunderbird-pgp.png)
 
 ![Decrypted Email in Thunderbird](/images/thunderbird-pgp-decrypted.png)
+
+Damit die Verschlüsselung auch funktioniert, muss der Empfänger (z.B. `martin.weixelbaum@weixmail.llan`) den Public Key von `fri3dl` importieren, damit er die Signatur überprüfen und die Nachricht entschlüsseln kann. Außerdem muss der Empfänger ebenfalls einen eigenen Key besitzen, damit `fri3dl` die Nachricht mit dem Public Key des Empfängers verschlüsseln kann. Diesen Key sendet der Empfänger dann an `fri3dl`, damit er ihn in Thunderbird importieren kann.
+
+![Thunderbird key response](/images/thunderbird-pgp-key-response.png)
+
+![Thunderbird import key](/images/thunderbird-pgp-import-key.png)
+
+
+Jetzt verschickte Nachrichten haben ein Vorhängeschloss-Symbol, das anzeigt, dass sie verschlüsselt sind. Beim Öffnen der Nachricht wird die Verschlüsselung automatisch erkannt und die Nachricht entschlüsselt, sofern der Private Key korrekt importiert wurde.
+
+![Thunderbird encrypted email](/images/thunderbird-pgp-encrypted-message.png)
