@@ -659,12 +659,6 @@ zum lokalen Private Key passt:
 ```bash
 sudo opendkim-testkey -d fri3dl.nscs.lan -s default -vvv
 ```
-b
-Eine erfolgreiche Ausgabe endet mit:
-
-```text
-opendkim-testkey: key OK
-```
 
 ![DKIM Key Test](/images/fri3dl-dkim-testkey.png)
 
@@ -683,12 +677,6 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=fri3dl.nscs.lan;
 
 ```bash
 dig TXT fri3dl.nscs.lan
-```
-
-Erwartete Ausgabe enthält den SPF-Record:
-
-```text
-fri3dl.nscs.lan. 300 IN TXT "v=spf1 mx ~all"
 ```
 
 ![SPF DNS Lookup](/images/fri3dl-spf-dig.png)
