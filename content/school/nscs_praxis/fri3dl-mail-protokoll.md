@@ -299,3 +299,314 @@ Damit die Verschlüsselung auch funktioniert, muss der Empfänger (z.B. `martin.
 Jetzt verschickte Nachrichten haben ein Vorhängeschloss-Symbol, das anzeigt, dass sie verschlüsselt sind. Beim Öffnen der Nachricht wird die Verschlüsselung automatisch erkannt und die Nachricht entschlüsselt, sofern der Private Key korrekt importiert wurde.
 
 ![Thunderbird encrypted email](/images/thunderbird-pgp-encrypted-message.png)
+
+## SPAM- und Virenfilter
+
+```bash
+sudo apt install amavisd-new clamav-daemon spamassassin razor pyzor
+```
+
+das installiert folgende Pakete:
+
+- **Spamassassin** bietet Spamfilterung
+- **ClamAV** ist ein für Linux und besonders Mailserver sehr beliebter Virenscanner
+- **Amavis** verbindet Mailserver mit Virenscannern und Spamfiltern
+- **Razor** und **pyzor** bieten Zugriff auf Online-Spamdatenbanken
+
+ClamAV benötigt normalerweise keine weiteren Anpassungen. Damit er mit Amavis
+integriert wird, muss der Benutzer `clamav` zur `amavis`-Gruppe hinzugefügt
+werden:
+
+```bash
+sudo adduser clamav amavis
+```
+
+![ClamAV added to amavis group](/images/fri3dl-clamav-amavis-group.png)
+
+### Amavis aktivieren
+
+Um Spam- und Virenschutz zu aktivieren, müssen in
+`/etc/amavis/conf.d/15-content_filter_mode` die folgenden vier Zeilen
+einkommentiert werden:
+
+```text
+@bypass_virus_checks_maps = (
+   \%bypass_virus_checks, \@bypass_virus_checks_acl, \$bypass_virus_checks_re);
+
+@bypass_spam_checks_maps = (
+   \%bypass_spam_checks, \@bypass_spam_checks_acl, \$bypass_spam_checks_re);
+```
+
+Danach Amavis neustarten:
+
+```bash
+sudo systemctl restart amavis
+```
+
+In `/etc/postfix/main.cf` folgenden Eintrag hinzufügen:
+
+```text
+content_filter = smtp-amavis:[127.0.0.1]:10024
+```
+
+Und in `/etc/postfix/master.cf` nach der Zeile mit `pickup` folgende Optionen
+einfügen:
+
+```text
+  -o content_filter=
+  -o receive_override_options=no_header_body_checks
+```
+
+Und am Ende der Datei folgende Blöcke hinzufügen:
+
+```text
+smtp-amavis     unix    -       -       -       -       2       smtp
+  -o smtp_data_done_timeout=1200
+  -o smtp_send_xforward_command=yes
+  -o disable_dns_lookups=yes
+  -o max_use=20
+
+127.0.0.1:10025 inet  n       -       -       -       -       smtpd
+  -o content_filter=
+  -o local_recipient_maps=
+  -o relay_recipient_maps=
+  -o smtpd_restriction_classes=
+  -o smtpd_delay_reject=no
+  -o smtpd_client_restrictions=permit_mynetworks,reject
+  -o smtpd_helo_restrictions=
+  -o smtpd_sender_restrictions=
+  -o smtpd_recipient_restrictions=permit_mynetworks,reject
+  -o smtpd_data_restrictions=reject_unauth_pipelining
+  -o smtpd_end_of_data_restrictions=
+  -o mynetworks=127.0.0.0/8
+  -o smtpd_error_sleep_time=0
+  -o smtpd_soft_error_limit=1001
+  -o smtpd_hard_error_limit=1000
+  -o smtpd_client_connection_count_limit=0
+  -o smtpd_client_connection_rate_limit=0
+  -o receive_override_options=no_header_body_checks,no_unknown_recipient_checks
+```
+
+Anschließend Postfix neustarten:
+
+```bash
+sudo systemctl restart postfix
+```
+
+### Testen
+
+Zum Testen des Virenschutzes gibt es den **EICAR**-Teststring. Eine Datei
+`eicar.com` mit folgendem Inhalt erstellen:
+
+```text
+X5O!P%@AP[4\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*
+```
+
+Diese Datei als Anhang an sich selbst senden (auf Windows muss dafür kurzzeitig
+der Echtzeitschutz ausgeschaltet werden). Die Mail sollte **nicht** ankommen, und
+in `/var/log/mail.log` ist folgende Meldung zu sehen, dass die Mail entfernt
+wurde:
+
+![EICAR Virustest - Mail entfernt](/images/fri3dl-eicar-virus-log.png)
+
+
+Für den Spamfilter gibt es ebenfalls einen Teststring (**GTUBE**):
+
+```text
+XJS*C4JDBQADN1.NSBN3*2IDNEN*GTUBE-STANDARD-ANTI-UBE-TEST-EMAIL*C.34X
+```
+
+Wenn man versucht eine E-Mail damit zu senden, erscheint eine ähnliche Meldung
+im Log.
+
+![GTUBE Spamtest Log](/images/fri3dl-gtube-spam-log.png)
+
+### Spam-Score konfigurieren
+
+Die Einstellungen für den Spamfilter sind in
+`/etc/amavis/conf.d/50-user` gespeichert. Jeder Mail wird ein Spam-Score
+zugeordnet, hier kann das Level festgelegt werden, ab dem bestimmte Maßnahmen
+getroffen werden:
+
+```perl
+$sa_tag_level_deflt  = -999; # alle Mails mit Headern versehen
+$sa_tag2_level_deflt = 6.31; # Betreff markieren
+$sa_kill_level_deflt = 6.31; # Mail löschen/quarantäne
+
+$final_spam_destiny = D_DISCARD; # Spam-Mails verwerfen
+```
+
+Nach einem Neustart von Amavis ist der Score in den Mail-Headern sichtbar.
+
+![Spam-Score in Mail-Headern](/images/fri3dl-amavis-spam-score-1.png)
+
+![Spam-Score in Mail-Headern (2)](/images/fri3dl-amavis-spam-score-2.png)
+
+### Whitelist / Blacklist / Greylist
+
+Man kann den Absender auf einer Liste nachschlagen und darauf basierend
+entscheiden:
+
+- **Whitelist:** Mails werden explizit erlaubt und manche Checks werden
+  umgangen.
+- **Blacklist:** Lehnt Mails automatisch ab.
+- **Greylist:** Lehnt Mails nur beim ersten Mal ab; wenn die Mail ein zweites
+  Mal gesendet wird, wird sie durchgelassen (mit Spam-Checks).
+
+Für manuelle Black-/Whitelists eine Datei `/etc/postfix/sender_access` mit dem
+Format aus <https://www.postfix.org/access.5.html> erstellen, z.B.:
+
+```text
+spammer@prima.nscs.lan   REJECT
+uok@prima.nscs.lan       OK
+```
+
+Dann die Datei in eine Datenbank konvertieren:
+
+```bash
+sudo postmap /etc/postfix/sender_access
+```
+
+Und den Eintrag `check_sender_access` in `/etc/postfix/main.cf` ganz vorne
+einfügen:
+
+```text
+smtpd_sender_restrictions =
+  check_sender_access hash:/etc/postfix/sender_access,
+  reject_unknown_sender_domain
+```
+
+Postfix neustarten – danach kann `uok` normal senden, `spammer` wird abgelehnt.
+
+![Sender Whitelist - uok erlaubt](/images/fri3dl-sender-whitelist.png)
+![Sender Blacklist - spammer abgelehnt](/images/fri3dl-sender-blacklist.png)
+
+Für **Greylisting** die Library `postgrey` installieren:
+
+```bash
+sudo apt install postgrey
+```
+
+Und `/etc/postfix/main.cf` erweitern:
+
+```text
+smtpd_recipient_restrictions =
+  ...
+  check_policy_service inet:127.0.0.1:10023
+```
+
+![Postgrey Konfiguration](/images/fri3dl-postgrey-config.png)
+Die erste Mail wird abgelehnt, nach 5 Minuten wird sie durchgelassen.
+![Postgrey - Mail nach 5 Minuten durchgelassen](/images/fri3dl-postgrey-allowed.png)
+
+Außerdem gibt es öffentliche DNS-basierte Blocklists (DNSBL), z.B.:
+
+```text
+smtpd_recipient_restrictions =
+  ...
+  reject_rbl_client zen.spamhaus.org
+```
+
+## Weitere Sicherheitsmaßnahmen
+
+### SPF (Sender Policy Framework)
+
+SPF ist ein DNS-Eintrag (TXT-Record), der angibt, welche Server berechtigt sind,
+E-Mails für eine Domain zu senden. Der empfangende Mailserver prüft, ob die
+sendende IP-Adresse in diesem Eintrag vorkommt. Beispiel-Eintrag:
+
+```text
+v=spf1 mx ~all
+```
+
+### DKIM (DomainKeys Identified Mail)
+
+DKIM **signiert** (nicht verschlüsselt) E-Mails mithilfe eines DNS-Eintrags.
+Dadurch kann der Empfänger prüfen, ob die Mail wirklich vom angegebenen Server
+stammt und nicht verändert wurde.
+
+Installation:
+
+```bash
+sudo apt install opendkim opendkim-tools
+```
+
+In `/etc/opendkim.conf` konfigurieren:
+
+```text
+Domain                  fri3dl.nscs.lan
+KeyFile                 /etc/opendkim/keys/fri3dl.nscs.lan/default.private
+Selector                default
+Socket                  inet:8891@localhost
+TrustedHosts            /etc/opendkim/TrustedHosts
+KeyTable                /etc/opendkim/KeyTable
+SigningTable            refile:/etc/opendkim/SigningTable
+```
+
+Benötigte Dateien erstellen:
+
+`/etc/opendkim/TrustedHosts` – alle vertrauten Hosts:
+
+```text
+127.0.0.1
+localhost
+fri3dl.nscs.lan
+```
+
+`/etc/opendkim/KeyTable`:
+
+```text
+default._domainkey.fri3dl.nscs.lan fri3dl.nscs.lan:default:/etc/opendkim/keys/fri3dl.nscs.lan/default.private
+```
+
+`/etc/opendkim/SigningTable`:
+
+```text
+*@fri3dl.nscs.lan default._domainkey.fri3dl.nscs.lan
+```
+
+Key generieren:
+
+```bash
+sudo mkdir -p /etc/opendkim/keys/fri3dl.nscs.lan
+sudo opendkim-genkey -D /etc/opendkim/keys/fri3dl.nscs.lan -d fri3dl.nscs.lan -s default
+sudo chown -R opendkim:opendkim /etc/opendkim/keys/
+```
+![DKIM Key Generierung](/images/fri3dl-dkim-keygen.png)
+
+In `/etc/postfix/main.cf` eintragen:
+
+```text
+milter_default_action = accept
+milter_protocol = 2
+smtpd_milters = inet:localhost:8891
+non_smtpd_milters = inet:localhost:8891
+```
+
+Den öffentlichen Schlüssel für den DNS-Eintrag ausgeben:
+
+```bash
+sudo cat /etc/opendkim/keys/fri3dl.nscs.lan/default.txt
+```
+
+Diesen Wert als TXT-Record `default._domainkey.fri3dl.nscs.lan` in der
+DNS-Konfiguration eintragen (Anführungszeichen entfernen, jeden String in eine
+eigene Zeile).
+![DKIM DNS TXT-Record](/images/fri3dl-dkim-dns-record.png)
+
+Beide Services neustarten:
+
+```bash
+sudo systemctl restart opendkim postfix
+```
+
+### DMARC (Domain-based Message Authentication, Reporting & Conformance)
+
+DMARC kombiniert SPF und DKIM und legt fest, was passiert, wenn eine Prüfung
+fehlschlägt (z.B. Signatur falsch → löschen, Absender auf Blacklist → als Spam
+markieren). Konfiguration per TXT-Record `_dmarc.fri3dl.nscs.lan`:
+
+```text
+v=DMARC1; p=quarantine; rua=mailto:postmaster@fri3dl.nscs.lan
+```
+
