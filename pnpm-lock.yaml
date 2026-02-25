@@ -41,6 +41,9 @@ importers:
       mermaid:
         specifier: ^11.12.0
         version: 11.12.0
+      nuxt-llms:
+        specifier: ^0.2.0
+        version: 0.2.0(magicast@0.3.5)
       sitemap:
         specifier: ^8.0.0
         version: 8.0.0
@@ -3843,6 +3846,9 @@ packages:
 
   nuxt-icon@1.0.0-beta.7:
     resolution: {integrity: sha512-HdEn1sZGmkIX44L5rZ8YUMdIdVCpeBXycO2DdrqZmFilixcHax0XYdehc1VD6Kl9Sxg8B7sKPMelmDXVTbDwIw==}
+
+  nuxt-llms@0.2.0:
+    resolution: {integrity: sha512-GoEW00x8zaZ1wS0R0aOYptt3b54JEaRwlyVtuAiQoH51BwYdjN5/3+00/+4wi39M5cT4j5XcnGwOxJ7v4WVb9A==}
 
   nuxt-studio@1.0.0-beta.3:
     resolution: {integrity: sha512-Rcx7sfsQ0CeHY0rtqLKSgm2pRPF0mknJ9UVXyKWHkcnAFnhouAM8r6SoPLVHRdd/cmxdM9uTrNTfz6CNbk7vtQ==}
@@ -9851,6 +9857,12 @@ snapshots:
       - supports-color
       - vite
       - vue
+
+  nuxt-llms@0.2.0(magicast@0.3.5):
+    dependencies:
+      '@nuxt/kit': 4.2.2(magicast@0.3.5)
+    transitivePeerDependencies:
+      - magicast
 
   nuxt-studio@1.0.0-beta.3(db0@0.3.4(better-sqlite3@12.5.0))(ioredis@5.8.1)(magicast@0.3.5)(vue@3.5.22(typescript@5.9.3)):
     dependencies:

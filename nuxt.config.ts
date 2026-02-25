@@ -11,7 +11,6 @@ export default defineNuxtConfig({
     "@vueuse/nuxt",
     "@nuxt/icon",
     "~/modules/embeddings",
-    "nuxt-studio",
     "nuxt-component-meta",
   ],
 
@@ -19,6 +18,12 @@ export default defineNuxtConfig({
     plugins: [tailwindcss()],
   },
   ssr: true,
+
+  llms: {
+    domain: 'https://lexica.fri3dl.dev',
+    title: 'Lexica',
+    description: 'My personal notes/markdowns, mainly for school',
+  },
 
   router: {
     options: {
