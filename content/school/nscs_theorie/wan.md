@@ -63,6 +63,14 @@ beste Übertragungstechnologie, da sie eine sehr hohe Bandbreite und geringe St�
 
 ### Andere Technologien
 
-- Satelit: StarLink
-- Wireless: 5G, WiFi, Bluetooth
-- WiMAX: Wireless Metropolitan Area Network, eine Technologie, die es ermöglicht, dass Daten über größere Entfernungen hinweg drahtlos übertragen werden können. Es ist wie ein WLAN, das über eine größere Fläche hinweg funktioniert und es ermöglicht, dass Geräte in verschiedenen Gebäuden oder sogar in verschiedenen Städten miteinander kommunizieren können. Sie hatten keinen Erfolg, da sie teuer waren.
+- **Satelit**: StarLink
+- **Wireless**: 5G, WiFi, Bluetooth
+    - **WiMAX**: Worldwide Interoperability for Microwave Access, eine Technologie, die es ermöglicht, dass Daten über größere Entfernungen hinweg drahtlos übertragen werden können. Es ist wie ein WLAN, das über eine größere Fläche hinweg funktioniert und es ermöglicht, dass Geräte in verschiedenen Gebäuden oder sogar in verschiedenen Städten miteinander kommunizieren können. Sie hatten keinen Erfolg, da sie teuer waren.
+
+## ISP Connectivity Options
+
+- **Single-homed**: Eine Verbindung zu einem einzigen Internet Service Provider (ISP). Dies ist die einfachste und kostengünstigste Option, bietet jedoch keine Redundanz oder Ausfallsicherheit, da die Verbindung zum ISP unterbrochen werden kann.
+- **Dual-homed**: Verbindet sich mit zwei verschiedenen ISPs, um Redundanz und Ausfallsicherheit zu gewährleisten. Wenn eine Verbindung zum ISP ausfällt, kann die andere Verbindung weiterhin verwendet werden, um den Internetzugang aufrechtzuerhalten.
+- **Multihomed**: Verbindet sich mit mehreren ISPs, um eine noch höhere Redundanz und Ausfallsicherheit zu gewährleisten. Dies bietet die beste Möglichkeit, den Internetzugang aufrechtzuerhalten, da es mehrere Verbindungen zu verschiedenen ISPs gibt, die genutzt werden können, wenn eine Verbindung ausfällt. Es ist jedoch auch die teuerste Option, da mehrere Verbindungen zu verschiedenen ISPs erforderlich sind.
+
+> viele Anforderungen des WANs können durch die Verwendung von VPNs (Virtual Private Networks) erfüllt werden [siehe VPN](./vpn)
