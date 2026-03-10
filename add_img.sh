@@ -29,6 +29,10 @@ if command -v wl-paste &> /dev/null; then
     wl-paste > "$TARGET_DIR/$filename.png" 2>/dev/null
     if [ $? -eq 0 ]; then
         echo "Image saved to $TARGET_DIR/$filename.png"
+        # Copy markdown syntax to clipboard
+        markdown_text="![alt text](/images/$filename.png)"
+        echo -n "$markdown_text" | wl-copy
+        echo "Markdown copied to clipboard: $markdown_text"
     else
         echo "Error: Failed to paste image from clipboard (Wayland)"
         exit 1
@@ -37,6 +41,10 @@ elif command -v xclip &> /dev/null; then
     xclip -selection clipboard -t image/png -o > "$TARGET_DIR/$filename.png" 2>/dev/null
     if [ $? -eq 0 ]; then
         echo "Image saved to $TARGET_DIR/$filename.png"
+        # Copy markdown syntax to clipboard
+        markdown_text="![alt text](/images/$filename.png)"
+        echo -n "$markdown_text" | xclip -selection clipboard
+        echo "Markdown copied to clipboard: $markdown_text"
     else
         echo "Error: Failed to paste image from clipboard (X11)"
         exit 1
