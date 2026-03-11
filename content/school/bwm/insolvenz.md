@@ -200,7 +200,7 @@ Die Privatinsolvenz ist für natürliche Personen als auch für **Einzelunterneh
 
 ![Privatinsolvenz](/images/privatinsolvenz.png)
 
-#### Zahlungsplan
+### Zahlungsplan
 
 Schuldner bietet an, **einen Teil** seiner Schulden in **maximal 7 Jahren** zurückzuzahlen.
 
@@ -209,6 +209,12 @@ Merkmale:
 - **Rückzahlungsquote** berechnet sich aus dem voraussichtlichen Einkommen der nächsten 3 Jahre
 - **keine Pfändung**
 - **Mehrheit der Gläubiger** muss zustimmen
+
+### Abschöpfungsverfahren
+
+Alles **Einkommen über dem Existenzminimum** wird gepfändet. Dauer ist **5 Jahre**
+
+Abschöpfungsverfahren mithilfe eines **Tilgungsplans** dauert **nur 3 Jahre**, wenn der Antrag auf Privatinsolvenz innerhalb von **30 Tagen** nach Eröffnung des Insolvenzverfahrens gestellt wird. Wärenddessen **keine neuen Schulden** mehr
 
 ## Freiwillige Auflösung von Unternehmen
 
