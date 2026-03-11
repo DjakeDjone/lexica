@@ -193,3 +193,28 @@ Zuerst werden die Aussonderungsansprüche, dann die Absonderungsansprüche und z
 $$
 \text{Konkursquote} = \frac{\text{Restvermögen}}{\text{Insolvenzforderungen}}
 $$
+
+## Privatinsolvenz
+
+Die Privatinsolvenz ist für natürliche Personen als auch für **Einzelunternehmer**
+
+![Privatinsolvenz](/images/privatinsolvenz.png)
+
+#### Zahlungsplan
+
+Schuldner bietet an, **einen Teil** seiner Schulden in **maximal 7 Jahren** zurückzuzahlen.
+
+Merkmale:
+
+- **Rückzahlungsquote** berechnet sich aus dem voraussichtlichen Einkommen der nächsten 3 Jahre
+- **keine Pfändung**
+- **Mehrheit der Gläubiger** muss zustimmen
+
+## Freiwillige Auflösung von Unternehmen
+
+Einige Schließungsgründe sind:
+
+- **Ruhestand**
+- **Tod**
+- **persönliche Gründe**: z.B. Krankheit, Scheidung, ...
+- **Pop-up Stores**: Form eines Unternehmens, die nur für eine begrenzte Zeit existieren, z.B. für die Weihnachtszeit, ...
