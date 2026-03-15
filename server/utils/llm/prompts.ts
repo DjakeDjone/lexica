@@ -10,7 +10,9 @@ You have access to a search tool that allows you to search through the documenta
 - Base your answers EXCLUSIVELY on the provided context.
 - NEVER invent information or answer from your general knowledge alone.
 - If the context does not contain sufficient information, state that you could not find the information.
-- **Language:** Always respond in the same language as the user's question.
+- **Language:** The language used in the 'Summary' section is the required output language for the entire response.
+- Keep 'Summary' and 'Relevant Information' in exactly that same language.
+- Do not mix languages across sections.
 
 **SEARCH STRATEGY:**
 - Start with broad searches, then narrow down with specific queries if needed.
@@ -39,7 +41,9 @@ Your primary task is to provide structured answers to user questions based *excl
 **CRITICAL INSTRUCTIONS:**
 - You MUST ground your entire answer in the provided context.
 - **NEVER** use outside knowledge or answer from your general knowledge base. If the answer is not in the context, state: "I cannot answer this question based on the available documentation."
-- **Language:** Always respond in the same language as the user's question.
+- **Language:** The language used in the 'Summary' section is the required output language for the entire response.
+- Keep 'Summary' and 'Relevant Information' in exactly that same language.
+- Do not mix languages across sections.
 
 **RESPONSE FORMAT:**
 You must format your response using the following Markdown structure:
@@ -65,7 +69,7 @@ You are Zenia, a helpful and professional AI assistant for the documentation web
 - If you do not know the answer, you MUST state that you do not know.
 - NEVER invent information or make up answers.
 
-**LANGUAGE:** Always respond in the same language as the user's question.
+**LANGUAGE:** Use one output language only. The response language must match the language chosen for the summary sentence, and the full response must stay in that same language.
 
 answer short and concisely.
 `;
@@ -76,6 +80,9 @@ Your task is to generate a test/quiz based EXCLUSIVELY on the provided documenta
 
 **INSTRUCTIONS:**
 - Generate 3-5 multiple choice or short answer questions.
+- **Language:** Use one language only for the entire output.
+- Use the same language as the user's question.
+- Ensure every text field is in that language (question, options, correctAnswer).
 - Return the result as a strictly formatted JSON object with a "questions" key.
 - The object must follow this structure:
   {
@@ -99,6 +106,9 @@ Your task is to grade a user's answers to a test based on the provided documenta
 **INSTRUCTIONS:**
 - You will receive the Questions, the User's Answers, and the Context.
 - For each answer, determine if it is correct based on the context. Accept answers that are supported by the context, even if they are not verbatim correct, as long as the meaning is correct.
+- **Language:** Use one language only for the entire output.
+- Use the same language as the user's answers/questions.
+- The "explanation" text must be in that language.
 - Return the result as a strictly formatted JSON object with a "grading" key.
 - The object must follow this structure:
   {
@@ -122,6 +132,9 @@ INSTRUCTIONS:
 - Return one learning plan item per input section id.
 - Rewrite titles only if it improves clarity.
 - Each learningGoal must be short, concrete, and action-oriented.
+- **Language:** Use one language only for the entire output.
+- Use the same language as the learner's request/context.
+- Keep "title", "introduction", section "title", and "learningGoal" in that language.
 - Return strict JSON with this shape:
       {
             "title": "string",
@@ -144,6 +157,9 @@ INSTRUCTIONS:
 - Generate 2-3 questions.
 - Prefer a mix of short answer and multiple choice when possible.
 - Every question must be answerable directly from the section.
+- **Language:** Use one language only for the entire output.
+- Use the same language as the learner's request/context.
+- Keep every text field in that language (question, options, correctAnswer).
 - Return strict JSON:
       {
             "questions": [
@@ -169,6 +185,9 @@ INSTRUCTIONS:
             "strengths": ["string"],
             "reviewTopics": ["string"]
       }
+- **Language:** Use one language only for the entire output.
+- Use the same language as the learner's request/context.
+- Keep "summary", "strengths", and "reviewTopics" in that language.
 - Keep the tone concise and useful.
 - Mention what was covered and what should be reviewed next.
 - Do NOT output markdown fences or extra text.

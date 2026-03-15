@@ -70,7 +70,7 @@ const placeholder = computed(() => {
                 <select
                     v-model="selectedMode"
                     :disabled="props.isLearnMode"
-                    class="select select-sm select-bordered"
+                    class="select select-ms select-bordered rounded-full h-8 w-24"
                     title="Mode"
                 >
                     <option value="ask">Ask</option>
@@ -79,8 +79,8 @@ const placeholder = computed(() => {
                 </select>
                 <label v-if="selectedMode === 'ask'" class="label cursor-pointer gap-2">
                     <input type="checkbox" v-model="useTools"
-                        class="toggle toggle-xs toggle-primary" />
-                    <span class="label-text text-xs opacity-70">RAG</span>
+                        class="toggle toggle-ms toggle-primary" />
+                    <span class="label-text text-ms opacity-70">RAG</span>
                 </label>
             </div>
             <div class="flex gap-2">
