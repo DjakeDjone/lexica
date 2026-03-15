@@ -15,6 +15,7 @@ import type {
     TestGrading,
     TestQuestion,
 } from "./types";
+import { DEFAULT_LLM_MODEL } from "./config";
 
 const createParagraphChunks = (
     text: string,
@@ -262,7 +263,7 @@ export const generateLearnPlan = async (
 
     const groq = createGroqClient();
     const response = await groq.chat.completions.create({
-        model: "llama-3.3-70b-versatile",
+        model: DEFAULT_LLM_MODEL,
         messages: [
             { role: "system", content: systemPromptForLearnPlan },
             {
@@ -290,7 +291,7 @@ export const generateLearnSectionQuiz = async (
 ): Promise<TestQuestion[]> => {
     const groq = createGroqClient();
     const response = await groq.chat.completions.create({
-        model: "llama-3.3-70b-versatile",
+        model: DEFAULT_LLM_MODEL,
         messages: [
             { role: "system", content: systemPromptForLearnQuiz },
             {
@@ -315,7 +316,7 @@ export const gradeLearnSectionQuiz = async (
 ): Promise<TestGrading[]> => {
     const groq = createGroqClient();
     const response = await groq.chat.completions.create({
-        model: "llama-3.3-70b-versatile",
+        model: DEFAULT_LLM_MODEL,
         messages: [
             { role: "system", content: systemPromptForGrading },
             {
@@ -342,7 +343,7 @@ export const summarizeLearningSession = async (
 ): Promise<{ summary: string; strengths: string[]; reviewTopics: string[] }> => {
     const groq = createGroqClient();
     const response = await groq.chat.completions.create({
-        model: "llama-3.3-70b-versatile",
+        model: DEFAULT_LLM_MODEL,
         messages: [
             { role: "system", content: systemPromptForLearningSessionSummary },
             { role: "user", content: `Plan Title: ${planTitle}\nResults:\n${JSON.stringify(results)}` },
