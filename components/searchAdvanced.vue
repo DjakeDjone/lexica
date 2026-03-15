@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue';
-import Fuse, { type FuseResult } from 'fuse.js';
+import { ref, computed, onMounted, watch } from 'vue';
 
 
 
 const searchVlue = ref('');
+const debouncedSearchValue = ref('');
 
 const value = defineModel();
 const selected = ref(0);
@@ -19,7 +19,7 @@ const possibleBangs = {
 }
 
 const query = computed(() => {
-    const value = searchVlue.value ?? '';
+    const value = debouncedSearchValue.value ?? '';
     let valueWithoutBangs = value;
     const bangs: string[] = [];
 
@@ -35,8 +35,6 @@ const query = computed(() => {
         }
     }
 
-    console.log('valueWithoutBangs:', valueWithoutBangs, 'bangs:', bangs);
-
     return {
         q: valueWithoutBangs,
         rebuildCache: bangs.includes('!rebuild')
@@ -47,6 +45,18 @@ const { data: results, status } = await useFetch('/api/search', {
     method: 'GET',
     query,
 });
+
+let searchDebounceTimeout: ReturnType<typeof setTimeout> | null = null;
+
+watch(searchVlue, (newValue) => {
+    if (searchDebounceTimeout) {
+        clearTimeout(searchDebounceTimeout);
+    }
+
+    searchDebounceTimeout = setTimeout(() => {
+        debouncedSearchValue.value = newValue;
+    }, 250);
+}, { immediate: true });
 
 
 const close = () => {
@@ -92,14 +102,11 @@ const handleKeyDown = (e: KeyboardEvent) => {
 
 onMounted(() => {
     searchInputRef.value?.focus();
-    if (searchInputRef.value) {
-        searchInputRef.value.addEventListener('keydown', handleKeyDown);
-    }
 });
 
 onUnmounted(() => {
-    if (searchInputRef.value) {
-        searchInputRef.value.removeEventListener('keydown', handleKeyDown);
+    if (searchDebounceTimeout) {
+        clearTimeout(searchDebounceTimeout);
     }
 });
 
@@ -112,7 +119,7 @@ onUnmounted(() => {
         <div class="spawn-animation z-[500] p-2 rounded-[.625rem] w-full max-w-2xl mt-[15vh] mb-16">
             <div class="w-full flex items-start gap-2">
                 <input type="text" class="input w-full" v-model="searchVlue" placeholder="Type to search..."
-                    ref="searchInputRef" />
+                    ref="searchInputRef" @keydown="handleKeyDown" />
                 <button class="btn btn-square" @click="resultExpaned = !resultExpaned"
                     :title="resultExpaned ? 'Collapse descriptions' : 'Expand descriptions'">
                     <Icon v-if="resultExpaned" name="line-md:menu-fold-left" size="24" />

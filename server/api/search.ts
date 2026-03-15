@@ -1,4 +1,4 @@
-import { processSearchResults, buildFolders, type SearchResult, type SearchResultFolder, type SearchResultsResponse, Section } from '../utils/search';
+import { processSearchResults, clearSearchSectionCache, buildFolders, type SearchResult, type SearchResultFolder, type SearchResultsResponse, Section } from '../utils/search';
 
 const SECTIONS: Section[] = [];
 
@@ -10,6 +10,7 @@ const getSectionsCached = (event: any, rebuild: boolean = false) => {
   console.time('Rebuild search index time');
   console.log("Current length of SECTIONS:", SECTIONS.length);
   SECTIONS.length = 0;
+  clearSearchSectionCache();
   return queryCollectionSearchSections(event, 'docs').then(sections => {
     SECTIONS.push(...sections);
     return SECTIONS;
@@ -17,12 +18,12 @@ const getSectionsCached = (event: any, rebuild: boolean = false) => {
 };
 
 export default defineCachedEventHandler(async (event): Promise<SearchResultsResponse> => {
-  const query = getQuery(event).q as string;
+  const query = ((getQuery(event).q as string) || '').trim();
   const page = parseInt((getQuery(event).page as string) || '1', 10);
   const pageSize = parseInt((getQuery(event).pageSize as string) || '10', 10);
   const rebuildCache = getQuery(event).rebuildCache === 'true';
 
-  if (!query) {
+  if (!query || query.length < 2) {
     return { results: [], folders: [], total: 0, page, pageSize };
   }
   const sections = await getSectionsCached(event, rebuildCache);

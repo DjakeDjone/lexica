@@ -1,5 +1,3 @@
-import Fuse from "fuse.js";
-
 export type SearchResult = {
     id: string;
     title: string;
@@ -79,88 +77,90 @@ export const extendSearchResults = (results: Section[]): SearchResult[] => {
     return extendedResults;
 }
 
-// Cache for Fuse instances to avoid recreating them
-const fuseCache = new Map<string, Fuse<any>>();
+type SectionSearchCache = {
+    signature: string;
+    normalizedTitles: string[];
+    normalizedTitleText: string;
+    normalizedContent: string;
+    titleTokens: Set<string>;
+    contentTokens: Set<string>;
+};
 
-const getFuseInstance = (section: SearchResult): Fuse<any> => {
-    const cacheKey = section.id;
-    if (!fuseCache.has(cacheKey)) {
-        const fuse = new Fuse([section], {
-            keys: ['titles', 'content', 'title', 'id'],
-            includeScore: true,
-            threshold: 0.4,
-            distance: 100
-        });
-        fuseCache.set(cacheKey, fuse);
+const sectionCache = new Map<string, SectionSearchCache>();
+
+const normalizeText = (text: string): string => text.toLowerCase();
+
+const tokenize = (text: string): string[] => {
+    const matches = text.match(/[\p{L}\p{N}_-]+/gu);
+    if (!matches) return [];
+    return matches.map(t => t.toLowerCase());
+};
+
+const getSectionCache = (section: SearchResult): SectionSearchCache => {
+    const sectionId = section.id || `${section.title}-${section.level}`;
+    const signature = `${section.title}|${section.titles.join('|')}|${section.content?.length || 0}`;
+    const existing = sectionCache.get(sectionId);
+
+    if (existing && existing.signature === signature) {
+        return existing;
     }
-    return fuseCache.get(cacheKey)!;
+
+    const normalizedTitles = section.titles.map(normalizeText);
+    const normalizedTitleText = normalizedTitles.join(' ');
+    const normalizedContent = normalizeText(section.content || '');
+
+    const cacheEntry: SectionSearchCache = {
+        signature,
+        normalizedTitles,
+        normalizedTitleText,
+        normalizedContent,
+        titleTokens: new Set(tokenize(normalizedTitleText)),
+        contentTokens: new Set(tokenize(normalizedContent))
+    };
+
+    sectionCache.set(sectionId, cacheEntry);
+    return cacheEntry;
+};
+
+export const clearSearchSectionCache = (): void => {
+    sectionCache.clear();
 };
 
 export const scoreSection = (section: SearchResult, query: string): number => {
-    const words = query.split(/\s+/).filter(w => w.length > 0);
+    const normalizedQuery = normalizeText(query.trim());
+    if (!normalizedQuery) return 0;
+
+    const words = tokenize(normalizedQuery);
+    if (words.length === 0) return 0;
+
+    const sectionData = getSectionCache(section);
     let score = 0;
     let hasAnyMatch = false;
 
     words.forEach(word => {
-        const wordLower = word.toLowerCase();
         let wordScore = 0;
         let foundMatch = false;
 
-        // Check for exact matches in titles (highest priority)
-        const exactTitleMatch = section.titles.some((title: string) =>
-            title.toLowerCase().split(/\s+/).some(titleWord => titleWord === wordLower)
-        );
-        if (exactTitleMatch) {
+        // Fast exact token match in titles
+        if (sectionData.titleTokens.has(word)) {
             wordScore += 20; // High boost for exact word match in title
             foundMatch = true;
         } else {
-            // Check for word boundary matches in titles (e.g., "median" matches "Median" but not "Medien")
-            const wordBoundaryTitleMatch = section.titles.some((title: string) => {
-                const regex = new RegExp(`\\b${word}\\b`, 'i');
-                return regex.test(title);
-            });
-            if (wordBoundaryTitleMatch) {
-                wordScore += 15; // Good boost for word boundary match in title
+            // Substring match in titles
+            const partialTitleMatch = sectionData.normalizedTitles.some(title => title.includes(word));
+            if (partialTitleMatch) {
+                wordScore += 8;
                 foundMatch = true;
-            } else {
-                // Check for partial matches in titles (lowest priority for titles)
-                const partialTitleMatch = section.titles.some((title: string) =>
-                    title.toLowerCase().includes(wordLower)
-                );
-                if (partialTitleMatch) {
-                    wordScore += 5; // Small boost for partial match in title
-                    foundMatch = true;
-                }
             }
         }
 
-        // Check for exact matches in content
-        if (section.content) {
-            const contentLower = section.content.toLowerCase();
-            const exactContentMatch = contentLower.split(/\s+/).some(contentWord => 
-                contentWord.replace(/[.,!?;:()]/g, '') === wordLower
-            );
-            if (exactContentMatch) {
+        // Content fallback after title checks
+        if (!foundMatch && sectionData.normalizedContent) {
+            if (sectionData.contentTokens.has(word)) {
                 wordScore += 10; // Good boost for exact word match in content
                 foundMatch = true;
-            } else {
-                // Check for word boundary matches in content
-                const regex = new RegExp(`\\b${word}\\b`, 'i');
-                if (regex.test(section.content)) {
-                    wordScore += 8; // Decent boost for word boundary match in content
-                    foundMatch = true;
-                }
-            }
-        }
-
-        // Use fuzzy matching as a fallback for both titles and content
-        if (!foundMatch) {
-            const fuse = getFuseInstance(section);
-            const result = fuse.search(word);
-            if (result.length > 0 && result[0].score !== undefined) {
-                // Score based on how good the fuzzy match is (0 = perfect, 1 = worst)
-                const fuzzyScore = Math.max(0, 4 - (result[0].score * 4));
-                wordScore += fuzzyScore; // Max 4 points for fuzzy matches
+            } else if (sectionData.normalizedContent.includes(word)) {
+                wordScore += 4;
                 foundMatch = true;
             }
         }
@@ -170,12 +170,20 @@ export const scoreSection = (section: SearchResult, query: string): number => {
         }
 
         score += wordScore;
-
-        // reward if the id has no 'id'
-        if (section.id && !section.id.includes(' ')) {
-            score += 2;
-        }
     });
+
+    if (sectionData.normalizedTitleText.includes(normalizedQuery)) {
+        score += 10;
+        hasAnyMatch = true;
+    } else if (sectionData.normalizedContent.includes(normalizedQuery)) {
+        score += 4;
+        hasAnyMatch = true;
+    }
+
+    // reward stable path-like IDs
+    if (section.id && !section.id.includes(' ')) {
+        score += 2;
+    }
 
     // Only filter out if no matches found at all
     if (!hasAnyMatch || score < 1) {
