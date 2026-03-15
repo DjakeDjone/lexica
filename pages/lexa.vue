@@ -4,7 +4,7 @@ import type { SearchResult } from '~/server/utils/search';
 const route = useRoute();
 const context = ref<SearchResult[]>([]);
 
-onMounted(() => {
+const syncContextFromRoute = () => {
     if (route.query.contextUrl && route.query.contextTitle) {
         context.value = [{
             id: route.query.contextUrl as string,
@@ -16,8 +16,15 @@ onMounted(() => {
             description: '',
             score: 1,
         }];
+        return;
     }
-});
+
+    context.value = [];
+};
+
+watch(() => [route.query.contextUrl, route.query.contextTitle], () => {
+    syncContextFromRoute();
+}, { immediate: true });
 </script>
 
 <template>

@@ -1,4 +1,5 @@
 import { useStorage } from '@vueuse/core';
+import type { SearchResult } from '~/server/utils/search';
 
 export type ChatMessage = {
     role: 'user' | 'system' | 'assistant';
@@ -155,7 +156,9 @@ export const useAiHandler = () => {
             });
 
             if (!response.ok) {
-                 throw new Error(`Error: ${response.status} ${response.statusText}`);
+                 const payload = await response.json().catch(() => null);
+                 const message = payload?.statusMessage || payload?.message || `Error: ${response.status} ${response.statusText}`;
+                 throw new Error(message);
             }
 
             if (action === 'generate_test') {

@@ -5,6 +5,21 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   preset: "vercel",
 
+  icon: {
+    fallbackToApi: false,
+    serverBundle: {
+      collections: [
+        "emojione-monotone",
+        "hugeicons",
+        "icon-park-twotone",
+        "line-md",
+        "mdi",
+        "system-uicons",
+        "vaadin",
+      ],
+    },
+  },
+
   modules: [
     "@nuxt/content",
     "@formkit/auto-animate",

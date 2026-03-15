@@ -14,17 +14,22 @@ const filePath = ref<string>();
                         <TableOfContentsSidebar :page="page" />
                     </div> -->
                     <div class="overflow-x-scroll">
-                        <div class="flex justify-between items-center mb-4">
+                        <div class="flex flex-col gap-3 mb-4 md:flex-row md:justify-between md:items-center">
                             <h1 v-if="page && page.title" class="font-bold">
                                 {{ page?.title }}
                             </h1>
-                            <button class="btn btn-sm btn-accent">
-                                <NuxtLink v-if="page" class="no-underline"
+                            <div class="flex gap-2">
+                                <NuxtLink v-if="page" class="btn btn-sm btn-accent no-underline"
                                     :to="{ path: '/lexa', query: { test: 'true', contextUrl: filePath, contextTitle: page.title } }">
                                     <Icon name="mdi:lightbulb" />
                                     Test
                                 </NuxtLink>
-                            </button>
+                                <NuxtLink v-if="page" class="btn btn-sm btn-primary no-underline"
+                                    :to="{ path: '/lexa', query: { learn: 'true', contextUrl: filePath, contextTitle: page.title } }">
+                                    <Icon name="mdi:brain" />
+                                    Lern Mode Pro
+                                </NuxtLink>
+                            </div>
                         </div>
                         <TableOfContents :page="page" v-if="page?.generateTableOfContents" />
                         <ImagePopupContainer>
