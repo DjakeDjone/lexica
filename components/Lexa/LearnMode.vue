@@ -84,7 +84,7 @@ const {
 <template>
     <!-- Outer wrapper: main card on the left, plan panel on the right -->
     <div class="flex gap-5 items-start justify-center" :class="{'max-w-2xl mx-auto': !plan}">
-        <LearnPlanSidebar v-if="plan" :plan="plan" :currentIndex="currentIndex"
+        <LexaLearnPlanSidebar v-if="plan" :plan="plan" :currentIndex="currentIndex"
             :progressBySection="progressBySection" />
 
         <section
