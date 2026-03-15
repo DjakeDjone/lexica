@@ -216,6 +216,15 @@ export const useLearnMode = (context: Ref<any[]>) => {
         error.value = null;
     };
 
+    const selectSection = (index: number) => {
+        if (!plan.value) return;
+        if (index < 0 || index >= plan.value.sections.length) return;
+
+        currentIndex.value = index;
+        stage.value = 'study';
+        error.value = null;
+    };
+
     const reviewSection = () => {
         stage.value = 'study';
     };
@@ -247,6 +256,7 @@ export const useLearnMode = (context: Ref<any[]>) => {
         finishLearning,
         submitQuiz,
         nextSection,
+        selectSection,
         reviewSection,
         retryQuiz,
     };

@@ -76,6 +76,7 @@ const {
     openQuiz,
     submitQuiz,
     nextSection,
+    selectSection,
     reviewSection,
     retryQuiz,
 } = useLearnMode(contextRef);
@@ -84,8 +85,8 @@ const {
 <template>
     <!-- Outer wrapper: main card on the left, plan panel on the right -->
     <div class="flex gap-5 items-start justify-center" :class="{'max-w-2xl mx-auto': !plan}">
-        <LexaLearnPlanSidebar v-if="plan" :plan="plan" :currentIndex="currentIndex"
-            :progressBySection="progressBySection" />
+        <LexaLearnModePlanSidebar v-if="plan" :plan="plan" :currentIndex="currentIndex"
+            :progressBySection="progressBySection" @select-section="selectSection" />
 
         <section
             ref="sectionRef"

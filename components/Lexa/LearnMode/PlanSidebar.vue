@@ -6,6 +6,10 @@ defineProps<{
     currentIndex: number;
     progressBySection: Record<string, SectionProgress>;
 }>();
+
+defineEmits<{
+    'select-section': [index: number];
+}>();
 </script>
 
 <template>
@@ -16,7 +20,9 @@ defineProps<{
                 class="rounded-2xl border px-3 py-3 text-sm transition-colors" :class="[
                     index === currentIndex ? 'border-primary bg-primary/5' : 'border-base-300',
                     progressBySection[section.id]?.passed ? 'ring-1 ring-success/30' : ''
-                ]">
+                ]" role="button" tabindex="0" @click="$emit('select-section', index)"
+                @keydown.enter.prevent="$emit('select-section', index)"
+                @keydown.space.prevent="$emit('select-section', index)">
                 <div class="flex items-start justify-between gap-3 group">
                     <div>
                         <div class="font-semibold">{{ index + 1 }}. {{ section.title }}</div>
