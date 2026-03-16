@@ -6,7 +6,8 @@ import type { SearchResult } from '~/server/utils/search';
 const prompt = ref('');
 const md = new MarkdownIt();
 const sidePanelOpen = ref(false);
-const { history, status, askAi, clearHistory } = useAiHandler();
+const { history, status, askAi, clearHistory, chats, loadChat, deleteChat, currentChatId } = useAiHandler();
+const showHistory = ref(false);
 
 const selectedContext = defineModel<SearchResult[]>("context");
 const useTools = ref(true); // Enable tool-based search by default
@@ -71,8 +72,19 @@ const handleSuggestionSelect = (selection: { text: string, mode: 'test' | 'rag',
                 <!-- Clear Chat -->
                 <Icon name="mdi:plus" />
             </button>
+            <button v-else class="btn" @click="showHistory = !showHistory">
+                <!-- history -->
+                <Icon name="mdi:history" />
+            </button>
         </div>
-        <LexaSuggestions v-if="!history.length && !isLearnMode" @update:select="handleSuggestionSelect" />
+        <LexaHistory
+            v-if="showHistory && !history.length && !isLearnMode"
+            :chats="chats"
+            :current-chat-id="currentChatId"
+            @select="(id) => { loadChat(id); showHistory = false; }"
+            @delete="deleteChat"
+        />
+        <LexaSuggestions v-else-if="!history.length && !isLearnMode" @update:select="handleSuggestionSelect" />
         <div class="mb-32">
             <div v-if="status.error" class="bg-red-100 text-red-700 p-2 mb-4 rounded">
                 {{ status.error }}
