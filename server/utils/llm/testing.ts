@@ -17,7 +17,7 @@ export const generateTest = async (contextLinks: string[], event: H3Event) => {
     const context = sectionsToContext(relevantSections);
     const groq = createGroqClient();
     const response = await groq.chat.completions.create({
-        model: "llama-3.3-70b-versatile",
+        model: DEFAULT_LLM_MODEL,
         messages: [
             { role: "system", content: systemPromptForTestGeneration },
             { role: "user", content: `Context:\n${context}\n\nGenerate a test.` },

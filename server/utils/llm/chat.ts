@@ -16,7 +16,7 @@ const contextualizeQuery = async (
     const relevantHistory = history.slice(-6);
 
     const response = await groq.chat.completions.create({
-        model: "llama-3.3-70b-versatile",
+        model: DEFAULT_LLM_MODEL,
         messages: [
             {
                 role: "system",
