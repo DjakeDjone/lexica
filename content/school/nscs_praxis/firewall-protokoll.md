@@ -15,7 +15,9 @@ tags: []
 
 ### Beschreiben Sie die Funktion von Paketfiltern (allgemein) und iptables (speziell)
 
-TODO
+Ein Paketfilter kontrolliert den Netzwerkverkehr anhand von Regeln auf Paketebene (z. B. Quelle, Ziel, Protokoll und Port). Je nach definierter Richtlinie werden Pakete erlaubt, verworfen oder protokolliert. Dadurch kann unerwünschter Verkehr blockiert und der Zugriff auf Dienste gezielt eingeschränkt werden.
+
+`iptables` ist unter Linux ein Werkzeug zur Konfiguration der Netfilter-Firewall im Kernel. Regeln werden in Ketten (z. B. `INPUT`, `OUTPUT`, `FORWARD`) organisiert und der Reihe nach ausgewertet. Typische Aktionen sind `ACCEPT`, `DROP`, `REJECT` oder `LOG`. Damit lassen sich Host-Firewalls aufbauen, um nur bestimmte Clients, Protokolle oder Paketgrößen zuzulassen.
 
 ### Installieren Sie webmin. (Konfigurieren Sie die Firewall, dass nur ein PC auf webmin zugreifen kann)
 
@@ -36,25 +38,25 @@ sudo apt-get install webmin --install-recommends
 
 ![alt text](/images/firewall_webmin_install.png)
 
-url: <https://10.139.0.125:10000>
+Webmin ist danach erreichbar unter: <https://10.139.0.125:10000>
 
-I fixed that by changing the webmin password:
+Das Anmeldeproblem wurde durch das Aendern des Webmin-Passworts behoben:
 
 ![alt text](/images/firewall_webmin_password_change.png)
 
 ### Erlauben Sie Pings nur von einem Client
 
 - Action to take: Allow
-- From: eigene IP-Adresse, auslesbar mit `ip addr show`, bei mir `172.17.0.105.51052`
+- From: eigene IP-Adresse, auslesbar mit `ip addr show`, bei mir `172.17.0.105`
 - Protocol: ICMP
 
 ![alt text](/images/firewall_ping_allow_rule.png)
 ![alt text](/images/firewall_ping_allow_verify.png)
 
-----> jetzt alle anderen Pings blockieren:
+Danach alle anderen Pings blockieren:
 
 ![alt text](/images/firewall_ping_block_rule.png)
-WICHTIG: apply configuration
+Wichtig: `Apply Configuration` ausfuehren.
 
 ![alt text](/images/firewall_apply_config.png)
 
@@ -64,13 +66,26 @@ Jetzt werden externe Pings geblockt, aber die eigenen Pings funktionieren weiter
 
 ### Lassen Sie sich die aktuelle Konfiguration anzeigen
 
-![alt text](/images/firewall_current_config.png)
+Anzeige in der Shell:
 
+```bash
+sudo iptables -L -n -v
+```
+
+![alt text](/images/firewall_current_config.png)
 ### Loggen Sie diese Pakete (Prefix Possible DoS Attack!) und verwerfen Sie sie danach:
 
 #### mehr als 10 Pings pro Minute
 
-geht nicht, da die Option `--limit` im Webmin nur mit below verfügbar ist, aber nicht mit above.
+In Webmin war die gewünschte Regel in dieser Form nicht direkt umsetzbar. Daher wurde sie per `iptables` in der Shell ergänzt:
+
+```bash
+sudo iptables -A INPUT -p icmp --icmp-type echo-request -m limit --limit 10/minute --limit-burst 10 -j ACCEPT
+sudo iptables -A INPUT -p icmp --icmp-type echo-request -j LOG --log-prefix "Possible DoS Attack! "
+sudo iptables -A INPUT -p icmp --icmp-type echo-request -j DROP
+```
+
+Ergebnis: Bis zu 10 Echo-Requests pro Minute werden akzeptiert, darüber hinaus werden sie mit Prefix `Possible DoS Attack!` geloggt und verworfen.
 
 
 #### Pings mit mehr als 100 Byte Größe
@@ -78,21 +93,31 @@ geht nicht, da die Option `--limit` im Webmin nur mit below verfügbar ist, aber
 - Create Rule
 - Action to take: Log and Drop
 - From: Any
-- extra options: Rate limit: above 100Byte (`-m length --length 100:65535`)
+- extra options: Packet length größer als 100 Byte (`-m length --length 101:65535`)
 ![alt text](/images/firewall_dos_log_drop_rule.png)
 ![alt text](/images/firewall_dos_rule_config.png)
 
-jetzt werden die Pings mit mehr als 100 Byte Größe geloggt und danach verworfen:
+Jetzt werden Pings mit mehr als 100 Byte geloggt und danach verworfen.
 
-testen:
+Test:
 ```bash
 ping -s 101 10.139.0.125
 ```
 
 ![alt text](/images/firewall_dos_test_result.png)
 
-show relevant logs:
+Relevante Logs anzeigen:
 
 ```bash
 sudo tail -f /var/log/syslog | grep "Possible DoS Attack"
 ```
+
+### Ergebnis
+
+Die Firewall-Regeln wurden erfolgreich umgesetzt und getestet:
+
+- Zugriff auf Webmin ist auf den gewünschten Client eingeschränkt.
+- ICMP ist nur für den erlaubten Client möglich.
+- Auffällige ICMP-Pakete (zu hohe Rate bzw. zu große Paketgröße) werden geloggt und verworfen.
+
+Damit wurde die Angriffsfläche reduziert und eine bessere Nachvollziehbarkeit durch Logging erreicht.
