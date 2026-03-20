@@ -132,7 +132,7 @@ es wurde mit Schleifen gearbeitet, um die daten einzufügen. Das sql ist [am end
 
 - `Versandfirma` wurde als eigene Tabelle normalisiert, statt nur einen Freitext in der Bestellung zu speichern. Dadurch bleiben die geforderten drei Versandfirmen konsistent referenzierbar.
 - Die im Attributblatt genannte Tabelle `Firmen` wurde nicht separat umgesetzt, weil sie fachlich mit Kunden/Lieferanten überlappt und für die Aufgabenstellung keinen zusätzlichen Informationsgewinn liefert.
-- `WährungCode` wurde in `Bestellung` aufgenommen. Dadurch bleibt das Modell für europaweite Kunden realistisch, wärend alle Artikelpreise weiterhin in einer einheitlichen Basiskalkulation gepflegt werden koennen.
+    - `WährungCode` wurde in `Bestellung` aufgenommen. Dadurch bleibt das Modell für europaweite Kunden realistisch, während alle Artikelpreise weiterhin in einer einheitlichen Basiskalkulation gepflegt werden können.
 - Lieferadresse und Empfänger bleiben in `Bestellung` redundant gespeichert, damit historische Auftragsdaten auch nach Stammdaten-'Änderungen' korrekt bleiben.
 
 Das insert script generiert die Testdaten mithilfe von Schleifen. Die Testdaten sind so gestaltet, dass sie die verschiedenen Versandfirmen und Währungen gleichmäßig verteilen, um die Abfrageaufgaben realistisch zu gestalten.
@@ -214,7 +214,7 @@ GO
 
 ## Beispielabfragen
 
-Fuer das DWH wurden 6 unterschiedliche OLAP-Anfragen fachlich formuliert und als SQL umgesetzt.
+Für das DWH wurden 6 unterschiedliche OLAP-Anfragen fachlich formuliert und als SQL umgesetzt.
 Die Beispiele enthalten Slice, Dice, Drill-Down, Roll-Up und CUBE.
 
 ### 1) Slice: Umsatz je Kunde im Jahr 1997
@@ -239,10 +239,10 @@ ORDER BY [Umsatz] DESC;
 
 ![Ergebnis Query 1 - Slice Umsatz je Kunde](/images/data-warehouse/query/query_01_slice_umsatz_kunde.png)
 
-### 2) Dice: Umsatz fuer ausgewaehlte Kombinationen
+### 2) Dice: Umsatz für ausgewählte Kombinationen
 
 Fachliche Frage:
-Wie hoch ist der Umsatz fuer eine Teilmenge von Jahren, Kundenlaendern und Artikelkategorien?
+Wie hoch ist der Umsatz für eine Teilmenge von Jahren, Kundenländern und Artikelkategorien?
 
 ```sql
 SELECT
@@ -270,7 +270,7 @@ ORDER BY z.[Jahr], z.[Quartal], [Umsatz] DESC;
 ### 3) Drill-Down: Zeitliche Verfeinerung Jahr -> Quartal -> Monat
 
 Fachliche Frage:
-Wie entwickelt sich der Umsatz bei zunehmendem Detaillierungsgrad von Jahr ueber Quartal bis Monat?
+Wie entwickelt sich der Umsatz bei zunehmendem Detaillierungsgrad von Jahr über Quartal bis Monat?
 
 ```sql
 SELECT
@@ -290,7 +290,7 @@ ORDER BY z.[Jahr], z.[Quartal], z.[Monat];
 ### 4) Roll-Up: Aggregation Monat -> Quartal -> Jahr -> Gesamt
 
 Fachliche Frage:
-Welche aggregierten Summen ergeben sich beim stufenweisen Verdichten ueber die Zeitdimension?
+Welche aggregierten Summen ergeben sich beim stufenweisen Verdichten über die Zeitdimension?
 
 ```sql
 SELECT
@@ -310,7 +310,7 @@ ORDER BY z.[Jahr], z.[Quartal], z.[Monat];
 ### 5) CUBE: Kombinationen aus Kundenland, Versandfirma und Waehrung
 
 Fachliche Frage:
-Welche Umsaetze entstehen fuer alle Teilaggregate und Gesamtaggregate ueber Land, Versandfirma und Waehrung?
+Welche Umsätze entstehen für alle Teilaggregate und Gesamtaggregate über Land, Versandfirma und Währung?
 
 ```sql
 SELECT
@@ -334,7 +334,7 @@ ORDER BY k.[Land], v.[Versandfirma], w.[WaehrungCode];
 ### 6) Kennzahlenvergleich: Umsatz vs. Frachtkosten je Monat und Versandfirma
 
 Fachliche Frage:
-Wie verhaelt sich die Frachtkostenquote zum Umsatz je Monat und Versandfirma?
+Wie verhält sich die Frachtkostenquote zum Umsatz je Monat und Versandfirma?
 
 ```sql
 WITH [UmsatzAgg] AS
