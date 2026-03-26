@@ -185,8 +185,8 @@ Wie viele Minuten an 'Sci-Fi'-Serien wurden im 4. Quartal 2025 von Nutzern aus '
     - `Kategorie_Altersfreigabe`
 
 ```sql
-SELECT SUM(s.Dauer_minuten) FROM Stream s
-JOIN Nutzer n ON s.NutzerID = n.NutzerID
+SELECT SUM(s.Dauer_minuten) FROM FAKT_Stream s
+JOIN DIM_Nutzer n ON s.NutzerID = n.NutzerID
 JOIN DIM_Land l ON n.Land = l.Land
 JOIN DIM_Zeit z ON s.Datum = z.Datum
 JOIN DIM_Titel t ON s.TitelID = t.TitelID
