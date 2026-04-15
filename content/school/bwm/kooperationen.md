@@ -90,3 +90,19 @@ Um ein Unternehmen zu kaufen oder zu verkaufen, muss der Wert des Unternehmens b
 
 > **kombinierte Methode**: Kombination der oben genannten Methoden, um eine genauere Bewertung zu erhalten
 
+
+### Berechnungen
+
+$$
+Unternehmenswert = \frac{Aktueller Aktienkurs}{Anzahl der Aktien}
+$$
+
+$$
+Umsatzmultiple = \frac{Marktwert}{Umsatz}
+$$
+
+Angewendet ist der Unternehmenswert der **Umsatz * Umsatzmultiple**
+
+$$
+Ertragswert = \frac{zukünftiger jährlicher Gewinn}{Kapitalisierungszinssatz}
+$$
