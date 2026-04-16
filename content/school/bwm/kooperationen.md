@@ -94,7 +94,7 @@ Um ein Unternehmen zu kaufen oder zu verkaufen, muss der Wert des Unternehmens b
 ### Berechnungen
 
 $$
-Unternehmenswert = \frac{Aktueller Aktienkurs}{Anzahl der Aktien}
+Unternehmenswert = Aktueller Aktienkurs \cdot Anzahl der Aktien
 $$
 
 $$
