@@ -46,7 +46,7 @@
             <div class="w-2 h-2 rounded-full bg-primary mt-2.5 opacity-50 group-hover:opacity-100 transition-opacity shrink-0"></div>
             
             <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-              <a :href="commit.url" target="_blank" rel="noopener noreferrer" class="link link-hover link-primary text-lg sm:text-xl font-medium">
+              <a :href="commit.url" target="_blank" rel="noopener noreferrer" class="link-accessible text-lg sm:text-xl font-medium">
                 {{ commit.message }}
               </a>
               <span class="text-sm sm:text-base text-base-content/50 whitespace-nowrap font-mono">
@@ -87,7 +87,7 @@
              <div class="w-2 h-2 rounded-full bg-primary mt-2.5 opacity-50 group-hover:opacity-100 transition-opacity shrink-0"></div>
             
             <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1 w-full overflow-hidden">
-              <NuxtLink :to="file.route" class="link link-hover link-primary text-lg sm:text-xl font-medium break-all sm:break-normal">
+              <NuxtLink :to="file.route" class="link-accessible text-lg sm:text-xl font-medium break-all sm:break-normal">
                 {{ file.path }}
               </NuxtLink>
             </div>

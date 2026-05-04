@@ -7,6 +7,17 @@ const navOpen = ref(false)
 const path = ref('')
 const searching = ref(false);
 
+const handleGlobalKeydown = (e: KeyboardEvent) => {
+  if ((e.ctrlKey && e.key === 'k') || (e.metaKey && e.key === 'k') || e.key === '/') {
+    e.preventDefault();
+    searching.value = !searching.value;
+  } else if (e.key === 'Escape') {
+    searching.value = false;
+  } else if (e.key === 'ArrowUp') {
+    scrollToTop();
+  }
+};
+
 // update path
 watchEffect(() => {
   path.value = useRoute().path;
@@ -20,33 +31,11 @@ onMounted(() => {
     document.documentElement.classList.add('dark');
   }
 
-  let currentScroll = window.scrollY;
-  const scrollActivationPoint = 200;
-  let scrollingSpeed = 0;
+  document.addEventListener('keydown', handleGlobalKeydown);
+});
 
-  let lastScrollPos = 0;
-  let lastShown = 0;
-  setInterval(() => {
-    // calculate the scroll speed
-    // if lastShwon is more than 5sec ago
-    if (new Date().getTime() - lastShown > 5000) {
-      scrollingSpeed = Math.abs(window.scrollY - lastScrollPos);
-    }
-    lastScrollPos = window.scrollY;
-  }, 100);
-
-  document.addEventListener('keydown', (e) => {
-    // STRG + K
-    if (e.ctrlKey && e.key === 'k' || e.metaKey && e.key === 'k' || e.key === '/') {
-      // prevent default
-      e.preventDefault();
-      searching.value = !searching.value;
-    } else if (e.key === 'Escape') {
-      searching.value = false;
-    } else if (e.key === 'ArrowUp') {
-      scrollToTop();
-    }
-  });
+onBeforeUnmount(() => {
+  document.removeEventListener('keydown', handleGlobalKeydown);
 });
 
 const getFileName = (path: string) => {
@@ -78,10 +67,12 @@ const scrollToTop = () => {
 
 <template>
   <div class="drawer p-4">
-    <input id="my-drawer" type="checkbox" class="drawer-toggle" v-model="navOpen" />
+    <input id="my-drawer" type="checkbox" class="drawer-toggle" v-model="navOpen"
+      aria-label="Open navigation drawer" />
     <div class="drawer-content">
       <nav class="flex items-end mb-4">
-        <button class="xl:fixed top-4 left-4 btn btn-primary p-2 mr-8" @click="navOpen = !navOpen">
+        <button class="xl:fixed top-4 left-4 btn btn-primary p-2 mr-8" aria-label="Open navigation"
+          @click="navOpen = !navOpen">
           <Icon name="line-md:menu" size="30" />
         </button>
         <h1 class="xl:ml-16 text-3xl font-bold max-w-[calc(100vw-2rem)] overflow-hidden whitespace-nowrap">{{
@@ -90,7 +81,7 @@ const scrollToTop = () => {
       </nav>
       <!-- Page content here -->
       <div class="fixed top-0 left-0 z-30">
-        <SearchAdvanced v-if="searching" @update:close="searching = false" />
+        <LazySearchAdvanced v-if="searching" @update:close="searching = false" />
       </div>
       <div class="xl:ml-16">
         <CopyWrapper>

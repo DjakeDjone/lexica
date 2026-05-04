@@ -1,5 +1,21 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 @plugin "daisyui" {
-  themes: light --default, dark --prefersdark, cupcake, retro, cyberpunk, valentine, aqua, halloween, dracula;
+  themes: light --default, dark --prefersdark, retro, cyberpunk, valentine, aqua;
+}
+
+@layer components {
+  .link-accessible {
+    color: var(--color-base-content);
+    text-decoration-line: underline;
+    text-decoration-color: var(--color-primary);
+    text-decoration-thickness: 0.12em;
+    text-underline-offset: 0.18em;
+  }
+
+  .link-accessible:hover,
+  .link-accessible:focus-visible {
+    color: var(--color-base-content);
+    text-decoration-color: currentColor;
+  }
 }

@@ -5,6 +5,40 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   preset: "vercel",
 
+  app: {
+    head: {
+      htmlAttrs: {
+        lang: "en",
+      },
+      title: "Lexica",
+      titleTemplate: "%s",
+      meta: [
+        {
+          name: "description",
+          content: "Lexica is a personal knowledge base with school notes, markdown documents, and study tools.",
+        },
+        {
+          property: "og:title",
+          content: "Lexica",
+        },
+        {
+          property: "og:description",
+          content: "A personal knowledge base with school notes, markdown documents, and study tools.",
+        },
+        {
+          property: "og:url",
+          content: "https://lexica.fri3dl.dev",
+        },
+      ],
+      link: [
+        {
+          rel: "canonical",
+          href: "https://lexica.fri3dl.dev",
+        },
+      ],
+    },
+  },
+
   icon: {
     fallbackToApi: false,
     serverBundle: {

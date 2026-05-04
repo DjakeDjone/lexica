@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { useStorage } from '@vueuse/core';
 
-const theme = useStorage('theme', 'default', import.meta.client ? localStorage : undefined);
+const theme = useStorage('theme', 'light', import.meta.client ? localStorage : undefined);
 
 const themes = [
-    'default',
+    'light',
+    'dark',
     'retro',
     'cyberpunk',
     'valentine',

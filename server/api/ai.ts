@@ -1,14 +1,13 @@
 import type { SearchResult } from "../utils/search";
+import { askLLM } from "../utils/llm/chat";
 import {
-    askLLM,
     generateLearnPlan,
     generateLearnSectionQuiz,
     gradeLearnSectionQuiz,
-    generateTest,
-    gradeTest,
-    parseSalaryFromText,
     summarizeLearningSession,
-} from "../utils/llm";
+} from "../utils/llm/learning";
+import { parseSalaryFromText } from "../utils/llm/salary";
+import { generateTest, gradeTest } from "../utils/llm/testing";
 
 const UPSTREAM_NETWORK_ERROR_CODES = new Set([
     "EAI_AGAIN",
