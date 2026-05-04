@@ -1,2 +1,3 @@
 User-agent: *
 Allow: /
+Sitemap: https://lexica.fri3dl.dev/sitemap.xml
