@@ -2,7 +2,7 @@
 
 ## 4 Grundfreiheiten der EU
 
-1. **Personenfreizügigkeit**: Jeder EU-Bürger darf sich in der EU frei bewegen und arbeiten.
+1. **Personenfreizügigkeit**: Jeder EU-Bürger darf sich in der EU frei bewegen und arbeiten. Dabei gelten die Regeln des Ziellandes. z.B. eine rumänische Haushaltsfrau hat wenn sie in Österreich arbeitet Anspruch auf Familienbeihilfe von Österreich. An den Grenzen gibt es keine Kontrollen mehr, aber es gibt immer noch Kontrollen auf den Straßen, z.B. Polizei kontrolliert ob die Fahrer einen gültigen Führerschein haben. Es gibt auch Kontrollen an den Flughäfen, z.B. Passkontrolle.
 2. **Warenverkehrsfreiheit**: Waren dürfen ohne Zölle und Beschränkungen innerhalb der EU transportiert werden.
 3. **Dienstleistungsfreiheit**: Jeder
 EU-Bürger darf in jedem EU-Land Dienstleistungen anbieten. Dabei gelten die Regeln des Ziellandes. z.B. eine rumänische Haushaltsfrau hat wenn sie in Österreich arbeitet Anspruch auf Familienbeihilfe von Österreich.
