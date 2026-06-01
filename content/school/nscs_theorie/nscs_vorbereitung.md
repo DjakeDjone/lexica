@@ -119,3 +119,85 @@ Die OSPF-ID ist eine eindeutige Kennung für jeden Router in einem OSPF-Netzwerk
 - **Area 0 (Backbone Area)**: Alle anderen Areas müssen direkt mit Area 0 verbunden sein, da sie als Rückgrat des OSPF-Netzwerks dient.
 - **Area 1, Area 2, ...**: Weitere Areas können erstellt werden, um die Größe und Komplexität des Netzwerks zu verwalten. Jede Area hat ihre eigene LSDB, aber Router in verschiedenen Areas tauschen nur Informationen über die besten Routen aus, nicht die vollständige Topologie.
 - **ABR (Area Border Router)**: Router, die mehrere Areas verbinden und Informationen zwischen ihnen weiterleiten.
+
+## LAN vs. WAN
+
+- **LAN (Local Area Network)**: Ein Netzwerk, das sich über eine begrenzte geografische Fläche erstreckt, z.B. ein Bürogebäude oder ein Zuhause. Es bietet hohe Datenraten und niedrige Latenzzeiten. *Das LAN wird üblicher Weise vom Nutzer selbst betrieben, z.B. durch einen Router oder Switch, und ermöglicht die Verbindung von Geräten innerhalb des lokalen Netzwerks.*
+- **WAN (Wide Area Network)**: Ein Netzwerk, das sich über eine große geografische Fläche erstreckt, z.B. das Internet. Es bietet niedrigere Datenraten und höhere Latenzzeiten im Vergleich zu LANs. *Das WAN wird in der Regel von Internet Service Providern (ISPs) betrieben und ermöglicht die Verbindung von LANs und anderen Netzwerken über große Entfernungen hinweg. Das Internet ist das größte Beispiel für ein WAN, das Milliarden von Geräten weltweit verbindet.*
+
+[Zusammenfassung WAN](https://lexica.fri3dl.dev/school/nscs_theorie/wan#wan-topoligie)
+
+### DTE und DCE
+
+- **DTE (Data Terminal Equipment)**: stellt Verbindung zum LAN her, z.B. Computer, Router, Switch
+- **DCE (Data Circuit-terminating Equipment)**: stellt Verbindung zum WAN her, z.B. Modem, CSU/DSU (Channel Service Unit/Data Service Unit)
+
+### Packet switched vs. circuit switched networks
+
+- **Packet switched networks**: Daten werden in kleine Pakete aufgeteilt, die unabhängig voneinander über das Netzwerk gesendet und am Zielort wieder zusammengesetzt werden (z.B. Internet); VT: Infrastruktur effizienter genutzt, da mehrere Pakete gleichzeitig über dasselbe Medium gesendet werden können, aber es kann zu Verzögerungen und Paketverlusten kommen
+- **Circuit switched networks**: Eine **dedizierte Verbindung** wird für die Dauer der Kommunikation zwischen den beteiligten Geräten hergestellt (z.B. früher Telefonnetz) NT: Verbindung blockiert, auch wenn keine Daten übertragen werden, was zu Ineffizienz führen kann
+
+## VPN
+
+*geskippt*
+
+## SNMP (Simple Network Management Protocol)
+
+Versionen:
+- SNMPv1: einfache Authentifizierung (Community Strings), keine Verschlüsselung
+- SNMPv2: verbesserte Funktionen, aber immer noch keine Verschlüsselung; Community String; keine Verschlüsselung
+- SNMPv2c: verbesserte Sicherheit (Community Strings mit Authentifizierung), aber immer noch keine Verschlüsselung; mit set-Befehl der Community String kann geändert werden, was ein Sicherheitsrisiko darstellt
+- SNMPv3: verbesserte Sicherheit (Authentifizierung und Verschlüsselung), Benutzerbasiertes Sicherheitsmodell (USM)
+
+**Funktionsweise:**
+- SNMP-Manager: zentraler Server, der Informationen von SNMP-Agenten sammelt
+- SNMP-Agenten: Software auf Netzwerkgeräten, die Informationen über den Zustand des Geräts sammelt und an den SNMP-Manager sendet
+- MIB (Management Information Base): Hierarchische Datenbank, die die Informationen definiert, die von SNMP-Agenten gesammelt und an den SNMP-Manager gesendet werden können
+
+> *SNMP verwendet UDP*
+
+**Traps**: SNMP-Agenten können auch Traps an den SNMP-Manager senden, um über bestimmte Ereignisse oder Zustände zu informieren (z.B. Fehler, Schwellenwertüberschreitungen)
+
+### Syslog vs. SNMP
+
+- **Syslog**: Protokoll zur Protokollierung von Ereignissen und Fehlermeldungen auf Netzwerkgeräten; verwendet UDP oder TCP; ermöglicht die zentrale Sammlung von Protokolldaten für die Überwachung und Fehlerbehebung
+- **SNMP**: Protokoll zur Überwachung und Verwaltung von Netzwerkgeräten; ermöglicht die Sammlung von Informationen über den Zustand von Geräten und die Konfiguration von Geräten; bietet auch Funktionen zur Fehlerbehebung und Alarmierung (z.B. Traps)
+
+### Warum ist es wichtig, dass die Uhrzeit auf Netzwerkgeräten synchronisiert ist?
+
+Der zeitliche Ablauf muss rekonstruierbar sein, um Ereignisse korrekt zuordnen und analysieren zu können.
+
+Die Uhren werden üblicherweise über das **Network Time Protocol (NTP)** synchronisiert, das es ermöglicht, die Uhren von Netzwerkgeräten mit einer zuverlässigen Zeitquelle zu synchronisieren, um sicherzustellen, dass alle Geräte die gleiche Zeit verwenden.
+
+### Verschlüsselung
+
+### TLS (Transport Layer Security) vs. SSL (Secure Sockets Layer)
+
+TLS Versionen:
+- TLS 1.0: Erste Version, jetzt veraltet
+- TLS 1.1: Verbesserte Sicherheit, aber immer noch veraltet
+- TLS 1.2: Weit verbreitet, unterstützt viele Verschlüsselungsalgorithmen
+- TLS 1.3: Neueste Version, verbessert die Sicherheit und Leistung, entfernt veraltete Funktionen
+
+**TLS Verbindungsaufbau:**
+
+## UDP/TCP
+
+Ports:
+- 20/21: FTP (File Transfer Protocol)
+- 22: SSH (Secure Shell)
+- 23: Telnet (veraltet, unsicher)
+- 25: SMTP (Simple Mail Transfer Protocol)
+- 53: DNS (Domain Name System)
+- 80: HTTP (Hypertext Transfer Protocol)
+- 110: POP3 (Post Office Protocol 3)
+- 143: IMAP (Internet Message Access Protocol)
+- 443: HTTPS (HTTP Secure)
+- 3389: RDP (Remote Desktop Protocol)
+
+### Wird UDP in Zukunft mehr oder weniger verwendet werden?
+
+Wrsl Ja:
+HTTP kann sowohl über TCP als auch über UDP (**HTTP/3**) verwendet werden. HTTP/3 basiert auf dem QUIC-Protokoll, das UDP als Transportprotokoll verwendet, um die Leistung zu verbessern und die Latenz zu reduzieren. Daher könnte die Verwendung von UDP in Zukunft zunehmen, insbesondere für Anwendungen, die von den Vorteilen von HTTP/3 profitieren können.
+
+QUIC ist schneller, weil es die Verbindungs- und Transportschicht kombiniert, was die Anzahl der Round-Trips reduziert, die für den Verbindungsaufbau erforderlich sind. Es bietet auch verbesserte Fehlerbehandlung und Multiplexing von Streams, was die Leistung weiter verbessert.
