@@ -60,3 +60,14 @@ Kaiser Franz Joseph: regierte von 1848 bis 1916, geprägt von konservativer Inne
 ---
 
 Der „Anschluss“ 1938: Österreich befand sich seit 1933 im autoritären Ständestaat (Austrofaschismus). Adolf Hitler setzte Bundeskanzler Kurt Schuschnigg beim Abkommen von Berchtesgaden (Februar 1938) massiv unter Druck. Schuschniggs Versuch, am 13. März eine Volksbefragung über die Unabhängigkeit abzuhalten, führte zum deutschen Ultimatum. Am 12. März 1938 marschierte die Wehrmacht ein. Am 15. März hielt Hitler die berüchtigte Rede auf dem Wiener Heldenplatz vor begeisterten Massen. Österreich wurde als „Ostmark“ in das Deutsche Reich eingegliedert; im April folgte eine nachträgliche, manipulierte Volksabstimmung (99,7 % Ja-Stimmen).
+
+---
+
+- **Unehrenhafte Berufe:** Turmwächter, Totengräber, Henkersknecht, Henker, Prostituierte, Gaukler, Bänkelsänger, Scharfrichter, Müllersbursche, Leichenbestatter, Hundefänger, Nachtwächter
+- **Was machen Hochkulturen aus?**: komplexe Gesellschaftsstrukturen, Arbeitsteilung, Städtebau, Schrift, Religion, Kunst, Wissenschaft, Rechtssysteme, Verwaltung, Handel, Technologie
+- **Codex Hammurabi:** eines der ältesten bekannten Rechtssysteme, bestehend aus 282 Gesetzen, die verschiedene Aspekte des täglichen Lebens regeln (z.B. Eigentum, Familie, Handel, Strafen); bekannt für das Prinzip „Auge um Auge, Zahn um Zahn“ (Talionsprinzip) - **dieses Prinzip galt nur in der selben sozialen Schicht**;
+- **Industrielle Revolution**:
+    - **Erste** Industrielle Revolution (ca. **1760–1840**): Übergang von agrarischer zu industrieller Gesellschaft, Erfindung der Dampfmaschine, Mechanisierung der Textilproduktion, Urbanisierung, soziale Veränderungen (z.B. Entstehung der Arbeiterklasse)
+    - **Zweite** Industrielle Revolution (ca. **1870–1914**): Aufstieg der Chemie-, Elektro- und Automobilindustrie, Beginn der Massenproduktion, Entwicklung neuer Technologien (z.B. Elektrizität, Verbrennungsmotor, Telefon)
+    
+    Die Situation der Arbeiterklasse verbesserte sich erst im Laufe des 20. Jahrhunderts durch Gewerkschaftsbewegungen, Sozialreformen und gesetzliche Regelungen (z.B. Arbeitszeitgesetze, Mindestlohn, Sozialversicherung). Davor waren 16-18 Stunden Arbeit pro Tag, Kinderarbeit und schlechte Arbeitsbedingungen weit verbreitet.

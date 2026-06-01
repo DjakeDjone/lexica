@@ -45,7 +45,7 @@ Martin Luther veröffentlicht seine 95 Thesen gegen den Ablasshandel in Wittenbe
 
 
 * **1521** / **1556**: Teilung der Habsburger
-Schrittweise Aufteilung der Dynastie in eine österreichische und eine spanische Linie unter Karl V. und Ferdinand I.
+Schrittweise Aufteilung der Dynastie in eine österreichische und eine spanische Linie unter Karl V. und Ferdinand I. Zitat Karl V.: „Die Sonne geht nie unter in meinem Reich.“
 
 
 * **1555**: Augsburger Religionsfriede
