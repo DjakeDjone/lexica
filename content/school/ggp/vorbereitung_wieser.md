@@ -22,7 +22,7 @@
 * Französische Revolution
 * Ära Kaiser Franz Joseph (Außen-/Innenpolitik, Gründerzeit, Ausgleich 1867, Untergang KK etc.)
 * 1. Republik Österreich (Zwischenkriegszeit, Wirtschaft, Kultur, Parteienlandschaft in 1920er, Schattendorf etc.)
-* Widerstand im 2. Weltkrieg (Motive, div. Gruppierungen, prominente Beispiele)0.5+(0.5*3/5)
+* Widerstand im 2. Weltkrieg (Motive, div. Gruppierungen, prominente Beispiele)
 
 ---
 

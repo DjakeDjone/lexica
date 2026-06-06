@@ -3,5 +3,6 @@
   "deno.enable": true,
   "markdown.marp.themes": [
     "./content/school/airscout/presentations/htl-theme.css"
-  ]
+  ],
+  "markdown.validate.enabled": true
 }
