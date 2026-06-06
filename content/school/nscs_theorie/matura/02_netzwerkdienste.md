@@ -72,7 +72,19 @@ Beispiele & Implementierungen:
 - LDIF-Dateien nutzen Key-Value-Pairs für Änderungen (Befehle via `changetype: add / modify / delete`).
 - **Wichtig:** Einzelne Einträge müssen in der Datei zwingend durch eine **Leerzeile** getrennt werden!
 
+### Beispiel
+
+Schüler Valentin (der einen 1er auf Matura hat) htlstp.ac.at:
+
+`cn=Valentin,du=schueler,dc=htlstp,dc=ac,dc=at`
+
+- **cn** ~ Common Name
+- **du**: Domain Unit
+- **dc**: Domain Component
+
 ## DNS
+
+[Hilfreich: Labor DNS](https://lexica.fri3dl.dev/school/nscs_praxis/labor_dns)
 
 ### Die DNS-Hierarchie:
 
