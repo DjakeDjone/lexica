@@ -2,9 +2,9 @@
     1. Ethernet/WLAN
     2. Switching/Spanning Tree/Etherchannel
     3. VLAN
-- Netzwerkdienste 
+- Netzwerkdienste ✅
     1. Mail
-    2. Verzeichnisdienste
+    2. Verzeichnisdienste (❗)
     3. DNS
 - Netzwerkplanung und Netzwerkmanagement (skipp ich 😎)
     1. IPv4 Familie (IP, ICMP, ARP) + DHCP

@@ -48,7 +48,7 @@
     - Polypol: viele Anbieter, viele Nachfrager, z.B. Lebensmittelmarkt
     - Oligopol: wenige Anbieter, viele Nachfrager, z.B. Automobilmarkt
     - Monopol: ein Anbieter, viele Nachfrager, z.B. Post
-- Bedürfnispyramide
+- Bedürfnispyramide: Existenz, Sicherheit, Zugehörigkeit, Wertschätzung, Selbstverwirklichung
 - Subsistenzwirtschaft: Selbstversorgung, z.B. in Entwicklungsländern, etc.
 - Standortfaktoren/Produktionsfaktoren: Lohnnebenkosten, Infrastruktur, Arbeitskräfte, etc.
 
