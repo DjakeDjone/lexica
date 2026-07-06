@@ -1,4 +1,6 @@
-# Schlaganfall
+# Random Infos - Erste Stunde
+
+### Schlaganfall
 
 Eine Schlaganfall ist eine plötzliche Durchblutungsstörung im Gehirn, die zu einer Schädigung von Gehirnzellen führt. Es gibt zwei Haupttypen von Schlaganfällen: ischämische Schlaganfälle, die durch eine Blockade in den Blutgefäßen verursacht werden, und hämorrhagische Schlaganfälle, die durch das Platzen eines Blutgefäßes entstehen.
 

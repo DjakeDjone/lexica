@@ -82,9 +82,9 @@ Faust auf Brustbein von hinten legen, zweiter Arm dazu und ruckartig nach oben z
 
 ## Atemwegsprobleme
 
-- Pneumothorax:
+- **Pneumothorax**:
     - Luft im Pleuraspalt (zwischen Lunge und Brustwand)
-- Spannungspneumothorax:
+- **Spannungspneumothorax**:
     - Luft im Pleuraspalt, die nicht entweichen kann
     - desshalb bohrt der Notarzt ein Loch in die Brustwand, um die Luft entweichen zu lassen
 
@@ -109,4 +109,57 @@ Ein Pneumothorax beschreibt den Eintritt von Luft in den Brustraum (Pleuraspalt)
 
 ### Herzinfakt
 
+<https://www.pflege.de/krankheiten/herzinfarkt/>
+
+zwei arten: <!--TODO-->
+
 > PTZA Krankenhaus: Peripheres, Thrombolyse, Zentrum, Akutversorgung
+
+### Schock
+
+- Verletzungen: offene Blutungen etc
+- Erkrankungen: Herzinfakt; Schlaganfall; Epilepsie; Hyperventilation
+- Vergiftungen: über die Haut, Lungen oder Schlucken
+
+> Zuckermessung: mg/dl; normalwert ist 100 mg/dl; zu wenig Zucker: Hypoglykämie (Unterzucker) Symptome sind blass, schwitzig und kalt;
+
+---
+
+## Kreislaufstillstand
+
+> ROSC: Return of Spontaneous Circulation (Rückkehr des spontanen Kreislaufs)
+
+Zwischenräume im Gewebe: Faszien.
+
+die Fasizien können Blut speichern:
+
+- Unterarm: 400ml
+- Oberarm: 800ml
+- Becken: 5L
+
+### Helm
+
+- wenn bei Bewusstsein: oben lassen
+- Bewusstlos: Helm abnehmen
+
+### Schlaganfall
+
+- Verstopfung eines Blutgefäßes im Gehirn (Ischämischer Schlaganfall) oder Blutung im Gehirn (Hämorrhagischer Schlaganfall)
+- Symptome: Gesichtslähmung, Arm- oder Beinlähmung, Sprachstörung, Sehstörung, Schwindel, Kopfschmerzen, Bewusstseinsstörung
+
+#### FAST
+
+- Face: Gesichtslähmung (einseitig): Zähne zeigen/Mundwinklel hochziehen; Stirn runzeln
+- Arm: Arm- oder Beinlähmung (einseitig)
+- Speech: Sprachstörung (verwaschene Sprache)
+- Time: Zeit (sofort Notruf absetzen)
+
+### Opioide
+
+bewirken Entspannung
+
+### Verbrennung
+
+Schockgefahr ab 5% bei Kindern, bei Erwachenen 10%
+
+Ärztliche Behandlung ab 2. Grad und betroffener Körperfläche > 1%
