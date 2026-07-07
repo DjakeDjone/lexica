@@ -8,6 +8,35 @@
 4. Rettungsdienst
 5. Krankenhaus
 
+## Symptome einer Kreislaufstörung
+
+- Blässe, Schwindel
+- Kühle, kaltschweißige Haut
+- Atembeschwerden, Atemnot
+- Bewusstseinstörung, Bewusstlosigkeit
+- Unruhe bis Todesangst
+- Beschwerden im Brustkorb
+
+## Symptome einer Atemstörung
+
+- Auffällige Atemgeräusche
+- Flache und schnelle oder sehr langsame Atmung 
+- Unregelmäßige Atmung
+- Ungewöhnliche Brustkorbbewegung
+- Stimmloses Husten
+- Einsatz der Atemhilfsmuskulatur, angestrengte Atmung
+- Blaufärbung der Haut (z.B. Lippen, Nagelbett)
+- Unruhe, Angst
+
+## Symptome allergischer Schock
+
+- Hautausschlag
+- Schwellung der Atemwege
+- Atemstörung
+- Kaltschweißig
+- Gräuliche Hautfarbe
+- Unruhe, Zittern
+
 ## 1234
 
 ### 1 - Szenenüberblick
