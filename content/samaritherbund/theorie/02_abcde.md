@@ -94,7 +94,7 @@
 - FAST+
 - Pupilen: Größe, Seitengleichheit, Form, Reaktion
 - ZOPS (Zeit, Ort, Person, Situation)
-- DMSK (Durchblutung Motorik, Sensibilität Kraft)
+- DMSK (Durchblutung, Motorik, Sensibilität, Kraft)
 - Stroke Untersuchung
 - Blutzuckerkontrolle: 
     - **Unterzucker**: kalt, schweißig, zittrig -> cola geben
