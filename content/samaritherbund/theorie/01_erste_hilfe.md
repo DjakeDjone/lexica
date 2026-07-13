@@ -89,7 +89,7 @@ Faust auf Brustbein von hinten legen, zweiter Arm dazu und ruckartig nach oben z
     - desshalb bohrt der Notarzt ein Loch in die Brustwand, um die Luft entweichen zu lassen
 
 Ein Pneumothorax beschreibt den Eintritt von Luft in den Brustraum (Pleuraspalt), wodurch die Lunge teilweise oder ganz kollabiert. Ein Spannungspneumothorax ist eine lebensbedrohliche Komplikation, bei der ein Ventilmechanismus die Luft in der Brust gefangen hält, was den Druck gefährlich ansteigen lässt.
-
+4064343
 > Die normale Sauerstoffsättigung beträgt 95-100%, bei 90% ist es kritisch, unter 80% lebensbedrohlich
 
 ## Atemstörungen

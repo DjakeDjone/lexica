@@ -52,9 +52,9 @@ Auch zu weiter entfernte Versorgungseinrichtungen nach Wunsch des Patienten wenn
 
 ### Notarztmittel
 
-- NEF: nur für Notfallsanitäter, Notfallarzt und Equipment -> kein Patiententransport!
-- SNAW: nur für Sekundärtransport, nur von Johannitern noch in verwendung
-- NAH (Nottransport Hubschrauber): Pilot und Sanitäter, Notarzt & Equipment
+- **NEF**: nur für Notfallsanitäter, Notfallarzt und Equipment -> kein Patiententransport!
+- **SNAW**: nur für Sekundärtransport, nur von Johannitern noch in verwendung
+- **NAH** (Nottransport Hubschrauber): Pilot und Sanitäter, Notarzt & Equipment
 
 ### Rendevoussystem
 
