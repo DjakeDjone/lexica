@@ -72,7 +72,7 @@
 
 ### Herzaktion
 
-- Kontraktion (Systole):
+- Kontra%ktion (Systole):
     - Anspannungsphase
     - Auswurfphase
 - Erschlaffungs-,Bluteinströmphase (Diastole)

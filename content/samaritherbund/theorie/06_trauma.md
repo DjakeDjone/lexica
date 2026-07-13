@@ -42,3 +42,29 @@
 - Impressionsfraktion
 - Offene Fraktion
 - Eigedrungener Fremdkörper
+
+### Polytrauma
+
+- Gleichzeitig entstandene Verletzung mehrerer Körperregionen oder Organe
+- Lebensgefahr
+
+### Nasenbluten
+
+- Kopf nach **VORNE**
+- Kalter Umschlag in den Nacken
+- Blutendes Nasenloch zudrücken (nicht bei Verdacht auf Nasenbeinfraktur)
+- Keine Tamponade
+- Immer hospitalisieren
+
+### Commotio cerebri - Gehirnerschütterung
+
+### Pneumotorax
+
+### Beckenschlinge - KISS Schema
+
+> IMPORTANT!: <mark>Bei vorheriger Schmerzangabe keine Palpation (~Untersuchung) des Beckens im Rahmen der STU!</mark>
+
+- **K**indetische Energie -> Verletzungsmechanismus für mögliche Beckenverletzung
+- **I**nspektion -> sichtbare Verletzungen, Blutungen, Fehlstellungen
+- **S**chmerzen -> im Bereich des Beckens, Palpationsschmerz
+- **S**tabilisieren -> OSCE "Beckenschlinge" anwenden

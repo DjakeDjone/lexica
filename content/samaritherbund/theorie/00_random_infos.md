@@ -57,5 +57,3 @@ Auch zu weiter entfernte Versorgungseinrichtungen nach Wunsch des Patienten wenn
 - **NAH** (Nottransport Hubschrauber): Pilot und Sanitäter, Notarzt & Equipment
 
 ### Rendevoussystem
-
-
