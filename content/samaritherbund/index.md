@@ -45,3 +45,11 @@ dringende, spritzende Blutung
 - **E**is -> Kühlung
 - **C**ompression -> elastischer Verband
 - **H**ochlagern -> Abschwellung
+
+### Angina pectoris (~Brustenge)
+
+### Myokardinfarkt (~Herzinfakt)
+
+### Plaques
+
+Ablagerungen an Herzgefäßen, bestehend aus Fett, Cholesterin, Bindegewebe und Kalk

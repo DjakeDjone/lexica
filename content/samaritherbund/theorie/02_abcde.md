@@ -71,6 +71,10 @@
 
 ### Circulation
 
+- **Haut**: schwitzen, temperatur, blässe
+- **Puls**: Radialispuls (Handgelenk)
+- **Kapilare**: auf haut drücken und zurückbluten testen (sollte schneller a)
+
 ### STU - Schnelle Trauma Untersuchung
 
 - Kopf
