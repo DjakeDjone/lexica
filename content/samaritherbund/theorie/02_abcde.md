@@ -95,7 +95,7 @@
 
 ### Disability - Neurologie
 
-- FAST+
+- FAST+ (face, arm, speech, text)
 - Pupilen: Größe, Seitengleichheit, Form, Reaktion
 - ZOPS (Zeit, Ort, Person, Situation)
 - DMSK (Durchblutung, Motorik, Sensibilität, Kraft)

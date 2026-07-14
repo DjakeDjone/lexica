@@ -114,3 +114,13 @@ Rückstau des Blutes in Lungenvenen und in Lungenvenen
 Blutgefäß ist ganz oder teilweise blockiert
 
 Wenn sich die Thrombose löst und von dem Herz in die Lunge gepumpt wird verstopft sich die Lunge -> **Lungenembolie**
+
+## Schäden der Gefäßwand
+
+### Aneurysma
+
+Lokale Erweiterung einer Aterie um bis zu 50%
+
+### Dissektion
+
+Plötzlicher Einriss der inneren Aterienschicht - Einblutung in Aterienwand
