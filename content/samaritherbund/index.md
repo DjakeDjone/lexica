@@ -1,15 +1,15 @@
 
 <https://moodlenoe.samariterbund.net>
 
-## Random
+# Random
 
-- Asystolie: 
+- **Asystolie**: 
   - Herzstillstand ohne elektrische Aktivität
   - Keine Herzaktion, keine Pulswelle, keine Atmung
   - EKG: flache Linie
   - Keine Reaktion auf Defibrillation
 
-- Kapnographie
+- **Kapnographie**
   - Messung der CO2-Konzentration in der Atemluft
   - Wird zur Überwachung der Beatmung und des Kreislaufs verwendet
   - Normalwerte: 35-45 mmHg
@@ -71,7 +71,7 @@ Ablagerungen an Herzgefäßen, bestehend aus Fett, Cholesterin, Bindegewebe und 
 
 > - **inspiratorischer Stridor**: preifendes Atemgeräusch beim Einatmen - Atemwege frei?
 > - **expiratorischer Stridor**: beim Ausatmen - Zeichen für Asthma oder [COPD](#copd-chronic-obstructive-pulmonary-disease)
-> - **biphatischer Stridor**: beim Ein- und Ausatmen
+> - **biphatischer Stridor**: beim Ein- und Ausatmen, z.B. Kehlkopfenzündung
 
 ### COPD (Chronic Obstructive Pulmonary Disease)
 
@@ -83,4 +83,4 @@ ist eine fortschreitende, nicht heilbare Lungenkrankheit, bei der sich die Atemw
 - Häufige Atemwegsinfekte (als Kind)
 ...
 
-
+> Atemfrequenz außerhalb von 8-25 ist bedrohlich -> assisstierte Beatmung notwendig

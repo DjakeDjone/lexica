@@ -117,13 +117,13 @@ SAMPLER, OPQRST
 
 ## SAMPLER
 
-- Symptome
-- Allergien
-- Medikamente
-- Persönliche medizinische Geschichte
-- Letzte Einnahme
-- Ereignis in Bezug auf das Problem
-- Risikofaktoren
+- **S**ymptome
+- **A**llergien
+- **M**edikamente
+- **P**ersönliche medizinische Geschichte
+- **L**etzte Einnahme
+- **E**reignis in Bezug auf das Problem
+- **R**isikofaktoren
 
 ## OPQRST
 
