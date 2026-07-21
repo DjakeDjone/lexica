@@ -84,3 +84,15 @@ ist eine fortschreitende, nicht heilbare Lungenkrankheit, bei der sich die Atemw
 ...
 
 > Atemfrequenz außerhalb von 8-25 ist bedrohlich -> assisstierte Beatmung notwendig
+
+##
+
+- Herrichten einer Infusion
+- Herrichten von Medikamenten
+- Herrichten einer Intubation
+- Herrichten Venenzugang
+
+
+Was ist die Intubation, welche Materialien
+
+> Behandlung 1: Behandlungspriorität, Behandlung 2: Transportpriorität, Behandlung 3: Spätere Behandlung, Nur in der Katastrophenmedizin Behandlung 4: Betreuende Behandlung
